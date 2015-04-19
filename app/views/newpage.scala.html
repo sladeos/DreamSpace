@@ -1,0 +1,33 @@
+
+@import helper._
+
+@(form: Form[User])
+
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="@routes.Assets.at("stylesheets/main.css")">
+        <link rel="shortcut icon" type="image/png" href="@routes.Assets.at("images/dreamhack-logo.png")">
+        <script src="@routes.Assets.at("javascripts/hello.js")" type="text/javascript"></script>
+    </head>
+        
+    <body>
+        <div id="main">
+            <div id="top"></div>
+            <div id="menu"></div>
+            <div id="logo"></div>
+            <div id="content">
+               
+               
+                @helper.form(routes.Application.authenticate) {
+                <center><h1>Log in to DreamSpace</h1></center>
+                <center><p><input type="email" name="email" placeholder="Email" value="@form("email").value"></P></center>
+                <center><p><input type="password" name="password" placeholder="Password"></p></center>
+                <center><p><button type="submit">Login</button></p></center>
+                }
+            </div>
+        </div>
+        
+    </body>
+</html>
