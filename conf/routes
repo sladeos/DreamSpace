@@ -41,3 +41,15 @@ GET /existfacebooklogin controllers.Application.facebookExistLogin()
 #Get to choosing username
 GET /chooseusername controllers.Application.chooseUsername()
 
+#Get tournament page
+GET /createtournament controllers.Application.tournament()
+
+POST /savetournament controllers.TournamentDatabase.addTournament()
+
+POST /edittournament controllers.TournamentDatabase.editTournament()
+
+GET  /showtournament/:id controllers.Application.showTournament(id: Integer)
+
+GET /tournament controllers.TournamentDatabase.getTournaments()
+
+

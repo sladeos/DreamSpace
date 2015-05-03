@@ -1,0 +1,254 @@
+@(message: String)
+
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta charset="UTF-8">
+        <title>DreamSpace</title>
+
+        <!-- JQuery Mobile -->
+       <link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+        <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+        <script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script> 
+
+        <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/main.css")">
+        <link rel="shortcut icon" type="image/png" href="@routes.Assets.at("images/dreamhack-logo.png")"> 
+        <script src="@routes.Assets.at("javascripts/jquery.bracket.min.js")" type="text/javascript"></script>
+		<link rel="stylesheet"  href="@routes.Assets.at("stylesheets/jquery.bracket.min.css")">+
+		      <script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '850805461661221',
+      xfbml      : true,
+      version    : 'v2.3'
+    });
+  };
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "//connect.facebook.net/en_US/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+  </script>
+    </head>
+    
+    <body>
+
+     <div data-role="page" data-theme="b" class="header-google">   
+
+                <div data-role="header" data-position = "fixed">
+                  
+                    <h1><img src="@routes.Assets.at("images/d2.png")" class = "fullscreen"></h1>
+               <div data-role="navbar" class="ui-grid-d">
+                    <ul>
+                        <li><a href="#" class="my-btn" class="ui-btn-active ui-state-persist">Home</a></li>
+                        <li><a href="#" class="my-btn">News feed</a></li>
+                        <li><a href="#" class="my-btn">EArena feed</a></li>
+                        <li><a href="#bars" class = "my-btn">MyMeny</a></li>
+                    </ul>
+                </div>
+        </div>
+        
+        <div data-role="content" >   
+           
+           
+            <h1 align="center">Create your tournament</h1>
+            You can change the name of the teams in your tournament by clicking the respective team label, you can also change the score by clicking the label after the team name. This updates the bracket.
+   
+   <div id='bracket'></div>
+                <div id='bracketForm'>
+                <form name="bracketGenerate" >
+                Name of your tournament: <input type="text" name="fname" id="fname">
+                Amount of players: 
+        <select id="amount">
+            <option value="4">4</option>
+            <option value="8">8</option>
+            <option value="16">16</option>
+            <option value="32">32</option>
+        </select> 
+        
+       
+        <input type="button" value="Create" id="create">
+            <p id="warning"></p>
+        
+    </form>
+    
+    </div>
+   <script type="text/javascript">
+    var tNameOkay = true;
+        $(function() {
+    	function errorInField(){
+    	 $("#warning").css('color', 'red');
+         $('#warning').prepend('<img id="redcross" src="@routes.Assets.at("images/redcross.png")" />')
+         $('#redcross').width(40);
+         $('#redcross').height(40);
+         tNameOkay = false;
+    }
+    	
+    	function fieldOkay(){
+    	    $("#warning").css('color', 'green');
+            $('#warning').prepend('<img id="greentick" src="@routes.Assets.at("images/greentick.png")" />')
+            $('#greentick').width(40);
+            $('#greentick').height(40);
+            tNameOkay = true;
+    		
+    	}
+    
+    $('#fname').change(function() {
+   	 if( $('#fname').val().length <4){
+   		 $("#warning").html('Tournament Name is too short! Please enter a minimum of 4 characters');
+   		errorInField()
+            return;
+   	 }else{
+       $("#warning").html("Tournament Name is okay!");
+	   fieldOkay()
+	   
+   }
+
+    })
+        })
+    
+    
+    </script>
+   
+    <script>
+$(function() {
+    
+    generateBracket($('#amount').val());
+    
+    var data;
+    
+    function saveFn(data) {
+        
+    }
+    
+    function generateBracket(playerAmount) {
+    
+    var teamData = {
+    teams : [] 
+    };
+    
+    playerAmount = playerAmount /2
+    
+    var j = 1;
+    for (i = 0; i < playerAmount; i++) { 
+    teamData.teams[i] = ["Team " + j, "Team " + ++j];
+    j++;
+    }
+    
+    var container = $('#bracket')
+    container.bracket({
+      init: teamData,
+      save: saveFn
+    })
+    
+    $('.tools').remove();
+  
+    data = container.bracket('data') ;
+ 
+    }
+    
+    $("#amount").change(function() {
+   
+    var players = Number($('#amount').val());
+    
+    switch(players) {
+    case 4:
+    generateBracket(4);
+        break;
+    case 8:
+    generateBracket(8);
+        break;
+    case 16:
+    generateBracket(16);
+        break;
+    case 32:
+    generateBracket(32);
+        break;
+    
+    }
+    
+    
+});
+
+
+$("#create").click(function() {
+    if(tNameOkay && $('#fname').val().length >4){
+    var teams = data.teams
+    var results = data.results
+
+      $.ajax({
+            url: "/savetournament",
+            type: 'POST',
+            contentType:'application/json',
+            data: JSON.stringify({name :  $('#fname').val(), amount: $('#amount').val(), teams: teams, results: results }),
+            dataType : 'html',
+            success: function(){
+                window.location.replace("/tournament");
+            }
+        });
+    }else{
+    	
+    	 $("#warning").html("There are errors in your tournament! Fix them and try again.");
+    	 $("#warning").css('color', 'red');
+         $('#warning').prepend('<img id="redcross" src="@routes.Assets.at("images/redcross.png")" />')
+         $('#redcross').width(40);
+         $('#redcross').height(40);
+    	
+    }
+        });
+
+});
+    </script>
+        </div>
+            <div data-role="footer">  
+
+
+                <div data-role="controlgroup" data-type="horizontal" style = "text-align: center" class="ui-grid-a">
+                     <a href="#" data-role="button" data-icon="star" id="footerB"class="my-btn">About</a>
+                     <a href="#" data-role="button" data-icon="mail" id="footerB"class="my-btn">Contact</a>
+                     <a href="#" data-role="button" data-icon="home" id="footerB"class="my-btn">Dreamhack.se</a>
+                     <a href="#" data-role="button" data-icon="info" id="footerB"class="my-btn">Info</a>
+                     <a href="#" onclick="$.mobile.silentScroll(0)" data-role="button" data-icon="arrow-u" id="footerB"class="my-btn">Up</a>
+                </div>
+
+                <h4>© 2015 DREAMSPACE AB</h4>
+
+            </div>
+
+            <div data-role="panel" id="bars" data-theme="b" data-display="overlay" Style = "max-width:75%">
+              
+                     <a href="#" data-role="button" data-icon="user"class="my-btn">MyProfile</a>
+                     <a href="#" data-role="button" data-icon="tag"class="my-btn">MyPacklist</a>
+                     <a href="#" data-role="button" data-icon="action"class="my-btn">MyEarena</a>
+                     <a href="#" data-role="button" data-icon="action"class="my-btn">MyEtournament</a>
+                    <button id="button1">Logout</button>
+                    
+                    <script>
+                    
+                    
+                     
+                        $('#button1').click(function() {
+                             FB.getLoginStatus(function(response) {
+                                 if (response.status === 'connected') {
+                                FB.logout(function(response) {
+                        	        window.location='/logout';
+                        	    });
+                                 } else { 
+                                     window.location='/logout';
+                                 }
+                            });
+                        });
+                             
+                       
+                    </script>
+
+            </div>
+
+        </div>
+    
+    </body>
+</html> 
