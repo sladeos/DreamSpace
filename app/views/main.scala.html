@@ -146,11 +146,8 @@
                                 window.location='/packlist'; });
                             $('#etournament').click(function() {
                                 window.location='/packlist'; });
-                            $('#logout').click(function() {
-                                window.location='/logout'; });
-
-
-                        $('#button1').click(function() {
+                      
+                        $('#logout').click(function() {
                              FB.getLoginStatus(function(response) {
                                  if (response.status === 'connected') {
                                 FB.logout(function(response) {
