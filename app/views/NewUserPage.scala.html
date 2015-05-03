@@ -13,17 +13,18 @@
         <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
         <script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script> 
 
-        <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/signup.css")">
+        <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/loginSignUp.css")">
         <link rel="shortcut icon" type="image/png" href="@routes.Assets.at("images/dreamhack-logo.png")">
+
     </head>
     <body>
         <div data-role="page" id = "signup" data-theme="b">
         
-            <div data-role="header"> 
-                <h1><img src="@routes.Assets.at("images/d2.png")" class = "fullscreen"></h1> 
+            <div data-role="header" class = "header"> 
+                <h1><img src="@routes.Assets.at("images/e3.png")" class = "fullscreen"></h1> 
             </div>
             
-            <div data-role = "content">
+            <div data-role = "content" class = "content">
             
                 <h1>Create new user</h1>
                 <form id ="signupform" action="@routes.UserDatabase.addUser()" method ="post" data-ajax="false">
@@ -48,7 +49,7 @@
                         <input type="password" name="confirmPass" id="confirmPass" value="" placeholder="Confirm password"/>
                     </div>
            
-                     <input type="submit" value="Create account" onclick="return validate()">
+                     <button class = "my-btn"  type="submit" value="Create account" onclick="return validate()">Create account </button>
 
                 </form>
                         <button onclick="window.location.href='/login'">Return to login</button>
@@ -181,7 +182,7 @@
             }
 </script>
 </div>
-<div data-role="footer" data-position = "fixed">  
+<div data-role="footer" class = "footer">  
 <h4>© 2015 DREAMSPACE AB</h4>
 </div>
 </div>

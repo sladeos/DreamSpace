@@ -1,4 +1,3 @@
-
 #bracket {
     color:black;
     text-shadow:0 0px 0 #111;
@@ -14,67 +13,89 @@
     height: 100%;*/
     background: black;
 
-}
-
-.fullscreen{
-    
+    .ui-page{
+        background: url("../images/main.jpg");
+    }
+   .content{
+        background: #151515;
+        padding: 5% 5%;
+        margin:0 auto;
+    }
+    .fullscreen{
         max-height: 100%;
         max-width: 100%;
-
-}
-.ui-content {
-
-    padding: 25px 50px;
-    margin: 0 auto ;
-    width: 70%;
-    border: 2px solid orange;
-    border-radius: 25px;
-    
-
-} 
-
-/*.header-google a.ui-btn {
-    border: none;
-    background: orange;
-    text-shadow: none;
-    color: white;
-    font-family: Arial, sans-serif;
-    font-size: 13px;
-}
-
-.header-google .ui-btn-inner {
-    padding: 0;
-    height: 29px;
-    line-height: 29px;
-}*/
-
-/*.header-google a.ui-btn.ui-btn-active,
-.header-google a.ui-btn:hover{
-    color: #FFF;
-}*/
-
-
-    /*.ui-grid-a {width: 100%}
-    .ui-grid-a .ui-controlgroup-controls {width:50%}
-    #homepageB {width:15% ; float:center}
-    #newsfeedB {width:15% ; float:center}
-    #eventfeedB {width:15% ; float:center}
-    #hamburgerB {width:10% ; float:center}
-    #footerB {float:center}*/
-
-.ui-page .ui-btn.my-btn  {
+    }
+    /*Färgen för alla knappar alla skärmar*/
+    .ui-page .ui-btn  {
     color      : white;
-    background : orange;
-}​
+    background : #FA7C04;
 
-/*ul {
-    margin: 0;
-    padding: 0;
-    text-align:center;
+
+    }​
+    .slide-menu{ 
+        max-width:75%;
+    }
+    /*Färgen för header alla skärmar*/
+    .ui-page .ui-header {
+        background:#151515;
+    }
+    /*Färgen för footer alla skärmar*/
+    .ui-page .ui-footer {
+        background:#151515;
+    }
+
+
+@media all and (max-width: 36em){
+ 
+    .ui-content{
+        background: #151515;
+    }
+
 }
 
-ul li {
-    display: inline-block;}
-*/
+@media all and (min-width: 50em){
+    .page{
+        background: url("../images/main.jpg");ß
+    }
+    .content{
+        padding: 5% 5%;
+        margin:0 auto;
+        width:70%;
+        background: #151515;
 
+    }
+    .header{
+        margin:0 auto;
+        width: 80%;
+    }
 
+    .footer {
+        margin:0 auto;
+        width: 80%;
+
+    } 
+    /*Ta bort detta innehåll vid skapande av ny sida*/
+    #img1{
+        padding: 1em;
+        float:right;
+    }
+    #col1{
+        padding: 1em;
+        float: left;
+    }
+    #img2{
+        padding: 1em;
+        float:left;
+    }
+    #col2{
+        padding: 1em;
+        float: right;
+    }
+    #img3{
+        padding: 4em;
+        float:right;
+        border: 2px solid orange;
+    }
+
+}
+ 

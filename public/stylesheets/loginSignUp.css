@@ -1,0 +1,21 @@
+@import url(main.css);
+
+    @media all and (min-width: 50em){
+        .content{
+            padding: 5% 5%;
+            margin:0 auto;
+            width:40%;
+            background: #151515;
+
+        }
+        .header{
+            margin:0 auto;
+            background: #151515;
+            width: 50%;
+        }
+        .footer{
+            margin:0 auto;
+            background: #151515;
+            width: 50%;
+
+        } 

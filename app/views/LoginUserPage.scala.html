@@ -4,16 +4,18 @@
 
 <html>
     <head>
+
        <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta charset="UTF-8">
         <title>DreamSpace</title>
 
         <!-- JQuery Mobile -->
         <link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+
         <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
         <script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script> 
 
-        <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/login.css")">
+        <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/loginSignUp.css")">
         <link rel="shortcut icon" type="image/png" href="@routes.Assets.at("images/dreamhack-logo.png")">
               
         <script>
@@ -151,14 +153,14 @@
 
  
   <div data-role="page" id = "login" data-theme="b">
-    <div data-role="header"> 
-       <h1><img src="@routes.Assets.at("images/d2.png")" class = "fullscreen"></h1> 
+    <div data-role="header" class = "header"> 
+       <h1><img src="@routes.Assets.at("images/e3.png")" class = "fullscreen"></h1> 
                       </div> 
                       
-		  <div data-role = "content">
+		  <div data-role = "content" class = "content" >
 		
           <h1 >Log in</h1>
-            	<form id ="loginform" action="@routes.UserDatabase.getUser()" method ="post" data-ajax="false" >
+            	<form id ="loginform" action="@routes.UserDatabase.getUser()" method ="post" data-ajax="false">
             
                <div data-role="fieldcontain"class="ui-hide-label">
                <label for="username">Username:</label>
@@ -170,12 +172,14 @@
                <input type="password" name="password" id="password" value="" placeholder="Password"/>
                </div>
       
-				<input type="submit" value="Login" onclick="return validate()">
+				<button class = "my-btn" type="submit" value="Login" onclick="return validate()">Login </button>
        
 		        </form>
 		        
-		        <button data-role ="button" id="button1">Register a new account</button>
-		        
+
+		        <button data-role = "button" id="button1" class = "my-btn">Register a new account</button>
+		
+
 		        <fb:login-button scope="public_profile,email" onlogin="checkLoginState();" data-size="xlarge" data-max-rows="1">
                 </fb:login-button>
                 
@@ -215,7 +219,7 @@ function isBlank(elementID){
 }
 </script>	        
 </div>
-<div data-role="footer" data-position = "fixed">  
+<div data-role="footer" class = "footer">  
 <h4>© 2015 DREAMSPACE AB</h4>
 </div>
 </div>        
