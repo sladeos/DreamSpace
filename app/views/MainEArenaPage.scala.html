@@ -1,0 +1,18 @@
+@(eads: List[EArenaAd])
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta charset="UTF-8">
+<title>EArena</title>
+</head>
+<body>
+
+<ul> 
+ @for(eads <- eads) {
+  <li><a rel="external"  href="/earenaad/@eads.arenaID">@{"Name of ad: " + eads.arenaName + " Name of host: " + eads.admin + " Name of game: " + eads.gameName + " Information: " + eads.information + " Amount of players required: " + eads.playersRequired}</a></li>
+ } 
+ </ul>
+
+</body>
+</html>

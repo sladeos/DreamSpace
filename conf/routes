@@ -41,15 +41,32 @@ GET /existfacebooklogin controllers.Application.facebookExistLogin()
 #Get to choosing username
 GET /chooseusername controllers.Application.chooseUsername()
 
+# Post to save created EArenaAd
+POST /savearenaad controllers.EArenaDatabase.addEArenaAd()
+
 #Get tournament page
 GET /createtournament controllers.Application.tournament()
 
+#Post to save tournament created
 POST /savetournament controllers.TournamentDatabase.addTournament()
 
+#Post to save edited tournament
 POST /edittournament controllers.TournamentDatabase.editTournament()
 
+#Gets specific tournament depending on the integer following /showtournament/
 GET  /showtournament/:id controllers.Application.showTournament(id: Integer)
 
+#Retrives list of currentuser's tournaments
 GET /tournament controllers.TournamentDatabase.getTournaments()
 
+# Shows createAd webpage
+GET /createarenaad controllers.Application.createEArenaAd()
 
+# Post to save created EArenaAd
+POST /savearenaad controllers.EArenaDatabase.addEArenaAd()
+
+#Shows Main EArena Page with all/newest Ads
+GET /mainearena controllers.EArenaDatabase.getEArenaAds()
+
+#Shows Individual EArenaAd and determines if the Currentuser is an admin to the ad or not, returns page depending on answer
+GET /earenaad/:id controllers.Application.showIndividualAd(id: Integer)
