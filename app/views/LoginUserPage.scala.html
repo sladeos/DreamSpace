@@ -4,40 +4,11 @@
 
 <html>
     <head>
-
-       <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta charset="UTF-8">
-        <title>DreamSpace</title>
-
-        <!-- JQuery Mobile -->
-        <link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
-
-        <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
-        <script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script> 
-
-        <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/loginSignUp.css")">
-        <link rel="shortcut icon" type="image/png" href="@routes.Assets.at("images/dreamhack-logo.png")">
-              
-        <script>
-        
-  window.fbAsyncInit = function() {
-    FB.init({
-      appId      : '850805461661221',
-      xfbml      : true,
-      version    : 'v2.3'
-    });
-  };
-  (function(d, s, id){
-     var js, fjs = d.getElementsByTagName(s)[0];
-     if (d.getElementById(id)) {return;}
-     js = d.createElement(s); js.id = id;
-     js.src = "//connect.facebook.net/en_US/sdk.js";
-     fjs.parentNode.insertBefore(js, fjs);
-   }(document, 'script', 'facebook-jssdk'));
-		</script>
+        @Templates.head()
+          <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/loginSignUp.css")">
+        @Templates.facebookHeadScript()
     </head>
     <body>
-    
     
     <script>
     var buttonClicked = false;
@@ -152,10 +123,8 @@
     
 
  
-  <div data-role="page" id = "login" data-theme="b">
-    <div data-role="header" class = "header"> 
-       <h1><img src="@routes.Assets.at("images/e3.png")" class = "fullscreen"></h1> 
-                      </div> 
+  <div data-role="page" id = "login" data-theme="b" class = "page">
+        @Templates.loginSignUpHeader() 
                       
 		  <div data-role = "content" class = "content" >
 		
@@ -219,9 +188,7 @@ function isBlank(elementID){
 }
 </script>	        
 </div>
-<div data-role="footer" class = "footer">  
-<h4>© 2015 DREAMSPACE AB</h4>
-</div>
+@Templates.loginSignUpFooter()
 </div>        
 </body>
 </html>

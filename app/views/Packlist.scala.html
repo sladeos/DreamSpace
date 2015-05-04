@@ -4,49 +4,20 @@
 
 <html>
     <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta charset="UTF-8">
-        <title>DreamSpace</title>
-
-
-        <!-- JQuery Mobile -->
-       <link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
-        <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
-        <script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script> 
-
-        <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/main.css")">
-        <link rel="shortcut icon" type="image/png" href="@routes.Assets.at("images/dreamhack-logo.png")">
-        <script src="@routes.Assets.at("javascripts/hello.js")" type="text/javascript"></script>
-      
+ 
+             @Templates.head()
+             @Templates.facebookHeadScript()
     </head>
     <body>
          
 
 
-        <div data-role="page" data-theme="b" class="header-google">   
-
-                <div data-role="header" data-position = "fixed">
-                    @message
-                    <h1><img src="@routes.Assets.at("images/d2.png")" class = "fullscreen"></h1>
-
-
-
-
-
-               <div data-role="navbar" class="ui-grid-d">
-                    <ul>
-                        <li><a href="#" class="my-btn" class="ui-btn-active ui-state-persist">Home</a></li>
-                        <li><a href="#" class="my-btn">News feed</a></li>
-                        <li><a href="#" class="my-btn">EArena feed</a></li>
-                        <li><a href="#bars" class = "my-btn">MyMeny</a></li>
-                    </ul>
-                </div>
-
+        <div data-role="page" data-theme="b" class="page">   
 
                 
-        </div>
-        
-        <div data-role="content" >   
+            @message
+            @Templates.header()
+        <div data-role="content" class = "content">   
             </ul>
             <p>
             <h1 align="center">Testar</h1>
@@ -57,39 +28,8 @@
 
 
         </div>
-            <div data-role="footer">  
-
-
-                <div data-role="controlgroup" data-type="horizontal" style = "text-align: center" class="ui-grid-a">
-                     <a href="#" data-role="button" data-icon="star" id="footerB"class="my-btn">About</a>
-                     <a href="#" data-role="button" data-icon="mail" id="footerB"class="my-btn">Contact</a>
-                     <a href="#" data-role="button" data-icon="home" id="footerB"class="my-btn">Dreamhack.se</a>
-                     <a href="#" data-role="button" data-icon="info" id="footerB"class="my-btn">Info</a>
-                     <a href="#" onclick="$.mobile.silentScroll(0)" data-role="button" data-icon="arrow-u" id="footerB"class="my-btn">Up</a>
-                </div>
-
-                <h4>© 2015 DREAMSPACE AB</h4>
-
-            </div>
-
-            <div data-role="panel" id="bars" data-theme="b" data-display="overlay" Style = "max-width:75%">
-              
-                     <a href="#" data-role="button" data-icon="user"class="my-btn">MyProfile</a>
-                     <a href="#packlist" data-role="button" data-icon="tag"class="my-btn">MyPacklist</a>
-                     <a href="#" data-role="button" data-icon="action"class="my-btn">MyEarena</a>
-                     <a href="#" data-role="button" data-icon="action"class="my-btn">MyEtournament</a>
-                     <script>
-                     $('#packlist').click(function() {
-                             window.location='/packlist'; });
-                     </script>
-
-                    <button id="button1">Logout</button>
-                    <script>
-                        $('#button1').click(function() {
-                             window.location='/logout'; });
-                    </script>
-
-            </div>
+            @Templates.footer()
+            @Templates.panelAndLogOut()
 
         </div>
 
