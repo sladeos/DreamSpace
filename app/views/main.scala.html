@@ -1,9 +1,10 @@
 @(message: String)
-
+import Templates.html.*;
 <!DOCTYPE html>
 
 <html>
     <head>
+
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta charset="UTF-8">
         <title>DreamSpace</title>
@@ -102,32 +103,9 @@
         </div>
 
 
+        @Templates.footer()
+       
 
-            <div data-role = "footer" class = "footer">
-                <footer class="footer-basic-centered" id = "foot">
-                    <p class="footer-company-motto">Life is short play more</p>
-                    <p class="footer-links">
-                        <a id="home" href="#">Home</a>
-                        ·
-                        <a id="contact" href="#">Contact</a>
-                        ·
-                        <a id="dreamhackse" href="#">DreamHack.se</a>
-                        ·
-                        <a id="info" href="#">Info</a>
-                    </p>
-                    <p class="footer-company-name">DREAMSPACE AB &copy; 2015</p>
-                </footer>
-            </div>
-            <script>
-                        $('#home').click(function() {
-                            window.location='/packlist'; });
-                        $('#contact').click(function() {
-                            window.location='/packlist'; });
-                        $('#dreamhackse').click(function() {
-                            window.location='/packlist'; });
-                        $('#info').click(function() {
-                            window.location='/packlist'; });
-                    </script>
 
               <div data-role="panel" id="bars" data-display="overlay" class = "slide-menu">
 
