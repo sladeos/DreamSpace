@@ -1,0 +1,33 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Create EArenaAd</title>
+</head>
+<body>
+ <h1>Create new user</h1>
+                <form id ="EArenaForm"  method ="post" action="@routes.EArenaDatabase.addEArenaAd()">
+                
+                    <div data-role="fieldcontain"class="ui-hide-label">
+                        <label for="arenaName">Arena Ad Name:</label>
+                        <input type="text" name="arenaName" id="arenaName" value="" placeholder="Arena Ad Name"/>
+                    </div>
+                    
+                    <div data-role="fieldcontain" class="ui-hide-label">
+                        <label for="gameName" >Game:</label>
+                        <input type="text" name="gameName" id="game" value="" placeholder="Game "/>
+                    </div>
+                    
+                    <div data-role="fieldcontain" class="ui-hide-label">
+                        <label for="playersRequired" >Players Required:</label>
+                        <input type="number" name="playersRequired" id="playersRequired" value="" placeholder="Players Required"/>
+                   </div>
+                   
+                   <div data-role="fieldcontain" class="ui-hide-label">
+                <textarea placeholder="Enter some information about your ad here!" name="information" id="informationArea" rows="4" cols="50" name="Information about your EArenaAd" ></textarea>
+                </div>
+                     <button class = "my-btn"  type="submit" value="Create EArena Ad">Create EArenaAd </button>
+                </form>
+</body>
+</html>
