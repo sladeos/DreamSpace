@@ -2,11 +2,16 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
 <title>Create EArenaAd</title>
+@Templates.head()
+@Templates.facebookHeadScript()
+<meta charset="UTF-8">
 </head>
 <body>
- <h1>Create new user</h1>
+ <div data-role="page" data-theme="b" id = "main" class = "page"  >
+	@Templates.header()
+ 	<div data-role="content" class = "content">  
+ <h1 align="center">Create an EArena Ad</h1>
                 <form id ="EArenaForm"  method ="post" action="@routes.EArenaDatabase.addEArenaAd()">
                 
                     <div data-role="fieldcontain"class="ui-hide-label">
@@ -29,5 +34,9 @@
                 </div>
                      <button class = "my-btn"  type="submit" value="Create EArena Ad">Create EArenaAd </button>
                 </form>
+                </div>
+@Templates.footer()
+@Templates.panelAndLogOut()
+</div>
 </body>
 </html>

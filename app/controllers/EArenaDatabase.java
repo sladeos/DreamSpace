@@ -94,7 +94,7 @@ public class EArenaDatabase extends Controller {
 					a.information = rs.getString("arenainformation");
 					a.gameName = rs.getString("gamename");
 					a.playersRequired = rs.getInt("playersrequired");
-					a.admin = currentUser;
+					a.admin = rs.getString("admin");
 					adList.add(a);
 				}
 

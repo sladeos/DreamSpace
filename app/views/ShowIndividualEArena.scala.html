@@ -2,12 +2,22 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
 <title>EArenaAd</title>
+@Templates.head()
+@Templates.facebookHeadScript()
+<meta charset="UTF-8">
 </head>
 <body>
+ <div data-role="page" data-theme="b" id = "main" class = "page"  >
+	@Templates.header()
+ 	<div data-role="content" class = "content">  
+ <h1 align="center">EArena Ad</h1>
 @eAd.arenaName
 <br>
 @eAd.admin
+</div>
+@Templates.footer()
+@Templates.panelAndLogOut()
+</div>
 </body>
 </html>
