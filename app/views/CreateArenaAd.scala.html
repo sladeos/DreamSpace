@@ -12,7 +12,7 @@
 	@Templates.header()
  	<div data-role="content" class = "content">  
  <h1 align="center">Create an EArena Ad</h1>
-                <form id ="EArenaForm"  method ="post" action="@routes.EArenaDatabase.addEArenaAd()">
+                <form id ="EArenaForm"  method ="post" action="@routes.EArenaDatabase.addEArenaAd()" data-ajax="false">
                 
                     <div data-role="fieldcontain"class="ui-hide-label">
                         <label for="arenaName">Arena Ad Name:</label>
@@ -26,14 +26,75 @@
                     
                     <div data-role="fieldcontain" class="ui-hide-label">
                         <label for="playersRequired" >Players Required:</label>
-                        <input type="number" name="playersRequired" id="playersRequired" value="" placeholder="Players Required"/>
+                        <input type="number" min="1" name="playersRequired" id="playersRequired" value="" placeholder="Players Required"/>
                    </div>
                    
                    <div data-role="fieldcontain" class="ui-hide-label">
                 <textarea placeholder="Enter some information about your ad here!" name="information" id="informationArea" rows="4" cols="50" name="Information about your EArenaAd" ></textarea>
                 </div>
-                     <button class = "my-btn"  type="submit" value="Create EArena Ad">Create EArenaAd </button>
+                     <button class = "my-btn"  type="submit" value="Create EArena Ad" onclick="return validate()">Create EArenaAd </button>
+                     <p id="warning"></p>
                 </form>
+   
+              <script type="text/javascript">
+              
+         	 function errorInField(){
+            	 $("#warning").css('color', 'red');
+                 $('#warning').prepend('<img id="redcross" src="@routes.Assets.at("images/redcross.png")" />')
+                 $('#redcross').width(40);
+                 $('#redcross').height(40);
+            }
+
+              
+              function validate() {
+            	   var blnValid = true;
+
+            	   if (isBlank("arenaName")) {
+            	     blnValid = false;
+            	     $("#warning").html('Please enter a name for your EArena Ad!');
+            	     errorInField()
+            	     document.getElementById("arenaName").focus();
+            	   }
+            	   if (blnValid) {
+            	     if (isBlank("game")) {
+            	       blnValid = false;
+            	       $("#warning").html('Please enter the name of your game!');
+            	       errorInField()
+            	       document.getElementById("game").focus();
+            	     }
+            	   }
+            	   if (blnValid) {
+            	     if (isBlank("playersRequired")) {
+            	       blnValid = false;
+            	       $("#warning").html('Please provide the amount of players you are lookng for! Numbers only!');
+            	       errorInField()
+            	       document.getElementById("playersRequired").focus();
+            	     }
+            	   }
+
+            	   if (blnValid) {
+            	     if (isBlank("informationArea")) {
+            	       blnValid = false;
+            	       $("#warning").html('Please provide some information about your ad!');
+            	       errorInField()
+            	       document.getElementById("informationArea").focus();
+            	     }
+            	   }
+
+            	   return blnValid;
+            	 }
+
+
+
+            	 function isBlank(elementID) {
+            	   if (document.getElementById(elementID).value.length == 0) {
+            	     return true;
+            	   }
+
+            	   return false;
+            	 }
+            
+            </script>
                 </div>
 @Templates.footer()
 @Templates.panelAndLogOut()
