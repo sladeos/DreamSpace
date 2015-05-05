@@ -5,8 +5,10 @@
 # Home page
 GET     /                           controllers.Application.mainMethod()
 
+
 #Get to packlist html-page
 GET   /packlist controllers.Application.packlist()
+
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)
@@ -86,4 +88,14 @@ POST /postreply controllers.EArenaDatabase.addReply()
 POST /updateearenaad controllers.EArenaDatabase.updateEArenaAd()
 
 GET /myetournaments controllers.TournamentDatabase.getMyTournaments()
+
+#edit user profile
+POST /edituserprofile controllers.UserProfileDatabase.editUserProfile()
+
+#Get to otheruserprofile html-page
+GET   /profile/:user controllers.Application.showProfile(user: String)
+
+GET /profile controllers.UserProfileDatabase.getProfiles()
+
+GET /myprofile controllers.Application.getMyProfile()
 
