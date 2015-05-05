@@ -2,9 +2,7 @@
     color:black;
     text-shadow:0 0px 0 #111;
     
-    
 }
-
     .ui-page{
         background: url("../images/main.jpg");
     }
@@ -35,15 +33,15 @@
     .ui-page .ui-footer {
         background:#151515;
     }
-
-
 @media all and (max-width: 36em){
  
     .ui-content{
         background: #151515;
     }
 
+
 }
+
 
 @media all and (min-width: 50em){
     .page{
@@ -65,7 +63,8 @@
         margin:0 auto;
         width: 80%;
 
-    } 
+    }
+
     /*Ta bort detta innehåll vid skapande av ny sida*/
     #img1{
         padding: 1em;
