@@ -104,8 +104,27 @@ public class Application extends Controller {
 	}
 
 	public static Result packlist() {
-		return ok(Packlist.render("test"));
-	}
+			String user = session("connected");
+			if (user != null) {
+				return ok(Packlist.render("You are logged in as "
+						+ user));
+			} else {
+				return unauthorized(LoginUserPage
+						.render("Welcome, login to explore the website"));
+			}
+		}
+
+
+			public static Result myprofile() {
+			String user = session("connected");
+			if (user != null) {
+				return ok(MyProfile.render("You are logged in as "
+						+ user));
+			} else {
+				return unauthorized(LoginUserPage
+						.render("Welcome, login to explore the website"));
+			}
+		}
  
 
 }
