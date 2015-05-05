@@ -4,163 +4,48 @@
 
 <html>
     <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta charset="UTF-8">
-        <title>DreamSpace</title>
-
-
-        <!-- JQuery Mobile -->
-        <link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
-        <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
-        <script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
-
-        <!-- Stylsheet main and images -->
-        <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/main.css")">
-        <link rel="shortcut icon" type="image/png" href="@routes.Assets.at("images/dreamhack-logo.png")">
-        <!-- Javascripts -->
-        <script src="@routes.Assets.at("javascripts/hello.js")" type="text/javascript"></script>
-		 <!-- Responsive menu -->
-        <link rel="stylesheet" href="@routes.Assets.at("stylesheets/rmm-css/responsivemobilemenu.css")">
-        <script type="text/javascript" src="@routes.Assets.at("javascripts/rmm-js/responsivemobilemenu.js")"></script>
-
-        <!-- Responsive footer -->
-        <link rel="stylesheet" href = "@routes.Assets.at("stylesheets/footer/footer-basic-centered.css")">
-
-	  
-      <script>
-  window.fbAsyncInit = function() {
-    FB.init({
-      appId      : '850805461661221',
-      xfbml      : true,
-      version    : 'v2.3'
-    });
-  };
-  (function(d, s, id){
-     var js, fjs = d.getElementsByTagName(s)[0];
-     if (d.getElementById(id)) {return;}
-     js = d.createElement(s); js.id = id;
-     js.src = "//connect.facebook.net/en_US/sdk.js";
-     fjs.parentNode.insertBefore(js, fjs);
-   }(document, 'script', 'facebook-jssdk'));
-		</script>
-      
+      @Templates.head()
+      @Templates.facebookHeadScript()
     </head>
     <body>         
         <div data-role="page" data-theme="b" id = "main" class = "page"  >   
-            <div data-role="header" class = "header">
+           
                 @message
-                <h1><img src="@routes.Assets.at("images/e3.png")" class = "fullscreen"></h1>
-                <div class="rmm">
-                    <ul>
-                        <li><a id="home" href='#home'>Home</a></li>
-                        <li><a id="newsFeed" href='#news'>News</a></li>
-                        <li><a id="earenaFeed" href='#Earena'>EArena</a></li>
-                        <li><a id="newsFeed" href='#feed'>Feed</a></li>
-                        <li><a href="#bars">MyMenu</a></li>
-                    </ul>
-					        <script>
-                         $('#home').click(function() {
-                                window.location='/packlist'; });
-                         $('#newsFeed').click(function() {
-                                window.location='/packlist'; });
-                         $('#earenaFeed').click(function() {
-                                window.location='/packlist'; });
-                         </script>
-                </div>    
-            </div>
+                @Templates.header()
             <div data-role="content" class = "content">
-<!--Ta bort detta vid användning och placera nytt inehåll i content  -->
-                <h1 align="center">News feed</h1>
-                 Veritus nominavi postulant ex nec. Quis utamur vix cu, no vix ullum dolorem maiestatis. Ei mel quidam vituperatoribus, id ius doctus phaedrum, quaeque maiorum detraxit vix cu. Ea amet case indoctum sed. Ei zril patrioque nam.ati instructior mel ne, mel elit cibo oporteat at, no qui assum soluta. Omnesque democritum et pro, no duo elit salutatus disputationi. Inani harum ea eos, pro te vivendo blandit, movet habemus ullamcorper eos te.<h2><img src="@routes.Assets.at("images/e2.png")" class = "fullscreen" id = "img1"></h2>
+                                <!--Ta bort detta vid användning och placera nytt inehåll i content  -->
+                                                <h1 align="center">News feed</h1>
+                                                 Veritus nominavi postulant ex nec. Quis utamur vix cu, no vix ullum dolorem maiestatis. Ei mel quidam vituperatoribus, id ius doctus phaedrum, quaeque maiorum detraxit vix cu. Ea amet case indoctum sed. Ei zril patrioque nam.ati instructior mel ne, mel elit cibo oporteat at, no qui assum soluta. Omnesque democritum et pro, no duo elit salutatus disputationi. Inani harum ea eos, pro te vivendo blandit, movet habemus ullamcorper eos te.<h2><img src="@routes.Assets.at("images/e2.png")" class = "fullscreen" id = "img1"></h2>
 
-            <p id = "col1">
-                 Ad nam alienum petentium complectitur, augue consequuntur te vim. Eam ei cibo oporteat. Ut nominavi menandri intellegam has, cu tacimates perpetua tincidunt cum. Vis fabulas alienum omittam ex, ut per diam unum soluta, diceret ullamcorper pri ne.
-            </p>
+                                            <p id = "col1">
+                                                 Ad nam alienum petentium complectitur, augue consequuntur te vim. Eam ei cibo oporteat. Ut nominavi menandri intellegam has, cu tacimates perpetua tincidunt cum. Vis fabulas alienum omittam ex, ut per diam unum soluta, diceret ullamcorper pri ne.
+                                            </p>
 
 
 
-                Eu vitae abhorreant sit. Mazim primis rationibus has eu, an etiam convenire per. Per ea summo partiendo urbanitas, at vis ceteros copiosae. Sea meliore pertinacia in, partem indoctum usu id, eos  id delectus placerat pericula. Id omnis prompta vivendum has, saepe tritani nominavi sed id. Cu gubergren aliquando vim, error timeam pro ex.
+                                                Eu vitae abhorreant sit. Mazim primis rationibus has eu, an etiam convenire per. Per ea summo partiendo urbanitas, at vis ceteros copiosae. Sea meliore pertinacia in, partem indoctum usu id, eos  id delectus placerat pericula. Id omnis prompta vivendum has, saepe tritani nominavi sed id. Cu gubergren aliquando vim, error timeam pro ex.
 
-                Veritus nominavi postulant ex nec. Quis utamur vix cu, no vix ullum dolorem maiestatis. Ei mel quidam vituperatoribus, id ius doctus phaedrum, quaeque maiorum detraxit vix cu. Ea amet case indoctum sed. Ei zril patrioque nam.ati instructior mel ne, mel elit cibo oporteat at, no qui assum soluta. Omnesque democritum et pro, no duo elit salutatus disputationi. Inani harum ea eos, pro te vivendo blandit, movet habemus ullamcorper eos te.
-                <img src="@routes.Assets.at("images/e1.png")" class = "fullscreen" id = "img2">
-            <p id = "col2">
-                 Ad nam alienum petentium complectitur, augue consequuntur te vim. Eam ei cibo oporteat. Ut nominavi menandri intellegam has, cu tacimates perpetua tincidunt cum. Vis fabulas alienum omittam ex, ut per diam unum soluta, diceret ullamcorper pri ne.
-            </p>
-                Eam audiam scripta iudicabit et, eu dolorem perfecto persecuti qui. Cu vix homero fabulas nonumes. Usu perpetua conceptam disputationi eu, iusto mollis forensibus sea ut, ex per brute theophrastus. Usu melius expetenda dissentias id, no vitae dolore disputationi his, semper quaeque invidunt per eu.
-            <p id = "col3">
-                Ad nam alienum petentium complectitur, augue consequuntur te vim. Eam ei cibo oporteat. Ut nominavi menandri    intellegam has, cu tacimates perpetua tincidunt cum. Vis fabulas alienum omittam ex, ut per diam unum soluta, diceret ullamcorper pri ne.</p>
+                                                Veritus nominavi postulant ex nec. Quis utamur vix cu, no vix ullum dolorem maiestatis. Ei mel quidam vituperatoribus, id ius doctus phaedrum, quaeque maiorum detraxit vix cu. Ea amet case indoctum sed. Ei zril patrioque nam.ati instructior mel ne, mel elit cibo oporteat at, no qui assum soluta. Omnesque democritum et pro, no duo elit salutatus disputationi. Inani harum ea eos, pro te vivendo blandit, movet habemus ullamcorper eos te.
+                                                <img src="@routes.Assets.at("images/e1.png")" class = "fullscreen" id = "img2">
+                                            <p id = "col2">
+                                                 Ad nam alienum petentium complectitur, augue consequuntur te vim. Eam ei cibo oporteat. Ut nominavi menandri intellegam has, cu tacimates perpetua tincidunt cum. Vis fabulas alienum omittam ex, ut per diam unum soluta, diceret ullamcorper pri ne.
+                                            </p>
+                                                Eam audiam scripta iudicabit et, eu dolorem perfecto persecuti qui. Cu vix homero fabulas nonumes. Usu perpetua conceptam disputationi eu, iusto mollis forensibus sea ut, ex per brute theophrastus. Usu melius expetenda dissentias id, no vitae dolore disputationi his, semper quaeque invidunt per eu.
+                                            <p id = "col3">
+                                                Ad nam alienum petentium complectitur, augue consequuntur te vim. Eam ei cibo oporteat. Ut nominavi menandri    intellegam has, cu tacimates perpetua tincidunt cum. Vis fabulas alienum omittam ex, ut per diam unum soluta, diceret ullamcorper pri ne.</p>
 
-            <img src="@routes.Assets.at("images/e3.png")" class = "fullscreen" id = "img3">
+                                            <img src="@routes.Assets.at("images/e3.png")" class = "fullscreen" id = "img3">
 
-                vitae abhorreant sit. Mazim primis rationibus has eu, an etiam convenire per. Per ea summo partiendo urbanitas, at vis ceteros copiosae. Sea meliore pertinacia in, partem indoctum usu id, eos id delectus placerat pericula. Id omnis prompta vivendum has, saepe tritani nominavi sed id. Cu gubergren aliquando vim, error timeam pro ex.
+                                                vitae abhorreant sit. Mazim primis rationibus has eu, an etiam convenire per. Per ea summo partiendo urbanitas, at vis ceteros copiosae. Sea meliore pertinacia in, partem indoctum usu id, eos id delectus placerat pericula. Id omnis prompta vivendum has, saepe tritani nominavi sed id. Cu gubergren aliquando vim, error timeam pro ex.
 
-                Veritus nominavi postulant ex nec. Quis utamur vix cu, no vix ullum dolorem maiestatis. Ei mel quidam vituperatoribus, id ius doctus phaedrum, quaeque maiorum detraxit vix cu. Ea amet case indoctum sed. Ei zril patrioque nam.ati    instructior mel ne, mel elit cibo oporteat at, no qui assum soluta. Omnesque democritum et pro, no duo elit salutatus disputationi. Inani harum ea eos, pro te vivendo blandit, movet habemus ullamcorper eos te.
+                                                Veritus nominavi postulant ex nec. Quis utamur vix cu, no vix ullum dolorem maiestatis. Ei mel quidam vituperatoribus, id ius doctus phaedrum, quaeque maiorum detraxit vix cu. Ea amet case indoctum sed. Ei zril patrioque nam.ati    instructior mel ne, mel elit cibo oporteat at, no qui assum soluta. Omnesque democritum et pro, no duo elit salutatus disputationi. Inani harum ea eos, pro te vivendo blandit, movet habemus ullamcorper eos te.
 
-                Eam audiam scripta iudicabit et, eu dolorem perfecto persecuti qui. Cu vix homero fabulas nonumes. Usu perpetua     conceptam disputationi eu, iusto mollis forensibus sea ut, ex per brute theophrastus. Usu melius expetenda dissentias id, no vitae dolore disputationi his, semper quaeque invidunt per eu.
+                                                Eam audiam scripta iudicabit et, eu dolorem perfecto persecuti qui. Cu vix homero fabulas nonumes. Usu perpetua     conceptam disputationi eu, iusto mollis forensibus sea ut, ex per brute theophrastus. Usu melius expetenda dissentias id, no vitae dolore disputationi his, semper quaeque invidunt per eu.
 
                   
-        </div>
-
-
-
-            <div data-role = "footer" class = "footer">
-                <footer class="footer-basic-centered" id = "foot">
-                    <p class="footer-company-motto">Life is short play more</p>
-                    <p class="footer-links">
-                        <a id="home" href="#">Home</a>
-                        ·
-                        <a id="contact" href="#">Contact</a>
-                        ·
-                        <a id="dreamhackse" href="#">DreamHack.se</a>
-                        ·
-                        <a id="info" href="#">Info</a>
-                    </p>
-                    <p class="footer-company-name">DREAMSPACE AB &copy; 2015</p>
-                </footer>
             </div>
-            <script>
-                        $('#home').click(function() {
-                            window.location='/packlist'; });
-                        $('#contact').click(function() {
-                            window.location='/packlist'; });
-                        $('#dreamhackse').click(function() {
-                            window.location='/packlist'; });
-                        $('#info').click(function() {
-                            window.location='/packlist'; });
-                    </script>
-
-              <div data-role="panel" id="bars" data-display="overlay" class = "slide-menu">
-
-                     <a href="#" id="myProfile" data-role="button" data-icon="user" class="my-btn">MyProfile</a>
-                     <a href="#" id="packlist" data-role="button" data-icon="tag" class="my-btn">MyPacklist</a>
-                     <a href="#" id="earena" data-role="button" data-icon="action" class="my-btn">MyEarena</a>
-                     <a href="#" id="etournament" data-role="button" data-icon="action" class="my-btn">MyEtournament</a>
-                    <button id="logout">Logout</button>
-                     
-                     <script>
-                            $('#myProfile').click(function() {
-                                window.location='/packlist'; });
-                            $('#packlist').click(function() {
-                                window.location='/packlist'; });
-                            $('#earena').click(function() {
-                                window.location='/packlist'; });
-                            $('#etournament').click(function() {
-                                window.location='/packlist'; });
-                      
-                        $('#logout').click(function() {
-                             FB.getLoginStatus(function(response) {
-                                 if (response.status === 'connected') {
-                                FB.logout(function(response) {
-                        	        window.location='/logout';
-                        	    });
-                                 } else { 
-                                     window.location='/logout';
-                                 }
-                            });
-                        });
-
-                    </script>
-            </div>
+            @Templates.footer()
+            @Templates.panelAndLogOut()
 
         </div>
 

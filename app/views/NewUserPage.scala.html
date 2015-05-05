@@ -4,26 +4,12 @@
 
 <html>
     <head>
-       <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta charset="UTF-8">
-        <title>DreamSpace</title>
-
-        <!-- JQuery Mobile -->
-        <link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
-        <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
-        <script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script> 
-
+        @Templates.head()
         <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/loginSignUp.css")">
-        <link rel="shortcut icon" type="image/png" href="@routes.Assets.at("images/dreamhack-logo.png")">
-
     </head>
     <body>
-        <div data-role="page" id = "signup" data-theme="b">
-        
-            <div data-role="header" class = "header"> 
-                <h1><img src="@routes.Assets.at("images/e3.png")" class = "fullscreen"></h1> 
-            </div>
-            
+        <div data-role="page" id = "signup" data-theme="b" class = "page">
+            @Templates.loginSignUpHeader()
             <div data-role = "content" class = "content">
             
                 <h1>Create new user</h1>
@@ -180,11 +166,9 @@
                 
                 return false;
             }
-</script>
-</div>
-<div data-role="footer" class = "footer">  
-<h4>© 2015 DREAMSPACE AB</h4>
-</div>
-</div>
-</body>
+            </script>
+                </div>
+            @Templates.loginSignUpFooter()
+        </div>
+    </body>
 </html>
