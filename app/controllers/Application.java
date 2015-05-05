@@ -3,8 +3,10 @@ package controllers;
 import models.*;
 import play.*;
 import play.mvc.*;
+
 import java.io.UnsupportedEncodingException;
 import java.sql.*;
+
 import views.html.*;
 import play.data.Form;
 import play.db.*;
@@ -118,11 +120,9 @@ public class Application extends Controller {
 		String user = session("connected");
 		if (user != null) {
 			if (user.equals(EArenaDatabase.getIndividualEArena(id).admin)) {
-				return ok(EditEArena.render(EArenaDatabase
-						.getIndividualEArena(id)));
+				return ok(EditEArena.render(EArenaDatabase.getIndividualEArena(id), EArenaDatabase.getEArenaReplies(id)));
 			} else {
-				return ok(ShowIndividualEArena.render(EArenaDatabase
-						.getIndividualEArena(id)));
+				return ok(ShowIndividualEArena.render(EArenaDatabase.getIndividualEArena(id), EArenaDatabase.getEArenaReplies(id)));
 			}
 		} else {
 			return unauthorized(LoginUserPage

@@ -26,11 +26,11 @@
                     
                     <div data-role="fieldcontain" class="ui-hide-label">
                         <label for="playersRequired" >Players Required:</label>
-                        <input type="number" min="1" name="playersRequired" id="playersRequired" value="" placeholder="Players Required"/>
+                        <input type="number" min="1" max="100" name="playersRequired" id="playersRequired" value="" placeholder="Players Required"/>
                    </div>
                    
                    <div data-role="fieldcontain" class="ui-hide-label">
-                <textarea placeholder="Enter some information about your ad here!" name="information" id="informationArea" rows="4" cols="50" name="Information about your EArenaAd" ></textarea>
+                <textarea placeholder="Enter some information about your ad here!" name="information" id="informationArea" rows="4" cols="50" ></textarea>
                 </div>
                      <button class = "my-btn"  type="submit" value="Create EArena Ad" onclick="return validate()">Create EArenaAd </button>
                      <p id="warning"></p>

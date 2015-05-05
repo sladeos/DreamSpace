@@ -12,7 +12,6 @@ import views.html.*;
 import models.FacebookUser;
 import play.data.Form;
 import play.db.DB;
-import play.libs.Json;
 import play.mvc.*;
 import play.db.*;
 import play.libs.Json;

@@ -4,7 +4,18 @@
     
     
 }
-
+	#replyfielddiv{
+	width: 40%;
+	margin:0 auto;
+	float: right;
+	
+	}
+	
+	#adreplies{
+	width: 40%;
+	margin:0 auto;
+	float: left;
+	}
     .ui-page{
         background: url("../images/main.jpg");
     }
