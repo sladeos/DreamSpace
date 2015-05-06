@@ -16,6 +16,7 @@
             <div data-role="content" class = "content" >
                 <div id = "mainTournamentContent">   
                     <h1 align="center">Tournament</h1>
+                    <a data-role = "button" id = "btn" rel="external" href="/createtournament">Create a new tournament</a>
                         <ul data-role="listview" data-inset="true" data-dividertheme="a"> 
                         @for(tournament <- tournament) {
                             <li  data-role = "list-divider" ></li>
@@ -23,7 +24,6 @@
                             </li>
                         } 
                     </ul>
-                    <a data-role = "button" id = "btn" rel="external" href="/createtournament">Create a new tournament</a>
                     <script>
                         $("#btn").css("background"," #FA7C04");
                     </script>
