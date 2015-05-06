@@ -2,54 +2,50 @@
 <!DOCTYPE html>
 <html>
 	<head>
-	<title>EArena</title>
-	@Templates.head()
-	@Templates.facebookHeadScript()
-<meta charset="UTF-8">
+	   <title>EArena</title>
+	   @Templates.head()
+        <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/MainEArenaPage.css")">
+	   @Templates.facebookHeadScript()
+        <meta charset="UTF-8">
 	</head>
-<body>
-	<div data-role="page" data-theme="b" id = "main" class = "page"  >
-	@Templates.header()
- 	<div data-role="content" class = "content">   
-     	<h1 align="center">EArena</h1>
-     	
-     	<div id="search">
-     	    <form>
-     	        <input type="search" name="search" id="search-basic" value="" />
-     	        
-     	        <div id="rbut">
-     	        <label>Search for: </label>
-     	        
-                <div class="ui-grid-b">
-                <div class="ui-block-a">
-                <input type="checkbox" name="checkbox-h-1a" id="checkbox-h-1a">
-                <label for="checkbox-h-1a">Name</label>
+    <body>
+        <div data-role="page" data-theme="b" id = "main" class = "page"  >
+	       @Templates.header()
+            <div data-role="content" class = "content">   
+            <h1 align="center">EArena</h1>
+                <div id="search">
+                    <form>
+                        <div id="blockBox">
+                            <input type="search" name="search" id="search-basic" value="" />
+                            <label>Search for: </label>
+                            <div class="ui-grid-b ui-responsive">
+                                <div class="ui-block-a">
+                                    <input type="checkbox" name="checkbox-h-1a" id="checkbox-h-1a">
+                                    <label for="checkbox-h-1a">Name</label>
+                                </div>
+                                <div class="ui-block-b">
+                                    <input type="checkbox" name="checkbox-h-1b" id="checkbox-h-1b">
+                                    <label for="checkbox-h-1b">User</label>
+                                </div>
+                                <div class="ui-block-c">
+                                    <input type="checkbox" name="checkbox-h-1c" id="checkbox-h-1c">
+                                    <label for="checkbox-h-1c">Players</label>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
                 </div>
-                <div class="ui-block-b">
-                <input type="checkbox" name="checkbox-h-1b" id="checkbox-h-1b">
-                <label for="checkbox-h-1b">User</label>
+                <div id = "MEArenaContent">
+                    <article  data-role="listview" data-inset="true" data-dividertheme="a"> 
+                        @for(eads <- eads) {
+                            <li  data-role = "list-divider" ></li>
+                            <li><a data-role = "button" rel="external"  href="/earenaad/@eads.arenaID" style = "background: #373737" >@{"Name of ad: " + eads.arenaName}<br> @{" Name of host: " + eads.admin} <br>@{" Name of game: " + eads.gameName }<br> @{" Information: " + eads.information}<br> @{" Amount of players required: " + eads.playersRequired} </a></li>
+                        } 
+                    </article>
                 </div>
-                <div class="ui-block-c">
-                <input type="checkbox" name="checkbox-h-1c" id="checkbox-h-1c">
-                <label for="checkbox-h-1c">Players</label>
-                </div>
-                
- 	      
- 	        </div>
- 	    </form>
- 	</div>
- 	
- 	
- 	
-	<ul> 
- 	@for(eads <- eads) {
-  	<li><a rel="external"  href="/earenaad/@eads.arenaID">@{"Name of ad: " + eads.arenaName + " Name of host: " + eads.admin + " Name of game: " + eads.gameName + " Information: " + eads.information + " Amount of players required: " + eads.playersRequired}</a></li>
-	} 
- 	</ul>
- 
- </div>
-@Templates.footer()
-@Templates.panelAndLogOut()
-</div>
-</body>
+            </div>
+            @Templates.footer()
+            @Templates.panelAndLogOut()
+        </div>
+    </body>
 </html>
