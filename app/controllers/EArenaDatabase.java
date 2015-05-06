@@ -433,5 +433,63 @@ public class EArenaDatabase extends Controller {
 
 	}
 	
+	public static Result getMyEArenaAds() {
+  String currentUser = session("connected");
+  if (currentUser == null) {
+   return unauthorized(LoginUserPage
+     .render("You have to login to access this page!"));
+  } else {
+   Connection conn = null;
+   PreparedStatement preparedStatement = null;
+   List<EArenaAd> adList = new ArrayList<EArenaAd>();
+   try {
+
+    conn = DB.getConnection();
+
+    String selectAdminAds = "SELECT * FROM EArena WHERE admin=?";
+    preparedStatement = conn.prepareStatement(selectAdminAds);
+    preparedStatement.setString(1, currentUser);
+    ResultSet rs = preparedStatement.executeQuery();
+
+    while (rs.next()) {
+     EArenaAd a = new EArenaAd();
+     a.arenaID = rs.getInt("arenaID");
+     a.arenaName = rs.getString("arenaname");
+     a.information = rs.getString("arenainformation");
+     a.gameName = rs.getString("gamename");
+     a.playersRequired = rs.getInt("playersrequired");
+     a.admin = rs.getString("admin");
+     adList.add(a);
+    }
+
+    rs.close();
+    return ok(myearenapage.render(adList));
+   } catch (com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException ice) {
+    return badRequest(ice.toString());
+   } catch (NumberFormatException nfe) {
+    return badRequest(nfe.toString());
+   } catch (SQLException se) {
+    // Handle sql errors
+    return internalServerError(se.toString());
+   } catch (Exception e) {
+    // Handle errors for Class.forName
+    return internalServerError(e.toString());
+   } finally {
+    // finally block used to close resources
+    // try {
+    // if (preparedStatement != null)
+    // conn.close();
+    // } catch (SQLException se) {
+    // } //do nothing
+    try {
+     if (conn != null)
+      conn.close();
+    } catch (SQLException se) {
+     return internalServerError(se.toString());
+    } // end finally try
+   } // end try
+  }
+ }
+	
 
 }

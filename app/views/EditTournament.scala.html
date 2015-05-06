@@ -22,6 +22,8 @@
                 <form name="bracketEdit" >
                 Name of your tournament: <input type="text" name="fname" id="fname">
                 <input type="button" value="Save changes" id="save">
+                
+                <input type="button" value="delete tournament" id="delete">
                     <p id="warning"></p>
                 
             </form>
@@ -137,6 +139,64 @@
                         });
                   
                     });
+          /////////////////////////////////////////////////delete button /////////////////////          
+                    
+                    $("#delete").click(function() {
+    if(true){
+   var data = {"id":"@tournament.tournamentID"}
+
+      $.ajax({
+            url: "/deletetournament",
+            type: 'POST',
+            contentType:'application/json',
+            data: JSON.stringify( data ),
+            dataType : 'html',
+            success: function(){
+                window.location.replace("/tournament");
+            }
+        });
+    }else{
+    	
+    	 $("#warning").html("There are errors in your tournament! Fix them and try again.");
+    	 $("#warning").css('color', 'red');
+         $('#warning').prepend('<img id="redcross" src="@routes.Assets.at("images/redcross.png")" />')
+         $('#redcross').width(40);
+         $('#redcross').height(40);
+    	
+    }
+        });
+                    
+             
+                    
+                    
+     /////////////////////////////////////////////////////////////////////////////////////               
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
                     
                     
                     $('#button1').click(function() {
