@@ -1,9 +1,10 @@
-@(eads: List[EArenaAd])
+@(eads: List[EArenaAd], games: List[String])
 <!DOCTYPE html>
 <html>
 	<head>
 	<title>EArena</title>
 	@Templates.head()
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 	@Templates.facebookHeadScript()
 <meta charset="UTF-8">
 	</head>
@@ -14,30 +15,49 @@
      	<h1 align="center">EArena</h1>
      	
      	<div id="search">
-     	    <form>
+     	    <form data-ajax="false">
      	        <input type="search" name="search" id="search-basic" value="" />
-     	        
-     	        <div id="rbut">
+     	            
+     	        <button id="showAdv" type="button">Show advanced search options</button>
+     	        <div id="advSearch" style="display: none;">
      	        <label>Search for: </label>
      	        
-                <div class="ui-grid-b">
-                <div class="ui-block-a">
-                <input type="checkbox" name="checkbox-h-1a" id="checkbox-h-1a">
-                <label for="checkbox-h-1a">Name</label>
-                </div>
-                <div class="ui-block-b">
-                <input type="checkbox" name="checkbox-h-1b" id="checkbox-h-1b">
-                <label for="checkbox-h-1b">User</label>
-                </div>
-                <div class="ui-block-c">
-                <input type="checkbox" name="checkbox-h-1c" id="checkbox-h-1c">
-                <label for="checkbox-h-1c">Players</label>
-                </div>
-                
- 	      
- 	        </div>
+ 	              <div class="ui-grid-c">
+                    <div class="ui-block-a">
+                        <input type="text" name="game" placeholder="Game" id="game">
+                    </div>
+                    <div class="ui-block-b">
+                        <input type="text" name="username" placeholder="Username" id="username">
+                    </div>
+                    <div class="ui-block-c">
+                        <input type="number" name="players" placeholder="Players" id="players">
+                    </div>
+                    <div class="ui-block-d">
+                        <input type="text" name="date" placeholder="Date" id="datepicker">
+                    </div>
+ 	             </div>
+ 	            </div>
+ 	            <button class="my-btn" type="submit">Search</button>
+ 	            
  	    </form>
- 	</div>
+        </div>
+        <script>
+         $(function() {
+           
+            $('#showAdv').click(function() {        
+               $('#advSearch').toggle('show');
+            });
+            
+            var games = @Html(games.toString());
+		   
+		    $( "#datepicker" ).datepicker(); 
+		    $( "#datepicker" ).datepicker( "option", "dateFormat", "yy-mm-dd" );
+		   
+    		$( "#game" ).autocomplete({
+    		  source: games
+    		});
+    	});
+        </script>
  	
  	
  	

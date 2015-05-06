@@ -60,13 +60,13 @@ GET  /showtournament/:id controllers.Application.showTournament(id: Integer)
 GET /tournament controllers.TournamentDatabase.getTournaments()
 
 # Shows createAd webpage
-GET /createarenaad controllers.EArenaDatabase.getEArenaGames()
+GET /createarenaad controllers.Application.createArenaAd()
 
 # Post to save created EArenaAd
 POST /savearenaad controllers.EArenaDatabase.addEArenaAd()
 
 #Shows Main EArena Page with all/newest Ads
-GET /mainearena controllers.EArenaDatabase.getEArenaAds()
+GET /mainearena controllers.Application.mainearena(search ?= null, game ?= null, username ?= null, players ?= null, date ?= null)
 
 #Shows Individual EArenaAd and determines if the Currentuser is an admin to the ad or not, returns page depending on answer
 GET /earenaad/:id controllers.Application.showIndividualAd(id: Integer)
