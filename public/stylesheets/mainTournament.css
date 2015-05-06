@@ -1,25 +1,24 @@
 @import url(main.css);
+   .ui-page .ui-btn  {
+    color      : white;
+    background : #373737;
 
+
+    }​
 	#mainTournamentContent{
     width: 100%;
     margin: 0 auto;
     
-} 
-body .ui-li .ui-li-desc {
- white-space: normal;
- }
-
-@media all and (max-width: 36em){
-	#mainTournamentContent{
-    width: 100%;
-	}
-}
-
-@media all and (min-width: 50em){
-    #mainTournamentContent{
-    width: 500px;
-    margin: 0 auto;
-
 	} 
+	@media all and (max-width: 36em){
+		#mainTournamentContent{
+    		width: 100%;
+		}
+	}
 
-} 
+	@media all and (min-width: 50em){
+    	#mainTournamentContent{
+    		width: 500px;
+    		margin: 0 auto;
+		} 
+	} 

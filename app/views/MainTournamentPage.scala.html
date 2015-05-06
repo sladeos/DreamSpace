@@ -20,12 +20,17 @@
                         <ul data-role="listview" data-inset="true" data-dividertheme="a"> 
                         @for(tournament <- tournament) {
                           
-                            <li data-role = "list-divider" ></li>
-                                <li><a id = "link" rel="external"  href="/showtournament/@tournament.tournamentID" ><img src="@routes.Assets.at("images/sun.jpg")" alt="Dreamhack" class = "fullscreen"/><h2>@{"Name: " + tournament.tournamentname}</h2> <p>@{" Size: " +  tournament.participant_count }</p></a>
+                            <li  data-role = "list-divider" ></li>
+                                <li><a data-role = "button" rel="external"  href="/showtournament/@tournament.tournamentID" ><img src="@routes.Assets.at("images/sun.jpg")" alt="Dreamhack" class = "fullscreen"/><h2>@{"Name: " + tournament.tournamentname}</h2> <p>@{" Size: " +  tournament.participant_count }</p></a>
                             </li>
                         } 
                     </ul>
-                    <a rel="external" href="/createtournament"><button>Create a new tournament</button></a>
+ 
+                    <a data-role = "button" id = "btn" rel="external" href="/createtournament">Create a new tournament</a>
+                    <script>
+                        $("#btn").css("background"," #FA7C04");
+                    </script>
+ 
                 </div>
             </div>
             @Templates.footer()
