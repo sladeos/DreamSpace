@@ -64,13 +64,17 @@
                 <div class="section" Style="border:none">
                     <div class="divLayoutcontact" Style = "width:20%" Style = "heigth:100%">
                       
-                      <img src="@routes.Assets.at("images/Avatars/avatarett.gif")" class = "fullscreen" id="avatarpic">
+                      <img src="@routes.Assets.at("images/Avatars/avatarett.gif")" class = "fullscreen" id="avatarpic" onclick="changeImage()">
                       
                       <div Style = "width:90%">
                         <div data-role="collapsible">
                           <h1>Change avatar!</h1>
                             <p> 
-                              Här ska avatars in. 
+                              <img src="@routes.Assets.at("images/Avatars/avatartre.gif")" class = "fullscreen" id="tre">
+                              <img src="@routes.Assets.at("images/Avatars/Homer.jpg")" class = "fullscreen" id="homer">
+                              <img src="@routes.Assets.at("images/Avatars/Kang.gif")" class = "fullscreen" id="kang">
+                              
+                              
                             </p>
                         </div>
 
@@ -103,6 +107,20 @@
                       </form>
                   </div>
                   </div>
+
+                  <script language="javascript">
+    function changeImage() {
+
+        if (document.getElementById("avatarpic").src == "http://www.userinterfaceicons.com/80x80/maximize.png"; 
+        {
+            document.getElementById("homer").src = "http://www.userinterfaceicons.com/80x80/maximize.png";
+        }
+        else 
+        {
+            document.getElementById("homer").src = "http://www.userinterfaceicons.com/80x80/minimize.png";
+        }
+    }
+</script>
 
                  <div class="section">
 
