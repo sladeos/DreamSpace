@@ -33,13 +33,19 @@
             float: right;
         }
 
-        #section{
+        .section{
           width:100%;
           padding:10px;
           border: 2px solid orange;
           margin:5px auto;
-          overflow: hidden; 
+          overflow: hidden;
         }
+
+        .divLayoutcontact {
+          float:left;
+        }
+
+
     </style>
     </head>
     <body>
@@ -53,54 +59,66 @@
             </ul>
 
                 <h1 align="center">My Profile</h1>
-                <div id="section" Style="border:none">
-                   <img src="@routes.Assets.at("images/Avatars/animated_anime_avatar_www.free-avatars.com.gif")" class = "fullscreen" id="avatarpic">
-
+                <div class="section" Style="border:none">
+                   <div class="divLayoutcontact" Style = "width:20%">
+                      <img src="@routes.Assets.at("images/Avatars/animated_anime_avatar_www.free-avatars.com.gif")" class = "fullscreen" id="avatarpic">
+                    </div>
+                
                    
-                    <p id ="contactinfo">
-
-                    <div Style="width:30%">
+                    <div class="divLayoutcontact" Style = "width:80%">
                       <form name="contactInfoGenerate" >
-                        Username: <br />
-                        Skypename: <input type="text" name="skypeID" id="skypeID" maxlength="30">
-                        <select id="seatMap">
+                        <div data-role="fieldcontain">
+                        <label for="username">Username:</label>
+                        <input type="text" name="username" id="username" maxlength="30">  
+                        <label for="skypeID">Skype:</label>
+                        <input type="text" name="skypeID" id="skypeID" maxlength="30">
+                        <label for="seatMap">Seat:</label>
+                        <select id="seatMap"  data-mini="true">
                           <option value="B">B</option>
                           <option value="C">C</option>
                           <option value="D">D</option>
                         </select>
-                        Battle.net: <input type="text" name="realID" id="realID" maxlength="30">
-                        Steam: <input type="text" name="steamID" id="steamID" maxlength="30">
-                        Twitch: <input type="text" name="twitchID" id="twitchID" maxlength="30">
-                        Uplay: <input  type="text" name="uplayID" id="uplayID" maxlength="30">
-                      
-                        <input type="button" value="Create" id="create">
+                        <label for="realID">Battle.net:</label>
+                        <input type="text" name="realID" id="realID" maxlength="30">
+                        <label for="steamID">Steam:</label>
+                        <input type="text" name="steamID" id="steamID" maxlength="30">
+                        <label for="twitchID">Twitch:</label>
+                        <input type="text" name="twitchID" id="twitchID" maxlength="30">
+                        <label for="uplayID">UPlay:</label>
+                        <input  type="text" name="uplayID" id="uplayID" maxlength="30">
+                        <div Style="float:right"><input type="button" value="Save" id="save"  data-mini="true"></div>
                         <p id="warning"></p>
-                      
+                        </div>
                       </form>
-                    </div>
-                    </p>
+                  </div>
                   </div>
 
-                 <div id="section">
+                 <div class="section">
 
                    
-                      <p>Eu vitae abhorreant sit. Mazim primis rationibus has eu, an etiam convenire per. Per ea summo partiendo urbanitas, at vis ceteros copiosae. Sea meliore pertinacia in, partem indoctum usu id, eos id delectus placerat pericula. Id omnis prompta vivendum has, saepe tritani nominavi sed id. Cu gubergren aliquando vim, error timeam pro ex. Veritus nominavi postulant ex nec. Quis utamur vix cu, no vix ullum dolorem maiestatis. Ei mel quidam vituperatoribus, id ius doctus phaedrum, quaeque maiorum detraxit vix cu. Ea amet case indoctum sed. Ei zril patrioque nam.ati instructior mel ne, mel elit cibo oporteat at, no qui assum soluta. Omnesque democritum et pro, no duo elit salutatus disputationi. Inani harum ea eos, pro te vivendo blandit, movet habemus ullamcorper eos te.  Ad nam alienum petentium complectitur, augue consequuntur te vim. Eam ei cibo oporteat. Ut nominavi menandri intellegam has, cu tacimates perpetua tincidunt cum. Vis fabulas alienum omittam ex, ut per diam unum soluta, diceret ullamcorper pri ne. Eam audiam scripta iudicabit et, eu dolorem perfecto persecuti qui. Cu vix homero fabulas nonumes. Usu perpetua conceptam disputationi eu, iusto mollis forensibus sea ut, ex per brute theophrastus. Usu melius expetenda dissentias id, no vitae dolore disputationi his, semper quaeque invidunt per eu.</p> 
+                  <div data-role="fieldcontain">
+                    <label for="favoritegames">Favorite Games:</label>
+                      <textarea cols="40" rows="8" name="favoritegames" id="favoritegames"></textarea>
+                  </div>
                        
                   
 
                  </div>
          
 
-                 <div id="section">
+                 <div class="section">
 
                    
-                      <p>Eu vitae abhorreant sit. Mazim primis rationibus has eu, an etiam convenire per. Per ea summo partiendo urbanitas, at vis ceteros copiosae. Sea meliore pertinacia in, partem indoctum usu id, eos id delectus placerat pericula. Id omnis prompta vivendum has, saepe tritani nominavi sed id. Cu gubergren aliquando vim, error timeam pro ex. Veritus nominavi postulant ex nec. Quis utamur vix cu, no vix ullum dolorem maiestatis. Ei mel quidam vituperatoribus, id ius doctus phaedrum, quaeque maiorum detraxit vix cu. Ea amet case indoctum sed. Ei zril patrioque nam.ati instructior mel ne, mel elit cibo oporteat at, no qui assum soluta. Omnesque democritum et pro, no duo elit salutatus disputationi. Inani harum ea eos, pro te vivendo blandit, movet habemus ullamcorper eos te.  Ad nam alienum petentium complectitur, augue consequuntur te vim. Eam ei cibo oporteat. Ut nominavi menandri intellegam has, cu tacimates perpetua tincidunt cum. Vis fabulas alienum omittam ex, ut per diam unum soluta, diceret ullamcorper pri ne. Eam audiam scripta iudicabit et, eu dolorem perfecto persecuti qui. Cu vix homero fabulas nonumes. Usu perpetua conceptam disputationi eu, iusto mollis forensibus sea ut, ex per brute theophrastus. Usu melius expetenda dissentias id, no vitae dolore disputationi his, semper quaeque invidunt per eu.</p> 
+                  <div data-role="fieldcontain">
+                    <label for="about">About:</label>
+                      <textarea cols="40" rows="8" name="about" id="about"></textarea>
+                  </div> 
 
                  </div>
 
     
 
-                 <div id="section">
+                 <div class="section">
 
                    
                       <p>Eu vitae abhorreant sit. Mazim primis rationibus has eu, an etiam convenire per. Per ea summo partiendo urbanitas, at vis ceteros copiosae. Sea meliore pertinacia in, partem indoctum usu id, eos id delectus placerat pericula. Id omnis prompta vivendum has, saepe tritani nominavi sed id. Cu gubergren aliquando vim, error timeam pro ex. Veritus nominavi postulant ex nec. Quis utamur vix cu, no vix ullum dolorem maiestatis. Ei mel quidam vituperatoribus, id ius doctus phaedrum, quaeque maiorum detraxit vix cu. Ea amet case indoctum sed. Ei zril patrioque nam.ati instructior mel ne, mel elit cibo oporteat at, no qui assum soluta. Omnesque democritum et pro, no duo elit salutatus disputationi. Inani harum ea eos, pro te vivendo blandit, movet habemus ullamcorper eos te.  Ad nam alienum petentium complectitur, augue consequuntur te vim. Eam ei cibo oporteat. Ut nominavi menandri intellegam has, cu tacimates perpetua tincidunt cum. Vis fabulas alienum omittam ex, ut per diam unum soluta, diceret ullamcorper pri ne. Eam audiam scripta iudicabit et, eu dolorem perfecto persecuti qui. Cu vix homero fabulas nonumes. Usu perpetua conceptam disputationi eu, iusto mollis forensibus sea ut, ex per brute theophrastus. Usu melius expetenda dissentias id, no vitae dolore disputationi his, semper quaeque invidunt per eu.</p> 
