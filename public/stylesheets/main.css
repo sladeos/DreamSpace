@@ -1,40 +1,56 @@
 #bracket {
     color:black;
     text-shadow:0 0px 0 #111;
-    
-    
 }
 
-    .ui-page{
-        background: url("../images/main.jpg");
-    }
-   .content{
-        background: #151515;
-        padding: 5% 5%;
-        margin:0 auto;
-    }
-    .fullscreen{
-        max-height: 100%;
-        max-width: 100%;
-    }
-    /*Färgen för alla knappar alla skärmar*/
-    .ui-page .ui-btn  {
-    color      : white;
-    background : #FA7C04;
+.ui-autocomplete {
+    list-style-position: inside;
+    padding: 0;
+    border: 1px solid #1D1D1D;
+    background-color: #2A2A2A;
+    list-style-type: none;
+    width:300px;
+    cursor:pointer;
+    box-shadow:0 0 15px #195166;
+}
+
+.ui-autocomplete li:hover
+{
+    background-color:#1A586F;
+}
+
+.ui-page{
+    background: url("../images/main.jpg");
+}
+
+.content{
+    background: #151515;
+    padding: 5% 5%;
+    margin:0 auto;
+}
+.fullscreen{
+    max-height: 100%;
+    max-width: 100%;
+}
+/*Färgen för alla knappar alla skärmar*/
+.ui-page .ui-btn  {
+color      : white;
+background : #FA7C04;
 
 
-    }​
-    .slide-menu{ 
-        max-width:75%;
-    }
-    /*Färgen för header alla skärmar*/
-    .ui-page .ui-header {
-        background:#151515;
-    }
-    /*Färgen för footer alla skärmar*/
-    .ui-page .ui-footer {
-        background:#151515;
-    }
+}​
+
+.slide-menu{ 
+    max-width:75%;
+}
+/*Färgen för header alla skärmar*/
+.ui-page .ui-header {
+    background:#151515;
+}
+/*Färgen för footer alla skärmar*/
+.ui-page .ui-footer {
+    background:#151515;
+}
 
 
 @media all and (max-width: 36em){

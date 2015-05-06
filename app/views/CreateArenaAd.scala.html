@@ -1,20 +1,24 @@
+@(games: List[String])
 
 <!DOCTYPE html>
 <html>
 <head>
 <title>Create EArenaAd</title>
+
 @Templates.head()
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 @Templates.facebookHeadScript()
 <meta charset="UTF-8">
 </head>
 <body>
+
  <div data-role="page" data-theme="b" id = "main" class = "page"  >
 	@Templates.header()
  	<div data-role="content" class = "content">  
  <h1 align="center">Create an EArena Ad</h1>
-                <form id ="EArenaForm"  method ="post" action="@routes.EArenaDatabase.addEArenaAd()">
+                <form id ="EArenaForm"  method ="post" action="@routes.EArenaDatabase.addEArenaAd()" data-ajax="false">
                 
-                    <div data-role="fieldcontain"class="ui-hide-label">
+                    <div data-role="fieldcontain" class="ui-hide-label">
                         <label for="arenaName">Arena Ad Name:</label>
                         <input type="text" name="arenaName" id="arenaName" value="" placeholder="Arena Ad Name"/>
                     </div>
@@ -34,7 +38,19 @@
                 </div>
                      <button class = "my-btn"  type="submit" value="Create EArena Ad">Create EArenaAd </button>
                 </form>
+                <script>
+$(function() {
+    var games = @Html(games.toString())
+    
+    $( "#game" ).autocomplete({
+      source: games
+    });
+  });    
+
+</script>
                 </div>
+                
+                
 @Templates.footer()
 @Templates.panelAndLogOut()
 </div>

@@ -20,7 +20,9 @@ public class EArenaDatabase extends Controller {
 		PreparedStatement preparedStatement;
 
 		 if (Form.form(EArenaAd.class).bindFromRequest().hasErrors()) {
-		 return badRequest(CreateArenaAd.render());
+		 List<String> games = new ArrayList<String>();
+		 games.add("Autocomplete encountered an error");
+		 return badRequest(CreateArenaAd.render(games));
 		 }
 
 		EArenaAd ead = Form.form(EArenaAd.class).bindFromRequest().get();
@@ -44,8 +46,8 @@ public class EArenaDatabase extends Controller {
 			return redirect(routes.EArenaDatabase.getEArenaAds());
 
 		} catch (com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException ice) {
-			return badRequest(NewUserPage
-					.render("User with that name already exists"));
+			return badRequest(MainEArenaPage
+					.render(null));
 		} catch (SQLException se) {
 			// Handle sql errors
 			return internalServerError(se.toString());
@@ -126,6 +128,57 @@ public class EArenaDatabase extends Controller {
 			} // end try
 		}
 	}
+	
+	public static Result getEArenaGames() {
+	    String currentUser = session("connected");
+		if (currentUser == null) {
+			return unauthorized(LoginUserPage
+					.render("You have to login to access this page!"));
+		} else {
+			Connection conn = null;
+			PreparedStatement preparedStatement = null;
+			List<String> games = new ArrayList<String>();
+			try {
+
+				conn = DB.getConnection();
+				String selectAdminAds = "SELECT gamename FROM Games";
+				preparedStatement = conn.prepareStatement(selectAdminAds);
+				// preparedStatement.setString(1, currentUser);
+				ResultSet rs = preparedStatement.executeQuery();
+
+				while (rs.next()) {
+					games.add(rs.getString("gamename"));
+				}
+
+				rs.close();
+				return ok(CreateArenaAd.render(games));
+			} catch (com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException ice) {
+				return badRequest(ice.toString());
+			} catch (NumberFormatException nfe) {
+				return badRequest(nfe.toString());
+			} catch (SQLException se) {
+				// Handle sql errors
+				return internalServerError(se.toString());
+			} catch (Exception e) {
+				// Handle errors for Class.forName
+				return internalServerError(e.toString());
+			} finally {
+				// finally block used to close resources
+				// try {
+				// if (preparedStatement != null)
+				// conn.close();
+				// } catch (SQLException se) {
+				// } //do nothing
+				try {
+					if (conn != null)
+						conn.close();
+				} catch (SQLException se) {
+					return internalServerError(se.toString());
+				} // end finally try
+			} // end try
+	}
+	}
+	
 
 	public static EArenaAd getIndividualEArena(Integer id) {
 

@@ -104,16 +104,6 @@ public class Application extends Controller {
 		return ok(Packlist.render("test"));
 	}
 
-	public static Result createEArenaAd() {
-		String user = session("connected");
-		if (user != null) {
-			return ok(CreateArenaAd.render());
-		} else {
-			return unauthorized(LoginUserPage
-					.render("Please login to use this feature!"));
-		}
-	}
-
 	public static Result showIndividualAd(Integer id) {
 		String user = session("connected");
 		if (user != null) {
