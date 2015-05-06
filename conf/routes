@@ -12,6 +12,8 @@ GET   /packlist controllers.Application.packlist()
 #Get to MyProfile html-page
 GET   /myprofile controllers.Application.myprofile()
 
+#Get to EditProfile html-page
+GET   /editprofile controllers.Application.editprofile()
 
 
 # Map static resources from the /public folder to the /assets URL path

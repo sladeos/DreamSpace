@@ -48,7 +48,6 @@
 
 
 
-
     </style>
     </head>
     <body>
@@ -61,42 +60,45 @@
             <div data-role="content" class = "content">   
             </ul>
 
-                <h1 align="center">My Profile</h1>
+                <h1 align="center">Edit My Profile</h1>
                 <div class="section" Style="border:none">
-                   <div class="divLayoutcontact" Style = "width:20%" Style = "heigth:100%">
+                    <div class="divLayoutcontact" Style = "width:20%" Style = "heigth:100%">
+                      
                       <img src="@routes.Assets.at("images/Avatars/avatarett.gif")" class = "fullscreen" id="avatarpic">
                       
-                      <div Style = "width:90%" Style="float:right">
-                        
-                        <input type="button" data-icon="arrow-r" value="Edit profile" id="edit">
+                      <div Style = "width:90%">
+                        <div data-role="collapsible">
+                          <h1>Change avatar!</h1>
+                            <p> 
+                              Här ska avatars in. 
+                            </p>
+                        </div>
+
                       </div>
-
-
-
                     </div>
                 
                    
                     <div class="divLayoutcontact" Style = "width:80%">
                       <form name="contactInfoGenerate" >
                         <div data-role="fieldcontain">
-                            <label for="username">Username:</label>
-                            <input type="text" name="username" id="username" maxlength="30">  
-                            <label for="skypeID">Skype:</label>
-                            <input type="text" name="skypeID" id="skypeID" maxlength="30">
-                            <label for="seatMap">Seat:</label>
-                            <select id="seatMap"  data-mini="true">
-                              <option value="B">B</option>
-                              <option value="C">C</option>
-                              <option value="D">D</option>
-                            </select>
-                            <label for="realID">Battle.net:</label>
-                            <input type="text" name="realID" id="realID" maxlength="30">
-                            <label for="steamID">Steam:</label>
-                            <input type="text" name="steamID" id="steamID" maxlength="30">
-                            <label for="twitchID">Twitch:</label>
-                            <input type="text" name="twitchID" id="twitchID" maxlength="30">
-                            <label for="uplayID">UPlay:</label>
-                            <input  type="text" name="uplayID" id="uplayID" maxlength="30">
+                        <label for="username">Username:</label>
+                        <input type="text" name="username" id="username" maxlength="30">  
+                        <label for="skypeID">Skype:</label>
+                        <input type="text" name="skypeID" id="skypeID" maxlength="30">
+                        <label for="seatMap">Seat:</label>
+                        <select id="seatMap"  data-mini="true">
+                          <option value="B">B</option>
+                          <option value="C">C</option>
+                          <option value="D">D</option>
+                        </select>
+                        <label for="realID">Battle.net:</label>
+                        <input type="text" name="realID" id="realID" maxlength="30">
+                        <label for="steamID">Steam:</label>
+                        <input type="text" name="steamID" id="steamID" maxlength="30">
+                        <label for="twitchID">Twitch:</label>
+                        <input type="text" name="twitchID" id="twitchID" maxlength="30">
+                        <label for="uplayID">UPlay:</label>
+                        <input  type="text" name="uplayID" id="uplayID" maxlength="30">                    
                         </div>
                       </form>
                   </div>
@@ -104,6 +106,7 @@
 
                  <div class="section">
 
+ 
                   <div data-role="fieldcontain">
                     <label for="favoritegames">Favorite Games:</label>
                       <textarea cols="40" rows="8" name="favoritegames" id="favoritegames"></textarea>
@@ -124,13 +127,8 @@
 
                  </div>
 
-    
-
-
-                <script>
-                  $('#edit').click(function() {
-                  window.location='/editprofile'; });
-                </script>
+                 <div Style="float:right"><input type="button" value="Save" id="save"  data-mini="true"></div>
+                       
   
 
                   
