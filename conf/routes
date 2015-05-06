@@ -71,6 +71,9 @@ POST /savearenaad controllers.EArenaDatabase.addEArenaAd()
 #Shows Main EArena Page with all/newest Ads
 GET /mainearena controllers.EArenaDatabase.getEArenaAds()
 
+#Shows User's EArena Ads
+GET /myearena controllers.EArenaDatabase.getMyEArenaAds()
+
 #Shows Individual EArenaAd and determines if the Currentuser is an admin to the ad or not, returns page depending on answer
 GET /earenaad/:id controllers.Application.showIndividualAd(id: Integer)
 

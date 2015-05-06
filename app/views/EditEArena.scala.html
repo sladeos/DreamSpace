@@ -32,9 +32,10 @@
                <div style="display: none;">
                   <input type="id" name="id" id="id" value="@eAd.arenaID"/>
                </div>
-               <button  class = "my-btn"  id="updateearena"  value="Update EArena Ad" onclick="validate()">Update EArena Ad </button>
+               <button  class = "my-btn"  id="updateearena"  value="Update EArena Ad" onclick="return validate()">Update EArena Ad </button>
                <p id="warning"></p>
             </div>
+            
             <script type="text/javascript">
                var adOkay = true;
                    $(function() {
@@ -80,9 +81,7 @@
                })
                    })
                
-               
-            </script>
-            <script type="text/javascript">
+
                function errorInField(){
                 	 $("#warning").css('color', 'red');
                      $('#warning').prepend('<img id="redcross" src="@routes.Assets.at("images/redcross.png")" />')
@@ -125,19 +124,11 @@
                 	     }
                 	   }
                if(blnValid){
-               send()
-               $("#warning").html('');
-               $("#warning").css('color', 'green');
-               $('#warning').prepend('<img id="greentick" src="@routes.Assets.at("images/greentick.png")" />')
-               $('#greentick').width(40);
-               $('#greentick').height(40);
-               $('#editad').toggle('show');
-               
+               send()               
                }else{
                 	   return blnValid;
                }
                 	 }
-               
                
                 	 function isBlank(elementID) {
                 	   if (document.getElementById(elementID).value.length == 0) {
@@ -148,19 +139,15 @@
                 	 }
                 
                 
-            </script>
-            <script>
-               $(document).ready(function(){
-               
-                  $('#edittournament').click(function() {        
-                       $('#editad').toggle('show');
-                  });
-                           
-               });
-            </script>
-            <script>
+            
                function send() {
                   if(adOkay){
+                      $("#warning").html('');
+                      $("#warning").css('color', 'green');
+                      $('#warning').prepend('<img id="greentick" src="@routes.Assets.at("images/greentick.png")" />')
+                      $('#greentick').width(40);
+                      $('#greentick').height(40);
+                      $('#editad').toggle('show');
                
                  var data = {"arenaName":$('#arenaName').val(), "information":$('#informationArea').val(),"gameName":$('#game').val(),"playersRequired":$('#playersRequired').val(),"id":$('#id').val()};
                     $.ajax({
@@ -170,6 +157,7 @@
                           data: JSON.stringify(data),
                           dataType : 'html',
                           success: function(data ){
+                        	  
                           	location.reload();
                           }
                       });
@@ -183,7 +171,18 @@
                
                   }
                }
+
+            
+
+               $(document).ready(function(){
+               
+                  $('#edittournament').click(function() {        
+                       $('#editad').toggle('show');
+                  });
+                           
+               });
             </script>
+            
             <div id="adinfo">
                id: @eAd.arenaID
                <br>
