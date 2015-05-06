@@ -1,7 +1,8 @@
-#bracket {
+﻿#bracket {
     color:black;
     text-shadow:0 0px 0 #111;
 }
+
 
 .ui-autocomplete {
     list-style-position: inside;
@@ -18,6 +19,23 @@
 {
     background-color:#1A586F;
 }
+
+
+#replyfielddiv{
+	width: 40%;
+	margin:0 auto;
+	float: right;
+	
+}
+	
+#adreplies{
+	width: 40%;
+	margin:0 auto;
+	float: left;
+}
+
+
+
 
 .ui-page{
     background: url("../images/main.jpg");

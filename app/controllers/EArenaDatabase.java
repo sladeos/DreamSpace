@@ -12,6 +12,9 @@ import views.html.*;
 import play.data.Form;
 import play.db.*;
 import views.*;
+import play.libs.Json;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 
 public class EArenaDatabase extends Controller {
 
@@ -201,9 +204,10 @@ public class EArenaDatabase extends Controller {
 				a.gameName = rs.getString("gamename");
 				a.playersRequired = rs.getInt("playersrequired");
 				a.admin = rs.getString("admin");
+				a.arenaID = id;
 			}
 
-			if (a.admin == null) {
+			if (a.admin == null ) {
 				return null;
 			}
 
@@ -222,7 +226,147 @@ public class EArenaDatabase extends Controller {
 			} catch (SQLException se) {
 			}// do nothing
 		}
+	}
+	
+	public static Result addReply() {
+
+		Connection conn = null;
+		PreparedStatement preparedStatement = null;
+		JsonNode json = request().body().asJson();
+
+		String adID = json.findPath("adID").textValue();
+		String contents = json.findPath("contents").textValue();
+		
+		String currentUser = session("connected");
+		try {
+			int adIDint = Integer.parseInt(adID);
+			conn = DB.getConnection();
+			String insertIntoDatabase = "INSERT INTO EArenaReply (arenaID, username,replycontent) VALUES(?,?,?)";
+			preparedStatement = conn.prepareStatement(insertIntoDatabase);
+
+			preparedStatement.setInt(1, adIDint);
+			preparedStatement.setString(2, currentUser);
+			preparedStatement.setString(3, contents);
+
+
+			preparedStatement.executeUpdate();
+			return ok("Succesful Reply!");
+		} catch (com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException ice) {
+			return badRequest(ice.toString() + "HEYEYEY");
+		} 
+		catch (NumberFormatException nfe) {
+			return badRequest(nfe.toString() + "WOW");
+		} catch (SQLException se) {
+			// Handle sql errors
+			return internalServerError(se.toString());
+		} catch (Exception e) {
+			// Handle errors for Class.forName
+			return internalServerError(e.toString());
+		} finally {
+			try {
+				if (conn != null)
+					conn.close();
+			} catch (SQLException se) {
+				return internalServerError(se.toString());
+			} // end finally try
+		} // end try
+	}
+	
+	
+	public static List<AdReply> getEArenaReplies(Integer id) {
+
+		Connection conn = null;
+		PreparedStatement preparedStatement = null;
+		List<AdReply> adReplyList = new ArrayList<AdReply>();
+		try {
+
+			conn = DB.getConnection();
+			String insertIntoDatabase = "SELECT * FROM EArenaReply WHERE arenaID=?;";
+			preparedStatement = conn.prepareStatement(insertIntoDatabase);
+			preparedStatement.setInt(1, id);
+
+			ResultSet rs = preparedStatement.executeQuery();
+			while (rs.next()) {
+				AdReply a = new AdReply();
+				a.content = rs.getString("replycontent");
+				a.user = rs.getString("username");
+				adReplyList.add(a);
+			}
+
+			if (adReplyList == null ) {
+				return null;
+			}
+
+			return adReplyList;
+
+		} catch (SQLException se) {
+			return null;
+		} catch (Exception e) {
+			// Handle errors for Class.forName
+			return null;
+		} finally {
+			// finally block used to close resources
+			try {
+				if (preparedStatement != null)
+					conn.close();
+			} catch (SQLException se) {
+			}// do nothing
+		}
 
 	}
+	
+	public static Result updateEArenaAd() {
+		Connection conn = null;
+		PreparedStatement preparedStatement;
+		JsonNode json = request().body().asJson();
+
+		String arenaName = json.findPath("arenaName").textValue();
+		String information = json.findPath("information").textValue();
+		String gameName = json.findPath("gameName").textValue();
+		String strplayersRequired = json.findPath("playersRequired").textValue();
+		String strid = json.findPath("id").textValue();
+		
+		try {
+			int playersRequired = Integer.parseInt(strplayersRequired);
+			int id = Integer.parseInt(strid);
+			conn = DB.getConnection();
+			String insertIntoDatabase = "UPDATE EArena SET arenaname=?, arenainformation=?, playersrequired=?, gamename=? WHERE arenaID=?";
+			preparedStatement = conn.prepareStatement(insertIntoDatabase);
+			
+			preparedStatement.setString(1, arenaName);
+			preparedStatement.setString(2, information);
+			preparedStatement.setInt(3, playersRequired);
+			preparedStatement.setString(4, gameName);
+			preparedStatement.setInt(5, id);
+			
+			preparedStatement.executeUpdate();
+
+			return ok("yeees");
+
+		} catch (com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException ice) {
+			return badRequest(ice.toString() + "WOW");
+		} catch (SQLException se) {
+			// Handle sql errors
+			return internalServerError(se.toString());
+		} catch (Exception e) {
+			// Handle errors for Class.forName
+			return internalServerError(e.toString());
+		} finally {
+			// finally block used to close resources
+			// try {
+			// if (preparedStatement != null)
+			// conn.close();
+			// } catch (SQLException se) {
+			// }// do nothing
+			try {
+				if (conn != null)
+					conn.close();
+			} catch (SQLException se) {
+				return internalServerError(se.toString());
+			}// end finally try
+		}// end try
+
+	}
+	
 
 }

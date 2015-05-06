@@ -1,23 +1,76 @@
-@(eAd: EArenaAd)
+@(eAd: EArenaAd, eAdReplies: List[AdReply])
 <!DOCTYPE html>
 <html>
-<head>
-<title>EArenaAd</title>
-@Templates.head()
-@Templates.facebookHeadScript()
-<meta charset="UTF-8">
-</head>
-<body>
- <div data-role="page" data-theme="b" id = "main" class = "page"  >
-	@Templates.header()
- 	<div data-role="content" class = "content">  
- <h1 align="center">EArena Ad</h1>
-@eAd.arenaName
-<br>
-@eAd.admin
-</div>
-@Templates.footer()
-@Templates.panelAndLogOut()
-</div>
-</body>
+   <head>
+      <title>EArenaAd</title>
+      @Templates.head()
+      @Templates.facebookHeadScript()
+      <meta charset="UTF-8">
+   </head>
+   <body>
+      <div data-role="page" data-theme="b" id = "main" class = "page"  >
+         @Templates.header()
+         <div data-role="content" class = "content">
+            <h1 align="center">EArena Ad</h1>
+            <div id="adinfo">
+               id: @eAd.arenaID
+               <br>
+               Name of Ad: @eAd.arenaName
+               <br>
+               Creator name: @eAd.admin
+               <br>
+               Name of Game: @eAd.gameName
+               <br>
+               Information about Ad: @eAd.information
+               <br>
+               Amount of Players Required: @eAd.playersRequired
+               <br>
+            </div>
+            <div id="adreplies">
+               @for(eAdReplies <- eAdReplies) {
+               <li>@{"User who replied: " + eAdReplies.user +" Reply content: " + eAdReplies.content}</li>
+               } 
+               </ul>
+            </div>
+            <div id="replyfielddiv">
+               <label for="reply">Reply:</label>
+               <textarea placeholder="Post your reply here" name="reply" id="replyarea" rows="4" cols="50"></textarea>
+               <input type="submit" id="postreply"value="Submit Reply" >
+               <p id="warning"></p>
+            </div>
+            <script>
+               $("#postreply").click(function() {
+                   if($('#replyarea').val().length >2){
+               
+                  var data = {"contents":$("#replyarea").val(), "adID": "@eAd.arenaID"};
+               
+                     $.ajax({
+                           url: "/postreply",
+                           type: 'POST',
+                           contentType:'application/json',
+                           data: JSON.stringify(data),
+                           dataType : 'html',
+                           success: function(data ){
+                           	location.reload();
+                           }
+                       });
+                   }else{
+                   	
+                   	 $("#warning").html("There are errors in your reply! Fix them and try again.");
+                   	 $("#warning").css('color', 'red');
+                        $('#warning').prepend('<img id="redcross" src="@routes.Assets.at("images/redcross.png")" />')
+                        $('#redcross').width(40);
+                        $('#redcross').height(40);
+                   	
+                   }
+                       });
+               
+               
+               
+            </script>
+         </div>
+         @Templates.footer()
+         @Templates.panelAndLogOut()
+      </div>
+   </body>
 </html>

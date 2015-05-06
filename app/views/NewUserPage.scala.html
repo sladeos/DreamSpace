@@ -42,28 +42,37 @@
                 <p id="warning">@message</p>
  
                 
-             <script type="text/javascript">
+              <script type="text/javascript">
              
              var usernameOkay = true;
              $('#username').change(function() {
-            	 if( $('#username').val().length <1){
-
-            		 $("#warning").html('Username is too short! Please enter a minimum of x characters!');
-            		 $("#warning").css('color', 'red');
+            	 function errorInField(){
+                	 $("#warning").css('color', 'red');
                      $('#warning').prepend('<img id="redcross" src="@routes.Assets.at("images/redcross.png")" />')
                      $('#redcross').width(40);
                      $('#redcross').height(40);
                      usernameOkay = false;
+                }
+                	
+                	function fieldOkay(){
+                	    $("#warning").css('color', 'green');
+                        $('#warning').prepend('<img id="greentick" src="@routes.Assets.at("images/greentick.png")" />')
+                        $('#greentick').width(40);
+                        $('#greentick').height(40);
+                        usernameOkay = true;
+                		
+                	}
+            	 
+            	 if( $('#username').val().length <1){
+            		 $("#warning").html('Username is too short! Please enter a minimum of x characters!');
+            		 errorInField()
                      return;
             	 }
             	 
 
             if(/[^a-zåäöA-ZÅÄÖ0-9_]/.test( $('#username').val())){
             	 $("#warning").html('Username contains invalid characters! Please only use letters, numbers and _');
-        		 $("#warning").css('color', 'red');
-                 $('#warning').prepend('<img id="redcross" src="@routes.Assets.at("images/redcross.png")" />')
-                 $('#redcross').width(40);
-                 $('#redcross').height(40);
+            	 errorInField()
                  usernameOkay = false;
                  return;
             }
@@ -79,18 +88,10 @@
             success: function(data){
             if(data != "null") {
                $("#warning").html('Username already exists');
-               $("#warning").css('color', 'red');
-               $('#warning').prepend('<img id="redcross" src="@routes.Assets.at("images/redcross.png")" />')
-               $('#redcross').width(40);
-               $('#redcross').height(40);
-               usernameOkay=false;
+               errorInField()
             } else {
                  $("#warning").html('Username is available');
-                 $("#warning").css('color', 'green');
-                 $('#warning').prepend('<img id="greentick" src="@routes.Assets.at("images/greentick.png")" />')
-                 $('#greentick').width(40);
-                 $('#greentick').height(40);
-                 usernameOkay=true;
+                 fieldOkay()
             }
             }
             });
