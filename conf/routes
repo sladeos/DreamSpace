@@ -60,7 +60,7 @@ GET  /showtournament/:id controllers.Application.showTournament(id: Integer)
 GET /tournament controllers.TournamentDatabase.getTournaments()
 
 # Shows createAd webpage
-GET /createarenaad controllers.Application.createEArenaAd()
+GET /createarenaad controllers.EArenaDatabase.getEArenaGames()
 
 # Post to save created EArenaAd
 POST /savearenaad controllers.EArenaDatabase.addEArenaAd()
