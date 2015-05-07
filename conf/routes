@@ -6,6 +6,9 @@
 GET     /                           controllers.Application.mainMethod()
 
 
+#Get to otheruserprofile html-page
+GET   /otheruser controllers.Application.otheruser()
+
 #Get to packlist html-page
 GET   /packlist controllers.Application.packlist()
 

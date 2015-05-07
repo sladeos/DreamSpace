@@ -138,6 +138,18 @@ public class Application extends Controller {
 						.render("Welcome, login to explore the website"));
 			}
 		}
+
+
+		public static Result otheruser() {
+			String user = session("connected");
+			if (user != null) {
+				return ok(OtherUserProfile.render("You are logged in as "
+						+ user));
+			} else {
+				return unauthorized(LoginUserPage
+						.render("Welcome, login to explore the website"));
+			}
+		}
  
 
 }
