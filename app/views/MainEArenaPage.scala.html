@@ -39,7 +39,7 @@
                     <article  data-role="listview" data-inset="true" data-dividertheme="a"> 
                         @for(eads <- eads) {
                             <li  data-role = "list-divider" ></li>
-                            <li><a data-role = "button" rel="external"  href="/earenaad/@eads.arenaID" style = "background: #373737" >@{"Name of ad: " + eads.arenaName}<br> @{" Name of host: " + eads.admin} <br>@{" Name of game: " + eads.gameName }<br> @{" Information: " + eads.information}<br> @{" Amount of players required: " + eads.playersRequired} </a></li>
+                            <li><a rel="external"  href="/earenaad/@eads.arenaID" style = "background: #373737" ><h2>@{"Name of ad: " + eads.arenaName}</h2><p>@{" Name of host: " + eads.admin}</p><p>@{" Name of game: " + eads.gameName }</p><p>@{" Amount of players required: " + eads.playersRequired}</p><p>Information:</p><textarea disabled name="textarea" id="text">@{eads.information}</textarea><br></a></li>
                         } 
                     </article>
                 </div>
