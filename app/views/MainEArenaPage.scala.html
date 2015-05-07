@@ -4,7 +4,7 @@
 	<head>
 	   <title>EArena</title>
 	   @Templates.head()
-        <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/MainEArenaPage.css")">
+        <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/EArena.css")">
 	   @Templates.facebookHeadScript()
         <meta charset="UTF-8">
 	</head>
@@ -12,10 +12,10 @@
         <div data-role="page" data-theme="b" id = "main" class = "page"  >
 	       @Templates.header()
             <div data-role="content" class = "content">   
-            <h1 align="center">EArena</h1>
+                <h1 align="center">EArena</h1>
                 <div id="search">
                     <form>
-                        <div id="blockBox">
+                        <div id="MAEcheckbox">
                             <input type="search" name="search" id="search-basic" value="" />
                             <label>Search for: </label>
                             <div class="ui-grid-b ui-responsive">
@@ -39,7 +39,15 @@
                     <article  data-role="listview" data-inset="true" data-dividertheme="a"> 
                         @for(eads <- eads) {
                             <li  data-role = "list-divider" ></li>
-                            <li><a rel="external"  href="/earenaad/@eads.arenaID" style = "background: #373737" ><h2>@{"Name of ad: " + eads.arenaName}</h2><p>@{" Name of host: " + eads.admin}</p><p>@{" Name of game: " + eads.gameName }</p><p>@{" Amount of players required: " + eads.playersRequired}</p><p>Information:</p><textarea disabled name="textarea" id="text">@{eads.information}</textarea><br></a></li>
+                            <li><a rel="external"  href="/earenaad/@eads.arenaID" style = "background: #373737" >
+                            <h2>@{"Name of ad: " + eads.arenaName}</h2>
+                            <p>@{" Name of host: " + eads.admin}</p>
+                            <p>@{" Name of game: " + eads.gameName }</p>
+                            <p>@{" Amount of players required: " + eads.playersRequired}</p>
+                            <p>Information:</p><textarea disabled name="textarea" id="text" style = "overflow:auto;resize:none" >@{eads.information}</textarea>
+                            <br>
+                            </a>
+                            </li>
                         } 
                     </article>
                 </div>
