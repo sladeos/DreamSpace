@@ -21,14 +21,14 @@
             <div data-role="content" class = "content">   
               </ul>
 
-              <h1 align="center">My Profile</h1>
+              <h1 align="center">User Profile</h1>
               <div class="section" Style="border:none">
                 
                 <div class="divLayoutcontact" Style = "width:20%" Style = "heigth:100%">
                   <img src="@routes.Assets.at("images/Avatars/avatarett.gif")" class = "fullscreen" id="avatarpic" onclick="changeImage()">
 
                   <div Style = "width:90%" Style="float:right">
-                    <input type="button" data-icon="arrow-r" value="Edit profile" id="edit">
+                    <input type="button" data-icon="plus" value="Favorite" id="addfavorite">
                   </div>
                 </div>
                 
@@ -51,16 +51,7 @@
                       <label for="uplayID">UPlay:</label>
                       <input  type="text" name="uplayID" id="uplayID" maxlength="30" placeholder="Placeholder">
                     </div>
-                      
-                        
-                    <div data-role="collapsible" data-icon="star">
-                      <h1>Favorites</h1>
-                      <p> 
-                        Placeholder <br/>
-                        Placeholder <br/>
-                        Placeholder <br/>
-                      </p>
-                    </div>
+   
                   </div>
                 </div>
                 
@@ -82,10 +73,10 @@
                 </form>
 
 
-                <script>
-                  $('#edit').click(function() {
-                  window.location='/editprofile'; });
-                </script> 
+                 <script>
+                //   $('#addfavorite').click(function() {      // ska användas till att adda favorit. 
+                //   window.location='/'; });
+                 </script> 
             
             </div>
 
