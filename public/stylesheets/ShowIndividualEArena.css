@@ -4,29 +4,39 @@
 	background: #373737;
 	padding: 1em;
 }
+	#p1{	
+		width: 100%;
+      
+		
+
+	}
+	#p2{
+		width: 100%;
+		
+	}
 
 @media all and (min-width: 50em){
 
 	#wrap{
-		border: solid orange;
 		overflow:hidden;
+		width:99%;
+		margin: 0 auto;
+		max-width: 800px;
+	
 	
 	}
 	#p1{
-		border: solid orange;
 		position: relative;
-		float: center;
-		width: 400px;
+		float: left;
+		width: 49%;
       
 		
 
 	}
 	#p2{
 		position: relative;
-		border: solid orange;
-		padding-left: 15px;
-		width: 400px;
-		float: center;
+		width: 49%;
+		float: right;
 	}
 
 

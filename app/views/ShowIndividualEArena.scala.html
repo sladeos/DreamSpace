@@ -15,7 +15,7 @@
             <div id="wrap">
                 <h1 align="center">EArena Ad</h1>
                 
-                    <div id = "p1" class = "div1">               
+                    <div id = "p1">               
                           <article id = "info"  data-role="listview" data-inset="true" data-dividertheme="a"> 
                               <li><h2>Name of Ad: @eAd.arenaName</h2>
                                   <p>id: @eAd.arenaID</p>
@@ -26,10 +26,10 @@
                                   <textarea disabled name="textarea" id="text">@eAd.information</textarea>
                               </li>
                           </article>
-                      <label for="reply">Reply:</label>
-                      <textarea placeholder="Post your reply here" name="reply" id="replyarea" rows="4" cols="50"></textarea>
-                      <input type="submit" id="postreply"value="Submit Reply" >
-                      <p id="warning"></p>
+                        <label for="reply">Reply:</label>
+                        <textarea placeholder="Post your reply here" name="reply" id="replyarea" rows="4" cols="50"></textarea>
+                        <input type="submit" id="postreply"value="Submit Reply" >
+                        <p id="warning"></p>
                       
                     </div>
                     <div id = "p2">  
@@ -66,7 +66,6 @@
                         }
                     });
                 </script>
-              
             </div>
             @Templates.footer()
             @Templates.panelAndLogOut()
