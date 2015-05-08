@@ -505,6 +505,62 @@ public class EArenaDatabase extends Controller {
 
 	}
 	
+	
+	public static Result deleteArena() {
+
+  Connection conn = null;
+  PreparedStatement preparedStatement = null;
+  JsonNode json = request().body().asJson();
+
+  String arenaID = json.findPath("id").textValue();
+ 
+
+  String currentUser = session("connected");
+
+  try {
+   if (arenaID == null || arenaID.isEmpty()) {
+    throw new SQLException();
+   }
+   conn = DB.getConnection();
+
+   int parsedID = Integer.parseInt(arenaID);
+
+   String insertIntoDatabase = "DELETE FROM EArena WHERE arenaID=?";
+   preparedStatement = conn.prepareStatement(insertIntoDatabase);
+
+ 
+   preparedStatement.setInt(1, parsedID);
+
+   preparedStatement.executeUpdate();
+   return ok();
+  } catch (com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException ice) {
+   return badRequest(ice.toString());
+  } catch (NumberFormatException nfe) {
+   return badRequest(nfe.toString());
+  } catch (SQLException se) {
+   // Handle sql errors
+   return internalServerError(se.toString());
+  } catch (Exception e) {
+   // Handle errors for Class.forName
+   return internalServerError(e.toString());
+  } finally {
+   // finally block used to close resources
+   // try {
+   // if (preparedStatement != null)
+   // conn.close();
+   // } catch (SQLException se) {
+   // } //do nothing
+   try {
+    if (conn != null)
+     conn.close();
+   } catch (SQLException se) {
+    return internalServerError(se.toString());
+   } // end finally try
+  } // end try
+ }
+ 
+ 
+ 
 	public static Result getMyEArenaAds() {
   String currentUser = session("connected");
   if (currentUser == null) {

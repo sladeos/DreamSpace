@@ -2,18 +2,32 @@
 <!DOCTYPE html>
 <html>
 	<head>
-	<title>EArena</title>
-	@Templates.head()
-<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-	@Templates.facebookHeadScript()
-<meta charset="UTF-8">
+	   <title>EArena</title>
+	   @Templates.head()
+       <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/MainEArenaPage.css")">
+	   @Templates.facebookHeadScript()
+        <meta charset="UTF-8">
 	</head>
 <body>
 	<div data-role="page" data-theme="b" id = "main" class = "page"  >
 	@Templates.header()
  	<div data-role="content" class = "content">   
      	<h1 align="center">EArena</h1>
-     	
+     	 <button id="share_button" >Share to Facebook</button>
+            <script type="text/javascript">
+            $(document).ready(function() {
+              $('#share_button').click(function(e) {
+                e.preventDefault();
+                FB.ui({
+                  method: 'feed',
+                  name: 'DreamSpace EArenaAds',
+                  link: document.URL,
+                  caption: "EArenaAds" ,
+                  description: ""
+                });
+              });
+            });
+            </script>
      	<div id="search">
      	    <form data-ajax="false">
      	        <input type="search" name="search" id="search-basic" value="" />
@@ -56,18 +70,17 @@
     		});
     	});
         </script>
- 	
- 	
- 	
+
 	<ul> 
  	@for(eads <- eads) {
   	<li><a rel="external"  href="/earenaad/@eads.arenaID">@{"Name of ad: " + eads.arenaName + " Name of host: " + eads.admin + " Name of game: " + eads.gameName + " Information: " + eads.information + " Amount of players required: " + eads.playersRequired}</a></li>
 	} 
  	</ul>
+
  
- </div>
-@Templates.footer()
-@Templates.panelAndLogOut()
-</div>
-</body>
+            </div>
+            @Templates.footer()
+            @Templates.panelAndLogOut()
+        </div>
+    </body>
 </html>
