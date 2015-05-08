@@ -122,7 +122,7 @@ public class EArenaDatabase extends Controller {
 			
 			try {
 			    
-		    if((!search.isEmpty() && search != null) && (game.isEmpty() && game == null) && ( username.isEmpty() && username == null) && (players.isEmpty() && players == null) && ( minutes.isEmpty() && minutes == null )){
+		    if(!search.isEmpty() && game.isEmpty() && username.isEmpty() && players.isEmpty() && minutes.isEmpty()){
 		        
 		        conn = DB.getConnection();
                 search = "%" + search + "%";
@@ -151,7 +151,7 @@ public class EArenaDatabase extends Controller {
 				
 
 				
-		    } else if ((!search.isEmpty() && search != null) || (!game.isEmpty() && game != null) || (!username.isEmpty() && username != null) || (!players.isEmpty() && players != null) || (!minutes.isEmpty() && minutes != null)) {
+		    } else if (!search.isEmpty() || !game.isEmpty() || !username.isEmpty()  || !players.isEmpty() || !minutes.isEmpty()) {
 		        
 		        first = true;
 		        conn = DB.getConnection();
