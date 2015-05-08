@@ -53,6 +53,9 @@ POST /savetournament controllers.TournamentDatabase.addTournament()
 #Post to delete tournament
 POST /deletetournament controllers.TournamentDatabase.deleteTournament()
 
+#Post to delete arenaad
+POST /deleteearena controllers.EArenaDatabase.deleteArena()
+
 #Post to save edited tournament
 POST /edittournament controllers.TournamentDatabase.editTournament()
 
@@ -63,13 +66,16 @@ GET  /showtournament/:id controllers.Application.showTournament(id: Integer)
 GET /tournament controllers.TournamentDatabase.getTournaments()
 
 # Shows createAd webpage
-GET /createarenaad controllers.EArenaDatabase.getEArenaGames()
+GET /createarenaad controllers.Application.createArenaAd()
 
 # Post to save created EArenaAd
 POST /savearenaad controllers.EArenaDatabase.addEArenaAd()
 
 #Shows Main EArena Page with all/newest Ads
-GET /mainearena controllers.EArenaDatabase.getEArenaAds()
+GET /mainearena controllers.Application.mainearena(search: String ?= "", game: String ?= "", username: String ?= "", players: String ?= "", minutes: String ?= "")
+
+#Shows User's EArena Ads
+GET /myearena controllers.EArenaDatabase.getMyEArenaAds()
 
 #Shows Individual EArenaAd and determines if the Currentuser is an admin to the ad or not, returns page depending on answer
 GET /earenaad/:id controllers.Application.showIndividualAd(id: Integer)

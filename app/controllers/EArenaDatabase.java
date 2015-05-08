@@ -17,10 +17,51 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
 public class EArenaDatabase extends Controller {
+    
+    private static boolean first = true;
+    
+    private static String wildcard(String str){
+        
+        if(!str.isEmpty()){
+            return  "%" + str + "%";
+            }
+        
+        return "";
+    } 
+    
+    private static String generateSQL(String str, String str2){
+       if(!str.isEmpty()){
+           if (first == false){
+               if (str2 == "arenainformation"){
+                  return " OR " + str2 + " LIKE ?)";
+               } else if (str2 == "created_date"){
+                   return " AND " + str2 + " >= DATE_SUB(NOW(), INTERVAL ? MINUTE)";
+               } else {
+               return " AND " + str2 + " LIKE ?";
+               }
+            } else if (str2 == "arenaname"){
+               first = false;
+               return " (" + str2 + " LIKE ?";
+            } else if (str2 == "created_date"){
+                first = false;
+                return " " + str2 + " >= DATE_SUB(NOW(), INTERVAL ? MINUTE)";
+            } else {
+                first = false;
+               return " " + str2 + " LIKE ?";
+           }
+           
+       }
+       
+       return "";
+       
+    }
+    
+    
 
 	public static Result addEArenaAd() {
 		Connection conn = null;
 		PreparedStatement preparedStatement;
+		
 
 		 if (Form.form(EArenaAd.class).bindFromRequest().hasErrors()) {
 		 List<String> games = new ArrayList<String>();
@@ -46,11 +87,10 @@ public class EArenaDatabase extends Controller {
 			preparedStatement.setString(5, gameName);
 			preparedStatement.executeUpdate();
 
-			return redirect(routes.EArenaDatabase.getEArenaAds());
+			return redirect(routes.Application.mainearena(null, null, null, null, null));
 
 		} catch (com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException ice) {
-			return badRequest(MainEArenaPage
-					.render(null));
+			return badRequest();
 		} catch (SQLException se) {
 			// Handle sql errors
 			return internalServerError(se.toString());
@@ -74,20 +114,118 @@ public class EArenaDatabase extends Controller {
 
 	}
 
-	public static Result getEArenaAds() {
-		String currentUser = session("connected");
-		if (currentUser == null) {
-			return unauthorized(LoginUserPage
-					.render("You have to login to access this page!"));
-		} else {
-			Connection conn = null;
+	public static List<EArenaAd> getEArenaAds(String search, String game, String username, String players, String minutes) {
+	        
+		    Connection conn = null;
 			PreparedStatement preparedStatement = null;
 			List<EArenaAd> adList = new ArrayList<EArenaAd>();
+			
 			try {
+			    
+		    if((!search.isEmpty() && search != null) && (game.isEmpty() && game == null) && ( username.isEmpty() && username == null) && (players.isEmpty() && players == null) && ( minutes.isEmpty() && minutes == null )){
+		        
+		        conn = DB.getConnection();
+                search = "%" + search + "%";
+				String selectAdvSearch = "SELECT * FROM EArena WHERE arenaname LIKE ? OR admin LIKE ? OR arenainformation LIKE ? OR gamename LIKE ? OR playersrequired LIKE ?";
+				
+				preparedStatement = conn.prepareStatement(selectAdvSearch);
+				preparedStatement.setString(1, search);
+				preparedStatement.setString(2, search);
+				preparedStatement.setString(3, search);
+				preparedStatement.setString(4, search);
+				preparedStatement.setString(5, search);
+			    
+				ResultSet rs = preparedStatement.executeQuery();
 
+				while (rs.next()) {
+					EArenaAd a = new EArenaAd();
+					a.arenaID = rs.getInt("arenaID");
+					a.arenaName = rs.getString("arenaname");
+					a.information = rs.getString("arenainformation");
+					a.gameName = rs.getString("gamename");
+					a.playersRequired = rs.getInt("playersrequired");
+					a.admin = rs.getString("admin");
+					adList.add(a);
+				}
+				rs.close();
+				
+
+				
+		    } else if ((!search.isEmpty() && search != null) || (!game.isEmpty() && game != null) || (!username.isEmpty() && username != null) || (!players.isEmpty() && players != null) || (!minutes.isEmpty() && minutes != null)) {
+		        
+		        first = true;
+		        conn = DB.getConnection();
+		        
+		        
+                search = wildcard(search);
+                game = wildcard(game);
+                username = wildcard(username);
+                
+				String selectAdvSearch = "SELECT * FROM EArena WHERE";
+				
+				selectAdvSearch += generateSQL(search, "arenaname");
+				selectAdvSearch += generateSQL(search, "arenainformation");
+				selectAdvSearch += generateSQL(game, "gamename");
+				selectAdvSearch += generateSQL(username, "admin");
+				selectAdvSearch += generateSQL(players, "playersrequired");
+				selectAdvSearch += generateSQL(minutes, "created_date");
+				
+				
+				preparedStatement = conn.prepareStatement(selectAdvSearch);
+					
+				int counter = 1; 
+				
+				if (selectAdvSearch.contains("arenaname")){
+				preparedStatement.setString(counter, search);
+				counter++;
+				} 
+				
+				if (selectAdvSearch.contains("arenainformation")){
+				preparedStatement.setString(counter, search);
+				counter++;
+				} 
+				
+				if (selectAdvSearch.contains("gamename")){
+				preparedStatement.setString(counter, game);
+				counter++;
+				} 
+				
+				if (selectAdvSearch.contains("admin")){
+				preparedStatement.setString(counter, username);
+				counter++;
+				} 
+				
+				if (selectAdvSearch.contains("playersrequired")){
+				preparedStatement.setString(counter, players);
+				counter++;
+				} 
+				
+				if (selectAdvSearch.contains("created_date")){
+				preparedStatement.setString(counter, minutes);
+				counter++;
+				} 
+				ResultSet rs = preparedStatement.executeQuery();
+
+				while (rs.next()) {
+					EArenaAd a = new EArenaAd();
+					a.arenaID = rs.getInt("arenaID");
+					a.arenaName = rs.getString("arenaname");
+					a.information = rs.getString("arenainformation");
+					a.gameName = rs.getString("gamename");
+					a.playersRequired = rs.getInt("playersrequired");
+					a.admin = rs.getString("admin");
+					adList.add(a);
+				}
+				
+				first = true;
+				rs.close();
+		    
+		    } else {
+                
 				conn = DB.getConnection();
-
+            
 				String selectAdminAds = "SELECT * FROM EArena";
+				
 				preparedStatement = conn.prepareStatement(selectAdminAds);
 				// preparedStatement.setString(1, currentUser);
 				ResultSet rs = preparedStatement.executeQuery();
@@ -102,19 +240,22 @@ public class EArenaDatabase extends Controller {
 					a.admin = rs.getString("admin");
 					adList.add(a);
 				}
-
+				
+			
+				
 				rs.close();
-				return ok(MainEArenaPage.render(adList));
+		    }
+
+				
+				return adList;
 			} catch (com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException ice) {
-				return badRequest(ice.toString());
+					return null;
 			} catch (NumberFormatException nfe) {
-				return badRequest(nfe.toString());
+			        return null;
 			} catch (SQLException se) {
-				// Handle sql errors
-				return internalServerError(se.toString());
+					return null;
 			} catch (Exception e) {
-				// Handle errors for Class.forName
-				return internalServerError(e.toString());
+	    	        return null;
 			} finally {
 				// finally block used to close resources
 				// try {
@@ -126,18 +267,15 @@ public class EArenaDatabase extends Controller {
 					if (conn != null)
 						conn.close();
 				} catch (SQLException se) {
-					return internalServerError(se.toString());
+					return null;
 				} // end finally try
 			} // end try
-		}
+		    
+		
 	}
 	
-	public static Result getEArenaGames() {
-	    String currentUser = session("connected");
-		if (currentUser == null) {
-			return unauthorized(LoginUserPage
-					.render("You have to login to access this page!"));
-		} else {
+	
+	public static List<String> getEArenaGames() {
 			Connection conn = null;
 			PreparedStatement preparedStatement = null;
 			List<String> games = new ArrayList<String>();
@@ -146,7 +284,7 @@ public class EArenaDatabase extends Controller {
 				conn = DB.getConnection();
 				String selectAdminAds = "SELECT gamename FROM Games";
 				preparedStatement = conn.prepareStatement(selectAdminAds);
-				// preparedStatement.setString(1, currentUser);
+
 				ResultSet rs = preparedStatement.executeQuery();
 
 				while (rs.next()) {
@@ -154,17 +292,17 @@ public class EArenaDatabase extends Controller {
 				}
 
 				rs.close();
-				return ok(CreateArenaAd.render(games));
+				return games;
 			} catch (com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException ice) {
-				return badRequest(ice.toString());
+				return null;
 			} catch (NumberFormatException nfe) {
-				return badRequest(nfe.toString());
+				return null;
 			} catch (SQLException se) {
 				// Handle sql errors
-				return internalServerError(se.toString());
+				return null;
 			} catch (Exception e) {
 				// Handle errors for Class.forName
-				return internalServerError(e.toString());
+				return null;
 			} finally {
 				// finally block used to close resources
 				// try {
@@ -176,12 +314,11 @@ public class EArenaDatabase extends Controller {
 					if (conn != null)
 						conn.close();
 				} catch (SQLException se) {
-					return internalServerError(se.toString());
+					return null;
 				} // end finally try
 			} // end try
-	}
-	}
 	
+	}
 
 	public static EArenaAd getIndividualEArena(Integer id) {
 
@@ -367,6 +504,120 @@ public class EArenaDatabase extends Controller {
 		}// end try
 
 	}
+	
+	
+	public static Result deleteArena() {
+
+  Connection conn = null;
+  PreparedStatement preparedStatement = null;
+  JsonNode json = request().body().asJson();
+
+  String arenaID = json.findPath("id").textValue();
+ 
+
+  String currentUser = session("connected");
+
+  try {
+   if (arenaID == null || arenaID.isEmpty()) {
+    throw new SQLException();
+   }
+   conn = DB.getConnection();
+
+   int parsedID = Integer.parseInt(arenaID);
+
+   String insertIntoDatabase = "DELETE FROM EArena WHERE arenaID=?";
+   preparedStatement = conn.prepareStatement(insertIntoDatabase);
+
+ 
+   preparedStatement.setInt(1, parsedID);
+
+   preparedStatement.executeUpdate();
+   return ok();
+  } catch (com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException ice) {
+   return badRequest(ice.toString());
+  } catch (NumberFormatException nfe) {
+   return badRequest(nfe.toString());
+  } catch (SQLException se) {
+   // Handle sql errors
+   return internalServerError(se.toString());
+  } catch (Exception e) {
+   // Handle errors for Class.forName
+   return internalServerError(e.toString());
+  } finally {
+   // finally block used to close resources
+   // try {
+   // if (preparedStatement != null)
+   // conn.close();
+   // } catch (SQLException se) {
+   // } //do nothing
+   try {
+    if (conn != null)
+     conn.close();
+   } catch (SQLException se) {
+    return internalServerError(se.toString());
+   } // end finally try
+  } // end try
+ }
+ 
+ 
+ 
+	public static Result getMyEArenaAds() {
+  String currentUser = session("connected");
+  if (currentUser == null) {
+   return unauthorized(LoginUserPage
+     .render("You have to login to access this page!"));
+  } else {
+   Connection conn = null;
+   PreparedStatement preparedStatement = null;
+   List<EArenaAd> adList = new ArrayList<EArenaAd>();
+   try {
+
+    conn = DB.getConnection();
+
+    String selectAdminAds = "SELECT * FROM EArena WHERE admin=?";
+    preparedStatement = conn.prepareStatement(selectAdminAds);
+    preparedStatement.setString(1, currentUser);
+    ResultSet rs = preparedStatement.executeQuery();
+
+    while (rs.next()) {
+     EArenaAd a = new EArenaAd();
+     a.arenaID = rs.getInt("arenaID");
+     a.arenaName = rs.getString("arenaname");
+     a.information = rs.getString("arenainformation");
+     a.gameName = rs.getString("gamename");
+     a.playersRequired = rs.getInt("playersrequired");
+     a.admin = rs.getString("admin");
+     adList.add(a);
+    }
+
+    rs.close();
+    return ok(myearenapage.render(adList));
+   } catch (com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException ice) {
+    return badRequest(ice.toString());
+   } catch (NumberFormatException nfe) {
+    return badRequest(nfe.toString());
+   } catch (SQLException se) {
+    // Handle sql errors
+    return internalServerError(se.toString());
+   } catch (Exception e) {
+    // Handle errors for Class.forName
+    return internalServerError(e.toString());
+   } finally {
+    // finally block used to close resources
+    // try {
+    // if (preparedStatement != null)
+    // conn.close();
+    // } catch (SQLException se) {
+    // } //do nothing
+    try {
+     if (conn != null)
+      conn.close();
+    } catch (SQLException se) {
+     return internalServerError(se.toString());
+    } // end finally try
+   } // end try
+  }
+ }
 	
 
 }

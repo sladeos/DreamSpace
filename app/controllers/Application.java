@@ -120,5 +120,27 @@ public class Application extends Controller {
 
 		}
 	}
+	
+	public static Result mainearena(String search, String game, String username, String players, String minutes) {
+		String userS = session("connected");
+		if (userS != null) {
+			return ok(MainEArenaPage.render(EArenaDatabase.getEArenaAds(search, game, username, players, minutes), EArenaDatabase.getEArenaGames()));
+		} else {
+			return unauthorized(LoginUserPage
+					.render("Welcome, login to explore the website"));
+		}
+	}
+	
+	
+	
+	public static Result createArenaAd() {
+		String user = session("connected");
+		if (user != null) {
+			return ok(CreateArenaAd.render(EArenaDatabase.getEArenaGames()));
+		} else {
+			return unauthorized(LoginUserPage
+					.render("Welcome, login to explore the website"));
+		}
+	}
 
 }

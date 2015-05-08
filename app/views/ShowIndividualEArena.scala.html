@@ -14,11 +14,28 @@
         </script>
    </head>
    <body>
+   
+
         <div data-role="page" data-theme="b" id = "main" class = "page"  >
             @Templates.header()
             <div data-role="content" class = "content">
             <div id="wrap">
                 <h1 align="center">EArena Ad</h1>
+            <button id="share_button" >Share to Facebook</button>
+            <script type="text/javascript">
+            $(document).ready(function() {
+              $('#share_button').click(function(e) {
+                e.preventDefault();
+                FB.ui({
+                  method: 'feed',
+                  name: 'EArenaAd: eAd.arenaName',
+                  link: document.URL,
+                  caption: "@eAd.admin" +" is looking for people to play @eAd,gameName" ,
+                  description: "Information about EArenaAd: @eAd.information"
+                });
+              });
+            });
+            </script>
                     <div id = "adinfo">               
                           <article data-role="listview" data-inset="true" data-dividertheme="a"> 
                               <li><h2>Name of Ad: @eAd.arenaName</h2>
@@ -48,6 +65,7 @@
                       </article> 
                     </div>
                   </div>
+                  
                 <script>
                     $("#postreply").click(function() {
                         if($('#replyarea').val().length >2){
@@ -71,7 +89,7 @@
                         }
                     });
                 </script>
-            </div>
+
             @Templates.footer()
             @Templates.panelAndLogOut()
         </div>
