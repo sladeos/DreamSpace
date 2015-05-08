@@ -33,7 +33,7 @@
                         <input type="number" name="players" placeholder="Players" id="players">
                     </div>
                     <div class="ui-block-d">
-                        <input type="text" name="date" placeholder="Date" id="datepicker">
+                        <input type="number" name="minutes" placeholder="Search X minutes ago" id="minutes">
                     </div>
  	             </div>
  	            </div>
@@ -50,8 +50,6 @@
             
             var games = @Html(games.toString());
 		   
-		    $( "#datepicker" ).datepicker(); 
-		    $( "#datepicker" ).datepicker( "option", "dateFormat", "yy-mm-dd" );
 		   
     		$( "#game" ).autocomplete({
     		  source: games

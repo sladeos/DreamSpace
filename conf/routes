@@ -69,7 +69,7 @@ GET /createarenaad controllers.Application.createArenaAd()
 POST /savearenaad controllers.EArenaDatabase.addEArenaAd()
 
 #Shows Main EArena Page with all/newest Ads
-GET /mainearena controllers.Application.mainearena(search ?= null, game ?= null, username ?= null, players ?= null, date ?= null)
+GET /mainearena controllers.Application.mainearena(search: String ?= "", game: String ?= "", username: String ?= "", players: String ?= "", minutes: String ?= "")
 
 #Shows User's EArena Ads
 GET /myearena controllers.EArenaDatabase.getMyEArenaAds()

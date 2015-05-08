@@ -34,13 +34,18 @@ public class EArenaDatabase extends Controller {
            if (first == false){
                if (str2 == "arenainformation"){
                   return " OR " + str2 + " LIKE ?)";
+               } else if (str2 == "created_date"){
+                   return " AND " + str2 + " >= DATE_SUB(NOW(), INTERVAL ? MINUTE)";
                } else {
                return " AND " + str2 + " LIKE ?";
                }
-           } else if (str2 == "arenaname"){
+            } else if (str2 == "arenaname"){
                first = false;
                return " (" + str2 + " LIKE ?";
-           } else {
+            } else if (str2 == "created_date"){
+                first = false;
+                return " " + str2 + " >= DATE_SUB(NOW(), INTERVAL ? MINUTE)";
+            } else {
                 first = false;
                return " " + str2 + " LIKE ?";
            }
@@ -56,6 +61,7 @@ public class EArenaDatabase extends Controller {
 	public static Result addEArenaAd() {
 		Connection conn = null;
 		PreparedStatement preparedStatement;
+		
 
 		 if (Form.form(EArenaAd.class).bindFromRequest().hasErrors()) {
 		 List<String> games = new ArrayList<String>();
@@ -108,14 +114,15 @@ public class EArenaDatabase extends Controller {
 
 	}
 
-	public static List<EArenaAd> getEArenaAds(String search, String game, String username, String players, String date) {
+	public static List<EArenaAd> getEArenaAds(String search, String game, String username, String players, String minutes) {
+	        
 		    Connection conn = null;
 			PreparedStatement preparedStatement = null;
 			List<EArenaAd> adList = new ArrayList<EArenaAd>();
-			String abc = "";
+			
 			try {
 			    
-		    if(!search.isEmpty() && game.isEmpty() && username.isEmpty() && players.isEmpty() && date.isEmpty()){
+		    if((!search.isEmpty() && search != null) && (game.isEmpty() && game == null) && ( username.isEmpty() && username == null) && (players.isEmpty() && players == null) && ( minutes.isEmpty() && minutes == null )){
 		        
 		        conn = DB.getConnection();
                 search = "%" + search + "%";
@@ -142,16 +149,17 @@ public class EArenaDatabase extends Controller {
 				}
 				rs.close();
 				
-		    } else if ((!search.isEmpty() && search != null) || (!game.isEmpty() && game != null) || (!username.isEmpty() && username != null) || (!players.isEmpty() && players != null) || (!date.isEmpty() && date != null)) {
+
+				
+		    } else if ((!search.isEmpty() && search != null) || (!game.isEmpty() && game != null) || (!username.isEmpty() && username != null) || (!players.isEmpty() && players != null) || (!minutes.isEmpty() && minutes != null)) {
 		        
-		    
+		        first = true;
 		        conn = DB.getConnection();
 		        
 		        
                 search = wildcard(search);
                 game = wildcard(game);
                 username = wildcard(username);
-                date = wildcard(date);
                 
 				String selectAdvSearch = "SELECT * FROM EArena WHERE";
 				
@@ -160,9 +168,9 @@ public class EArenaDatabase extends Controller {
 				selectAdvSearch += generateSQL(game, "gamename");
 				selectAdvSearch += generateSQL(username, "admin");
 				selectAdvSearch += generateSQL(players, "playersrequired");
-				selectAdvSearch += generateSQL(date, "date_created");
+				selectAdvSearch += generateSQL(minutes, "created_date");
 				
-				abc = selectAdvSearch;
+				
 				preparedStatement = conn.prepareStatement(selectAdvSearch);
 					
 				int counter = 1; 
@@ -192,11 +200,10 @@ public class EArenaDatabase extends Controller {
 				counter++;
 				} 
 				
-				if (selectAdvSearch.contains("date_created")){
-				preparedStatement.setString(counter, date);
+				if (selectAdvSearch.contains("created_date")){
+				preparedStatement.setString(counter, minutes);
 				counter++;
 				} 
-		
 				ResultSet rs = preparedStatement.executeQuery();
 
 				while (rs.next()) {
@@ -210,15 +217,15 @@ public class EArenaDatabase extends Controller {
 					adList.add(a);
 				}
 				
-			
 				first = true;
 				rs.close();
 		    
 		    } else {
-
+                
 				conn = DB.getConnection();
-
+            
 				String selectAdminAds = "SELECT * FROM EArena";
+				
 				preparedStatement = conn.prepareStatement(selectAdminAds);
 				// preparedStatement.setString(1, currentUser);
 				ResultSet rs = preparedStatement.executeQuery();
@@ -234,23 +241,21 @@ public class EArenaDatabase extends Controller {
 					adList.add(a);
 				}
 				
+			
 				
+				rs.close();
 		    }
 
 				
 				return adList;
 			} catch (com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException ice) {
-					
 					return null;
 			} catch (NumberFormatException nfe) {
-
-					return null;
+			        return null;
 			} catch (SQLException se) {
-					
 					return null;
 			} catch (Exception e) {
-					
-					return null;
+	    	        return null;
 			} finally {
 				// finally block used to close resources
 				// try {
@@ -279,7 +284,7 @@ public class EArenaDatabase extends Controller {
 				conn = DB.getConnection();
 				String selectAdminAds = "SELECT gamename FROM Games";
 				preparedStatement = conn.prepareStatement(selectAdminAds);
-				// preparedStatement.setString(1, currentUser);
+
 				ResultSet rs = preparedStatement.executeQuery();
 
 				while (rs.next()) {
