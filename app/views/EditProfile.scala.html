@@ -31,7 +31,7 @@
                     <div data-role="collapsible" data-collapsed-icon="gear">
                       <h1>Change avatar!</h1>
                       
-                      <fieldset data-role="controlgroup">
+                      <fieldset data-role="controlgroup" id="avatarID">
                         <legend></legend>
                         <input type="radio" name="radio-choice" id="radio-choice-1" value="choice-1" checked="checked" />
                         <label for="radio-choice-1">
@@ -59,23 +59,23 @@
                   <form name="contactInfoGenerate" >
                     <div data-role="fieldcontain">
                       <label for="username">Username:</label>
-                      <input type="text" name="username" id="username" maxlength="30">  
+                      <input type="text" name="username" id="username" maxlength="30" placeholder="Placeholder">  
                       <label for="skypeID">Skype:</label>
-                      <input type="text" name="skypeID" id="skypeID" maxlength="30">
+                      <input type="text" name="skypeID" id="skypeID" maxlength="30" placeholder="Placeholder">
                       <label for="seatMap">Seat:</label>
-                      <select id="seatMap"  data-mini="true">
+                      <select id="seatMap"  data-mini="true" >
                         <option value="B">B</option>
                         <option value="C">C</option>
                         <option value="D">D</option>
                       </select>
-                      <label for="realID">Battle.net:</label>
-                      <input type="text" name="realID" id="realID" maxlength="30">
+                      <label for="battlenetID">Battle.net:</label>
+                      <input type="text" name="battlenetID" id="battlenetID" maxlength="30" placeholder="Placeholder">
                       <label for="steamID">Steam:</label>
-                      <input type="text" name="steamID" id="steamID" maxlength="30">
+                      <input type="text" name="steamID" id="steamID" maxlength="30" placeholder="Placeholder">
                       <label for="twitchID">Twitch:</label>
-                      <input type="text" name="twitchID" id="twitchID" maxlength="30">
+                      <input type="text" name="twitchID" id="twitchID" maxlength="30" placeholder="Placeholder">
                       <label for="uplayID">UPlay:</label>
-                      <input  type="text" name="uplayID" id="uplayID" maxlength="30">                    
+                      <input  type="text" name="uplayID" id="uplayID" maxlength="30" placeholder="Placeholder">                    
                     </div>
                       
 
@@ -107,7 +107,34 @@
               </form>
 
               <div Style="float:right"><input type="button" value="Save" id="save"  data-mini="true"></div>
-                  
+              
+<script>
+        $("#save").click(function() {
+          
+
+      $.ajax({
+            url: "/saveuserprofile",
+            type: 'POST',
+            contentType:'application/json',
+            data: JSON.stringify({avatarID :  $('#avatarID').val(), username :  $('#username').val(), skypeID: $('#skypeID').val(), seatMap: $('#seatMap').val(), battlenetID: $('#battlenetID').val(), steamID: $('#steamID').val(), twitchID: $('#twitchID').val(), uplayID: $('#uplayID').val(), favoritegames: $('#favoritegames').val(), about: $('#about').val()}),
+            dataType : 'html',
+            success: function(){
+                window.location.replace("/myprofile");
+            }
+        });
+   
+        });
+
+
+</script>
+
+
+
+
+
+
+
+
         </div>
 
 
