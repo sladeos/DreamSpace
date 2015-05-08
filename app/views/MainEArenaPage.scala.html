@@ -2,74 +2,64 @@
 <!DOCTYPE html>
 <html>
 	<head>
-	<title>EArena</title>
-	@Templates.head()
-<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-	@Templates.facebookHeadScript()
-<meta charset="UTF-8">
+	   <title>EArena</title>
+	   @Templates.head()
+       <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/MainEArenaPage.css")">
+	   @Templates.facebookHeadScript()
+        <meta charset="UTF-8">
 	</head>
-<body>
-	<div data-role="page" data-theme="b" id = "main" class = "page"  >
-	@Templates.header()
- 	<div data-role="content" class = "content">   
-     	<h1 align="center">EArena</h1>
-     	
-     	<div id="search">
-     	    <form data-ajax="false">
-     	        <input type="search" name="search" id="search-basic" value="" />
-     	            
-     	        <button id="showAdv" type="button">Show advanced search options</button>
-     	        <div id="advSearch" style="display: none;">
-     	        <label>Search for: </label>
-     	        
- 	              <div class="ui-grid-c">
-                    <div class="ui-block-a">
-                        <input type="text" name="game" placeholder="Game" id="game">
-                    </div>
-                    <div class="ui-block-b">
-                        <input type="text" name="username" placeholder="Username" id="username">
-                    </div>
-                    <div class="ui-block-c">
-                        <input type="number" name="players" placeholder="Players" id="players">
-                    </div>
-                    <div class="ui-block-d">
-                        <input type="text" name="date" placeholder="Date" id="datepicker">
-                    </div>
- 	             </div>
- 	            </div>
- 	            <button class="my-btn" type="submit">Search</button>
+    <body>
+	   <div data-role="page" data-theme="b" id = "main" class = "page"  >
+	       @Templates.header()
+            <div data-role="content" class = "content">   
+                <h1 align="center">EArena</h1>
+     	        <div id="search">
+                    <form data-ajax="false">
+     	               <input type="search" name="search" id="search-basic" value="" />
+     	               <button id="showAdv" type="button"  data-icon="arrow-d">Show advanced search options</button>
+     	               <div id="advSearch" style="display: none;">
+     	                   <label>Search for: </label>
+     	                   <div id = "grid" class="ui-grid-c ui-responsive">
+                                <div class="ui-block-a">
+                                    <input type="text" name="game" placeholder="Game" id="game">
+                                </div>
+                                <div class="ui-block-b">
+                                    <input type="text" name="username" placeholder="Username" id="username">
+                                </div>
+                                <div class="ui-block-c">
+                                    <input type="number" name="players" placeholder="Players" id="players">
+                                </div>
+                                <div class="ui-block-d">
+                                    <input data-role="date" data-inline="true" type="text" name="date" placeholder="Date" id="datepicker">
+                                </div>
+     	                    </div>
+ 	                    </div>
+ 	                    <button class="my-btn" type="submit">Search</button>
  	            
- 	    </form>
-        </div>
-        <script>
-         $(function() {
-           
-            $('#showAdv').click(function() {        
-               $('#advSearch').toggle('show');
-            });
-            
-            var games = @Html(games.toString());
-		   
-		    $( "#datepicker" ).datepicker(); 
-		    $( "#datepicker" ).datepicker( "option", "dateFormat", "yy-mm-dd" );
-		   
-    		$( "#game" ).autocomplete({
-    		  source: games
-    		});
-    	});
-        </script>
- 	
- 	
- 	
-	<ul> 
- 	@for(eads <- eads) {
-  	<li><a rel="external"  href="/earenaad/@eads.arenaID">@{"Name of ad: " + eads.arenaName + " Name of host: " + eads.admin + " Name of game: " + eads.gameName + " Information: " + eads.information + " Amount of players required: " + eads.playersRequired}</a></li>
-	} 
- 	</ul>
+ 	                </form>
+                </div>
+                <script>
+                    $(function() {
+                        $('#showAdv').click(function() {        
+                            $('#advSearch').toggle('show');
+                        });
+                        var games = @Html(games.toString());
+		                $( "#datepicker" ).datepicker(); 
+		                $( "#datepicker" ).datepicker( "option", "dateFormat", "yy-mm-dd" );
+    		            $( "#game" ).autocomplete({
+    		              source: games
+    		            });
+    	           });
+                </script>
+            	<ul> 
+             	@for(eads <- eads) {
+              	<li><a rel="external"  href="/earenaad/@eads.arenaID">@{"Name of ad: " + eads.arenaName + " Name of host: " + eads.admin + " Name of game: " + eads.gameName + " Information: " + eads.information + " Amount of players required: " + eads.playersRequired}</a></li>
+            	} 
+             	</ul>
  
- </div>
-@Templates.footer()
-@Templates.panelAndLogOut()
-</div>
-</body>
+            </div>
+            @Templates.footer()
+            @Templates.panelAndLogOut()
+        </div>
+    </body>
 </html>
