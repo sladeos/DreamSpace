@@ -11,7 +11,22 @@
       <div data-role="page" data-theme="b" id = "main" class = "page"  >
          @Templates.header()
          <div data-role="content" class = "content">
-            <h1 align="center">Edit your EArena Ad</h1>
+            <h1 align="center">Your EArena Ad</h1>
+                        <button id="share_button" >Share to Facebook</button>
+            <script type="text/javascript">
+            $(document).ready(function() {
+              $('#share_button').click(function(e) {
+                e.preventDefault();
+                FB.ui({
+                  method: 'feed',
+                  name: 'EArenaAd: eAd.arenaName',
+                  link: document.URL,
+                  caption: "@eAd.admin" +" is looking for people to play @eAd,gameName" ,
+                  description: "Information about EArenaAd: @eAd.information"
+                });
+              });
+            });
+            </script>
             <input type='button' id='edittournament' value='Edit Tournament'>
             <div id="editad" style="display: none;">
                <div data-role="fieldcontain"class="ui-hide-label">
