@@ -1,8 +1,10 @@
 	#adinfo{	
 		width: 100%;
-      
-		
 
+	}
+	#grid{
+		padding-left: 2%;
+		padding-right: 2%;
 	}
 	#adreplies{
 		width: 100%;
@@ -21,7 +23,26 @@
     	width: 100%;
 		}
 	}
+	.ui-page .ui-btn.myFace{
+		background: #3A5795;
+	}
+		.faceButton{
+		width: 200px;
+		max-width: 200px;
 
+	}
+	.ui-page .ui-btn.submitReplay{
+		background: #FA7C04;
+	}
+	@media all and (max-width: 36em){
+ 		.faceButton{
+		width: 170px;
+		max-width: 170px;
+
+	}
+
+    
+    }
 @media all and (min-width: 50em){
 
 	#MEArenaContent{
@@ -43,7 +64,7 @@
 	margin: 0 auto;
 }
 
-	#wrap{
+	.wrap{
 		overflow:hidden;
 		width:99%;
 		margin: 0 auto;
@@ -78,6 +99,17 @@
 		float: left;
 		width: 49%;
       	padding-left: 1%;
+
+	}
+		.search{
+		width: 550px;
+		margin:0 auto;
+		max-width: 550px;
+		
+	}
+	.faceButton{
+		width: 200px;
+		max-width: 200px;
 
 	}
 
