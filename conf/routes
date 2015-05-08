@@ -53,6 +53,9 @@ POST /savetournament controllers.TournamentDatabase.addTournament()
 #Post to delete tournament
 POST /deletetournament controllers.TournamentDatabase.deleteTournament()
 
+#Post to delete arenaad
+POST /deleteearena controllers.EArenaDatabase.deleteArena()
+
 #Post to save edited tournament
 POST /edittournament controllers.TournamentDatabase.editTournament()
 

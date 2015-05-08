@@ -27,7 +27,7 @@
               });
             });
             </script>
-            <input type='button' id='edittournament' value='Edit Tournament'>
+            <input type='button' id='editearenaad' value='Edit Ad'>
             <div id="editad" style="display: none;">
                <div data-role="fieldcontain"class="ui-hide-label">
                   <label for="arenaName">Arena Ad Name:</label>
@@ -48,11 +48,14 @@
                   <input type="id" name="id" id="id" value="@eAd.arenaID"/>
                </div>
                <button  class = "my-btn"  id="updateearena"  value="Update EArena Ad" onclick="return validate()">Update EArena Ad </button>
+               
+                <input type="button" value="Delete Ad" id="deletearena">
                <p id="warning"></p>
             </div>
             
             <script type="text/javascript">
                var adOkay = true;
+              
                    $(function() {
                	function errorInField(){
                	 $("#warning").css('color', 'red');
@@ -186,12 +189,40 @@
                
                   }
                }
+               
+               
+               ////////////////////////////////////derete button////
+               
+               
+                $("#deletearena").click(function() {
+    if(true){
+          
+   var data = {"id":"@eAd.arenaID"}
 
-            
+      $.ajax({
+            url: "/deleteearena",
+            type: 'POST',
+            contentType:'application/json',
+            data: JSON.stringify(data),
+            dataType : 'html',
+            success: function(){
+                window.location.replace("/myearena");
+            }
+        });
+    }else{
+    	
+    	 $("#warning").html("There are errors in your Ad! Fix them and try again.");
+    	 $("#warning").css('color', 'red');
+         $('#warning').prepend('<img id="redcross" src="@routes.Assets.at("images/redcross.png")" />')
+         $('#redcross').width(40);
+         $('#redcross').height(40);
+    	
+    }
+        });
 
                $(document).ready(function(){
                
-                  $('#edittournament').click(function() {        
+                  $('#editearenaad').click(function() {        
                        $('#editad').toggle('show');
                   });
                            
