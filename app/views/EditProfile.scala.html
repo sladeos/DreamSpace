@@ -80,7 +80,7 @@
                       
 
                     <div data-role="collapsible" data-collapsed-icon="gear">
-                      <h1>Edit Favorites</h1>
+                      <h1>Edit Favourites</h1>
                       <p> 
                         Placeholder <br/>
                         Placeholder <br/>
@@ -92,8 +92,8 @@
 
               <div class="section">
                 <div data-role="fieldcontain">
-                  <label for="favoritegames">Favorite Games:</label>
-                  <textarea cols="40" rows="8" name="favoritegames" id="favoritegames"></textarea>
+                  <label for="favouritegames">Favourite Games:</label>
+                  <textarea cols="40" rows="8" name="favouritegames" id="favouritegames"></textarea>
                 </div>
               </div>
          
@@ -116,7 +116,7 @@
             url: "/saveuserprofile",
             type: 'POST',
             contentType:'application/json',
-            data: JSON.stringify({avatarID :  $('#avatarID').val(), username :  $('#username').val(), skypeID: $('#skypeID').val(), seatMap: $('#seatMap').val(), battlenetID: $('#battlenetID').val(), steamID: $('#steamID').val(), twitchID: $('#twitchID').val(), uplayID: $('#uplayID').val(), favoritegames: $('#favoritegames').val(), about: $('#about').val()}),
+            data: JSON.stringify({avatarID :  $('#avatarID').val(), username :  $('#username').val(), skypeID: $('#skypeID').val(), seatMap: $('#seatMap').val(), battlenetID: $('#battlenetID').val(), steamID: $('#steamID').val(), twitchID: $('#twitchID').val(), uplayID: $('#uplayID').val(), favouritegames: $('#favouritegames').val(), about: $('#about').val()}),
             dataType : 'html',
             success: function(){
                 window.location.replace("/myprofile");

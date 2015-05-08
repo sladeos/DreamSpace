@@ -20,96 +20,11 @@ import play.libs.Json;
 import java.util.ArrayList;
 import java.util.List;
 
-// public class UserProfileDatabase extends Controller {
+public class UserProfileDatabase extends Controller {
 
-	// public static Tournament getTournamentAdmin(Integer id) {
+	
 
-	// 	Connection conn = null;
-	// 	PreparedStatement preparedStatement = null;
 
-	// 	Tournament t = new Tournament();
-
-	// 	try {
-
-	// 		conn = DB.getConnection();
-	// 		String insertIntoDatabase = "SELECT * FROM ETournament WHERE tournamentID=?;";
-	// 		preparedStatement = conn.prepareStatement(insertIntoDatabase);
-	// 		preparedStatement.setInt(1, id);
-
-	// 		ResultSet rs = preparedStatement.executeQuery();
-	// 		if (rs.isBeforeFirst()) {
-	// 			rs.next();
-	// 			t.tournamentcreator = rs.getString("admin");
-	// 		}
-
-	// 		if (t.tournamentcreator == null) {
-	// 			return null;
-	// 		}
-
-	// 		return t;
-
-	// 	} catch (SQLException se) {
-	// 		return null;
-	// 	} catch (Exception e) {
-	// 		// Handle errors for Class.forName
-	// 		return null;
-	// 	} finally {
-	// 		// finally block used to close resources
-	// 		try {
-	// 			if (preparedStatement != null)
-	// 				conn.close();
-	// 		} catch (SQLException se) {
-	// 		}// do nothing
-	// 	}
-
-	// }
-
-	// public static Tournament getTournament(Integer id) {
-
-	// 	Connection conn = null;
-	// 	PreparedStatement preparedStatement = null;
-
-	// 	Tournament t = new Tournament();
-
-	// 	try {
-
-	// 		conn = DB.getConnection();
-	// 		String insertIntoDatabase = "SELECT * FROM ETournament WHERE tournamentID=?;";
-	// 		preparedStatement = conn.prepareStatement(insertIntoDatabase);
-	// 		preparedStatement.setInt(1, id);
-
-	// 		ResultSet rs = preparedStatement.executeQuery();
-	// 		if (rs.isBeforeFirst()) {
-	// 			rs.next();
-	// 			t.tournamentID = rs.getInt("tournamentID");
-	// 			t.tournamentname = rs.getString("tournamentName");
-	// 			t.participant_count = rs.getInt("teamAmount");
-	// 			t.tournamentcreator = rs.getString("admin");
-	// 			t.tournamentdata = rs.getString("tournamentData");
-
-	// 		}
-
-	// 		if (t.tournamentdata == null) {
-	// 			return null;
-	// 		}
-
-	// 		return t;
-
-	// 	} catch (SQLException se) {
-	// 		return null;
-	// 	} catch (Exception e) {
-	// 		// Handle errors for Class.forName
-	// 		return null;
-	// 	} finally {
-	// 		// finally block used to close resources
-	// 		try {
-	// 			if (preparedStatement != null)
-	// 				conn.close();
-	// 		} catch (SQLException se) {
-	// 		}// do nothing
-	// 	}
-
-	// }
 
 	// public static Result getTournaments() {
 	// 	String currentUser = session("connected");
@@ -169,26 +84,25 @@ import java.util.List;
 	// 	}
 	// }
 
+
+
 	// public static Result addUserProfile() {
 
 	// 	Connection conn = null;
 	// 	PreparedStatement preparedStatement = null;
 	// 	JsonNode json = request().body().asJson();
 
-	// 	// JsonNode jsonparent = json.findParent("tournamentInfo");
-	// 	// String tournamentData = jsonparent.toString();
-	// 	// String dataOnly =
-	// 	// tournamentData.substring(tournamentData.lastIndexOf(":"));
 
-	// 	String avatarID = json.findPath("avatarID").textValue();
-	// 	String username = json.findPath("username").textValue();
+
+	// 	String avatarIDstring = json.findPath("avatarID").textValue();
+	// 	//String username = json.findPath("username").textValue();
 	// 	String skypeID = json.findPath("skypeID").textValue();
 	// 	//String seatMapID = json.findPath("seatMap").textValue();
 	// 	String battlenetID = json.findPath("battlenetID").textValue();
 	// 	String steamID = json.findPath("steamID").textValue();
 	// 	String twitchID = json.findPath("twitchID").textValue();
 	// 	String uplayID = json.findPath("uplayID").textValue();
-	// 	String favouritegames = json.findPath("favoritegames").textValue();
+	// 	String favouritegames = json.findPath("favouritegames").textValue();
 	// 	String userbio = json.findPath("about").textValue();
 
 
@@ -198,14 +112,19 @@ import java.util.List;
 
 	// 		conn = DB.getConnection();
 
-	// 		int teamAmount = Integer.parseInt(tournamentAmount);
-	// 		String insertIntoDatabase = "INSERT INTO ETournament (admin, tournamentData, tournamentName, teamAmount) VALUES(?,?,?,?)";
+	// 		int avatarID = Integer.parseInt(avatarIDstring);
+	// 		String insertIntoDatabase = "INSERT INTO UserProfile (favouritegames, userbio, skypeID, steamID, battlenetID, uplayID, twitchID, avatarID)";
 	// 		preparedStatement = conn.prepareStatement(insertIntoDatabase);
 
-	// 		preparedStatement.setString(1, currentUser);
-	// 		preparedStatement.setString(2, tournamentData);
-	// 		preparedStatement.setString(3, tournamentName);
-	// 		preparedStatement.setInt(4, teamAmount);
+
+	// 		preparedStatement.setString(6, favouritegames);
+	// 		preparedStatement.setString(7, userbio);
+	// 		preparedStatement.setString(8, skypeID);
+	// 		preparedStatement.setString(9, steamID);
+	// 		preparedStatement.setString(10, battlenetID);
+	// 		preparedStatement.setString(11, uplayID);
+	// 		preparedStatement.setString(12, twitchID);
+	// 		preparedStatement.setInt(13, avatarID);
 
 	// 		preparedStatement.executeUpdate();
 	// 		return ok();
@@ -299,4 +218,4 @@ import java.util.List;
 	// 	} // end try
 // 	 }
 
-// }
+ }
