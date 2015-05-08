@@ -2,51 +2,48 @@
 
 <!DOCTYPE html>
 <html>
-<head>
-<title>Create EArenaAd</title>
-
-@Templates.head()
-<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-@Templates.facebookHeadScript()
-<meta charset="UTF-8">
-</head>
-<body>
-
- <div data-role="page" data-theme="b" id = "main" class = "page"  >
-	@Templates.header()
- 	<div data-role="content" class = "content">  
- <h1 align="center">Create an EArena Ad</h1>
+    <head>
+        <title>Create EArenaAd</title>
+        @Templates.head()
+        <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+         <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/EArena.css")">
+        @Templates.facebookHeadScript()
+        <meta charset="UTF-8">
+    </head>
+    <body>
+    <div data-role="page" data-theme="b" id = "main" class = "page"  >
+	   @Templates.header()
+        <div data-role="content" class = "content">  
+            <h1 align="center">Create an EArena Ad</h1>
+            <div id = "createAEform">
                 <form id ="EArenaForm"  method ="post" action="@routes.EArenaDatabase.addEArenaAd()" data-ajax="false">
-                
                     <div data-role="fieldcontain" class="ui-hide-label">
                         <label for="arenaName">Arena Ad Name:</label>
                         <input type="text" name="arenaName" id="arenaName" value="" placeholder="Arena Ad Name"/>
                     </div>
-                    
                     <div data-role="fieldcontain" class="ui-hide-label">
                         <label for="gameName" >Game:</label>
                         <input type="text" name="gameName" id="game" value="" placeholder="Game "/>
                     </div>
-                    
                     <div data-role="fieldcontain" class="ui-hide-label">
                         <label for="playersRequired" >Players Required:</label>
                         <input type="number" min="1" max="100" name="playersRequired" id="playersRequired" value="" placeholder="Players Required"/>
-                   </div>
-                   
-                   <div data-role="fieldcontain" class="ui-hide-label">
-                <textarea placeholder="Enter some information about your ad here!" name="information" id="informationArea" rows="4" cols="50" ></textarea>
-                </div>
-                     <button class = "my-btn"  type="submit" value="Create EArena Ad" onclick="return validate()">Create EArenaAd </button>
-                     <p id="warning"></p>
+
+                    </div>
+                    <div data-role="fieldcontain" class="ui-hide-label">
+                        <textarea placeholder="Enter some information about your ad here!" name="information" id="informationArea" rows="4" cols="50" ></textarea>
+                    </div>
+                    <button class = "my-btn"  type="submit" value="Create EArena Ad" onclick="return validate()">Create EArenaAd </button>
+                    <p id="warning"></p>
                 </form>
-<script type="text/javascript">
-	$(function() {
-		var games = @Html(games.toString())
-		
-		$( "#game" ).autocomplete({
-		  source: games
-		});
-	  });    
+            </div>
+            <script type="text/javascript">
+	           $(function() {
+		          var games = @Html(games.toString())
+		              $( "#game" ).autocomplete({
+		                  source: games
+		              });
+	            });    
 
 
    

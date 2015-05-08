@@ -4,15 +4,45 @@
    <head>
       <title>Edit your EArena Ad</title>
       @Templates.head()
+      <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/EArena.css")">
       @Templates.facebookHeadScript()
       <meta charset="UTF-8">
    </head>
    <body>
-      <div data-role="page" data-theme="b" id = "main" class = "page"  >
-         @Templates.header()
-         <div data-role="content" class = "content">
-            <h1 align="center">Your EArena Ad</h1>
-                        <button id="share_button" >Share to Facebook</button>
+
+        <div data-role="page" data-theme="b" id = "main" class = "page"  >
+            @Templates.header()
+            <div data-role="content" class = "content">
+                <div id = "wrap2">
+                    <h1 align="center">Your EArena Ad</h1>
+                    
+                    <button id="share_button" >Share to Facebook</button>
+                    
+                    <input type='button' id='edittournament' value='Edit EArenaAd'>
+                    <div id="editad" style="display: none;">
+                        <div data-role="fieldcontain"class="ui-hide-label">
+                            <label for="arenaName">Arena Ad Name:</label>
+                            <input type="text" name="arenaName" id="arenaName" value="@eAd.arenaName" placeholder="Arena Ad Name"/>
+                        </div>
+                        <div data-role="fieldcontain" class="ui-hide-label">
+                            <label for="gameName" >Game:</label>
+                            <input type="text" name="gameName" id="game" value="@eAd.gameName" placeholder="Game "/>
+                        </div>
+                        <div data-role="fieldcontain" class="ui-hide-label">
+                            <label for="playersRequired" >Players Required:</label>
+                            <input type="number" min="1" max="100" name="playersRequired" id="playersRequired" value="@eAd.playersRequired" placeholder="Players Required"/>
+                        </div>
+                        <div data-role="fieldcontain" class="ui-hide-label">
+                            <textarea placeholder="Enter some information about your ad here!" name="information" id="informationArea" rows="4" cols="50"  >@eAd.information</textarea>
+                        </div>
+                        <div style="display: none;">
+                            <input type="id" name="id" id="id" value="@eAd.arenaID"/>
+                        </div>
+                        <button  class = "my-btn"  id="updateearena"  value="Update EArena Ad" onclick="validate()">Update EArena Ad </button>
+                            <p id="warning"></p>
+                        </div>
+                    </div>
+
             <script type="text/javascript">
             $(document).ready(function() {
               $('#share_button').click(function(e) {
@@ -27,31 +57,6 @@
               });
             });
             </script>
-            <input type='button' id='editearenaad' value='Edit Ad'>
-            <div id="editad" style="display: none;">
-               <div data-role="fieldcontain"class="ui-hide-label">
-                  <label for="arenaName">Arena Ad Name:</label>
-                  <input type="text" name="arenaName" id="arenaName" value="@eAd.arenaName" placeholder="Arena Ad Name"/>
-               </div>
-               <div data-role="fieldcontain" class="ui-hide-label">
-                  <label for="gameName" >Game:</label>
-                  <input type="text" name="gameName" id="game" value="@eAd.gameName" placeholder="Game "/>
-               </div>
-               <div data-role="fieldcontain" class="ui-hide-label">
-                  <label for="playersRequired" >Players Required:</label>
-                  <input type="number" min="1" max="100" name="playersRequired" id="playersRequired" value="@eAd.playersRequired" placeholder="Players Required"/>
-               </div>
-               <div data-role="fieldcontain" class="ui-hide-label">
-                  <textarea placeholder="Enter some information about your ad here!" name="information" id="informationArea" rows="4" cols="50"  >@eAd.information</textarea>
-               </div>
-               <div style="display: none;">
-                  <input type="id" name="id" id="id" value="@eAd.arenaID"/>
-               </div>
-               <button  class = "my-btn"  id="updateearena"  value="Update EArena Ad" onclick="return validate()">Update EArena Ad </button>
-               
-                <input type="button" value="Delete Ad" id="deletearena">
-               <p id="warning"></p>
-            </div>
             
             <script type="text/javascript">
                var adOkay = true;
@@ -99,7 +104,6 @@
                })
                    })
                
-
                function errorInField(){
                 	 $("#warning").css('color', 'red');
                      $('#warning').prepend('<img id="redcross" src="@routes.Assets.at("images/redcross.png")" />')
@@ -156,8 +160,6 @@
                 	   return false;
                 	 }
                 
-                
-            
                function send() {
                   if(adOkay){
                       $("#warning").html('');
@@ -191,14 +193,13 @@
                }
                
                
-               ////////////////////////////////////derete button////
+               ////////////////////////////////////Delete button////
                
                
                 $("#deletearena").click(function() {
     if(true){
           
    var data = {"id":"@eAd.arenaID"}
-
       $.ajax({
             url: "/deleteearena",
             type: 'POST',
@@ -219,7 +220,6 @@
     	
     }
         });
-
                $(document).ready(function(){
                
                   $('#editearenaad').click(function() {        
@@ -228,63 +228,64 @@
                            
                });
             </script>
-            
-            <div id="adinfo">
-               id: @eAd.arenaID
-               <br>
-               Name of Ad: @eAd.arenaName
-               <br>
-               Creator name: @eAd.admin
-               <br>
-               Name of Game: @eAd.gameName
-               <br>
-               Information about Ad: @eAd.information
-               <br>
-               Amount of Players Required: @eAd.playersRequired
-               <br>
+                
+                <div id="wrap">
+                    <div id="adinfo">
+                        <article data-role="listview" data-inset="true" data-dividertheme="a"> 
+                            <li><h2>Name of Ad: @eAd.arenaName</h2>
+                                <p>id: @eAd.arenaID</p>
+                                <p>Creator name: @eAd.admin</p>
+                                <p>Name of Game: @eAd.gameName</p>
+                                <p>Amount of Players Required: @eAd.playersRequired</p>
+                                <p>Information about Ad:</p> 
+                                <textarea disabled name="textarea" id="text" style = "overflow:auto;resize:none">@eAd.information</textarea>
+                            </li>
+                        </article>
+                        <label for="reply">Reply:</label>
+                        <textarea placeholder="Post your reply here" name="reply" id="replyarea" rows="4" cols="50"></textarea>
+                        <input type="submit" id="postreply" value="Submit Reply" >
+                        <p id="warningreply"></p>
+                    </div>
+                    <div id="adreplies">
+                         <article data-role="listview" data-inset="true" data-dividertheme="a">
+                            @for(eAdReplies <- eAdReplies) {
+                              <li  data-role = "list-divider" ></li>
+                              <li><h2>@{"User who replied: " + eAdReplies.user}</h2>
+                               <p>Reply content:</p>
+                               <textarea disabled name="textarea" id="text" style = "overflow:auto;resize:none">@{eAdReplies.content}
+                                </textarea>
+                                </li>
+                            } 
+                          </article>
+                    </div>
+                </div>
+                
+                <script>
+                    $("#postreply").click(function() {
+                        if($('#replyarea').val().length >2){
+                            var data = {"contents":$("#replyarea").val(), "adID": "@eAd.arenaID"};
+                            $.ajax({
+                                url: "/postreply",
+                                type: 'POST',
+                                contentType:'application/json',
+                                data: JSON.stringify(data),
+                                dataType : 'html',
+                                success: function(data ){
+                                    location.reload();
+                                }
+                            });
+                            }else{
+                   	             $("#warningreply").html("There are errors in your reply! Fix them and try again.");
+                   	             $("#warningreply").css('color', 'red');
+                                $('#warningreply').prepend('<img id="redcross" src="@routes.Assets.at("images/redcross.png")" />')
+                                $('#redcross').width(40);
+                                $('#redcross').height(40);
+                            }
+                        });
+                </script>
             </div>
-            <div id="adreplies">
-               @for(eAdReplies <- eAdReplies) {
-               <li>@{"User who replied: " + eAdReplies.user +" Reply content: " + eAdReplies.content}</li>
-               } 
-               </ul>
-            </div>
-            <div id="replyfielddiv">
-               <label for="reply">Reply:</label>
-               <textarea placeholder="Post your reply here" name="reply" id="replyarea" rows="4" cols="50"></textarea>
-               <input type="submit" id="postreply" value="Submit Reply" >
-               <p id="warningreply"></p>
-            </div>
-            <script>
-               $("#postreply").click(function() {
-                   if($('#replyarea').val().length >2){
-               
-                  var data = {"contents":$("#replyarea").val(), "adID": "@eAd.arenaID"};
-               
-                     $.ajax({
-                           url: "/postreply",
-                           type: 'POST',
-                           contentType:'application/json',
-                           data: JSON.stringify(data),
-                           dataType : 'html',
-                           success: function(data ){
-                           	location.reload();
-                           }
-                       });
-                   }else{
-                   	
-                   	 $("#warningreply").html("There are errors in your reply! Fix them and try again.");
-                   	 $("#warningreply").css('color', 'red');
-                        $('#warningreply').prepend('<img id="redcross" src="@routes.Assets.at("images/redcross.png")" />')
-                        $('#redcross').width(40);
-                        $('#redcross').height(40);
-                   	
-                   }
-                       });
-            </script>
-         </div>
-         @Templates.footer()
-         @Templates.panelAndLogOut()
+            @Templates.footer()
+            @Templates.panelAndLogOut()
       </div>
    </body>
 </html>
