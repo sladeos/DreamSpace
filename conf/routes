@@ -101,4 +101,5 @@ GET /profile controllers.UserProfileDatabase.getProfiles()
 
 GET /myprofile controllers.Application.getMyProfile()
 
-
+#add new user profile
+POST /saveuserprofile controllers.UserProfileDatabase.addUserProfile()
