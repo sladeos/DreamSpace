@@ -86,73 +86,66 @@ public class UserProfileDatabase extends Controller {
 
 
 
-	// public static Result addUserProfile() {
+	public static Result addUserProfile() {
 
-	// 	Connection conn = null;
-	// 	PreparedStatement preparedStatement = null;
-	// 	JsonNode json = request().body().asJson();
-
-
-
-	// 	String avatarIDstring = json.findPath("avatarID").textValue();
-	// 	//String username = json.findPath("username").textValue();
-	// 	String skypeID = json.findPath("skypeID").textValue();
-	// 	//String seatMapID = json.findPath("seatMap").textValue();
-	// 	String battlenetID = json.findPath("battlenetID").textValue();
-	// 	String steamID = json.findPath("steamID").textValue();
-	// 	String twitchID = json.findPath("twitchID").textValue();
-	// 	String uplayID = json.findPath("uplayID").textValue();
-	// 	String favouritegames = json.findPath("favouritegames").textValue();
-	// 	String userbio = json.findPath("about").textValue();
+		Connection conn = null;
+		PreparedStatement preparedStatement = null;
+		JsonNode json = request().body().asJson();
 
 
 
-	// 	String currentUser = session("connected");
-	// 	try {
+		//String avatarIDstring = json.findPath("avatarID").textValue();
+		String skypeID = json.findPath("skypeID").textValue();
+		String battlenetID = json.findPath("battlenetID").textValue();
+		String steamID = json.findPath("steamID").textValue();
+		String twitchID = json.findPath("twitchID").textValue();
+		String uplayID = json.findPath("uplayID").textValue();
+		String favouritegames = json.findPath("favouritegames").textValue();
+		String userbio = json.findPath("about").textValue();
 
-	// 		conn = DB.getConnection();
 
-	// 		int avatarID = Integer.parseInt(avatarIDstring);
-	// 		String insertIntoDatabase = "INSERT INTO UserProfile (favouritegames, userbio, skypeID, steamID, battlenetID, uplayID, twitchID, avatarID)";
-	// 		preparedStatement = conn.prepareStatement(insertIntoDatabase);
+		String currentUser = session("connected");
+		try {
+
+			conn = DB.getConnection();
+
+			//int avatarID = Integer.parseInt(avatarIDstring);
+			String insertIntoDatabase = "INSERT INTO UserProfile (favouritegames, userbio, skypeID, steamID, battlenetID, uplayID, twitchID) VALUES(?,?,?,?,?,?,?)";
+			
+			preparedStatement = conn.prepareStatement(insertIntoDatabase);
 
 
-	// 		preparedStatement.setString(6, favouritegames);
-	// 		preparedStatement.setString(7, userbio);
-	// 		preparedStatement.setString(8, skypeID);
-	// 		preparedStatement.setString(9, steamID);
-	// 		preparedStatement.setString(10, battlenetID);
-	// 		preparedStatement.setString(11, uplayID);
-	// 		preparedStatement.setString(12, twitchID);
-	// 		preparedStatement.setInt(13, avatarID);
+			preparedStatement.setString(1, favouritegames);
+			preparedStatement.setString(2, userbio);
+			preparedStatement.setString(3, skypeID);
+			preparedStatement.setString(4, steamID);
+			preparedStatement.setString(5, battlenetID);
+			preparedStatement.setString(6, uplayID);
+			preparedStatement.setString(7, twitchID);
+		//	preparedStatement.setInt(13, avatarID);
 
-	// 		preparedStatement.executeUpdate();
-	// 		return ok();
-	// 	} catch (com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException ice) {
-	// 		return badRequest(ice.toString());
-	// 	} catch (NumberFormatException nfe) {
-	// 		return badRequest(nfe.toString());
-	// 	} catch (SQLException se) {
-	// 		// Handle sql errors
-	// 		return internalServerError(se.toString());
-	// 	} catch (Exception e) {
-	// 		// Handle errors for Class.forName
-	// 		return internalServerError(e.toString());
-	// 	} finally {
-	// 		// finally block used to close resources
-	// 		// try {
-	// 		// if (preparedStatement != null)
-	// 		// conn.close();
-	// 		// } catch (SQLException se) {
-	// 		// } //do nothing
-	// 		try {
-	// 			if (conn != null)
-	// 				conn.close();
-	// 		} catch (SQLException se) {
-	// 			return internalServerError(se.toString());
-	// 		} // end finally try
-	// 	} // end try
-	// }
+			preparedStatement.executeUpdate();
+			return ok("Succesful Reply!");
+		} catch (com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException ice) {
+			return badRequest(ice.toString() + "HEYEYEY");
+		} 
+		catch (NumberFormatException nfe) {
+			return badRequest(nfe.toString() + "WOW");
+		} catch (SQLException se) {
+			// Handle sql errors
+			return internalServerError(se.toString());
+		} catch (Exception e) {
+			// Handle errors for Class.forName
+			return internalServerError(e.toString());
+		} finally {
+			try {
+				if (conn != null)
+					conn.close();
+			} catch (SQLException se) {
+				return internalServerError(se.toString());
+			} // end finally try
+		} // end try
+	}
 
 	// public static Result editUserProfile() {
 

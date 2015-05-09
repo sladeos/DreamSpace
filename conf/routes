@@ -64,4 +64,5 @@ GET  /showtournament/:id controllers.Application.showTournament(id: Integer)
 GET /tournament controllers.TournamentDatabase.getTournaments()
 
 
-
+#add new user profile
+POST /saveuserprofile controllers.UserProfileDatabase.addUserProfile()
