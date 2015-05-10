@@ -3,7 +3,6 @@
     text-shadow:0 0px 0 #111;
 }
 
-
 .ui-autocomplete {
     list-style-position: inside;
     padding: 0;
@@ -52,9 +51,12 @@ background : #FA7C04;
     background:#151515;
 }
     #adinfo{    
-        width: 100%;
-
+        width: 100%;    
+}
+    .ui-page{
+        background: url("../images/main.jpg");
     }
+    
     #grid{
         padding-left: 2%;
         padding-right: 2%;
@@ -83,6 +85,7 @@ background : #FA7C04;
         background: #FA7C04;
     }
 
+
 @media all and (max-width: 36em){
  
     .ui-content{
@@ -99,8 +102,8 @@ background : #FA7C04;
 
     }
 
-
 }
+
 
 @media all and (min-width: 50em){
     .page{
@@ -121,7 +124,6 @@ background : #FA7C04;
     .footer {
         margin:0 auto;
         width: 80%;
-
     } 
         #MEArenaContent{
         width: 500px;
@@ -190,6 +192,9 @@ background : #FA7C04;
         max-width: 150px;
 
     }
+
+    }
+
     /*Ta bort detta innehåll vid skapande av ny sida*/
     #img1{
         padding: 1em;

@@ -591,7 +591,7 @@ public class EArenaDatabase extends Controller {
     }
 
     rs.close();
-    return ok(myearenapage.render(adList));
+    return ok(MyEArenaPage.render(adList));
    } catch (com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException ice) {
     return badRequest(ice.toString());
    } catch (NumberFormatException nfe) {

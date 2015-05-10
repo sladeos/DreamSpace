@@ -1,0 +1,13 @@
+@import url(main.css);
+
+ 
+@media all and (max-width: 36em){
+    .ui-content{
+        background: #151515;
+    }
+    #tBracket{
+    	 width: 20%;
+
+    }
+
+}

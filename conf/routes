@@ -63,7 +63,7 @@ POST /edittournament controllers.TournamentDatabase.editTournament()
 GET  /showtournament/:id controllers.Application.showTournament(id: Integer)
 
 #Retrives list of currentuser's tournaments
-GET /tournament controllers.TournamentDatabase.getTournaments()
+GET /mainetournament controllers.TournamentDatabase.getTournaments()
 
 # Shows createAd webpage
 GET /createarenaad controllers.Application.createArenaAd()
@@ -84,3 +84,6 @@ GET /earenaad/:id controllers.Application.showIndividualAd(id: Integer)
 POST /postreply controllers.EArenaDatabase.addReply()
 
 POST /updateearenaad controllers.EArenaDatabase.updateEArenaAd()
+
+GET /myetournaments controllers.TournamentDatabase.getMyTournaments()
+
