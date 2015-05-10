@@ -11,12 +11,14 @@
    <body>
 
         <div data-role="page" data-theme="b" id = "main" class = "page"  >
-            @Templates.header()
+             <div data-role="header" class = "header">
+	       @Templates.header()
+	       </div>
             <div data-role="content" class = "content">
                 <div class = "wrap">
                     <h1 align="center">Your EArena Ad</h1>
                     
-                    <button id="share_button" data-icon="facebook-square" class = "myFace faceButton search" data-mini="true" >Share to Facebook</button>
+                    <button id="share_button" class = "myFace faceButton search" data-mini="true">Facebook Share</button>
                     
                     <button type='button' id='editearenaad' value='Edit EArenaAd' class = "submitReplay" data-icon="arrow-d">Edit EArenaAd</button>
                     <div id="editad" style="display: none;">
@@ -51,7 +53,7 @@
                   method: 'feed',
                   name: 'EArenaAd: eAd.arenaName',
                   link: document.URL,
-                  caption: "@eAd.admin" +" is looking for people to play @eAd,gameName" ,
+                  caption: "@eAd.admin" +" is looking for people to play @eAd.gameName" ,
                   description: "Information about EArenaAd: @eAd.information"
                 });
               });
