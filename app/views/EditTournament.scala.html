@@ -16,6 +16,7 @@
             </ul>
             <p>
             <h1 align="center">Edit your tournament</h1>
+
             <button id="share_button" class = "myFace faceButton search" data-mini="true">Facebook Share</button>
             <script type="text/javascript">
             $(document).ready(function() {
@@ -31,9 +32,11 @@
               });
             });
             </script>
+            
+            <div id = "bracketcontent"  data-scroll="true" style = "overflow:scroll">
             <div id="bracket"></div>
+             <div id='bracketForm' class = "tEdit">
 
-             <div id='bracketForm'>
                 <form name="bracketEdit" >
                 Name of your tournament: <input type="text" name="fname" id="fname">
                 <button data-role = "button" value="Save changes" id="save" class = "submitReplay">Save changes</button>
@@ -91,7 +94,6 @@
                        case "32":
                        amount = "16";
                            break;
-                       
                    }
                });
                
@@ -149,43 +151,33 @@
                /////////////////////////////////////////////////delete button /////////////////////          
                
                $("#delete").click(function() {
-               if(true){
-               var data = {"id":"@tournament.tournamentID"}
-               
-               $.ajax({
+           if (true) {
+             var data = {
+               "id": "@tournament.tournamentID"
+             }
+
+             $.ajax({
                url: "/deletetournament",
                type: 'POST',
-               contentType:'application/json',
-               data: JSON.stringify( data ),
-               dataType : 'html',
-               success: function(){
-               window.location.replace("/tournament");
+               contentType: 'application/json',
+               data: JSON.stringify(data),
+               dataType: 'html',
+               success: function() {
+                 window.location.replace("/tournament");
                }
-               });
-               }else{
-               
-               $("#warning").html("There are errors in your tournament! Fix them and try again.");
-               $("#warning").css('color', 'red');
-               $('#warning').prepend('<img id="redcross" src="@routes.Assets.at("images/redcross.png")" />')
-               $('#redcross').width(40);
-               $('#redcross').height(40);
-               
-               }
-               });
+             });
+           }
+           else {
 
-               $('#button1').click(function() {
-                    FB.getLoginStatus(function(response) {
-                        if (response.status === 'connected') {
-                       FB.logout(function(response) {
-               	        window.location='/logout';
-               	    });
-                        } else { 
-                            window.location='/logout';
-                        }
-                   });
-               });
-               
-               
+             $("#warning").html("There are errors in your tournament! Fix them and try again.");
+             $("#warning").css('color', 'red');
+             $('#warning').prepend('<img id="redcross" src="@routes.Assets.at("images/redcross.png")" />')
+             $('#redcross').width(40);
+             $('#redcross').height(40);
+
+           }
+         });
+
             </script>
          </div>
          @Templates.footer()

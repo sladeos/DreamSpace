@@ -85,7 +85,6 @@ background : #FA7C04;
         background: #FA7C04;
     }
 
-
 @media all and (max-width: 36em){
  
     .ui-content{
@@ -105,25 +104,26 @@ background : #FA7C04;
 }
 
 
-@media all and (min-width: 50em){
+@media all and (min-width: 60em){
     .page{
         background: url("../images/main.jpg");
+
     }
     .content{
-        padding: 5% 5%;
+        padding: 15px 15px;
         margin:0 auto;
-        width:70%;
+        width:900px;
         background: #151515;
 
     }
     .header{
         margin:0 auto;
-        width: 80%;
+        width: 930px;
     }
 
     .footer {
         margin:0 auto;
-        width: 80%;
+		width: 930px;
     } 
         #MEArenaContent{
         width: 500px;
@@ -193,6 +193,9 @@ background : #FA7C04;
 
     }
 
+    }
+        .tEdit{
+        width: 300px;
     }
 
     /*Ta bort detta innehåll vid skapande av ny sida*/
