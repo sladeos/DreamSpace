@@ -93,7 +93,7 @@ public class UserProfileDatabase extends Controller {
 		JsonNode json = request().body().asJson();
 
 
-
+		String username = session("connected");
 		//String avatarIDstring = json.findPath("avatarID").textValue();
 		String skypeID = json.findPath("skypeID").textValue();
 		String battlenetID = json.findPath("battlenetID").textValue();
@@ -103,25 +103,24 @@ public class UserProfileDatabase extends Controller {
 		String favouritegames = json.findPath("favouritegames").textValue();
 		String userbio = json.findPath("about").textValue();
 
-
-		String currentUser = session("connected");
+		
 		try {
 
 			conn = DB.getConnection();
 
 			//int avatarID = Integer.parseInt(avatarIDstring);
-			String insertIntoDatabase = "INSERT INTO UserProfile (favouritegames, userbio, skypeID, steamID, battlenetID, uplayID, twitchID) VALUES(?,?,?,?,?,?,?)";
+			String insertIntoDatabase = "INSERT INTO UserProfile (username, favouritegames, userbio, skypeID, steamID, battlenetID, uplayID, twitchID) VALUES(?,?,?,?,?,?,?,?)";
 			
 			preparedStatement = conn.prepareStatement(insertIntoDatabase);
 
-
-			preparedStatement.setString(1, favouritegames);
-			preparedStatement.setString(2, userbio);
-			preparedStatement.setString(3, skypeID);
-			preparedStatement.setString(4, steamID);
-			preparedStatement.setString(5, battlenetID);
-			preparedStatement.setString(6, uplayID);
-			preparedStatement.setString(7, twitchID);
+			preparedStatement.setString(1, username);
+			preparedStatement.setString(2, favouritegames);
+			preparedStatement.setString(3, userbio);
+			preparedStatement.setString(4, skypeID);
+			preparedStatement.setString(5, steamID);
+			preparedStatement.setString(6, battlenetID);
+			preparedStatement.setString(7, uplayID);
+			preparedStatement.setString(8, twitchID);
 		//	preparedStatement.setInt(13, avatarID);
 
 			preparedStatement.executeUpdate();
