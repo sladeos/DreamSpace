@@ -33,6 +33,7 @@
     .ui-page .ui-footer {
         background:#151515;
     }
+
 @media all and (max-width: 36em){
  
     .ui-content{
@@ -63,6 +64,9 @@
         margin:0 auto;
         width: 80%;
 
+    }
+        .tEdit{
+        width: 300px;
     }
 
     /*Ta bort detta innehåll vid skapande av ny sida*/

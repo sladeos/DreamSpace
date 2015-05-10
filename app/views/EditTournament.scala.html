@@ -20,8 +20,9 @@
             </ul>
             <p>
             <h1 align="center">Edit your tournament</h1>
+            <div id = "bracketcontent"  data-scroll="true" style = "overflow:scroll">
             <div id="bracket"></div>
-             <div id='bracketForm'>
+             <div id='bracketForm' class = "tEdit">
                 <form name="bracketEdit" >
                 Name of your tournament: <input type="text" name="fname" id="fname">
                 <input type="button" value="Save changes" id="save">
@@ -156,7 +157,7 @@
                     
                     
                     </script>
-				
+				</div>
         </div>
             @Templates.footer()
             @Templates.panelAndLogOut()
