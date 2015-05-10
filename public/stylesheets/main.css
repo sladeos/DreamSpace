@@ -43,25 +43,26 @@
 }
 
 
-@media all and (min-width: 50em){
+@media all and (min-width: 60em){
     .page{
-        background: url("../images/main.jpg");ß
+        background: url("../images/main.jpg");
+       
     }
     .content{
-        padding: 5% 5%;
+        padding: 15px 15px;
         margin:0 auto;
-        width:70%;
+        width:900px;
         background: #151515;
 
     }
     .header{
         margin:0 auto;
-        width: 80%;
+        width: 930px;
     }
 
     .footer {
         margin:0 auto;
-        width: 80%;
+        width: 930px;
 
     }
 
