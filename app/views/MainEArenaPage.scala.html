@@ -4,8 +4,6 @@
 	<head>
 	   <title>EArena</title>
 	   @Templates.head()
-<<<<<<< HEAD
-        <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/EArena.css")">
 	   @Templates.facebookHeadScript()
         <meta charset="UTF-8">
 	</head>
@@ -14,9 +12,9 @@
 	       @Templates.header()
             <div data-role="content" class = "content">   
                 <h1 align="center">EArena</h1>
-                
-                
-                <button id="share_button" >Share to Facebook</button>
+           
+                <button id="share_button" class = "myFace faceButton search" data-mini="true">Facebook Share</button>
+
             <script type="text/javascript">
             $(document).ready(function() {
               $('#share_button').click(function(e) {
@@ -31,19 +29,22 @@
               });
             });
             </script>
+            <scrip>
+                
+            </scrip>
             
                 
                 
-                <div id="search">
+                <div class ="search">
      	    <form data-ajax="false">
      	        <input type="search" name="search" id="search-basic" value="" />
      	            
-     	        <button id="showAdv" type="button">Show advanced search options</button>
+     	        <button id="showAdv" type="button"  data-icon="arrow-d" >Show advanced search options</button>
      	        <div id="advSearch" style="display: none;">
      	        <label>Search for: </label>
      	        
- 	              <div class="ui-grid-c ui-responsive">
-                    <div class="ui-block-a">
+ 	              <div class="ui-grid-c ui-responsive" >
+                    <div class="ui-block-a" >
                         <input type="text" name="game" placeholder="Game" id="game">
                     </div>
                     <div class="ui-block-b">
@@ -57,7 +58,7 @@
                     </div>
  	             </div>
  	            </div>
- 	            <button class="my-btn" type="submit">Search</button>
+ 	            <button class="my-btn" type="submit"  data-icon="search">Search</button>
  	            
  	    </form>
         </div>

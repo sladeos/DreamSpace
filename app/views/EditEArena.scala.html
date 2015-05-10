@@ -4,7 +4,7 @@
    <head>
       <title>Edit your EArena Ad</title>
       @Templates.head()
-      <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/EArena.css")">
+      
       @Templates.facebookHeadScript()
       <meta charset="UTF-8">
    </head>
@@ -13,12 +13,12 @@
         <div data-role="page" data-theme="b" id = "main" class = "page"  >
             @Templates.header()
             <div data-role="content" class = "content">
-                <div id = "wrap2">
+                <div class = "wrap">
                     <h1 align="center">Your EArena Ad</h1>
                     
-                    <button id="share_button" >Share to Facebook</button>
+                    <button id="share_button" data-icon="facebook-square" class = "myFace faceButton search" data-mini="true" >Share to Facebook</button>
                     
-                    <input type='button' id='editearenaad' value='Edit EArenaAd'>
+                    <button type='button' id='editearenaad' value='Edit EArenaAd' class = "submitReplay" data-icon="arrow-d">Edit EArenaAd</button>
                     <div id="editad" style="display: none;">
                         <div data-role="fieldcontain"class="ui-hide-label">
                             <label for="arenaName">Arena Ad Name:</label>
@@ -229,7 +229,7 @@
                });
             </script>
                 
-                <div id="wrap">
+                <div class = "wrap">
                     <div id="adinfo">
                         <article data-role="listview" data-inset="true" data-dividertheme="a"> 
                             <li><h2>Name of Ad: @eAd.arenaName</h2>
@@ -243,7 +243,7 @@
                         </article>
                         <label for="reply">Reply:</label>
                         <textarea placeholder="Post your reply here" name="reply" id="replyarea" rows="4" cols="50"></textarea>
-                        <input type="submit" id="postreply" value="Submit Reply" >
+                        <button type="submit" id="postreply" value="Submit Reply" class = "submitReplay" >Submit Reply </button>
                         <p id="warningreply"></p>
                     </div>
                     <div id="adreplies">
