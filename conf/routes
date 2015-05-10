@@ -41,15 +41,49 @@ GET /existfacebooklogin controllers.Application.facebookExistLogin()
 #Get to choosing username
 GET /chooseusername controllers.Application.chooseUsername()
 
+# Post to save created EArenaAd
+POST /savearenaad controllers.EArenaDatabase.addEArenaAd()
+
 #Get tournament page
 GET /createtournament controllers.Application.tournament()
 
+#Post to save tournament created
 POST /savetournament controllers.TournamentDatabase.addTournament()
 
+#Post to delete tournament
+POST /deletetournament controllers.TournamentDatabase.deleteTournament()
+
+#Post to delete arenaad
+POST /deleteearena controllers.EArenaDatabase.deleteArena()
+
+#Post to save edited tournament
 POST /edittournament controllers.TournamentDatabase.editTournament()
 
+#Gets specific tournament depending on the integer following /showtournament/
 GET  /showtournament/:id controllers.Application.showTournament(id: Integer)
 
-GET /tournament controllers.TournamentDatabase.getTournaments()
+#Retrives list of currentuser's tournaments
+GET /mainetournament controllers.TournamentDatabase.getTournaments()
+
+# Shows createAd webpage
+GET /createarenaad controllers.Application.createArenaAd()
+
+# Post to save created EArenaAd
+POST /savearenaad controllers.EArenaDatabase.addEArenaAd()
+
+#Shows Main EArena Page with all/newest Ads
+GET /mainearena controllers.Application.mainearena(search: String ?= "", game: String ?= "", username: String ?= "", players: String ?= "", minutes: String ?= "")
+
+#Shows User's EArena Ads
+GET /myearena controllers.EArenaDatabase.getMyEArenaAds()
+
+#Shows Individual EArenaAd and determines if the Currentuser is an admin to the ad or not, returns page depending on answer
+GET /earenaad/:id controllers.Application.showIndividualAd(id: Integer)
+
+#Posts reply to an individual EArena Ad. Ajax call.
+POST /postreply controllers.EArenaDatabase.addReply()
+
+POST /updateearenaad controllers.EArenaDatabase.updateEArenaAd()
 
 GET /myetournaments controllers.TournamentDatabase.getMyTournaments()
+

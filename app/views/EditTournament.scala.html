@@ -1,9 +1,7 @@
 @(tournament: Tournament)
-
 <!DOCTYPE html>
-
 <html>
-    <head>
+   <head>
       @Templates.head()
         <script src="@routes.Assets.at("javascripts/jquery.bracket.min.js")" type="text/javascript"></script>
 		<link rel="stylesheet"  href="@routes.Assets.at("stylesheets/jquery.bracket.min.css")">
@@ -11,158 +9,179 @@
     </head>
     <body>
         <div data-role="page" data-theme="b" class="page">
-
             <div data-role="header" class = "header">
                 @Templates.header()
             </div>
-        
         <div data-role="content" class = "content">   
             </ul>
             <p>
             <h1 align="center">Edit your tournament</h1>
+
+            <button id="share_button" class = "myFace faceButton search" data-mini="true">Facebook Share</button>
+            <script type="text/javascript">
+            $(document).ready(function() {
+              $('#share_button').click(function(e) {
+                e.preventDefault();
+                FB.ui({
+                  method: 'feed',
+                  name: 'Tournament: @tournament.tournamentname',
+                  link: document.URL,
+                  caption: "@tournament.tournamentcreator" + "'s " + "tournament",
+                  description: "Size of Tournament: @tournament.participant_count"
+                });
+              });
+            });
+            </script>
+            
             <div id = "bracketcontent"  data-scroll="true" style = "overflow:scroll">
             <div id="bracket"></div>
              <div id='bracketForm' class = "tEdit">
+
                 <form name="bracketEdit" >
                 Name of your tournament: <input type="text" name="fname" id="fname">
-                <input type="button" value="Save changes" id="save">
+                <button data-role = "button" value="Save changes" id="save" class = "submitReplay">Save changes</button>
+                
+                <button data-role = "button" value="Delete tournament" id="delete" class = "submitReplay">Delete tournament</button>
                     <p id="warning"></p>
                 
             </form>
-            
             </div>
-
-                    <script>
-                    var data;
-                    var a = @Html(tournament.tournamentdata);
-                    var tid = @tournament.tournamentID;
-                    var name = "@tournament.tournamentname";
-                    var tamount = @tournament.participant_count;
-                    var amount = tamount.toString(); 
-                    var container = $('#bracket');
-                    var prevAmt;
-                    
-                    
-                    $(document).on("pageload",function(){
-                    
-                     
-                    });
-                    
-                    $(document).on('click','.increment',function(){
-                        
-                        switch(amount) {
-                            case "4":
-                            amount = "8"; 
-                                break;
-                            case "8":
-                            amount = "16";
-                                break;
-                            case "16":
-                            amount = "32";
-                            $('.increment').remove();
-                                break;
-                            case "32":
-                                break;
-                            
-                        }
-                        
-                    });
-                    
-                   $(document).on('click','.decrement',function(){
-                        
-                        switch(amount) {
-                            case "4":
-                                break;
-                            case "8":
-                             $('.decrement').remove();
-                            amount = "4";
-                                break;
-                            case "16":
-                            amount = "8";
-                                break;
-                            case "32":
-                            amount = "16";
-                                break;
-                            
-                        }
-                    });
-                    
-                    $('#bracket').click(function() {
-                        
-                        $('.doubleElimination').remove();
-                        
+            <script>
+               var data;
+               var a = @Html(tournament.tournamentdata);
+               var tid = @tournament.tournamentID;
+               var name = "@tournament.tournamentname";
+               var tamount = @tournament.participant_count;
+               var amount = tamount.toString(); 
+               var container = $('#bracket');
+               var prevAmt;
+               
+               
+               $(document).on("pageload",function(){                               
+               });
+               
+               $(document).on('click','.increment',function(){
+                   
+                   switch(amount) {
+                       case "4":
+                       amount = "8"; 
+                           break;
+                       case "8":
+                       amount = "16";
+                           break;
+                       case "16":
+                       amount = "32";
+                       $('.increment').remove();
+                           break;
+                       case "32":
+                           break;                       
+                   }
+                   
+               });
+               
+               $(document).on('click','.decrement',function(){
+                   
+                   switch(amount) {
+                       case "4":
+                           break;
+                       case "8":
+                        $('.decrement').remove();
+                       amount = "4";
+                           break;
+                       case "16":
+                       amount = "8";
+                           break;
+                       case "32":
+                       amount = "16";
+                           break;
+                   }
+               });
+               
+               $('#bracket').click(function() {
+                   
+                   $('.doubleElimination').remove();                  
+               });
+               
+               $(function() {
+                   
+                   $("#fname").val(name);
+                   $("#amount").val(amount);
+                   $("#amount").selectmenu('refresh');
+                   prevAmt = $('#amount').val();
+                   
+                   container.bracket({
+                   init: a,
+                   save: saveFn
+                   
+                   });
+                   
+                   if (amount == "4"){
+                       $('.decrement').remove();
+                   }
+                   
+                   $('.doubleElimination').remove();
+                
+               });
+               
+               function saveFn(data) {
+               }
+               
+               $("#save").click(function() {
                        
-                        
-                    });
-                    
-                    $(function() {
-                        
-                        $("#fname").val(name);
-                        $("#amount").val(amount);
-                        $("#amount").selectmenu('refresh');
-                        prevAmt = $('#amount').val();
-                        
-                        container.bracket({
-                        init: a,
-                        save: saveFn
-                        
-                        });
-                        
-                        if (amount == "4"){
-                            $('.decrement').remove();
-                        }
-                        
-                        $('.doubleElimination').remove();
-                     
-                    });
-                    
-                    function saveFn(data) {
-                    }
-                    
-                    $("#save").click(function() {
-                            
-                        name = $("#fname").val();
-                        amount;
-                        data = container.bracket('data');
-                        var teams = data.teams;
-                        var results = data.results;
-                        var id = tid.toString();
-                      
-                        
-                        $.ajax({
-                                url: "/edittournament",
-                                type: 'POST',
-                                contentType:'application/json',
-                                data: JSON.stringify({ id: id, name: name, amount: amount, teams: teams, results: results }),
-                                dataType : 'html',
-                                success: function(){
-                                    window.location.replace("/tournament");
-                                }
-                        });
-                  
-                    });
-                    
-                    
-                    $('#button1').click(function() {
-                         FB.getLoginStatus(function(response) {
-                             if (response.status === 'connected') {
-                            FB.logout(function(response) {
-                    	        window.location='/logout';
-                    	    });
-                             } else { 
-                                 window.location='/logout';
-                             }
-                        });
-                    });
-                    
-                    
-                    </script>
-				</div>
-        </div>
-            @Templates.footer()
-            @Templates.panelAndLogOut()
+                   name = $("#fname").val();
+                   amount;
+                   data = container.bracket('data');
+                   var teams = data.teams;
+                   var results = data.results;
+                   var id = tid.toString();
+                 
+                   
+                   $.ajax({
+                           url: "/edittournament",
+                           type: 'POST',
+                           contentType:'application/json',
+                           data: JSON.stringify({ id: id, name: name, amount: amount, teams: teams, results: results }),
+                           dataType : 'html',
+                           success: function(){
+                               window.location.replace("/tournament");
+                           }
+                   });
+               
+               });
+               /////////////////////////////////////////////////delete button /////////////////////          
+               
+               $("#delete").click(function() {
+           if (true) {
+             var data = {
+               "id": "@tournament.tournamentID"
+             }
 
-        </div>
+             $.ajax({
+               url: "/deletetournament",
+               type: 'POST',
+               contentType: 'application/json',
+               data: JSON.stringify(data),
+               dataType: 'html',
+               success: function() {
+                 window.location.replace("/tournament");
+               }
+             });
+           }
+           else {
 
-    </body>
+             $("#warning").html("There are errors in your tournament! Fix them and try again.");
+             $("#warning").css('color', 'red');
+             $('#warning').prepend('<img id="redcross" src="@routes.Assets.at("images/redcross.png")" />')
+             $('#redcross').width(40);
+             $('#redcross').height(40);
+
+           }
+         });
+
+            </script>
+         </div>
+         @Templates.footer()
+         @Templates.panelAndLogOut()
+      </div>
+   </body>
 </html>
