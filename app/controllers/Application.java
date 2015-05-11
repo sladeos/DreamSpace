@@ -4,6 +4,7 @@ import models.*;
 import play.*;
 import play.mvc.*;
 
+import java.io.ByteArrayInputStream;
 import java.io.UnsupportedEncodingException;
 import java.sql.*;
 
@@ -19,6 +20,8 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.io.IOException;
 import java.security.SecureRandom;
+
+import javax.persistence.Entity;
 
 import play.libs.Json;
 
@@ -142,5 +145,29 @@ public class Application extends Controller {
 					.render("Welcome, login to explore the website"));
 		}
 	}
+	
+public static Result newPicture(){
+	return ok(NewPicturePage.render());
+}
+
+public static Result getImage(byte[] pic) {
+    ByteArrayInputStream input = null;
+
+    if (entity.getImage() != null) {
+        input = new ByteArrayInputStream(entity.getImage());
+    } else {
+        try {
+            byte[] byteArray;
+            File file = Play.getFile("/public/images/no_photo.jpg", Play.current());
+            byteArray = IOUtils.toByteArray(new FileInputStream(file));
+            input = new ByteArrayInputStream(byteArray);
+        } catch (Exception e) {
+
+        }
+    }
+
+    return ok(input).as("image/jpeg");
+}
+
 
 }

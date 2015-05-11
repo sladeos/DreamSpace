@@ -1,0 +1,35 @@
+
+
+<!DOCTYPE html>
+
+<html>
+    <head>
+        @Templates.headMainTournamentPage()
+
+        @Templates.facebookHeadScript()
+    </head>
+    <body>
+        <div data-role="page" data-theme="b" class="page">   
+            <div data-role="header" class = "header">
+                @Templates.header()
+            </div>
+            <div data-role="content" class = "content" >
+                    <h1 align="center">New Photo</h1>
+                    
+                    <form id ="newpicture" action="@routes.PictureDatabase.savePicture()" method ="post" data-ajax="false" enctype="multipart/form-data">
+                    <input name="picture" type="file" accept="image/*;capture=camera">
+                    <button class = "my-btn"  type="submit" value="Save Picture" >Save Picture </button>
+    </form>
+
+
+<script>
+
+</script>
+                </div>
+            @Templates.footer()
+            @Templates.panelAndLogOut()
+            </div>
+
+
+    </body>
+</html>
