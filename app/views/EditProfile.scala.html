@@ -136,7 +136,7 @@
           
 
           $.ajax({
-                url: "/saveuserprofile",
+                url: "/edituserprofile",
                 type: 'POST',
                 contentType:'application/json',
                 data: JSON.stringify({skypeID: $('#skypeID').val(), battlenetID: $('#battlenetID').val(), steamID: $('#steamID').val(), twitchID: $('#twitchID').val(), uplayID: $('#uplayID').val(), favouritegames: $('#favouritegames').val(), about: $('#about').val()}),
