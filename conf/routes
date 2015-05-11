@@ -87,3 +87,8 @@ POST /updateearenaad controllers.EArenaDatabase.updateEArenaAd()
 
 GET /myetournaments controllers.TournamentDatabase.getMyTournaments()
 
+GET /newpicture controllers.Application.newPicture()
+
+POST /savepicture controllers.PictureDatabase.savePicture()
+
+GET /pictures controllers.PictureDatabase.getPictures()
