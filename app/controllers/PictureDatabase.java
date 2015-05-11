@@ -9,6 +9,7 @@ import play.mvc.Http.MultipartFormData.FilePart;
 import java.awt.Choice;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -18,6 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.ImageIcon;
+import javax.imageio.ImageIO;
 
 import views.html.*;
 import play.data.Form;
@@ -34,20 +36,26 @@ public class PictureDatabase extends Controller{
 		Connection conn = null;
 		PreparedStatement preparedStatement = null;
 		String currentuser = session("connected");
+		BufferedImage img = null;
 		try {
 			conn = DB.getConnection();
 			
 			MultipartFormData body = request().body().asMultipartFormData();
-			  FilePart picture = body.getFile("picture");
+			FilePart picture = body.getFile("picture");
+			
 			  if (picture != null) {
 			    
 			    File file = picture.getFile();
+                img = ImageIO.read(file);
+               
 			    InputStream inputStream = new FileInputStream(file);
-			    String sql = "INSERT INTO Picture (creator, image) VALUES(?,?)";
-			    preparedStatement = conn.prepareStatement(sql);
-			    preparedStatement.setString(1, currentuser);
-			    preparedStatement.setBlob(2, inputStream);
-			    preparedStatement.executeUpdate();
+			    String suffix = picture.getContentType().substring(picture.getContentType().lastIndexOf("/") + 1);
+                File path = new File("public\\users\\"+ currentuser+ "\\uploadedimages\\" + file.getName() + "." + suffix);
+	                if (!path.exists()) {
+                    path.mkdirs();
+	                }
+			    
+			    ImageIO.write(img, suffix, path);
 			    
 			    return ok();
 			    
@@ -56,8 +64,6 @@ public class PictureDatabase extends Controller{
 				 return ok("IMAGE WAS EMPTY");
 			  }
 
-		} catch (SQLException se) {
-			return ok("null" + se.toString());
 		} catch (Exception e) {
 			// Handle errors for Class.forName
 			return ok("null" + e.toString());

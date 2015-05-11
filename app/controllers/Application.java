@@ -6,6 +6,7 @@ import play.mvc.*;
 
 import java.io.ByteArrayInputStream;
 import java.io.UnsupportedEncodingException;
+
 import java.sql.*;
 
 import views.html.*;
@@ -146,28 +147,8 @@ public class Application extends Controller {
 		}
 	}
 	
-public static Result newPicture(){
-	return ok(NewPicturePage.render());
-}
-
-public static Result getImage(byte[] pic) {
-    ByteArrayInputStream input = null;
-
-    if (entity.getImage() != null) {
-        input = new ByteArrayInputStream(entity.getImage());
-    } else {
-        try {
-            byte[] byteArray;
-            File file = Play.getFile("/public/images/no_photo.jpg", Play.current());
-            byteArray = IOUtils.toByteArray(new FileInputStream(file));
-            input = new ByteArrayInputStream(byteArray);
-        } catch (Exception e) {
-
-        }
+    public static Result newPicture(){
+    	return ok(NewPicturePage.render());
     }
-
-    return ok(input).as("image/jpeg");
-}
-
 
 }
