@@ -40,8 +40,12 @@ public class PictureDatabase extends Controller{
 		try {
 			conn = DB.getConnection();
 			
+			String sql = "INSERT INTO Picture (creator, path) VALUES(?,?)";
+			preparedStatement = conn.prepareStatement(sql);
+			
 			MultipartFormData body = request().body().asMultipartFormData();
 			FilePart picture = body.getFile("picture");
+			
 			
 			  if (picture != null) {
 			    
@@ -50,14 +54,19 @@ public class PictureDatabase extends Controller{
                
 			    InputStream inputStream = new FileInputStream(file);
 			    String suffix = picture.getContentType().substring(picture.getContentType().lastIndexOf("/") + 1);
+			    
                 File path = new File("public\\users\\"+ currentuser+ "\\uploadedimages\\" + file.getName() + "." + suffix);
 	                if (!path.exists()) {
                     path.mkdirs();
 	                }
+	                
+	                preparedStatement.setString(1, currentuser);
+	                preparedStatement.setString(2, path.toString());
+	                preparedStatement.executeUpdate();
 			    
 			    ImageIO.write(img, suffix, path);
 			    
-			    return ok();
+			    return redirect(routes.PictureDatabase.getPictures());
 			    
 			  }else{
 				  
@@ -96,15 +105,12 @@ public class PictureDatabase extends Controller{
 				String insertIntoDatabase = "SELECT * FROM Picture";
 				preparedStatement = conn.prepareStatement(insertIntoDatabase);
 				ResultSet rs = preparedStatement.executeQuery();
-				//ByteArrayInputStream input = new ByteArrayInputStream(pic);
-				
-				byte[] img = null;
+
 				while (rs.next()) {
 					Picture p = new Picture();
 					p.creator = rs.getString("creator");
-					p.image = rs.getBlob("image");
-					p.pic = rs.getBytes("image");
-					
+					p.path = rs.getString("path").substring(7);
+					p.pictureID = rs.getInt("pictureID");
 					pList.add(p);
 				}
 

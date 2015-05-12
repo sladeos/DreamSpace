@@ -13,13 +13,12 @@ import play.db.ebean.Model;
 public class Picture extends Model	{
 	
 
-	public java.sql.Blob image;
 	@Id
 	public int pictureID;
 	
 	public String creator;
 	
-	public byte[] pic;
+	public String path;
 	
 	
 

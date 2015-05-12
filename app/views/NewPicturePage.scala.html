@@ -4,8 +4,8 @@
 
 <html>
     <head>
-        @Templates.headMainTournamentPage()
-
+        @Templates.head()
+  @Templates.loadimage()
         @Templates.facebookHeadScript()
     </head>
     <body>
@@ -17,13 +17,23 @@
                     <h1 align="center">New Photo</h1>
                     
                     <form id ="newpicture" action="@routes.PictureDatabase.savePicture()" method ="post" data-ajax="false" enctype="multipart/form-data">
-                    <input name="picture" type="file" accept="image/*;capture=camera">
+                    <input id="picfield" name="picture" type="file" accept="image/*;capture=camera">
                     <button class = "my-btn"  type="submit" value="Save Picture" >Save Picture </button>
     </form>
-
-
-<script>
-
+    <div id="imageshow"></div>
+    <script type="text/javascript">
+    
+    document.getElementById('picfield').onchange = function (e) {
+    	    loadImage(
+    	        e.target.files[0],
+    	        function (img) {
+    	            document.body.appendChild(img);
+    	            $('imageshow').html(img);
+    	           alert(img)
+    	        },
+    	        {maxWidth: 600} // Options
+    	    );
+    	};
 </script>
                 </div>
             @Templates.footer()
