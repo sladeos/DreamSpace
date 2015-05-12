@@ -4,46 +4,52 @@
 
 <html>
     <head>
-        @Templates.head()
-        <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/loginSignUp.css")">
+         @Templates.loginSignUpHead()
+       
     </head>
     <body>
         <div data-role="page" id = "signup" data-theme="b" class = "page">
-           <div data-role="header" class = "header"> 
-           @Templates.loginSignUpHeader() 
-            </div>
-            <div data-role = "content" class = "content">
-            
-                <h1>Create new user</h1>
-                <form id ="signupform" action="@routes.UserDatabase.addUser()" method ="post" data-ajax="false">
+            <div data-role = "content" class = "loginContent">
+                <div class = "loginBox">
+                    <h1 class = "headerPic"><img src="@routes.Assets.at("images/e3.png")" class = "fullscreen"></h1> 
+                    <h1 class =  "headerPic">Create new user</h1>
+                    <form id ="signupform" action="@routes.UserDatabase.addUser()" method ="post" data-ajax="false">
                 
-                    <div data-role="fieldcontain"class="ui-hide-label">
-                        <label for="username">Username:</label>
-                        <input type="text" name="username" id="username" value="" placeholder="Username"/>
+                        <div data-role="fieldcontain"class="ui-hide-label">
+                            <label for="username">Username:</label>
+                            <input type="text" name="username" id="username" value="" placeholder="Username"/>
+                        </div>
+                        
+                        <div data-role="fieldcontain" class="ui-hide-label">
+                            <label for="Email" >Email:</label>
+                            <input type="email" name="email" id="email" value="" placeholder="Email"/>
+                        </div>
+                        
+                        <div data-role="fieldcontain" class="ui-hide-label">
+                            <label for="Password" >Password:</label>
+                            <input type="password" name="password" id="password" value="" placeholder="Password"/>
+                        </div>
+                        
+                        <div data-role="fieldcontain" class="ui-hide-label">
+                            <label for="Confirm password" >Confirm password:</label>
+                            <input type="password" name="confirmPass" id="confirmPass" value="" placeholder="Confirm password"/>
+                        </div>
+                           <p id="warning">@message</p>
+                       <div style="text-align: center">
+                         <button class=" ui-btn ui-corner-all ui-btn-inline"  type="submit" value="Create account" onclick="return validate()" >Create account </button>
+                         </div>
+                    </form>
+                    <div style="text-align: center">
+                        <button data-role = "button" onclick="window.location.href='/login'" class=" ui-btn ui-icon-delete ui-btn-icon-right ui-btn  ui-corner-all ui-btn-inline  goBackButton ui-mini">Cancel</button>
                     </div>
-                    
-                    <div data-role="fieldcontain" class="ui-hide-label">
-                        <label for="Email" >Email:</label>
-                        <input type="email" name="email" id="email" value="" placeholder="Email"/>
-                    </div>
-                    
-                    <div data-role="fieldcontain" class="ui-hide-label">
-                        <label for="Password" >Password:</label>
-                        <input type="password" name="password" id="password" value="" placeholder="Password"/>
-                    </div>
-                    
-                    <div data-role="fieldcontain" class="ui-hide-label">
-                        <label for="Confirm password" >Confirm password:</label>
-                        <input type="password" name="confirmPass" id="confirmPass" value="" placeholder="Confirm password"/>
-                    </div>
-           
-                     <button class = "my-btn"  type="submit" value="Create account" onclick="return validate()">Create account </button>
+            </div> 
+                <script>
+                    $('#username').textinput({ theme: "a" });
+                    $('#email').textinput({ theme: "a" });
+                    $('#password').textinput({ theme: "a" });
+                    $('#confirmPass').textinput({ theme: "a" });
+                </script>
 
-                </form>
-                        <button onclick="window.location.href='/login'">Return to login</button>
-                <p id="warning">@message</p>
- 
-                
               <script type="text/javascript">
              
              var usernameOkay = true;
@@ -171,7 +177,6 @@
             }
             </script>
                 </div>
-            @Templates.loginSignUpFooter()
         </div>
     </body>
 </html>
