@@ -73,10 +73,11 @@
                         @for(eads <- eads) {
                             <li  data-role = "list-divider" ></li>
                             <li><a rel="external"  href="/earenaad/@eads.arenaID" style = "background: #373737" >
-                            <h2>@{"Name of ad: " + eads.arenaName}</h2>
-                            <p>@{" Name of host: " + eads.admin}</p>
-                            <p>@{" Name of game: " + eads.gameName }</p>
-                            <p>@{" Amount of players required: " + eads.playersRequired}</p>
+                            <h2>@{" " + eads.arenaName}</h2>
+                            <p>@{" Host: " + eads.admin}</p>
+                            <p>@{" Game: " + eads.gameName }</p>
+                            <p>@{" Created: " + eads.createdDate }</p>
+                            <p>@{" Players required: " + eads.playersRequired}</p>
                             <p>Information:</p><textarea disabled name="textarea" id="text" style = "overflow:auto;resize:none" >@{eads.information}</textarea>
                             <br>
                             </a>

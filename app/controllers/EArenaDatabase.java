@@ -126,7 +126,7 @@ public class EArenaDatabase extends Controller {
 		        
 		        conn = DB.getConnection();
                 search = "%" + search + "%";
-				String selectAdvSearch = "SELECT * FROM EArena WHERE arenaname LIKE ? OR admin LIKE ? OR arenainformation LIKE ? OR gamename LIKE ? OR playersrequired LIKE ?";
+				String selectAdvSearch = "SELECT * FROM EArena WHERE arenaname LIKE ? OR admin LIKE ? OR arenainformation LIKE ? OR gamename LIKE ? OR playersrequired LIKE ? ORDER BY created_date DESC";
 				
 				preparedStatement = conn.prepareStatement(selectAdvSearch);
 				preparedStatement.setString(1, search);
@@ -145,6 +145,7 @@ public class EArenaDatabase extends Controller {
 					a.gameName = rs.getString("gamename");
 					a.playersRequired = rs.getInt("playersrequired");
 					a.admin = rs.getString("admin");
+					a.createdDate = rs.getString("created_date");
 					adList.add(a);
 				}
 				rs.close();
@@ -169,7 +170,7 @@ public class EArenaDatabase extends Controller {
 				selectAdvSearch += generateSQL(username, "admin");
 				selectAdvSearch += generateSQL(players, "playersrequired");
 				selectAdvSearch += generateSQL(minutes, "created_date");
-				
+				selectAdvSearch += " ORDER BY created_date DESC";
 				
 				preparedStatement = conn.prepareStatement(selectAdvSearch);
 					
@@ -200,7 +201,7 @@ public class EArenaDatabase extends Controller {
 				counter++;
 				} 
 				
-				if (selectAdvSearch.contains("created_date")){
+				if (selectAdvSearch.contains("created_date >=")){
 				preparedStatement.setString(counter, minutes);
 				counter++;
 				} 
@@ -214,6 +215,7 @@ public class EArenaDatabase extends Controller {
 					a.gameName = rs.getString("gamename");
 					a.playersRequired = rs.getInt("playersrequired");
 					a.admin = rs.getString("admin");
+					a.createdDate = rs.getString("created_date");
 					adList.add(a);
 				}
 				
@@ -224,7 +226,7 @@ public class EArenaDatabase extends Controller {
                 
 				conn = DB.getConnection();
             
-				String selectAdminAds = "SELECT * FROM EArena";
+				String selectAdminAds = "SELECT * FROM EArena ORDER BY created_date DESC";
 				
 				preparedStatement = conn.prepareStatement(selectAdminAds);
 				// preparedStatement.setString(1, currentUser);
@@ -238,6 +240,7 @@ public class EArenaDatabase extends Controller {
 					a.gameName = rs.getString("gamename");
 					a.playersRequired = rs.getInt("playersrequired");
 					a.admin = rs.getString("admin");
+					a.createdDate = rs.getString("created_date");
 					adList.add(a);
 				}
 				
