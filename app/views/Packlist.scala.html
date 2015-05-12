@@ -4,37 +4,98 @@
 
 <html>
     <head>
- 
-             @Templates.head()
-             @Templates.facebookHeadScript()
-    </head>
-    <body>
-         
+        @Templates.head()
+        <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/userprofile.css")">
+        <script src="@routes.Assets.at("javascripts/jquery.bracket.min.js")" type="text/javascript"></script>
+        <link rel="stylesheet"  href="@routes.Assets.at("stylesheets/jquery.bracket.min.css")">
+       @Templates.facebookHeadScript()
 
+      </head>
 
-        <div data-role="page" data-theme="b" class="page">   
-
-                
+    <body>         
+        <div data-role="page" data-theme="b" class = "page"  >   
+            <div data-role="header" class = "header">
+                @Templates.header()
+            </div>
             
-        <div data-role="header" class = "header">
-            @message
-            @Templates.header()
-        </div>
-        <div data-role="content" class = "content">   
-            </ul>
-            <p>
-            <h1 align="center">Testar</h1>
+            <div data-role="content" class = "content">
             
+                <h1 align="center">My personal packlist</h1>
+                <img src="@routes.Assets.at("images/packlist.jpg")"> 
+                <p>
+                Here is your packlist and checklist for DreamHack, ideal for you who are first time visitors but also for you who have been at DreamHack before, it is easy to forget something important! Do not forget to read the rules of the festival, where you’ll also find useful tips and regulations, please note the information regarding yours, and all other visitors’ safety and comfort.
+                </p>
+                <p>
+                Tip!
+                Always take your valuables and smaller devices with you when you leave your seat or ask your friends and neighbours to watch your belongings. Secure the screen, computer and other valuable hardware with cables and computer security lock. Never leave your mobile phone and wallet on the table. The occasion makes the thief!
+                </p>
 
-            Packlista test
-            </p>
+                <label><input type="checkbox" name="checkbox-0">Personal computer with all cables</label>
+                <label><input type="checkbox" name="checkbox-0">Powerstrip so you can connect all your stuff</label>
+                <label><input type="checkbox" name="checkbox-0">Screen and associated cables</label>
+                <label><input type="checkbox" name="checkbox-0">Keyboard, mouse and mouse pad</label>
+                <label><input type="checkbox" name="checkbox-0">Headset or headphones</label>
+                <label><input type="checkbox" name="checkbox-0">Network cable, about 10-15 meters</label>
+                <label><input type="checkbox" name="checkbox-0">Screwdriver, for quick fixes and upgrades to your computer</label>
+                <label><input type="checkbox" name="checkbox-0">Cable ties, secure your cables and keep all things tidy</label>
+                <label><input type="checkbox" name="checkbox-0">Duct Tape. Solves everything and a little more</label>
+                <label><input type="checkbox" name="checkbox-0">Game console & controller. Make sure it can be plugged in to your screen, or select portable options.</label>
+                <label><input type="checkbox" name="checkbox-0">Mobile phone and charger.</label>
+                <label><input type="checkbox" name="checkbox-0">Digital camera and camcorder. Send photos to your blog and videos on Youtube, a must!</label>
+                <label><input type="checkbox" name="checkbox-0">Flashlight, find your stuff in the dark.</label>
+                <label><input type="checkbox" name="checkbox-0">Your own office chair if you want to sit really comfortable. DH provides simple chairs.</label>
+                <label><input type="checkbox" name="checkbox-0">Computer security lock, cables and padlock. Secure your hardware!</label>
+                <h1>Software</h1>
+                <label><input type="checkbox" name="checkbox-0">Installation CD / DVD / HD / USB for your operating system</label>
+                <label><input type="checkbox" name="checkbox-0">USB / CD / DVD with drivers, if you need to do a reinstallation.</label>
+                <label><input type="checkbox" name="checkbox-0">Games and Software</label>
+                <label><input type="checkbox" name="checkbox-0">Anti-virus software, be sure to have your security software and your operating system updated before the festival.</label>
+                <h1>Clothing and sleeping accessories</h1>
+                <label><input type="checkbox" name="checkbox-0">Comfortable clothes and shoes</label>
+                <label><input type="checkbox" name="checkbox-0">Swimwear, visit the nearby water park!</label>
+                <label><input type="checkbox" name="checkbox-0">Bed sheets and towels</label>
+                <label><input type="checkbox" name="checkbox-0">Sleeping bag or blanket</label>
+                <label><input type="checkbox" name="checkbox-0">Sleeping pad or air mattress</label>
+                <label><input type="checkbox" name="checkbox-0">Pillows</label>
+                <h1>Hygiende & health</h1>
+                <label><input type="checkbox" name="checkbox-0">Toothbrush and toothpaste</label>
+                <label><input type="checkbox" name="checkbox-0">Shower Soap</label>
+                <label><input type="checkbox" name="checkbox-0">Hand Cream</label>
+                <label><input type="checkbox" name="checkbox-0">Shampoo</label>
+                <label><input type="checkbox" name="checkbox-0">Deodorant</label>
+                <label><input type="checkbox" name="checkbox-0">Headache Tablets</label>
+                <label><input type="checkbox" name="checkbox-0">Earplugs</label>
+                <label><input type="checkbox" name="checkbox-0">Any medications, be sure to inform the crew if you suffer from any disease or allergies</label>
+
+                <div Style="float:right"><input type="button" value="Save" id="save"  data-mini="true"></div>
+              </form>
+     
+    <script>
+        $("#save").click(function() {
+          
+
+          $.ajax({
+                url: "/editpacklist",
+                type: 'POST',
+                contentType:'application/json',
+                data: JSON.stringify({PersonalComputer: $('#PersonalComputer').val(), Powerstrip: $('#Powerstrip').val()}),
+                dataType : 'html',
+                success: function(){
+                    window.location.replace("/packlist");
+                }
+          });
+        });
+      </script>
 
 
-        </div>
+                  
+            </div>
+
             @Templates.footer()
             @Templates.panelAndLogOut()
 
         </div>
 
     </body>
+
 </html>

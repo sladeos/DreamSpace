@@ -63,9 +63,11 @@ GET  /showtournament/:id controllers.Application.showTournament(id: Integer)
 
 GET /tournament controllers.TournamentDatabase.getTournaments()
 
-
 #add new user profile
 POST /saveuserprofile controllers.UserProfileDatabase.addUserProfile()
 
 #edit user profile
 POST /edituserprofile controllers.UserProfileDatabase.editUserProfile()
+
+#edit Packlist
+POST /editpacklist controllers.PacklistDatabase.editPacklist()
