@@ -22,18 +22,41 @@
     </form>
     <div id="imageshow"></div>
     <script type="text/javascript">
+    var orientationt = null;
     
-    document.getElementById('picfield').onchange = function (e) {
-    	    loadImage(
-    	        e.target.files[0],
-    	        function (img) {
-    	            document.body.appendChild(img);
-    	            $('imageshow').html(img);
-    	           alert(img)
-    	        },
-    	        {maxWidth: 600} // Options
-    	    );
-    	};
+    function exifShit(e) {
+        var file = e.target.files[0];
+        loadImage.parseMetaData(file, function(data) {
+          if (data.exif) {
+            orientationt = data.exif.get('Orientation');
+            alert(orientationt + "EXIF SHIT")
+          }
+        });
+
+      }
+    
+
+    document.getElementById('picfield').onchange = function(e) {
+      exifShit(e)
+      
+      var loadingImage = loadImage(
+        e.target.files[0],
+    		 
+        function(img) {
+
+          document.getElementById("imageshow").appendChild(img);
+          alert(orientationt + " IMG FUNCTION")
+
+        }, {
+          maxWidth: 600,
+          maxHeight: 300,
+          minWidth: 100,
+          minHeight: 50,
+          orientation: orientationt,
+        }
+
+      );
+    };
 </script>
                 </div>
             @Templates.footer()
