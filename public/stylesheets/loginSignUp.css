@@ -1,21 +1,69 @@
-@import url(main.css);
 
+     .loginContent{
+            background: #151515;
+        }
+    .fullscreen{
+        max-height: 100%;
+        max-width: 100%;
+    }
+    .loginBox{
+        margin: 0 auto;
+        width: 300px;
+    } 
+    #facebook{
+        text-align: center;
+    }
+    .headerPic{
+        text-align: center;
+    }
+    .custom-centercollheader a {
+        text-align: center !important;
+        padding-right: 2.5em !important;
+    }
+    .ui-page .ui-btn.goBackButton  {
+    color      : white;
+    background : #996600;
+
+
+    }​
+    .center-button{
+            margin: 0 auto;
+        }
+    @media all and (max-width: 36em){
+        .ui-content{
+            background: #151515;
+        }
+        .loginBox{
+            margin: 0 auto;
+            width: 100%;
+        } 
+    }
     @media all and (min-width: 60em){
-        .content{
+         
+        .page{
+            background: url("../images/main.jpg");
+        }
+        .loginContent{
             padding: 15px 15px;
-            margin:0 auto;
             width:500px;
             background: #151515;
-
+            margin: 0 auto;
+            margin-top: 200px;
+          
+            border-radius: 25px;
         }
         .header{
             margin:0 auto;
-            background: #151515;
-            width: 530px;
+            width: 830px;
         }
-        .footer{
-            margin:0 auto;
-            background: #151515;
-            width: 530px;
-
+        .loginBox{
+            margin: 0 auto;
+            width: 300px;
         } 
+        #facebook{
+            text-align: center;
+        }
+        .myClass .ui-btn-inner{
+            padding: 0px;
+        }
+}
