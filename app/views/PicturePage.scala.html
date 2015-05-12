@@ -4,9 +4,9 @@
 
 <html>
     <head>
-        @Templates.headMainTournamentPage()
-
+        @Templates.head()
         @Templates.facebookHeadScript()
+      
     </head>
     <body>
         <div data-role="page" data-theme="b" class="page">   
@@ -15,10 +15,15 @@
             </div>
             <div data-role="content" class = "content" >
                     <h1 align="center">Photo Stream</h1>
+                    
                    @for(pictures <- pictures) {
                            
-                                @{"Creator: " + pictures.creator + " Picture: " + pictures.pic + " byte pic " + pictures.pic}</p>
-                        } 
+                               <p>Creator:   @pictures.creator </p> 
+                               <div id="photo">
+                               <p><img src="@routes.Assets.at(pictures.path)" id="@pictures.pictureID"></p>
+                               </div>
+
+                      }
                     </ul>
 
 
