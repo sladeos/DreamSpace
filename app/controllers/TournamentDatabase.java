@@ -374,7 +374,7 @@ public class TournamentDatabase extends Controller {
 				}
 
 				rs.close();
-				return ok(MainTournamentPage.render(tList));
+				return ok(MyTournamentPage.render(tList));
 			} catch (com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException ice) {
 				return badRequest(ice.toString());
 			} catch (NumberFormatException nfe) {

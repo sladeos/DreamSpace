@@ -142,7 +142,7 @@
                            data: JSON.stringify({ id: id, name: name, amount: amount, teams: teams, results: results }),
                            dataType : 'html',
                            success: function(){
-                               window.location.replace("@routes.TournamentDatabase.getTournaments()");
+                              window.location.replace(document.referrer); 
 
                            }
                    });
@@ -165,7 +165,7 @@
                data: JSON.stringify(data),
                dataType: 'html',
                success: function() {
-                 window.location.replace("@routes.TournamentDatabase.getTournaments()");
+                window.location.replace(document.referrer);     
 
                }
 
