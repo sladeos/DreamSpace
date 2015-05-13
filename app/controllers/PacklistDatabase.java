@@ -34,7 +34,7 @@ public class PacklistDatabase extends Controller {
 
 			conn = DB.getConnection();
 
-			String insertIntoDatabase = "INSERT INTO Packlist (PersonalComputer, Powerstrip) VALUES(?,?)";
+			String insertIntoDatabase = "UPDATE Packlist SET PersonalComputer = ?, Powerstrip = ? WHERE userID = ?";
 			
 			preparedStatement = conn.prepareStatement(insertIntoDatabase);
 
