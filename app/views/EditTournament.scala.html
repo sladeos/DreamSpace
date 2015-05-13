@@ -33,19 +33,18 @@
             });
             </script>
             
-            <div id = "bracketcontent"  data-scroll="true" style = "overflow:scroll">
+            
             <div id="bracket"></div>
              <div id='bracketForm' class = "tEdit">
 
-                <form name="bracketEdit" >
+               
                 Name of your tournament: <input type="text" name="fname" id="fname">
-                <button data-role = "button" value="Save changes" id="save" class = "submitReplay">Save changes</button>
+                <button data-role = "button"  value="Save changes" id="save" class = "submitReplay">Save changes</button>
                 
-                <button data-role = "button" value="Delete tournament" id="delete" class = "submitReplay">Delete tournament</button>
+                <button data-role = "button"  value="Delete tournament" id="delete" class = "submitReplay">Delete tournament</button>
                     <p id="warning"></p>
                 
-            </form>
-            </div>
+                        </div>
             <script>
                var data;
                var a = @Html(tournament.tournamentdata);
@@ -134,7 +133,7 @@
                    var teams = data.teams;
                    var results = data.results;
                    var id = tid.toString();
-                 
+                    
                    
                    $.ajax({
                            url: "/edittournament",
@@ -143,7 +142,7 @@
                            data: JSON.stringify({ id: id, name: name, amount: amount, teams: teams, results: results }),
                            dataType : 'html',
                            success: function(){
-                               window.location.replace("/tournament");
+                               window.location.replace("@routes.TournamentDatabase.getTournaments()");
                            }
                    });
                
@@ -151,9 +150,11 @@
                /////////////////////////////////////////////////delete button /////////////////////          
                
                $("#delete").click(function() {
+               
            if (true) {
              var data = {
                "id": "@tournament.tournamentID"
+
              }
 
              $.ajax({
@@ -163,8 +164,9 @@
                data: JSON.stringify(data),
                dataType: 'html',
                success: function() {
-                 window.location.replace("/tournament");
+                 window.location.replace("@routes.TournamentDatabase.getTournaments()");
                }
+
              });
            }
            else {
@@ -179,6 +181,7 @@
          });
 
             </script>
+            
          </div>
          @Templates.footer()
          @Templates.panelAndLogOut()
