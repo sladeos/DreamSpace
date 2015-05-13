@@ -1,6 +1,4 @@
 ﻿
-            
-
 
 
 
@@ -93,7 +91,7 @@ background : #FF9900;
     .ui-page .ui-btn.submitReplay{
         background: #FF9900;
     }
-        #mainTournamentContent{
+        .mainTournamentContent{
     width: 100%;
     margin: 0 auto;
     
@@ -114,7 +112,7 @@ background : #FF9900;
         max-width: 150px;
 
     }
-        #mainTournamentContent{
+        .mainTournamentContent{
             width: 100%;
         }
 
@@ -146,7 +144,7 @@ background : #FF9900;
 		width: 930px;
 
     } 
-        #mainTournamentContent{
+        .mainTournamentContent{
             width: 500px;
             margin: 0 auto;
         } 
@@ -221,6 +219,11 @@ background : #FF9900;
     
         .tEdit{
         width: 300px;
+    }
+    .mainButton{
+        margin:0 auto;
+        width: 200px;
+        max-width: 200px;
     }
     #test{
         position: fixed;
