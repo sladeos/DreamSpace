@@ -34,6 +34,6 @@ public String uplayID;
 @Constraints.Required 
 public String twitchID;
 
-@Constraints.Required
+
 public int userID;
 }
