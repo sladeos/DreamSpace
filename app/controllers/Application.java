@@ -106,7 +106,7 @@ public class Application extends Controller {
 	public static Result packlist() {
 			String user = session("connected");
 			if (user != null) {
-				return ok(Packlist.render("You are logged in as "
+				return ok(MyPacklist.render("You are logged in as "
 						+ user));
 			} else {
 				return unauthorized(LoginUserPage
