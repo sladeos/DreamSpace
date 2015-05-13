@@ -17,7 +17,7 @@
                 <div id = "mainTournamentContent">   
                     <h1 align="center">Tournament</h1>
                     <a data-role = "button" id = "btn" rel="external" href="/createtournament">Create a new tournament</a>
-                        <ul data-role="listview" data-inset="true" data-dividertheme="a"> 
+                        <ul data-role="listview" data-inset="true" data-dividertheme="a" data-theme = "b"> 
                         @for(tournament <- tournament) {
                             <li  data-role = "list-divider" ></li>
                                 <li><a data-role = "button" rel="external"  href="/showtournament/@tournament.tournamentID" ><img src="@routes.Assets.at("images/sun.jpg")" alt="Dreamhack" class = "fullscreen"/><h2>@{"Name: " + tournament.tournamentname}</h2> <p>@{" Size: " +  tournament.participant_count }</p></a>
@@ -25,7 +25,7 @@
                         } 
                     </ul>
                     <script>
-                        $("#btn").css("background"," #FA7C04");
+                        $("#btn").css("background","  #FF9900");
                     </script>
                 </div>
             </div>

@@ -1,4 +1,10 @@
-﻿#bracket {
+﻿
+            
+
+
+
+
+#bracket {
     color:black;
     text-shadow:0 0px 0 #111;
 }
@@ -20,12 +26,15 @@
 }
 .ui-page{
     background: url("../images/main.jpg");
+
+
 }
 
 .content{
     background: #151515;
     padding: 5% 5%;
     margin:0 auto;
+
 }
 .fullscreen{
     max-height: 100%;
@@ -82,8 +91,13 @@ background : #FF9900;
 
     }
     .ui-page .ui-btn.submitReplay{
-        background: #FA7C04;
+        background: #FF9900;
     }
+        #mainTournamentContent{
+    width: 100%;
+    margin: 0 auto;
+    
+    } 
 
 @media all and (max-width: 36em){
  
@@ -96,10 +110,13 @@ background : #FF9900;
     
 
     .faceButton{
-        width: 100%;
-        max-width: 100%;
+        width: 150px;
+        max-width: 150px;
 
     }
+        #mainTournamentContent{
+            width: 100%;
+        }
 
 }
 
@@ -107,6 +124,7 @@ background : #FF9900;
 @media all and (min-width: 60em){
     .page{
         background: url("../images/main.jpg");
+    
 
     }
     .content{
@@ -114,6 +132,7 @@ background : #FF9900;
         margin:0 auto;
         width:900px;
         background: #151515;
+        
 
     }
     .header{
@@ -122,9 +141,15 @@ background : #FF9900;
     }
 
     .footer {
+       
         margin:0 auto;
 		width: 930px;
+
     } 
+        #mainTournamentContent{
+            width: 500px;
+            margin: 0 auto;
+        } 
         #MEArenaContent{
         width: 500px;
         margin: 0 auto;
@@ -196,6 +221,11 @@ background : #FF9900;
     
         .tEdit{
         width: 300px;
+    }
+    #test{
+        position: fixed;
+        bottom:0px;
+
     }
 
     /*Ta bort detta innehåll vid skapande av ny sida*/

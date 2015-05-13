@@ -1,20 +1,30 @@
-              <div data-role="panel" id="bars" data-display="overlay" class = "slide-menu">
+              <div data-role="panel" id="bars" data-display="overlay" data-position="right" class = "slide-menu" style = "background: black">
 
-                     <a href="#" id="myProfile" data-role="button" data-icon="user" class="my-btn">MyProfile</a>
-                     <a href="#" id="packlist" data-role="button" data-icon="tag" class="my-btn">MyPacklist</a>
-                     <a href="#" id="earena" data-role="button" data-icon="action" class="my-btn">MyEarena</a>
-                     <a href="#" id="etournament" data-role="button" data-icon="action" class="my-btn">MyEtournament</a>
-                    <button id="logout">Logout</button>
+                     <a href="#" id="EArena" data-role="button" data-icon="tag">EARENA</a>
+                     <a href="#" id="MYEArena" data-role="button" data-icon="user">MYEARENA</a>
+                     <a href="#" id="etournament" data-role="button" data-icon="tag">ETOURNAMENT</a>
+                     <a href="#" id="MYetournament" data-role="button"  data-icon="user">MYETOURNAMENT</a>
+                     <a href="#" id="packlist" data-role="button" data-icon="action">PACKLIST</a>
+                     <a href="#" id="gallery" data-role="button" data-icon="action">GALLERY</a>
+                        <button id="logout">Logout</button>
+                        <br>
+                     <a href="#panelmenu" data-role = "button" data-rel="close" data-icon="delete">Close panel</a>
                      
                      <script>
-                            $('#myProfile').click(function() {
-                                window.location='/myprofile'; });
-                            $('#packlist').click(function() {
-                                window.location='/packlist'; });
-                            $('#earena').click(function() {
+                            $('#EArena').click(function() {
+                                window.location='/mainearena'; });
+                            $('#MYEArena').click(function() {
                                 window.location='/myearena'; });
                             $('#etournament').click(function() {
+                                window.location='/mainetournament'; });
+                            $('#MYetournament').click(function() {
                                 window.location='/myetournaments'; });
+                            $('#packlist').click(function() {
+                                window.location='/packlist'; });
+                            $('#gallery').click(function() {
+                                window.location='/'; });
+
+                           
                       
                         $('#logout').click(function() {
                              FB.getLoginStatus(function(response) {

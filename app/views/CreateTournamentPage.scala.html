@@ -151,7 +151,8 @@ $("#create").click(function() {
             data: JSON.stringify({name :  $('#fname').val(), amount: $('#amount').val(), teams: teams, results: results }),
             dataType : 'html',
             success: function(){
-                window.location.replace("/mainetournament");
+                window.location.replace("@routes.TournamentDatabase.getTournaments()");
+
             }
         });
     }else{

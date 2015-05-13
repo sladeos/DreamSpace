@@ -3,25 +3,38 @@
   <div data-role = "footer" class = "footer">
                 <footer class="footer-basic-centered" id = "foot">
                     <p class="footer-company-motto">Life is short play more</p>
-                    <p class="footer-links">
-                        <a id="home" href="#">Home</a>
-                        ·
-                        <a id="contact" href="#">Contact</a>
-                        ·
-                        <a id="dreamhackse" href="#">DreamHack.se</a>
-                        ·
-                        <a id="info" href="#">Info</a>
-                    </p>
+                 
                     <p class="footer-company-name">DREAMSPACE AB &copy; 2015</p>
                 </footer>
             </div>
-            <script>
-                        $('#home').click(function() {
-                            window.location='/'; });
-                        $('#contact').click(function() {
-                            window.location='/contact'; });
-                        $('#dreamhackse').click(function() {
-                        	window.open("http://www.dreamhack.se"); });
-                        $('#info').click(function() {
-                            window.location='/info'; });
-                    </script>
+
+<div data-role="footer" data-tap-toggle="false" class = "footer" data-position="fixed">
+    <div data-role="navbar">
+        <ul>
+            <li><a id="h" href="#h"  data-icon="home"class="ui-alt-icon ui-btn ui-shadow"></a></li>
+            <li><a id="mail" href="#mail" data-icon="mail" class="ui-alt-icon ui-btn ui-shadow" ></a></li>
+            <li><a id = "user" data-icon="user" class="ui-alt-icon ui-btn ui-shadow"></a></li>
+            <li><a id="panelmenu" href="#bars" data-icon="bars" class="ui-alt-icon ui-btn ui-shadow"></a></li>
+        </ul>
+    </div>
+</div>
+
+        <script>
+       
+            $('#h').click(function() {
+                
+                window.location='/'; });
+
+            $('#mail').click(function() {
+                 
+                window.location='/'; });
+
+            $('#user').click(function() {
+               window.location='/'; });
+
+            $('#info').click(function() {
+                window.location='/'; });
+   
+    </script>
+
+     
