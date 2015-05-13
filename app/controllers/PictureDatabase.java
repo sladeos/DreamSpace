@@ -5,9 +5,8 @@ import play.*;
 import play.mvc.*;
 
 import java.io.File;
-import java.io.FileInputStream;
+
 import java.io.IOException;
-import java.io.InputStream;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,17 +19,14 @@ import views.*;
 import play.mvc.Http.MultipartFormData;
 import play.mvc.Http.MultipartFormData.FilePart;
 
-import java.awt.Choice;
 import java.awt.Color;
 import java.awt.Graphics2D;
-import java.awt.Image;
-import java.awt.Toolkit;
 import java.awt.geom.AffineTransform;
 import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
-import java.io.ByteArrayInputStream;
 
-import javax.swing.ImageIcon;
+
+
 import javax.imageio.ImageIO;
 
 import com.drew.imaging.ImageMetadataReader;
@@ -137,6 +133,7 @@ public class PictureDatabase extends Controller{
 	
 	
 	public static Result savePicture(){
+		System.setProperty("java.awt.headless", "true");
 		Connection conn = null;
 		PreparedStatement preparedStatement = null;
 		String currentuser = session("connected");
