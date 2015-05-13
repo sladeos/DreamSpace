@@ -69,3 +69,7 @@ POST /saveuserprofile controllers.UserProfileDatabase.addUserProfile()
 
 #edit user profile
 POST /edituserprofile controllers.UserProfileDatabase.editUserProfile()
+
+
+#get information to userProfile
+GET /profileinfo controllers.Application.showInfoMyProfile()

@@ -24,65 +24,56 @@ public class UserProfileDatabase extends Controller {
 
 	
 
+public static Profile getProfile() {
+
+		Connection conn = null;
+		PreparedStatement preparedStatement = null;
+		
+		Profile p = new Profile();
+		String username = session("connected");
+		
+		try {
+
+			conn = DB.getConnection();
+			String insertIntoDatabase = "SELECT * FROM UserProfile WHERE username=?;";
+			preparedStatement = conn.prepareStatement(insertIntoDatabase);
+			preparedStatement.setString(1, username);
+
+			ResultSet rs = preparedStatement.executeQuery();
+
+			if (rs.isBeforeFirst()) {
+				rs.next();
+				p.username = rs.getString("username");
+				p.favouritegames = rs.getString("favouritegames");
+				p.userbio = rs.getString("userbio");
+				p.skypeID = rs.getString("skypeID");
+				p.steamID = rs.getString("steamID");
+				p.battlenetID = rs.getString("battlenetID");
+				p.uplayID = rs.getString("uplayID");
+				p.twitchID = rs.getString("twitchID");
+				p.userID = rs.getInt("userID");
+			}
 
 
-	// public static Result getTournaments() {
-	// 	String currentUser = session("connected");
-	// 	if (currentUser == null) {
-	// 		return unauthorized(LoginUserPage
-	// 				.render("You have to login to access this page!"));
-	// 	} else {
-	// 		Connection conn = null;
-	// 		PreparedStatement preparedStatement = null;
-	// 		List<Tournament> tList = new ArrayList<Tournament>();
-	// 		try {
+			return p;
 
-	// 			conn = DB.getConnection();
+		} catch (SQLException se) {
+			return null;
+		} catch (Exception e) {
+			// Handle errors for Class.forName
+			return null;
+		} finally {
+			// finally block used to close resources
+			try {
+				if (preparedStatement != null)
+					conn.close();
+			} catch (SQLException se) {
+			}// do nothing
+		}
 
-	// 			String insertIntoDatabase = "SELECT * FROM ETournament et WHERE admin=?";
-	// 			preparedStatement = conn.prepareStatement(insertIntoDatabase);
-	// 			preparedStatement.setString(1, currentUser);
-	// 			ResultSet rs = preparedStatement.executeQuery();
-	// 			// boolean next =
+	}
 
-	// 			while (rs.next()) {
-	// 				Tournament t = new Tournament();
-	// 				t.tournamentname = rs.getString("tournamentName");
-	// 				t.participant_count = rs.getInt("teamAmount");
-	// 				t.tournamentcreator = rs.getString("admin");
-	// 				t.tournamentdata = rs.getString("tournamentData");
-	// 				t.tournamentID = rs.getInt("tournamentID");
-	// 				tList.add(t);
-	// 			}
 
-	// 			rs.close();
-	// 			return ok(MainTournamentPage.render(tList));
-	// 		} catch (com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException ice) {
-	// 			return badRequest(ice.toString());
-	// 		} catch (NumberFormatException nfe) {
-	// 			return badRequest(nfe.toString());
-	// 		} catch (SQLException se) {
-	// 			// Handle sql errors
-	// 			return internalServerError(se.toString());
-	// 		} catch (Exception e) {
-	// 			// Handle errors for Class.forName
-	// 			return internalServerError(e.toString());
-	// 		} finally {
-	// 			// finally block used to close resources
-	// 			// try {
-	// 			// if (preparedStatement != null)
-	// 			// conn.close();
-	// 			// } catch (SQLException se) {
-	// 			// } //do nothing
-	// 			try {
-	// 				if (conn != null)
-	// 					conn.close();
-	// 			} catch (SQLException se) {
-	// 				return internalServerError(se.toString());
-	// 			} // end finally try
-	// 		} // end try
-	// 	}
-	// }
 
 
 

@@ -152,4 +152,15 @@ public class Application extends Controller {
 		}
  
 
+ public static Result showInfoMyProfile() {
+		String user = session("connected");
+		if (user != null) {
+			
+				return ok(MyProfile.render(UserProfileDatabase
+						.getProfile()));
+		} else {
+			return unauthorized(LoginUserPage
+					.render("Welcome, login to explore the website"));
+		}
+	}
 }
