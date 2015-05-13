@@ -27,19 +27,19 @@ public class PacklistDatabase extends Controller {
 		PreparedStatement preparedStatement = null;
 		JsonNode json = request().body().asJson();
 
-		String PersonalComputer = json.findPath("PersonalComputer").textValue();
-		String Powerstrip = json.findPath("Powerstrip").textValue();
+		String boxlist = json.findPath("test").textValue();
+		System.out.println(boxlist);
 
 		try {
 
 			conn = DB.getConnection();
 
-			String insertIntoDatabase = "UPDATE Packlist SET PersonalComputer = ?, Powerstrip = ? WHERE userID = ?";
+			String insertIntoDatabase = "UPDATE Packlist SET PC = ?, Powerstrip = ? WHERE userID = ?";
 			
 			preparedStatement = conn.prepareStatement(insertIntoDatabase);
 
-			preparedStatement.setString(1, PersonalComputer);
-			preparedStatement.setString(2, Powerstrip);
+			//preparedStatement.setString(1, PC);
+			//preparedStatement.setString(2, Powerstrip);
 
 			preparedStatement.executeUpdate();
 			return ok("Succesful Reply!");

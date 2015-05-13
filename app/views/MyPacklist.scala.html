@@ -32,7 +32,7 @@
 
                 <form>
                     <div data-role="fieldcontain">
-                        <fieldset data-role="controlgroup">
+                        <fieldset data-role="controlgroup" id="test">
 
                 <label><input type="checkbox" name="checkbox-0" id="PC">Personal computer with all cables</label>
                 <label><input type="checkbox" name="checkbox-0" id="Powerstrip">Powerstrip so you can connect all your stuff</label>
@@ -85,10 +85,10 @@
                 url: "/editpacklist",
                 type: 'POST',
                 contentType:'application/json',
-                data: JSON.stringify({PersonalComputer: $('#PersonalComputer').val(), Powerstrip: $('#Powerstrip').val()}),
+                data: JSON.stringify({Test: $('#test').val()}),
                 dataType : 'html',
                 success: function(){
-                    window.location.replace("/packlist");
+                    window.location.replace("/Mypacklist");
                 }
           });
         });
