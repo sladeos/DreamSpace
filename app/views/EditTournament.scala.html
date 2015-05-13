@@ -33,7 +33,6 @@
             });
             </script>
             
-            
             <div id="bracket"></div>
              <div id='bracketForm' class = "tEdit">
 
@@ -45,6 +44,7 @@
                     <p id="warning"></p>
                 
                         </div>
+
             <script>
                var data;
                var a = @Html(tournament.tournamentdata);
@@ -125,8 +125,8 @@
                function saveFn(data) {
                }
                
-               $("#save").click(function() {
-                       
+               $("#save").click(function(event) {
+                    event.preventDefault();
                    name = $("#fname").val();
                    amount;
                    data = container.bracket('data');
@@ -143,6 +143,7 @@
                            dataType : 'html',
                            success: function(){
                                window.location.replace("@routes.TournamentDatabase.getTournaments()");
+
                            }
                    });
                
@@ -165,6 +166,7 @@
                dataType: 'html',
                success: function() {
                  window.location.replace("@routes.TournamentDatabase.getTournaments()");
+
                }
 
              });
