@@ -5,6 +5,7 @@
 <html>
     <head>
         @Templates.head()
+          @Templates.loadimage()
         @Templates.facebookHeadScript()
       
     </head>
@@ -22,14 +23,17 @@
                                <div id="photo">
                                <p><img src="@routes.Assets.at(pictures.path)" id="@pictures.pictureID"></p>
                                </div>
+<script type="text/javascript">
+$('#@pictures.pictureID').width(500);
+$('#@pictures.pictureID').height(500);
+        
+</script>
 
                       }
                     </ul>
 
 
-<script>
 
-</script>
                 </div>
             @Templates.footer()
             @Templates.panelAndLogOut()
