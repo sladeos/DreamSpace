@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 
 <html>
@@ -18,10 +16,23 @@
                     
                     <form id ="newpicture" action="@routes.PictureDatabase.savePicture()" method ="post" data-ajax="false" enctype="multipart/form-data">
                     <input id="picfield" name="picture" type="file" accept="image/*;capture=camera">
+   							
                     <button class = "my-btn"  type="submit" value="Save Picture" >Save Picture </button>
     </form>
     <div id="imageshow"></div>
+    <canvas id="piccanvas" width="400" height="400"></canvas>
     <script type="text/javascript">
+    /*
+    $('#newpicture').submit(function() {
+    	var canvasData = $('imageshow').first()[0];
+    	alert(canvasData);
+    	var data = canvasData.gettoDataURL();
+    	alert(data)
+    	  var pic = $('#newpic');
+    	  pic.val($('imageshow').children('canvas'));
+    	});
+    */
+    
     
     document.getElementById('picfield').onchange = function(e) {
     var orientationt = null;
@@ -34,9 +45,8 @@
         }
           var loadingImage = loadImage(
             e.target.files[0],
-        		 
+           
             function(img) {
-                
                 document.getElementById("imageshow").appendChild(img);
     
             }, {

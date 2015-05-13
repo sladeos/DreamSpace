@@ -3,35 +3,204 @@ package controllers;
 import models.*;
 import play.*;
 import play.mvc.*;
-import play.mvc.Http.MultipartFormData;
-import play.mvc.Http.MultipartFormData.FilePart;
 
-import java.awt.Choice;
-import java.awt.Image;
-import java.awt.Toolkit;
-import java.awt.image.BufferedImage;
-import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.ImageIcon;
-import javax.imageio.ImageIO;
-
 import views.html.*;
 import play.data.Form;
 import play.db.*;
 import views.*;
+//Imports for picture
+import play.mvc.Http.MultipartFormData;
+import play.mvc.Http.MultipartFormData.FilePart;
 
+import java.awt.Choice;
+import java.awt.Color;
+import java.awt.Graphics2D;
+import java.awt.Image;
+import java.awt.Toolkit;
+import java.awt.geom.AffineTransform;
+import java.awt.image.AffineTransformOp;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+
+import javax.swing.ImageIcon;
+import javax.imageio.ImageIO;
+
+import com.drew.imaging.ImageMetadataReader;
+import com.drew.imaging.ImageProcessingException;
+import com.drew.metadata.*;
+import com.drew.metadata.exif.ExifIFD0Directory;
+import com.drew.metadata.jpeg.JpegDirectory;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
 public class PictureDatabase extends Controller{
 	
 	
+	// Inner class containing image information
+	public static class ImageInformation {
+	    public final int orientation;
+	    public final int width;
+	    public final int height;
+
+	    public ImageInformation(int orientation, int width, int height) {
+	        this.orientation = orientation;
+	        this.width = width;
+	        this.height = height;
+	    }
+
+	    public String toString() {
+	        return String.format("%dx%d,%d", this.width, this.height, this.orientation);
+	    }
+	}
+
+
+	public static ImageInformation readImageInformation(File imageFile)  throws IOException, MetadataException, ImageProcessingException {
+	    Metadata metadata = ImageMetadataReader.readMetadata(imageFile);
+	    Directory directory = metadata.getFirstDirectoryOfType(ExifIFD0Directory.class);
+	    JpegDirectory jpegDirectory = (JpegDirectory)metadata.getFirstDirectoryOfType(JpegDirectory.class);
+
+	    int orientation = 1;
+	    try {
+	        orientation = directory.getInt(ExifIFD0Directory.TAG_ORIENTATION);
+	    } catch (MetadataException me) {
+	        System.out.println("OUCH");
+	    }
+	    int width = jpegDirectory.getImageWidth();
+	    int height = jpegDirectory.getImageHeight();
+
+	    return new ImageInformation(orientation, width, height);
+	}
+
+	public static AffineTransform getExifTransformation(ImageInformation info) {
+
+	    AffineTransform t = new AffineTransform();
+
+	    switch (info.orientation) {
+	    case 1:
+	        break;
+	    case 2: // Flip X
+	        t.scale(-1.0, 1.0);
+	        t.translate(-info.width, 0);
+	        break;
+	    case 3: // PI rotation 
+	        t.translate(info.width, info.height);
+	        t.rotate(Math.PI);
+	        break;
+	    case 4: // Flip Y
+	        t.scale(1.0, -1.0);
+	        t.translate(0, -info.height);
+	        break;
+	    case 5: // - PI/2 and Flip X
+	        t.rotate(-Math.PI / 2);
+	        t.scale(-1.0, 1.0);
+	        break;
+	    case 6: // -PI/2 and -width
+	        t.translate(info.height, 0);
+	        t.rotate(Math.PI / 2);
+	        break;
+	    case 7: // PI/2 and Flip
+	        t.scale(-1.0, 1.0);
+	        t.translate(-info.height, 0);
+	        t.translate(0, info.width);
+	        t.rotate(  3 * Math.PI / 2);
+	        break;
+	    case 8: // PI / 2
+	        t.translate(0, info.width);
+	        t.rotate(  3 * Math.PI / 2);
+	        break;
+	    }
+
+	    return t;
+	}
+	
+	
+	public static BufferedImage transformImage(BufferedImage image, AffineTransform transform) throws Exception {
+
+	    AffineTransformOp op = new AffineTransformOp(transform, AffineTransformOp.TYPE_BICUBIC);
+
+	    BufferedImage destinationImage = op.createCompatibleDestImage(image,  (image.getType() == BufferedImage.TYPE_BYTE_GRAY)? image.getColorModel() : null );
+	    Graphics2D g = destinationImage.createGraphics();
+	    g.setBackground(Color.WHITE);
+	    g.clearRect(0, 0, destinationImage.getWidth(), destinationImage.getHeight());
+	    destinationImage = op.filter(image, destinationImage);;
+	    return destinationImage;
+	}
+	
+	
+	
+	public static Result savePicture(){
+		Connection conn = null;
+		PreparedStatement preparedStatement = null;
+		String currentuser = session("connected");
+		BufferedImage img = null;
+		try {
+			conn = DB.getConnection();
+			
+			String sql = "INSERT INTO Picture (creator, path) VALUES(?,?)";
+			preparedStatement = conn.prepareStatement(sql);
+			
+			MultipartFormData body = request().body().asMultipartFormData();
+			FilePart picture = body.getFile("picture");
+			
+			
+			  if (picture != null) {
+				  File file = picture.getFile();
+				  ImageInformation imageF = readImageInformation(file);
+				  AffineTransform info =  getExifTransformation(imageF);
+				  img = ImageIO.read(file);
+				  BufferedImage finalImg = transformImage(img, info);
+			    
+               
+			    String suffix = picture.getContentType().substring(picture.getContentType().lastIndexOf("/") + 1);
+			    
+			    
+                File path = new File("public\\users\\"+ currentuser+ "\\uploadedimages\\" + file.getName() + "." + suffix);
+	                if (!path.exists()) {
+                    path.mkdirs();
+	                }
+	                
+	                preparedStatement.setString(1, currentuser);
+	                preparedStatement.setString(2, path.toString());
+	                preparedStatement.executeUpdate();
+			    
+			    ImageIO.write(finalImg, suffix, path);
+			    
+			    return redirect(routes.PictureDatabase.getPictures());
+			    
+			  }else{
+				  
+				 return ok("IMAGE WAS EMPTY");
+			  }
+
+		} catch (Exception e) {
+			// Handle errors for Class.forName
+			return ok("null" + e.toString());
+		} finally {
+			// finally block used to close resources
+			try {
+				if (preparedStatement != null)
+					conn.close();
+			} catch (SQLException se) {
+			}// do nothin
+		}
+
+	}
+	
+	
+	
+	
+	
+	
+	
+	/*
 	public static Result savePicture(){
 		Connection conn = null;
 		PreparedStatement preparedStatement = null;
@@ -86,7 +255,7 @@ public class PictureDatabase extends Controller{
 		}
 
 	}
-
+*/
 	
 	public static Result getPictures() {
 		String currentUser = session("connected");
