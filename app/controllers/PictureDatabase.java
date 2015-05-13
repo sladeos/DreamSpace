@@ -56,10 +56,10 @@ public class PictureDatabase extends Controller{
 	        return String.format("%dx%d,%d", this.width, this.height, this.orientation);
 	    }
 	}
-
-
+	
 	public static ImageInformation readImageInformation(File imageFile)  throws IOException, MetadataException, ImageProcessingException {
 	    Metadata metadata = ImageMetadataReader.readMetadata(imageFile);
+	 
 	    Directory directory = metadata.getFirstDirectoryOfType(ExifIFD0Directory.class);
 	    JpegDirectory jpegDirectory = (JpegDirectory)metadata.getFirstDirectoryOfType(JpegDirectory.class);
 
@@ -68,6 +68,8 @@ public class PictureDatabase extends Controller{
 	        orientation = directory.getInt(ExifIFD0Directory.TAG_ORIENTATION);
 	    } catch (MetadataException me) {
 	        System.out.println("OUCH");
+	    }catch (NullPointerException npe){
+	    	return null;
 	    }
 	    int width = jpegDirectory.getImageWidth();
 	    int height = jpegDirectory.getImageHeight();
@@ -118,15 +120,12 @@ public class PictureDatabase extends Controller{
 	}
 	
 	
-	public static BufferedImage transformImage(BufferedImage image, AffineTransform transform) throws Exception {
-
-	    AffineTransformOp op = new AffineTransformOp(transform, AffineTransformOp.TYPE_BICUBIC);
-
-	    BufferedImage destinationImage = op.createCompatibleDestImage(image,  (image.getType() == BufferedImage.TYPE_BYTE_GRAY)? image.getColorModel() : null );
-	    Graphics2D g = destinationImage.createGraphics();
-	    g.setBackground(Color.WHITE);
-	    g.clearRect(0, 0, destinationImage.getWidth(), destinationImage.getHeight());
-	    destinationImage = op.filter(image, destinationImage);;
+	public static BufferedImage transformImage(BufferedImage originalImage, AffineTransform transform) throws Exception {		
+		AffineTransformOp affineTransformOp = new AffineTransformOp(transform, AffineTransformOp.TYPE_BILINEAR);  
+        BufferedImage destinationImage = new BufferedImage(originalImage.getWidth(), originalImage.getHeight(),  originalImage.getType());
+        destinationImage = affineTransformOp.filter(originalImage, destinationImage);
+		
+		
 	    return destinationImage;
 	}
 	
@@ -138,6 +137,8 @@ public class PictureDatabase extends Controller{
 		PreparedStatement preparedStatement = null;
 		String currentuser = session("connected");
 		BufferedImage img = null;
+		String abc ="";
+		BufferedImage finalImg;
 		try {
 			conn = DB.getConnection();
 			
@@ -145,16 +146,29 @@ public class PictureDatabase extends Controller{
 			preparedStatement = conn.prepareStatement(sql);
 			
 			MultipartFormData body = request().body().asMultipartFormData();
-			FilePart picture = body.getFile("picture");
+			abc="0";
 			
+			FilePart picture = body.getFile("picture");
+			abc="55";
 			
 			  if (picture != null) {
+				  abc="11";
 				  File file = picture.getFile();
-				  ImageInformation imageF = readImageInformation(file);
-				  AffineTransform info =  getExifTransformation(imageF);
 				  img = ImageIO.read(file);
-				  BufferedImage finalImg = transformImage(img, info);
-			    
+				  abc="12";
+				  if(readImageInformation(file) !=null){
+			      ImageInformation imageF = readImageInformation(file);
+					  
+				  
+				  abc="1";
+				  AffineTransform info =  getExifTransformation(imageF);
+				  abc="2";
+				  abc="3";
+				  finalImg = transformImage(img, info);
+				  abc="4";
+				  }else{
+					  finalImg =img;
+				  }
                
 			    String suffix = picture.getContentType().substring(picture.getContentType().lastIndexOf("/") + 1);
 			    
@@ -167,9 +181,10 @@ public class PictureDatabase extends Controller{
 	                preparedStatement.setString(1, currentuser);
 	                preparedStatement.setString(2, path.toString());
 	                preparedStatement.executeUpdate();
+	                abc="5";
 			    
 			    ImageIO.write(finalImg, suffix, path);
-			    
+	                abc="6";
 			    return redirect(routes.PictureDatabase.getPictures());
 			    
 			  }else{
@@ -179,7 +194,7 @@ public class PictureDatabase extends Controller{
 
 		} catch (Exception e) {
 			// Handle errors for Class.forName
-			return ok("null" + e.toString());
+			return ok("null " + e.toString() + " " + abc);
 		} finally {
 			// finally block used to close resources
 			try {
