@@ -39,13 +39,14 @@
             </script>
                     <div id = "adinfo">               
                           <article data-role="listview" data-inset="true" data-dividertheme="a"> 
-                              <li><h2>Name of Ad: @eAd.arenaName</h2>
+                              <li><h2>@eAd.arenaName</h2>
                                   <p>id: @eAd.arenaID</p>
-                                  <p>Creator name: @eAd.admin</p>
-                                  <p>Name of Game: @eAd.gameName</p>
-                                  <p>Amount of Players Required: @eAd.playersRequired</p>
-                                  <p>Information about Ad:</p> 
-                                  <textarea disabled name="textarea" id="text">@eAd.information</textarea>
+                                  <p>Creator: @eAd.admin</p>
+                                  <p>Game: @eAd.gameName</p>
+                                  <p>Created: @eAd.createdDate</p>
+                                  <p>Players required: @eAd.playersRequired</p>
+                                  <p>Information:</p> 
+                                  <textarea readonly name="textarea" id="text">@eAd.information</textarea>
                               </li>
                           </article>
                         <label for="reply">Reply:</label>
@@ -57,9 +58,9 @@
                       <article data-role="listview" data-inset="true" data-dividertheme="a">
                         @for(eAdReplies <- eAdReplies) {
                           <li  data-role = "list-divider" ></li>
-                          <li><h2>@{"User who replied: " + eAdReplies.user}</h2>
-                           <p>Replay content:</p>
-                           <textarea disabled name="textarea" id="text" style = "overflow:auto;resize:none">@{eAdReplies.content}
+                          <li><h2>@{eAdReplies.user + " - " + eAdReplies.createdDate}</h2>
+                           <p>Reply:</p>
+                           <textarea readonly name="textarea" id="text" style = "overflow:auto;resize:none">@{eAdReplies.content}
                             </textarea>
                             </li>
                         } 
@@ -82,7 +83,7 @@
                                 }
                             });
                         }else{
-                       	    $("#warning").html("There are errors in your reply! Fix them and try again.");
+                       	    $("#warning").html("Your reply is too short!");
                        	    $("#warning").css('color', 'red');
                             $('#warning').prepend('<img id="redcross" src="@routes.Assets.at("images/redcross.png")" />')
                             $('#redcross').width(40);

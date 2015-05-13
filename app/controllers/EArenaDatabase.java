@@ -119,11 +119,12 @@ public class EArenaDatabase extends Controller {
 		    Connection conn = null;
 			PreparedStatement preparedStatement = null;
 			List<EArenaAd> adList = new ArrayList<EArenaAd>();
+			String dickbutt = "";
 			
 			try {
 			    
 		    if(!search.isEmpty() && game.isEmpty() && username.isEmpty() && players.isEmpty() && minutes.isEmpty()){
-		        
+		        dickbutt = "first";
 		        conn = DB.getConnection();
                 search = "%" + search + "%";
 				String selectAdvSearch = "SELECT * FROM EArena WHERE arenaname LIKE ? OR admin LIKE ? OR arenainformation LIKE ? OR gamename LIKE ? OR playersrequired LIKE ? ORDER BY created_date DESC";
@@ -153,7 +154,7 @@ public class EArenaDatabase extends Controller {
 
 				
 		    } else if (!search.isEmpty() || !game.isEmpty() || !username.isEmpty()  || !players.isEmpty() || !minutes.isEmpty()) {
-		        
+		        dickbutt = "2";
 		        first = true;
 		        conn = DB.getConnection();
 		        
@@ -224,12 +225,12 @@ public class EArenaDatabase extends Controller {
 		    
 		    } else {
                 
+				
 				conn = DB.getConnection();
             
 				String selectAdminAds = "SELECT * FROM EArena ORDER BY created_date DESC";
 				
 				preparedStatement = conn.prepareStatement(selectAdminAds);
-				// preparedStatement.setString(1, currentUser);
 				ResultSet rs = preparedStatement.executeQuery();
 
 				while (rs.next()) {
@@ -243,9 +244,7 @@ public class EArenaDatabase extends Controller {
 					a.createdDate = rs.getString("created_date");
 					adList.add(a);
 				}
-				
-			
-				
+
 				rs.close();
 		    }
 
@@ -254,9 +253,9 @@ public class EArenaDatabase extends Controller {
 			} catch (com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException ice) {
 					return null;
 			} catch (NumberFormatException nfe) {
-			        return null;
+		            return null;
 			} catch (SQLException se) {
-					return null;
+    		        return null;
 			} catch (Exception e) {
 	    	        return null;
 			} finally {
@@ -421,7 +420,7 @@ public class EArenaDatabase extends Controller {
 		try {
 
 			conn = DB.getConnection();
-			String insertIntoDatabase = "SELECT * FROM EArenaReply WHERE arenaID=?;";
+			String insertIntoDatabase = "SELECT * FROM EArenaReply WHERE arenaID=? ORDER BY created_date DESC;";
 			preparedStatement = conn.prepareStatement(insertIntoDatabase);
 			preparedStatement.setInt(1, id);
 
@@ -430,6 +429,7 @@ public class EArenaDatabase extends Controller {
 				AdReply a = new AdReply();
 				a.content = rs.getString("replycontent");
 				a.user = rs.getString("username");
+				a.createdDate = rs.getString("created_date");
 				adReplyList.add(a);
 			}
 

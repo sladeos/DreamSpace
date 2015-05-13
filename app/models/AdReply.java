@@ -20,4 +20,7 @@ public class AdReply extends Model {
 
 	@Constraints.Required
 	public String content;
+	
+	@Constraints.Required
+	public String createdDate;
 }
