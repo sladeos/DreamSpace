@@ -15,14 +15,11 @@
     box-shadow:0 0 15px #195166;
 }
 
-.ui-autocomplete li:hover
-{
+.ui-autocomplete li:hover{
     background-color:#1A586F;
 }
 .ui-page{
     background: url("../images/main.jpg");
-
-
 }
 
 .content{
@@ -39,8 +36,6 @@
 .ui-page .ui-btn  {
 color      : white;
 background : #FF9900;
-
-
 }​
 
 .slide-menu{ 
@@ -73,9 +68,8 @@ background : #FF9900;
         width: 100%;
     }
     .MEArenaContent{
-    width: 500px;
+    width: 100%;
     margin: 0 auto;
-    
     }
         .ui-page .ui-btn.myFace{
         background: #3A5795;
@@ -83,7 +77,6 @@ background : #FF9900;
         .faceButton{
         width: 150px;
         max-width: 150px;
-
     }
     .ui-page .ui-btn.submitReplay{
         background: #FF9900;
@@ -91,7 +84,6 @@ background : #FF9900;
         .mainTournamentContent{
     width: 100%;
     margin: 0 auto;
-    
     } 
        .custom-centercollheader a {
         text-align: center !important;
@@ -105,15 +97,13 @@ background : #FF9900;
     .ui-page .ui-btn.goBackButton  {
     color      : white;
     background : #996600;
-
-
     }​
 @media all and (max-width: 36em){
  
     .ui-content{
         background: #151515;
     }
-.MEArenaContent{
+    .MEArenaContent{
         width: 100%;
         }
     
@@ -155,11 +145,11 @@ background : #FF9900;
 		width: 930px;
 
     } 
-        .mainTournamentContent{
+    .mainTournamentContent{
             width: 500px;
             margin: 0 auto;
-        } 
-        .MEArenaContent{
+    } 
+    .MEArenaContent{
         width: 500px;
         margin: 0 auto;
     }

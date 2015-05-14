@@ -18,10 +18,12 @@
         <div data-role="page" data-theme="b" id = "main" class = "page"  >
              <div data-role="header" class = "header">
 	       @Templates.header()
-             <a id = "back"href="#back" data-role="button" role="button" data-icon="back" data-inline="true" data-mini = "true">Back</a>
+             <a id = "back"href="#back"  data-role="button" role="button" data-icon="back" data-inline="true" data-mini = "true">Back</a>
             <script type="text/javascript">
+            
               $('#back').click(function() {
-                window.location.replace(document.referrer);  });
+                window.location='/mainearena';  });
+              
             </script>
 	       </div>
             <div data-role="content" class = "content">
