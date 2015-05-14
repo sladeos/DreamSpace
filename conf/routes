@@ -7,16 +7,10 @@ GET     /                           controllers.Application.mainMethod()
 
 
 #Get to otheruserprofile html-page
-GET   /otheruser controllers.Application.otheruser()
+GET   /profile/:user controllers.Application.showProfile(user: String)
 
 #Get to packlist html-page
 GET   /packlist controllers.Application.packlist()
-
-#Get to MyProfile html-page
-GET   /myprofile controllers.Application.myprofile()
-
-#Get to EditProfile html-page
-GET   /editprofile controllers.Application.editprofile()
 
 
 # Map static resources from the /public folder to the /assets URL path
@@ -63,13 +57,6 @@ GET  /showtournament/:id controllers.Application.showTournament(id: Integer)
 
 GET /tournament controllers.TournamentDatabase.getTournaments()
 
-
-#add new user profile
-POST /saveuserprofile controllers.UserProfileDatabase.addUserProfile()
-
 #edit user profile
 POST /edituserprofile controllers.UserProfileDatabase.editUserProfile()
 
-
-#get information to userProfile
-GET /profileinfo controllers.Application.showInfoMyProfile()

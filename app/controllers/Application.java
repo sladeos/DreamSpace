@@ -115,52 +115,35 @@ public class Application extends Controller {
 		}
 
 
-			public static Result myprofile() {
-			String user = session("connected");
-			if (user != null) {
-				return ok(MyProfile.render("You are logged in as "
-						+ user));
-			} else {
-				return unauthorized(LoginUserPage
-						.render("Welcome, login to explore the website"));
-			}
-		}
 
-
-
-		public static Result editprofile() {
-			String user = session("connected");
-			if (user != null) {
-				return ok(EditProfile.render("You are logged in as "
-						+ user));
-			} else {
-				return unauthorized(LoginUserPage
-						.render("Welcome, login to explore the website"));
-			}
-		}
-
-
-		public static Result otheruser() {
-			String user = session("connected");
-			if (user != null) {
-				return ok(OtherUserProfile.render("You are logged in as "
-						+ user));
-			} else {
-				return unauthorized(LoginUserPage
-						.render("Welcome, login to explore the website"));
-			}
-		}
- 
-
- public static Result showInfoMyProfile() {
-		String user = session("connected");
-		if (user != null) {
 			
-				return ok(MyProfile.render(UserProfileDatabase
-						.getProfile()));
-		} else {
-			return unauthorized(LoginUserPage
-					.render("Welcome, login to explore the website"));
-		}
-	}
+			public static Result showProfile(String userUrl) {
+				String user = session("connected");
+				if (user != null) {
+					if (user.equals(userUrl)) {
+						return ok(MyProfile.render(UserProfileDatabase.getProfile(user)));
+					} else {
+						return ok(OtherUserProfile.render(UserProfileDatabase.getProfile(user)));
+					}
+				} else {
+					return unauthorized(LoginUserPage
+							.render("Welcome, login to explore the website"));
+				}
+			}
+
+
+//		public static Result showProfile() {
+//			String user = session("connected");
+//			if (user != null) {
+//				if (user.equals(UserProfileDatabase.getProfile(user).username)) {
+//					return ok(MyProfile.render(UserProfileDatabase.getProfile(user)));
+//				} else {
+//					return ok(OtherUserProfile.render(UserProfileDatabase.getProfile(user)));
+//				}
+//			} else {
+//				return unauthorized(LoginUserPage
+//						.render("Welcome, login to explore the website"));
+//			}
+//		}
+
 }
