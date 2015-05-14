@@ -79,18 +79,19 @@
      
     <script>
         $("#save").click(function() {
-          
+          if($'#PC').is(':checked')){
 
           $.ajax({
                 url: "/editpacklist",
                 type: 'POST',
                 contentType:'application/json',
-                data: JSON.stringify({Test: $('#test').val()}),
+                data: JSON.stringify({test: $('#PC').val()}),
                 dataType : 'html',
                 success: function(){
-                    window.location.replace("/Mypacklist");
+                    window.location.replace("/MyProfile");
                 }
           });
+      }
         });
       </script>
 
