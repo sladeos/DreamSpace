@@ -23,6 +23,7 @@
             </ul>
 
               <h1 align="center">Edit My Profile</h1>
+              
               <div class="section" Style="border:none">
                 <div class="divLayoutcontact" Style = "width:20%" Style = "heigth:100%">
                   <img src="@routes.Assets.at("images/Avatars/avatarett.gif")" class = "fullscreen" id="avatarpic" onclick="changeImage()">
@@ -142,7 +143,7 @@
                 data: JSON.stringify({skypeID: $('#skypeID').val(), battlenetID: $('#battlenetID').val(), steamID: $('#steamID').val(), twitchID: $('#twitchID').val(), uplayID: $('#uplayID').val(), favouritegames: $('#favouritegames').val(), about: $('#about').val()}),
                 dataType : 'html',
                 success: function(){
-                    window.location.replace("/myprofile");
+                    window.location.replace(document.URL);
                 }
           });
         });

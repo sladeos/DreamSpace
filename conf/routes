@@ -5,10 +5,6 @@
 # Home page
 GET     /                           controllers.Application.mainMethod()
 
-
-#Get to otheruserprofile html-page
-GET   /otheruser controllers.Application.otheruser()
-
 #Get to packlist html-page
 GET   /packlist controllers.Application.packlist()
 
@@ -94,7 +90,7 @@ GET /myetournaments controllers.TournamentDatabase.getMyTournaments()
 #edit user profile
 POST /edituserprofile controllers.UserProfileDatabase.editUserProfile()
 
-#Get to otheruserprofile html-page
+#Get to retrieve Profile page, renders edit or other depending onc urrent user
 GET   /profile/:user controllers.Application.showProfile(user: String)
 
 GET /profile controllers.UserProfileDatabase.getProfiles()
