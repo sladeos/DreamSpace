@@ -13,35 +13,35 @@
         <div data-role="page" data-theme="b" id = "main" class = "page"  >
              <div data-role="header" class = "header">
 	       @Templates.header()
+            <a href="#" data-rel="back" data-role="button" role="button" data-icon="back" data-inline="true" data-mini = "true">Back</a>
 	       </div>
             <div data-role="content" class = "content">
-                <div class = "wrap">
-                    <h1 align="center">Your EArena Ad</h1>
+
+                 <h1 align="center">Your EArena Ad</h1>
+
+                <div class = "search">
+
+                    <div data-role="collapsible" class="ui-icon-alt" data-collapsed-icon="arrow-r" data-inline="true" data-expanded-icon="arrow-d" data-iconpos="right"  >
+
+                   
                     
-                    <button id="share_button" class = "myFace faceButton search" data-mini="true">Facebook Share</button>
-                    
-                    <button type='button' id='editearenaad' value='Edit EArenaAd' class = "submitReplay" data-icon="arrow-d">Edit EArenaAd</button>
-                    <div id="editad" style="display: none;">
-                        <div data-role="fieldcontain"class="ui-hide-label">
-                            <label for="arenaName">Arena Ad Name:</label>
+                    <!-- <button id="share_button" class = "myFace faceButton search" data-mini="true">Facebook Share</button> -->
+                     <h3 class = "custom-centercollheader" >Edit ad</h3>
+                   
+
                             <input type="text" name="arenaName" id="arenaName" value="@eAd.arenaName" placeholder="Arena Ad Name"/>
-                        </div>
-                        <div data-role="fieldcontain" class="ui-hide-label">
-                            <label for="gameName" >Game:</label>
+                    
                             <input type="text" name="gameName" id="game" value="@eAd.gameName" placeholder="Game "/>
-                        </div>
-                        <div data-role="fieldcontain" class="ui-hide-label">
-                            <label for="playersRequired" >Players Required:</label>
+             
                             <input type="number" min="1" max="100" name="playersRequired" id="playersRequired" value="@eAd.playersRequired" placeholder="Players Required"/>
-                        </div>
-                        <div data-role="fieldcontain" class="ui-hide-label">
+                   
                             <textarea placeholder="Enter some information about your ad here!" name="information" id="informationArea" rows="4" cols="50"  >@eAd.information</textarea>
-                        </div>
+                    
                         <div style="display: none;">
                             <input type="id" name="id" id="id" value="@eAd.arenaID"/>
                         </div>
                         <button  class = "my-btn"  id="updateearena"  value="Update EArena Ad" onclick="validate()">Update EArena Ad </button>
-                        <button data-role = "button" value="Delete EArena" id="deletearena" class = "submitReplay">Delete EArena</button>
+                        <button data-role = "button" value="Delete EArena" id="deletearena" class = "submitReplay goBackButton" data-icon="delete" data-iconpos="right">Delete EArena</button>
                             <p id="warning"></p>
                         </div>
                     </div>
@@ -233,6 +233,7 @@
             </script>
                 
                 <div class = "wrap">
+
                     <div id="adinfo">
                         <article data-role="listview" data-inset="true" data-dividertheme="a"> 
                             <li><h2>@eAd.arenaName</h2>

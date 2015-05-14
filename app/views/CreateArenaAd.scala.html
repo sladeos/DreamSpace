@@ -14,10 +14,12 @@
     <div data-role="page" data-theme="b" id = "main" class = "page"  >
 	   <div data-role="header" class = "header">
 	       @Templates.header()
+           <a href="#" data-rel="back" data-role="button" role="button" data-icon="back" data-inline="true" data-mini = "true">Back</a> 
 	       </div>
         <div data-role="content" class = "content">  
             <h1 align="center">Create an EArena Ad</h1>
-            <div id = "createAEform">
+
+            <div class = "search">
                 <form id ="EArenaForm"  method ="post" action="@routes.EArenaDatabase.addEArenaAd()" data-ajax="false">
                     <div data-role="fieldcontain" class="ui-hide-label">
                         <label for="arenaName">Arena Ad Name:</label>
@@ -35,7 +37,7 @@
                     <div data-role="fieldcontain" class="ui-hide-label">
                         <textarea placeholder="Enter some information about your ad here!" name="information" id="informationArea" rows="4" cols="50" ></textarea>
                     </div>
-                    <button class = "my-btn"  type="submit" value="Create EArena Ad" onclick="return validate()">Create EArenaAd </button>
+                    <button class = "my-btn"  type="submit" value="Create EArena Ad" onclick="return validate()">UPLOAD </button>
                     <p id="warning"></p>
                 </form>
             </div>

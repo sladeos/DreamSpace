@@ -15,14 +15,22 @@
 	       </div>
             <div data-role="content" class = "content">   
                 <h1 align="center">EArena</h1>
-           
-                <button id="share_button" class = "myFace faceButton search" data-mini="true">Facebook Share</button>
-                <button data-role = "button" id = "creatAd" class = "search" rel="external" href="/">Create ad</button>
-            
+           <!-- 
+                <button id="share_button" class = "myFace faceButton search" data-mini="true">Facebook Share</button> -->
+                 <div class ="search">
+                  <button data-role = "button" id = "MYEArena"  rel="external" href="/" data-icon="user" data-iconpos="right" >My Ads</button>
+                  <p>
+                  <button data-role = "button" id = "creatAd"  rel="external" href="/" data-icon="arrow-r" data-iconpos="right" >Create ad</button>
+                </div>
+
+ 
                   <script type="text/javascript">
 
                         $('#creatAd').click(function() {
                     window.location='/createarenaad'; });
+
+                        $('#MYEArena').click(function() {
+                        window.location='/myearena'; });
 
                   </script>
             <script type="text/javascript">
@@ -46,37 +54,39 @@
             
                 
                 
-                <div class ="search">
-     	    <form data-ajax="false">
-     	        <input type="search" name="search" id="search-basic" value="" />
-     	            
-     	        <button id="showAdv" type="button"  data-icon="arrow-d" >Show advanced search options</button>
-     	        <div id="advSearch" style="display: none;">
-     	        <label>Search for: </label>
-     	        
- 	              <div class="ui-grid-c ui-responsive" >
-                    <div class="ui-block-a" >
-                        <input type="text" name="game" placeholder="Game" id="game">
-                    </div>
-                    <div class="ui-block-b">
-                        <input type="text" name="username" placeholder="Username" id="username">
-                    </div>
-                    <div class="ui-block-c">
-                        <input type="number" name="players" placeholder="Players" id="players">
-                    </div>
-                    <div class="ui-block-d">
-                        <input type="number" name="minutes" placeholder="Search X minutes ago" id="minutes">
-                    </div>
- 	             </div>
- 	            </div>
- 	            <button class="my-btn" type="submit"  data-icon="search">Search</button>
- 	            
- 	    </form>
-        </div>
+        <div class ="search">
+               <div data-role="collapsible" class="ui-icon-alt" data-collapsed-icon="arrow-r" data-expanded-icon="arrow-d" data-iconpos="right"  >
+                       <h3 class = "custom-centercollheader" >Search</h3>
+     	       <form data-ajax="false">
+
+     	         
+                           <input type="search" name="search" id="search-basic" value="" />
+ 	                          <p>Advanced search</p>
+                            <hr>
+                            <div data-role="fieldcontain"class="ui-hide-label" >
+                                <input type="text" name="game" placeholder="Game" id="game">
+                            
+                            
+                                <input type="text" name="username" placeholder="Username" id="username">
+                         
+                            
+                                <input type="number" name="players" placeholder="Players" id="players">
+                          
+                                <input type="number" name="minutes" placeholder="Search X minutes ago" id="minutes">
+                            </div>
+ 	                      <div data-role="controlgroup" data-type="horizontal" style="text-align:center;">
+ 	                        <button data-inline="true" type="submit"  data-icon="search" data-mini="true">GO!</button>
+                      </div>
+                </form>
+            </div>
+        </div>  
+        <div class = "search">    
+        <h3>Ads found</h3>  
+                 
+                 </div>
                 
-                
-                
-                <div id = "MEArenaContent">
+                <div class ="MEArenaContent">
+                <hr>
                     <article  data-role="listview" data-inset="true" data-dividertheme="a"> 
                         @for(eads <- eads) {
                             <li  data-role = "list-divider" ></li>
