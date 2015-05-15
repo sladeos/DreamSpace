@@ -97,3 +97,5 @@ POST /savepicture controllers.PictureDatabase.savePicture()
 
 #Get to retrive pictures
 GET /pictures controllers.PictureDatabase.getPictures()
+
+GET /pic/:id controllers.PictureDatabase.render(id: Integer)
