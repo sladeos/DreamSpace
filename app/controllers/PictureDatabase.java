@@ -4,9 +4,11 @@ import models.*;
 import play.*;
 import play.mvc.*;
 
+import java.io.DataInputStream;
 import java.io.File;
-
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,6 +26,9 @@ import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
 import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
+
+
+
 
 
 
@@ -142,49 +147,48 @@ public class PictureDatabase extends Controller{
 		try {
 			conn = DB.getConnection();
 			
-			String sql = "INSERT INTO Picture (creator, path) VALUES(?,?)";
+			String sql = "INSERT INTO Picture (creator, image) VALUES(?,?)";
 			preparedStatement = conn.prepareStatement(sql);
 			
 			MultipartFormData body = request().body().asMultipartFormData();
-			abc="0";
+
 			
 			FilePart picture = body.getFile("picture");
-			abc="55";
+
 			
 			  if (picture != null) {
-				  abc="11";
+
 				  File file = picture.getFile();
-				  img = ImageIO.read(file);
-				  abc="12";
-				  if(readImageInformation(file) !=null){
-			      ImageInformation imageF = readImageInformation(file);
-					  
+//				  img = ImageIO.read(file);
+//
+//				  if(readImageInformation(file) !=null){
+//			      ImageInformation imageF = readImageInformation(file);
+//
+//				  AffineTransform info =  getExifTransformation(imageF);
+//
+//				  finalImg = transformImage(img, info);
+//
+//				  }else{
+//					  finalImg =img;
+//				  }
+//               
+//			    String suffix = picture.getContentType().substring(picture.getContentType().lastIndexOf("/") + 1);
+//			    
+//			    
+//                File path = new File("public\\users\\"+ currentuser+ "\\uploadedimages\\" + file.getName() + "." + suffix);
+//	                if (!path.exists()) {
+//                    path.mkdirs();
+//	                }
 				  
-				  abc="1";
-				  AffineTransform info =  getExifTransformation(imageF);
-				  abc="2";
-				  abc="3";
-				  finalImg = transformImage(img, info);
-				  abc="4";
-				  }else{
-					  finalImg =img;
-				  }
-               
-			    String suffix = picture.getContentType().substring(picture.getContentType().lastIndexOf("/") + 1);
-			    
-			    
-                File path = new File("public\\users\\"+ currentuser+ "\\uploadedimages\\" + file.getName() + "." + suffix);
-	                if (!path.exists()) {
-                    path.mkdirs();
-	                }
+				  InputStream inputStream = new FileInputStream(file);
 	                
 	                preparedStatement.setString(1, currentuser);
-	                preparedStatement.setString(2, path.toString());
+	                //preparedStatement.setString(2, path.toString());
+	                preparedStatement.setBlob(2, inputStream);
 	                preparedStatement.executeUpdate();
-	                abc="5";
+
 			    
-			    ImageIO.write(finalImg, suffix, path);
-	                abc="6";
+//			    ImageIO.write(finalImg, suffix, path);
 			    return redirect(routes.PictureDatabase.getPictures());
 			    
 			  }else{
@@ -208,66 +212,77 @@ public class PictureDatabase extends Controller{
 	
 	
 	
-	
+	public static Result getPictures() {
+		String currentUser = session("connected");
+		if (currentUser == null) {
+			return unauthorized(LoginUserPage
+					.render("You have to login to access this page!"));
+		} else {
+			Connection conn = null;
+			PreparedStatement preparedStatement = null;
+			List<Picture> pList = new ArrayList<Picture>();
+
+			try {
+
+				conn = DB.getConnection();
+
+				String insertIntoDatabase = "SELECT * FROM Picture";
+				preparedStatement = conn.prepareStatement(insertIntoDatabase);
+				ResultSet rs = preparedStatement.executeQuery();
+
+				while (rs.next()) {
+					Picture p = new Picture();
+					p.creator = rs.getString("creator");
+					p.image = rs.getBlob("image");
+				
+					
+//					
+//				InputStream inBlob = b.getBinaryStream();
+//				
+//				byte[] imgDataBa = new byte[(int)inBlob.read()];
+//				DataInputStream dataIs = new DataInputStream((inBlob));
+//				dataIs.readFully(imgDataBa);
+//				p.bBlob = imgDataBa;
+//				
+				p.pictureID = rs.getInt("pictureID");
+				pList.add(p);
+				}
+
+				rs.close();
+				return ok(PicturePage.render(pList));
+				
+			} catch (com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException ice) {
+				return badRequest(ice.toString());
+			} catch (NumberFormatException nfe) {
+				return badRequest(nfe.toString());
+			} catch (SQLException se) {
+				// Handle sql errors
+				return internalServerError(se.toString());
+			} catch (Exception e) {
+				// Handle errors for Class.forName
+				return internalServerError(e.toString());
+			} finally {
+				// finally block used to close resources
+				// try {
+				// if (preparedStatement != null)
+				// conn.close();
+				// } catch (SQLException se) {
+				// } //do nothing
+				try {
+					if (conn != null)
+						conn.close();
+				} catch (SQLException se) {
+					return internalServerError(se.toString());
+				} // end finally try
+			} // end try
+		}
+	}
+		
+
 	
 	
 	
 	/*
-	public static Result savePicture(){
-		Connection conn = null;
-		PreparedStatement preparedStatement = null;
-		String currentuser = session("connected");
-		BufferedImage img = null;
-		try {
-			conn = DB.getConnection();
-			
-			String sql = "INSERT INTO Picture (creator, path) VALUES(?,?)";
-			preparedStatement = conn.prepareStatement(sql);
-			
-			MultipartFormData body = request().body().asMultipartFormData();
-			FilePart picture = body.getFile("picture");
-			
-			
-			  if (picture != null) {
-			    
-			    File file = picture.getFile();
-                img = ImageIO.read(file);
-               
-			    InputStream inputStream = new FileInputStream(file);
-			    String suffix = picture.getContentType().substring(picture.getContentType().lastIndexOf("/") + 1);
-			    
-                File path = new File("public\\users\\"+ currentuser+ "\\uploadedimages\\" + file.getName() + "." + suffix);
-	                if (!path.exists()) {
-                    path.mkdirs();
-	                }
-	                
-	                preparedStatement.setString(1, currentuser);
-	                preparedStatement.setString(2, path.toString());
-	                preparedStatement.executeUpdate();
-			    
-			    ImageIO.write(img, suffix, path);
-			    
-			    return redirect(routes.PictureDatabase.getPictures());
-			    
-			  }else{
-				  
-				 return ok("IMAGE WAS EMPTY");
-			  }
-
-		} catch (Exception e) {
-			// Handle errors for Class.forName
-			return ok("null" + e.toString());
-		} finally {
-			// finally block used to close resources
-			try {
-				if (preparedStatement != null)
-					conn.close();
-			} catch (SQLException se) {
-			}// do nothin
-		}
-
-	}
-*/
 	
 	public static Result getPictures() {
 		String currentUser = session("connected");
@@ -324,5 +339,5 @@ public class PictureDatabase extends Controller{
 			} // end try
 		}
 	}
-		
+		*/
 }
