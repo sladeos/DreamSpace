@@ -16,8 +16,9 @@
             </div>
             <div data-role="content" class = "content" >
                     <h1 align="center">Photo Stream</h1>
-                    
-                    
+                    <div class = "search">
+                    <a data-role = "button" id = "btn2"  rel="external" href="/newpicture" data-icon="arrow-r" data-iconpos="right">Take and Upload a Picture</a>
+                    </div>
                    @for(pictures <- pictures) {
                            
                                <p>Creator:   @pictures.creator </p> 
@@ -32,7 +33,9 @@ $('#@pictures.pictureID').height(500);
 </script>
                       }
                     </ul>
-
+                        <script>
+                        $("#btn2").css("background","  #FF9900");
+                    </script>
 
 
                 </div>
