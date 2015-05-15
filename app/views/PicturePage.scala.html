@@ -20,18 +20,35 @@
                    @for(pictures <- pictures) {
                            
                                <p>Creator:   @pictures.creator </p> 
-                               <div id="photo">
-                               <p><img src="@routes.Assets.at(pictures.path)" id="@pictures.pictureID"></p>
-                               </div>
-<script type="text/javascript">
-$('#@pictures.pictureID').width(500);
-$('#@pictures.pictureID').height(500);
-        
-</script>
+                               <div id="@pictures.pictureID" ></div>
+                               
+                               <script>
+                        
+                               var b = "@pictures.image"
+                               
+                               var blob = new Blob([b], {type: "image/jpeg"});
+                           	
+                               loadImage(
+                            		   blob,
+                            		    function (img) {
+                            			   alert(img)
+                            			   //document.getElementById("@pictures.pictureID").appendChild(img);
+                            			   $('#@pictures.pictureID').prepend(img);
+                            			   
+
+                            		    },{}
+                            		);
+                               
+                               
+                               </script>
 
                       }
                     </ul>
 
+<script type="text/javascript">
+ctures.pictureID').height(500);
+  */      
+</script>
 
 
                 </div>
