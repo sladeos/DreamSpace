@@ -11,22 +11,18 @@ import com.mysql.jdbc.Blob;
 import play.db.ebean.*;
 import play.data.validation.*;
 import play.db.ebean.Model;
-public class Picture extends Model	{
-	
+
+public class Picture extends Model {
 
 	@Id
 	public int pictureID;
-	
-	public String creator;
-	
-	public String path;
-	
-	public java.sql.Blob image;
-	
-	public Blob blob;
-	
-	public InputStream strBlob;
 
-	public byte[] bBlob;
+	public String creator;
+
+	public java.sql.Blob image;
+
+	public String mimetype;
+
+	public Blob blob;
 
 }
