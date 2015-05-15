@@ -17,19 +17,34 @@
      <div data-role="page" data-theme="b" class="page">   
         <div data-role="header" class = "header">
             @Templates.header()
+            <a id = "back" rel="external" href="/mainetournament" data-role="button" role="button" data-icon="back" data-iconpos="notext">Back</a>
+            <script>
+              $("#back").css("background","  #FF9900");
+            </script>
         </div>
         <div data-role="content" class = "content">   
            
  
-            <h1 align="center">Create your tournament</h1>
-            You can change the name of the teams in your tournament by clicking the respective team label, you can also change the score by clicking the label after the team name. This updates the bracket.
+          <h1 align="center">Create your tournament</h1>
+
+
+            
      <div id = "bracketcontent">
    <div id='bracket'></div>
-                <div id='bracketForm' class = "tEdit">
+                <div id='bracketForm' class = "search">
+                <br>
+                <br>
+           
+            <a href="#popupCloseRight" data-rel="popup" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-icon-info ui-btn-icon-right ui-mini">Info</a>
+            <div data-role="popup" id="popupCloseRight" class="ui-content" style="max-width:280px">
+            <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext  ui-btn-right">Close</a>
+            <p>You can change the name of the teams in your tournament by clicking the respective team label, you can also change the score by clicking the label after the team name. This updates the bracket.</p>
+            </div>
+
             <form name="bracketGenerate">
                 Name of your tournament: <input type="text" name="fname" id="fname">
                 Amount of players: 
-        <select id="amount">
+        <select id="amount" data-role = "button" data-inline = "true" data-mini = "true">
             <option value="4">4</option>
             <option value="8">8</option>
             <option value="16">16</option>
@@ -37,7 +52,7 @@
         </select> 
         
        
-        <input type="button" value="Create" id="create">
+        <input data-role = "button"  type="button" value="Create" id="create">
             <p id="warning"></p>
         
     </form>
