@@ -14,21 +14,30 @@
                 @Templates.header()
             </div>
             <div data-role="content" class = "content" >
-                <div class = "mainTournamentContent">   
+                  
                     <h1 align="center">Tournament</h1>
-                    <a data-role = "button" id = "btn"  rel="external" href="/createtournament">Create a new tournament</a>
+                    <div class = "search">
+                    <a data-role = "button" id = "btn1"  rel="external" href="/myetournaments"  data-icon="user" data-iconpos="right">My tournament</a>
+                    <a data-role = "button" id = "btn2"  rel="external" href="/createtournament" data-icon="arrow-r" data-iconpos="right">Create a new tournament</a>
+                    <h3>Available tournaments</h3>
+                    </div>
+                    <div class ="MEArenaContent">
+                            
+                            <hr>
                         <ul data-role="listview" data-inset="true" data-dividertheme="a" data-theme = "b"> 
                         @for(tournament <- tournament) {
                             <li  data-role = "list-divider" ></li>
                                 <li><a data-role = "button"  rel="external"  href="/showtournament/@tournament.tournamentID" class = "greyBtn"><img src="@routes.Assets.at("images/sun.jpg")" alt="Dreamhack" class = "fullscreen"  /><h2>@{"Name: " + tournament.tournamentname}</h2> <p>@{" Size: " +  tournament.participant_count }</p></a>
                             </li>
                         } 
-                    </ul>
+                        </ul>
+                    </div>    
                     <script>
-                        $("#btn").css("background","  #FF9900");
+                        $("#btn1").css("background","  #FF9900");
+                         $("#btn2").css("background","  #FF9900");
                           $("#bt2").addClass('greyBtn');
                     </script>
-                </div>
+                
             </div>
             @Templates.footer()
             @Templates.panelAndLogOut()

@@ -81,11 +81,8 @@ background : #FF9900;
     .ui-page .ui-btn.submitReplay{
         background: #FF9900;
     }
-        .mainTournamentContent{
-    width: 100%;
-    margin: 0 auto;
-    } 
-       .custom-centercollheader a {
+ 
+    .custom-centercollheader a {
         text-align: center !important;
         padding-right: 2.5em !important;
     }
@@ -113,10 +110,6 @@ background : #FF9900;
         max-width: 150px;
 
     }
-        .mainTournamentContent{
-            width: 100%;
-        }
-
 }
 
 
@@ -144,10 +137,6 @@ background : #FF9900;
         margin:0 auto;
 		width: 930px;
 
-    } 
-    .mainTournamentContent{
-            width: 500px;
-            margin: 0 auto;
     } 
     .MEArenaContent{
         width: 500px;
@@ -215,11 +204,6 @@ background : #FF9900;
         width: 150px;
         max-width: 150px;
 
-    }
-
-    
-        .tEdit{
-        width: 300px;
     }
     .mainButton{
         margin:0 auto;

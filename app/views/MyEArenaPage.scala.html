@@ -11,11 +11,9 @@
         <div data-role="page" data-theme="b" id = "main" class = "page"  >
 	         <div data-role="header" class = "header">
 	       @Templates.header()
-            <a id = "back"href="#back" data-role="button" role="button" data-icon="back" data-inline="true" data-mini = "true">Back</a>
-                
-            <script type="text/javascript">
-                 $('#back').click(function() {
-                 window.location='/mainearena';  });
+            <a id = "back" rel="external" href="/mainearena" data-role="button" role="button" data-icon="back" data-iconpos="notext">Back</a>
+              <script>
+              $("#back").css("background","  #FF9900");
             </script>
 	       </div>
             <div data-role="content" class = "content"> 
