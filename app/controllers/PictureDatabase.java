@@ -5,6 +5,7 @@ import play.*;
 import play.mvc.*;
 
 import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.DataInputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -74,7 +75,7 @@ public class PictureDatabase extends Controller {
 		try {
 			orientation = directory.getInt(ExifIFD0Directory.TAG_ORIENTATION);
 		} catch (MetadataException me) {
-			System.out.println("OUCH");
+
 		} catch (NullPointerException npe) {
 			return null;
 		}
@@ -143,7 +144,9 @@ public class PictureDatabase extends Controller {
 		Connection conn = null;
 		PreparedStatement preparedStatement = null;
 		String currentuser = session("connected");
-
+		BufferedImage img = null;
+		BufferedImage finalImg = null;
+		InputStream inputStream;
 		try {
 			conn = DB.getConnection();
 
@@ -155,21 +158,40 @@ public class PictureDatabase extends Controller {
 			FilePart picture = body.getFile("picture");
 
 			if (picture != null) {
-
 				File file = picture.getFile();
-
+				img = ImageIO.read(file);
 				String suffix = "image/";
-				suffix += picture.getContentType().substring(
+				String type = picture.getContentType().substring(
 						picture.getContentType().lastIndexOf("/") + 1);
+					
+				suffix += type;
 
-				InputStream inputStream = new FileInputStream(file);
+				if (readImageInformation(file) != null) {
+					ImageInformation imageF = readImageInformation(file);
+
+					AffineTransform info = getExifTransformation(imageF);
+
+					finalImg = transformImage(img, info);
+					
+					ByteArrayOutputStream os = new ByteArrayOutputStream();
+					ImageIO.write(finalImg, type, os);
+					inputStream = new ByteArrayInputStream(os.toByteArray());
+
+				} else {
+					inputStream = new FileInputStream(file);
+				}
+
+				
+
+			
+
+	
 
 				preparedStatement.setString(1, currentuser);
 				preparedStatement.setBlob(2, inputStream);
 				preparedStatement.setString(3, suffix);
 				preparedStatement.executeUpdate();
 
-				// ImageIO.write(finalImg, suffix, path);
 				return redirect(routes.PictureDatabase.getPictures());
 
 			} else {
