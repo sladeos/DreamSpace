@@ -44,40 +44,6 @@
   
     </div>
    <script type="text/javascript">
-    var tNameOkay = true;
-        $(function() {
-    	function errorInField(){
-    	 $("#warning").css('color', 'red');
-         $('#warning').prepend('<img id="redcross" src="@routes.Assets.at("images/redcross.png")" />')
-         $('#redcross').width(40);
-         $('#redcross').height(40);
-         tNameOkay = false;
-    }
-    	
-    	function fieldOkay(){
-    	    $("#warning").css('color', 'green');
-            $('#warning').prepend('<img id="greentick" src="@routes.Assets.at("images/greentick.png")" />')
-            $('#greentick').width(40);
-            $('#greentick').height(40);
-            tNameOkay = true;
-    		
-    	}
-    
-    $('#fname').change(function() {
-   	 if( $('#fname').val().length <4){
-   		 $("#warning").html('Tournament Name is too short! Please enter a minimum of 4 characters');
-   		errorInField()
-            return;
-   	 }else{
-       $("#warning").html("Tournament Name is okay!");
-	   fieldOkay()
-	   
-   }
-
-    })
-        })
-    
-    
    
 $(function() {
     
@@ -140,7 +106,7 @@ $(function() {
 
 
 $("#create").click(function() {
-    if(tNameOkay && $('#fname').val().length >4){
+    if($('#fname').val().length >3){
     var teams = data.teams
     var results = data.results
 
@@ -151,13 +117,14 @@ $("#create").click(function() {
             data: JSON.stringify({name :  $('#fname').val(), amount: $('#amount').val(), teams: teams, results: results }),
             dataType : 'html',
             success: function(){
-                window.location.replace(document.referrer); 
+                alert("Tournament created!");
+                window.location = "/myetournaments"; 
 
             }
         });
     }else{
     	
-    	 $("#warning").html("There are errors in your tournament! Fix them and try again.");
+    	 $("#warning").html("Tournament Name is too short! Please enter a minimum of 4 characters");
     	 $("#warning").css('color', 'red');
          $('#warning').prepend('<img id="redcross" src="@routes.Assets.at("images/redcross.png")" />')
          $('#redcross').width(40);

@@ -147,6 +147,7 @@ public class EArenaDatabase extends Controller {
 					a.playersRequired = rs.getInt("playersrequired");
 					a.admin = rs.getString("admin");
 					a.createdDate = rs.getString("created_date");
+					a.createdDate = a.createdDate.substring(0, a.createdDate.lastIndexOf("."));
 					adList.add(a);
 				}
 				rs.close();
@@ -217,6 +218,7 @@ public class EArenaDatabase extends Controller {
 					a.playersRequired = rs.getInt("playersrequired");
 					a.admin = rs.getString("admin");
 					a.createdDate = rs.getString("created_date");
+					a.createdDate = a.createdDate.substring(0, a.createdDate.lastIndexOf("."));
 					adList.add(a);
 				}
 				
@@ -242,6 +244,7 @@ public class EArenaDatabase extends Controller {
 					a.playersRequired = rs.getInt("playersrequired");
 					a.admin = rs.getString("admin");
 					a.createdDate = rs.getString("created_date");
+					a.createdDate = a.createdDate.substring(0, a.createdDate.lastIndexOf("."));
 					adList.add(a);
 				}
 
@@ -344,6 +347,8 @@ public class EArenaDatabase extends Controller {
 				a.playersRequired = rs.getInt("playersrequired");
 				a.admin = rs.getString("admin");
 				a.arenaID = id;
+				a.createdDate = rs.getString("created_date");
+				a.createdDate = a.createdDate.substring(0, a.createdDate.lastIndexOf("."));
 			}
 
 			if (a.admin == null ) {
@@ -420,7 +425,7 @@ public class EArenaDatabase extends Controller {
 		try {
 
 			conn = DB.getConnection();
-			String insertIntoDatabase = "SELECT * FROM EArenaReply WHERE arenaID=? ORDER BY created_date DESC;";
+			String insertIntoDatabase = "SELECT * FROM EArenaReply WHERE arenaID=? ORDER BY created_date DESC";
 			preparedStatement = conn.prepareStatement(insertIntoDatabase);
 			preparedStatement.setInt(1, id);
 
@@ -430,6 +435,7 @@ public class EArenaDatabase extends Controller {
 				a.content = rs.getString("replycontent");
 				a.user = rs.getString("username");
 				a.createdDate = rs.getString("created_date");
+				a.createdDate = a.createdDate.substring(0, a.createdDate.lastIndexOf("."));
 				adReplyList.add(a);
 			}
 
@@ -481,10 +487,10 @@ public class EArenaDatabase extends Controller {
 			
 			preparedStatement.executeUpdate();
 
-			return ok("yeees");
+			return ok();
 
 		} catch (com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException ice) {
-			return badRequest(ice.toString() + "WOW");
+			return badRequest(ice.toString());
 		} catch (SQLException se) {
 			// Handle sql errors
 			return internalServerError(se.toString());
@@ -577,7 +583,7 @@ public class EArenaDatabase extends Controller {
 
     conn = DB.getConnection();
 
-    String selectAdminAds = "SELECT * FROM EArena WHERE admin=?";
+    String selectAdminAds = "SELECT * FROM EArena WHERE admin=? ORDER BY created_date DESC";
     preparedStatement = conn.prepareStatement(selectAdminAds);
     preparedStatement.setString(1, currentUser);
     ResultSet rs = preparedStatement.executeQuery();
@@ -590,6 +596,8 @@ public class EArenaDatabase extends Controller {
      a.gameName = rs.getString("gamename");
      a.playersRequired = rs.getInt("playersrequired");
      a.admin = rs.getString("admin");
+     a.createdDate = rs.getString("created_date");
+     a.createdDate = a.createdDate.substring(0, a.createdDate.lastIndexOf("."));
      adList.add(a);
     }
 

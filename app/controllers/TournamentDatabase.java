@@ -73,7 +73,7 @@ public class TournamentDatabase extends Controller {
 		try {
 
 			conn = DB.getConnection();
-			String insertIntoDatabase = "SELECT * FROM ETournament WHERE tournamentID=?;";
+			String insertIntoDatabase = "SELECT * FROM ETournament WHERE tournamentID=? ORDER BY created_date DESC";
 			preparedStatement = conn.prepareStatement(insertIntoDatabase);
 			preparedStatement.setInt(1, id);
 
@@ -123,7 +123,7 @@ public class TournamentDatabase extends Controller {
 
 				conn = DB.getConnection();
 
-				String insertIntoDatabase = "SELECT * FROM ETournament WHERE 1";
+				String insertIntoDatabase = "SELECT * FROM ETournament WHERE 1 ORDER BY created_date DESC";
 				preparedStatement = conn.prepareStatement(insertIntoDatabase);
 				ResultSet rs = preparedStatement.executeQuery();
 				// boolean next =
@@ -357,7 +357,7 @@ public class TournamentDatabase extends Controller {
 			try {
 				conn = DB.getConnection();
 
-				String insertIntoDatabase = "SELECT * FROM ETournament et WHERE admin=?";
+				String insertIntoDatabase = "SELECT * FROM ETournament et WHERE admin=? ORDER BY created_date DESC";
 				preparedStatement = conn.prepareStatement(insertIntoDatabase);
 				preparedStatement.setString(1, currentUser);
 				ResultSet rs = preparedStatement.executeQuery();

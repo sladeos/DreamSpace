@@ -36,7 +36,6 @@
             <div id="bracket"></div>
              <div id='bracketForm' class = "tEdit">
 
-               
                 Name of your tournament: <input type="text" name="fname" id="fname">
                 <button data-role = "button"  value="Save changes" id="save" class = "submitReplay">Save changes</button>
                 
@@ -46,6 +45,7 @@
                         </div>
 
             <script>
+
                var data;
                var a = @Html(tournament.tournamentdata);
                var tid = @tournament.tournamentID;
@@ -128,6 +128,7 @@
                $("#save").click(function(event) {
                     event.preventDefault();
                    name = $("#fname").val();
+                   if(name.length >3){
                    amount;
                    data = container.bracket('data');
                    var teams = data.teams;
@@ -142,17 +143,27 @@
                            data: JSON.stringify({ id: id, name: name, amount: amount, teams: teams, results: results }),
                            dataType : 'html',
                            success: function(){
-                              window.location.replace(document.referrer); 
+                                alert("Tournament edited!");
+                                location.reload(); 
 
                            }
                    });
+                   } else {
+                       
+                        $("#warning").html("Tournament Name is too short! Please enter a minimum of 4 characters");
+                        $("#warning").css('color', 'red');
+                        $('#warning').prepend('<img id="redcross" src="@routes.Assets.at("images/redcross.png")" />')
+                        $('#redcross').width(40);
+                        $('#redcross').height(40);
+                   } 
+                   
                
                });
                /////////////////////////////////////////////////delete button /////////////////////          
                
                $("#delete").click(function() {
                
-           if (true) {
+          
              var data = {
                "id": "@tournament.tournamentID"
 
@@ -165,21 +176,13 @@
                data: JSON.stringify(data),
                dataType: 'html',
                success: function() {
-                window.location.replace(document.referrer);     
+                    alert("Tournament deleted!");
+                    window.location = "/myetournaments";    
 
                }
 
              });
-           }
-           else {
-
-             $("#warning").html("There are errors in your tournament! Fix them and try again.");
-             $("#warning").css('color', 'red');
-             $('#warning').prepend('<img id="redcross" src="@routes.Assets.at("images/redcross.png")" />')
-             $('#redcross').width(40);
-             $('#redcross').height(40);
-
-           }
+           
          });
 
             </script>
