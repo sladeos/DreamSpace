@@ -160,9 +160,12 @@
                
                });
                /////////////////////////////////////////////////delete button /////////////////////          
-               
+               var deleteconfirmation = false;
                $("#delete").click(function() {
-               
+               if (deleteconfirmation == false){
+                    $("#delete").html("Are you sure?");
+                    deleteconfirmation = true;
+                } else {
           
              var data = {
                "id": "@tournament.tournamentID"
@@ -182,7 +185,7 @@
                }
 
              });
-           
+                }
          });
 
             </script>
