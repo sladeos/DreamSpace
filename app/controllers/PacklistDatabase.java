@@ -31,6 +31,7 @@ public class PacklistDatabase extends Controller {
 		String personalComputer = json.findPath("pc").textValue();
 		String powerstrip = json.findPath("powerstrip").textValue();
 		String screenAndCables = json.findPath("screenAnd").textValue();
+		String keyboard = json.findPath("keyboard").textValue();
 
 //Testutskrift i activators system bara för att se att 1:orna och 0:orna blir rätt.  
 		System.out.println("EDIT -> PC: " + personalComputer + " , " + "POWERSTRIP: " + powerstrip + " , " + "SCREENAND: " + screenAndCables);
@@ -95,6 +96,16 @@ public static Result addPacklist() {
 		String personalComputer = json.findPath("pc").textValue();
 		String powerstrip = json.findPath("powerstrip").textValue();
 		String screenAndCables = json.findPath("screenAnd").textValue();
+		String keyboard = json.findPath("keyboard").textValue();
+		String headset = json.findPath("headset").textValue();
+		String networkCable = json.findPath("networkCable").textValue();
+		String screwdriver = json.findPath("screwdriver").textValue();
+		String cable_Ties = json.findPath("cable_Ties").textValue();
+		String ductTape = json.findPath("ductTape").textValue();
+		String gameConsole = json.findPath("gameConsole").textValue();
+		String mobilePhone = json.findPath("mobilePhone").textValue();
+		String camera = json.findPath("camera").textValue();
+		String flashlight = json.findPath("flashlight").textValue();
 //Testutskrift i activators system bara för att se att 1:orna och 0:orna blir rätt.  
 		System.out.println("ADD -> PC: " + personalComputer + " , " + "POWERSTRIP: " + powerstrip + " , " + "SCREENAND: " + screenAndCables);
 
@@ -102,7 +113,7 @@ public static Result addPacklist() {
 
 			conn = DB.getConnection();
 
-			String insertIntoDatabase = "INSERT INTO Packlist (username, personalComputer, powerstrip, screenAndCables) VALUES(?,?,?,?)";
+			String insertIntoDatabase = "INSERT INTO Packlist (username, personalComputer, powerstrip, screenAndCables, keyboard, headset, networkCable, screwdriver, cable_Ties, ductTape, gameConsole, mobilePhone, camera, flashlight) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 			
 						
 			preparedStatement = conn.prepareStatement(insertIntoDatabase);
@@ -111,6 +122,16 @@ public static Result addPacklist() {
 			preparedStatement.setString(2, personalComputer);
 			preparedStatement.setString(3, powerstrip);
 			preparedStatement.setString(4, screenAndCables);
+			preparedStatement.setString(5, keyboard);
+			preparedStatement.setString(6, headset);
+			preparedStatement.setString(7, networkCable);
+			preparedStatement.setString(8, screwdriver);
+			preparedStatement.setString(9, cable_Ties);
+			preparedStatement.setString(10, ductTape);
+			preparedStatement.setString(11, gameConsole);
+			preparedStatement.setString(12, mobilePhone);
+			preparedStatement.setString(13, camera);
+			preparedStatement.setString(14, flashlight);
 			
 			
 			preparedStatement.executeUpdate();

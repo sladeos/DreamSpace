@@ -37,6 +37,8 @@
                 <label><input type="checkbox" name="checkbox-0" id="pc" value="0">Personal computer with all cables</label>
                 <label><input type="checkbox" name="checkbox-0" id="powerstrip" value="0">Powerstrip so you can connect all your stuff</label>
                 <label><input type="checkbox" name="checkbox-0" id="screenAnd" value="0">Screen and associated cables</label>
+                <label><input type="checkbox" name="checkbox-0" id="keyboard" value="0">Keyboard and mouse</label>
+                <label><input type="checkbox" name="checkbox-0" id="headset" value="0">headset</label>
                 
                 <div Style="float:right"><input type="button" value="Save" id="save"  data-mini="true"></div>
 
@@ -57,12 +59,19 @@
             if($('#screenAnd').is(':checked')){
             document.getElementById("screenAnd").value = 1;
             } 
+            if($('#keyboard').is(':checked')){
+            document.getElementById("keyboard").value = 1;
+            } 
+            if($('#headset').is(':checked')){
+            document.getElementById("headset").value = 1;
+            } 
+            
  //POSTen.         
           $.ajax({
                 url: "/addpacklist",
                 type: 'POST',
                 contentType:'application/json',
-                data: JSON.stringify({pc: $('#pc').val(), powerstrip: $('#powerstrip').val(), screenAnd: $('#screenAnd').val()}),
+                data: JSON.stringify({pc: $('#pc').val(), powerstrip: $('#powerstrip').val(), screenAnd: $('#screenAnd').val(), keyboard: $('#keyboard').val(), headset: $('#headset').val()}),
                 dataType : 'html',
                 success: function(){
                     window.location.replace("/myprofile");
@@ -72,6 +81,8 @@
       document.getElementById("pc").value = 0;
       document.getElementById("powerstrip").value = 0;
       document.getElementById("screenAnd").value = 0;
+      document.getElementById("keyboard").value = 0;
+      document.getElementById("headset").value = 0;
 
         });
       </script>
