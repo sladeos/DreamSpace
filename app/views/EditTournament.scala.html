@@ -22,6 +22,7 @@
             <h1 align="center">Edit your tournament</h1>
 
             <button id="share_button" class = "myFace faceButton search" data-mini="true">Facebook Share</button>
+            <br>
             <script type="text/javascript">
             $(document).ready(function() {
               $('#share_button').click(function(e) {
@@ -40,7 +41,8 @@
             <div id="bracket"></div>
              <div id='bracketForm' class = "search">
 
-               <br><br>
+               <br>
+               <br>
                 <a href="#popupCloseRight" data-rel="popup" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-icon-info ui-btn-icon-right ui-mini">Info</a>
                 <div data-role="popup" id="popupCloseRight" class="ui-content" style="max-width:280px">
                 <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext  ui-btn-right">Close</a>
@@ -195,7 +197,7 @@
             </script>
             
          </div>
-         @Templates.footer()
+         @Templates.mitLicens()
          @Templates.panelAndLogOut()
       </div>
    </body>
