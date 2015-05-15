@@ -71,3 +71,6 @@ POST /edituserprofile controllers.UserProfileDatabase.editUserProfile()
 
 #edit Packlist
 POST /editpacklist controllers.PacklistDatabase.editPacklist()
+
+#add Packlist
+POST /addpacklist controllers.PacklistDatabase.addPacklist()
