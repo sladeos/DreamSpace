@@ -163,8 +163,8 @@
                /////////////////////////////////////////////////delete button /////////////////////          
                
                $("#delete").click(function() {
-               
-           if (true) {
+               var is_sure = confirm("Are you sure you want to delete?");
+           if (is_sure == true) {
              var data = {
                "id": "@tournament.tournamentID"
 
