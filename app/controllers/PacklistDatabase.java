@@ -33,9 +33,6 @@ public class PacklistDatabase extends Controller {
 		String screenAndCables = json.findPath("screenAnd").textValue();
 		String keyboard = json.findPath("keyboard").textValue();
 
-//Testutskrift i activators system bara för att se att 1:orna och 0:orna blir rätt.  
-		System.out.println("EDIT -> PC: " + personalComputer + " , " + "POWERSTRIP: " + powerstrip + " , " + "SCREENAND: " + screenAndCables);
-
 		try {
 
 			conn = DB.getConnection();
@@ -49,7 +46,6 @@ public class PacklistDatabase extends Controller {
 			preparedStatement.setString(2, powerstrip);
 			preparedStatement.setString(3, screenAndCables);
 			preparedStatement.setString(4, username);
-			
 			
 			preparedStatement.executeUpdate();
 			return ok("Succesful Reply!");
@@ -73,19 +69,6 @@ public class PacklistDatabase extends Controller {
 			} // end finally try
 		} // end try
 	}
-
-
-	
-
-
-
-
-
-
-
-
-
-
 
 public static Result addPacklist() {
 		Connection conn = null;
@@ -135,8 +118,7 @@ public static Result addPacklist() {
 			conn = DB.getConnection();
 
 			String insertIntoDatabase = "INSERT INTO Packlist (username, personalComputer, powerstrip, screenAndCables, keyboard, headset, networkCable, screwdriver, cable_Ties, ductTape, gameConsole, mobilePhone, camera, flashlight, chair, safe, installationMedia, drivers, games, antiVirus, toothbrush, soap, handCream, shampoo, deo, aspirin, earplugs, medication, clothes, swimwear, sheets, sleepingBag, pillow, mattress) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-			
-						
+							
 			preparedStatement = conn.prepareStatement(insertIntoDatabase);
 
 			preparedStatement.setString(1, username);
@@ -173,10 +155,6 @@ public static Result addPacklist() {
 			preparedStatement.setString(32, sleepingBag);
 			preparedStatement.setString(33, pillow);
 			preparedStatement.setString(34, mattress);
-
-
-
-			
 			
 			preparedStatement.executeUpdate();
 			return ok("Succesful Reply!");
@@ -201,104 +179,74 @@ public static Result addPacklist() {
 		} // end try
 	}
 
-
-
-
-
-// public static Result getPacklist(String user) {
-// 		Connection conn = null;
-// 		PreparedStatement preparedStatement = null;
+ public static Result getPacklist(String user) {
+ 		Connection conn = null;
+ 		PreparedStatement preparedStatement = null;
 		
-// 		Packlist pL = new Packlist():
-// 		String username = session("connected");
+ 		Packlist pL = new Packlist();
+ 		String username = session("connected");
 
-	
+ 		try {
+ 			conn = DB.getConnection();
+			String insertIntoDatabase = "SELECT * FROM Packlist WHERE username=?;";
+ 			preparedStatement = conn.prepareStatement(insertIntoDatabase);
+ 			preparedStatement.setString(1, user);
 
-// 		try {
+ 			ResultSet rs = preparedStatement.executeQuery();
 
-// 			conn = DB.getConnection();
+ 			if (rs.isBeforeFirst()) {
+				rs.next();
+ 				pL.pc = rs.getString("personalComputer");
+ 				pL.powerstrip = rs.getString("powerstrip");
+				pL.screenAnd = rs.getString("screenAnd");
+ 				pL.keyboard = rs.getString("keyboard");
+ 				pL.headset = rs.getString("headset");
+ 				pL.networkCable = rs.getString("networkCable");
+				pL.screwdriver = rs.getString("screwdriver");
+				pL.cable_Ties = rs.getString("cable_Ties");
+				pL.ductTape = rs.getString("ductTape");
+				pL.gameConsole = rs.getString("gameConsole");
+				pL.mobilePhone = rs.getString("mobilePhone");
+ 				pL.camera = rs.getString("camera");
+ 				pL.flashlight = rs.getString("flashlight");
+ 				pL.chair = rs.getString("chair");
+ 				pL.safe = rs.getString("safe");
+				pL.installationMedia = rs.getString("installationMedia");
+ 				pL.drivers = rs.getString("drivers");
+ 				pL.games = rs.getString("games");
+ 				pL.antiVirus = rs.getString("antiVirus");
+ 				pL.toothbrush = rs.getString("toothbrush");
+ 				pL.soap = rs.getString("soap");
+ 				pL.handCream = rs.getString("handCream");
+ 				pL.shampoo = rs.getString("shampoo");
+ 				pL.deo = rs.getString("deo");
+ 				pL.aspirin = rs.getString("aspirin");
+ 				pL.earplugs = rs.getString("earplugs");
+ 				pL.medication = rs.getString("medication");
+ 				pL.clothes = rs.getString("clothes");
+ 				pL.swimwear = rs.getString("swimwear");
+ 				pL.sheets = rs.getString("sheets");
+ 				pL.sleepingBag = rs.getString("sleepingBag");
+ 				pL.pillow = rs.getString("pillow");
+ 				pL.mattress = rs.getString("mattress");
+ 				pL.userID = rs.getInt("userId");
 
-// 			String insertIntoDatabase = "SELECT * INTO Packlist WHERE username=?;";
-// 			preparedStatement = conn.prepareStatement(insertIntoDatabase);
-// 			preparedStatement.setString(1, user);
+ 			}
 
-
-// 			ResultSet rs = preparedStatement.executeQuery();
-// 			if (rs.isBeforeFirst()) {
-// 				rs.next();
-// 				pL.personalComputer = rs.getInt("personalComputer");
-// 				pL.powerstrip = rs.getString("powerstrip");
-// 				pL.screenAndCables = rs.getInt("screenAndCables");
-// 				pL.keyboard = rs.getString("keyboard");
-// 				pL.headset = rs.getString("headset");
-// 				pL.networkCable = rs.getInt("networkCable");
-// 				pL.screwdriver = rs.getString("screwdriver");
-// 				pL.cable_Ties = rs.getInt("cable_Ties");
-// 				pL.ductTape = rs.getString("ductTape");
-// 				pL.gameConsole = rs.getString("gameConsole");
-// 				pL.mobilePhone = rs.getInt("mobilePhone");
-// 				pL.camera = rs.getString("camera");
-// 				pL.flashlight = rs.getInt("flashlight");
-// 				pL.chair = rs.getInt("chair");
-// 				pL.safe = rs.getInt("safe");
-// 				pL.installationMedia = rs.getInt("installationMedia");
-// 				pL.drivers = rs.getInt("drivers");
-// 				pL.games = rs.getInt("games");
-// 				pL.antiVirus = rs.getInt("antiVirus");
-// 				pL.toothbrush = rs.getInt("toothbrush");
-// 				pL.soap = rs.getInt("soap");
-// 				pL.handCream = rs.getInt("handCream");
-// 				pL.shampoo = rs.getInt("shampoo");
-// 				pL.deo = rs.getInt("deo");
-// 				pL.aspirin = rs.getInt("aspirin");
-// 				pL.earplugs = rs.getInt("earplugs");
-// 				pL.medication = rs.getInt("medication");
-// 				pL.clothes = rs.getInt("clothes");
-// 				pL.swimwear = rs.getInt("swimwear");
-// 				pL.sheets = rs.getInt("sheets");
-// 				pL.sleepingBag = rs.getInt("sleepingBag");
-// 				pL.pillow = rs.getInt("pillow");
-// 				pL.mattress = rs.getInt("mattress");
-
-// 			}
-
-
-// 		return pL;
-
-
+ 		return pL;
 		
-// 		} catch (SQLException se) {
-// 			return null;
-// 		} catch (Exception e) {
-// 			// Handle errors for Class.forName
-// 			return null;
-// 		} finally {
-// 			try {
-// 				if (preparedStatement != null)
-// 					conn.close();
-// 			} catch (SQLException se) {
-// 			} // end finally try
-// 		} // end try
-// 	}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+ 		} catch (SQLException se) {
+ 			return null;
+ 		} catch (Exception e) {
+ 			// Handle errors for Class.forName
+ 			return null;
+ 		} finally {
+ 			try {
+ 				if (preparedStatement != null)
+ 					conn.close();
+ 			} catch (SQLException se) {
+ 			} // end finally try
+ 		} // end try
+ 	}
 
 }

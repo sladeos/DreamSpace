@@ -152,24 +152,15 @@ public class Application extends Controller {
 		}
  
 
-			// public static Result showPacklist(String userUrl) {
-			// 	String user = session("connected");
-			// 	if (user != null) {
-			// 		if (user.equals(userUrl)) {
-			// 			return ok(Packlist.render(PacklistDatabase.getPacklist(user)));
-			// 		} 
-			// 	} else {
-			// 		return unauthorized(LoginUserPage
-			// 				.render("Welcome, login to explore the website"));
-			// 	}
-			// }
-
-
-
-
-
+			 public static Result showPacklist(String userUrl) {
+				String user = session("connected");
+			 	if (user != null) {
+			 		if (user.equals(userUrl)) {
+			 			return ok(Packlist.render(PacklistDatabase.getPacklist(user)));
+			 		} 
+			 	} else {
+			 		return unauthorized(LoginUserPage
+			 				.render("Welcome, login to explore the website"));
+			 	}
+			 }
 }
-
-
-
-

@@ -1,4 +1,5 @@
-@(message: String)
+@(packlist: Packlist)
+
 
 <!DOCTYPE html>
 
@@ -67,14 +68,21 @@
                 <label><input type="checkbox" name="checkbox-0" id="sleepingBag" value="unchecked">sleepingbag</label>
                 <label><input type="checkbox" name="checkbox-0" id="pillow" value="unchecked">pillow</label>
                 <label><input type="checkbox" name="checkbox-0" id="mattress" value="unchecked">mattress</label>
-
-
                 
                 <div Style="float:right"><input type="button" value="Save" id="save"  data-mini="true"></div>
 
                 </fieldset>
                 </div>
               </form>
+
+              <div class="section">
+                <div data-role="fieldcontain">
+                    <label for="pc">Personal computer:</label>
+                    <p>
+                        @packlist.pc
+                    </p>
+                </div>
+            </div>
      
     <script>
         $("#save").click(function() {
@@ -185,7 +193,7 @@
                 url: "/addpacklist",
                 type: 'POST',
                 contentType:'application/json',
-                data: JSON.stringify({pc: $('#pc').val(), powerstrip: $('#powerstrip').val(), screenAnd: $('#screenAnd').val(), keyboard: $('#keyboard').val(), headset: $('#headset').val(), networkCable: $('#networkCable').val(), screwdriver: $('#screwdriver').val(), cable_Ties: $('#cable_Ties').val(), ductTape: $('#ductTape').val(), gameConsole: $('#gameConsole').val(), mobilePhone: $('#mobilePhone').val, camera: $('#camera').val(), flashlight: $('#flashlight').val(), chair: $('#chair').val(), safe: $('#safe').val(), installationMedia: $('#installationMedia').val(), drivers: $('#drivers').val(), games: $('#games').val(), antiVirus: $('#antiVirus').val(), toothbrush: $('#toothbrush').val(), soap: $('#soap').val(), handCream: $('#handCream').val(), shampoo: $('#shampoo').val(), deo: $('#deo').val(), aspirin: $('#aspirin').val(), earplugs: $('#earplugs').val(), medication: $('#medication').val(), clothes: $('#clothes').val(), swimwear: $('#swimwear').val(), sheets: $('sheets').val(), sleepingBag: $('#sleepingBag').val(), pillow: $('#pillow').val(), mattress: $('#mattress').val()}),
+                data: JSON.stringify({pc: $('#pc').val(), powerstrip: $('#powerstrip').val(), screenAnd: $('#screenAnd').val(), keyboard: $('#keyboard').val(), headset: $('#headset').val(), networkCable: $('#networkCable').val(), screwdriver: $('#screwdriver').val(), cable_Ties: $('#cable_Ties').val(), ductTape: $('#ductTape').val(), gameConsole: $('#gameConsole').val(), mobilePhone: $('#mobilePhone').val(), camera: $('#camera').val(), flashlight: $('#flashlight').val(), chair: $('#chair').val(), safe: $('#safe').val(), installationMedia: $('#installationMedia').val(), drivers: $('#drivers').val(), games: $('#games').val(), antiVirus: $('#antiVirus').val(), toothbrush: $('#toothbrush').val(), soap: $('#soap').val(), handCream: $('#handCream').val(), shampoo: $('#shampoo').val(), deo: $('#deo').val(), aspirin: $('#aspirin').val(), earplugs: $('#earplugs').val(), medication: $('#medication').val(), clothes: $('#clothes').val(), swimwear: $('#swimwear').val(), sheets: $('#sheets').val(), sleepingBag: $('#sleepingBag').val(), pillow: $('#pillow').val(), mattress: $('#mattress').val()}),
                 dataType : 'html',
                 success: function(){
                     window.location.replace("/myprofile");
@@ -226,10 +234,6 @@
       document.getElementById("sleepingBag").value = "unchecked";
       document.getElementById("pillow").value = "unchecked";
       document.getElementById("mattress").value = "unchecked";
-
-
-
-
 
         });
       </script>
