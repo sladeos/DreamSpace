@@ -168,7 +168,6 @@ public class Application extends Controller {
 				}
 			}
 
-
 	public static Result getMyProfile() {
 		String user = session("connected");
 		if (user != null) {
@@ -178,8 +177,6 @@ public class Application extends Controller {
 					.render("Welcome, login to explore the website"));
 		}
 	}
-
-
 
 
 }

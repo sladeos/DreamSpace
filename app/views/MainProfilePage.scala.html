@@ -1,0 +1,49 @@
+@(profile: List[Profile])
+
+<!DOCTYPE html>
+
+<html>
+    <head>
+        @Templates.head()
+        
+        @Templates.facebookHeadScript()
+    </head>
+    <body>
+        <div data-role="page" data-theme="b" class="page">   
+            <div data-role="header" class = "header">
+                @Templates.header()
+            </div>
+            <div data-role="content" class = "content" >
+                  
+                    <h1 align="center">Profiles</h1>
+                    <div class = "search">
+                    
+                    <a data-role = "button" id = "btn1"  rel="external" href="/myprofile" data-icon="user" data-iconpos="right">My Profile</a>
+                    
+                    <h3>User Profiles</h3>
+                    </div>
+                    <div class ="MEArenaContent">
+                            
+                            <hr>
+                        <ul data-role="listview" data-inset="true" data-dividertheme="a" data-theme = "b"> 
+                        @for(profile <- profile) {
+                            <li  data-role = "list-divider" ></li>
+                                <li><a data-role = "button"  rel="external"  href="/profile/@profile.username" class = "greyBtn"><img src="@routes.Assets.at("images/sun.jpg")" alt="Dreamhack" class = "fullscreen"  /><h2>@{profile.username}</h2> <p>@{" Favourite Games " +  profile.favouritegames }</p><p>@{"User Bio: " + profile.userbio} </p></a>
+                            </li>
+                        } 
+                        </ul>
+                    </div>    
+                    
+                    <script>
+                        $("#btn1").css("background","  #FF9900");
+
+                    </script>
+                
+            </div>
+            @Templates.footer()
+            @Templates.panelAndLogOut()
+
+        </div>
+
+    </body>
+</html>

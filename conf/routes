@@ -90,11 +90,14 @@ GET /myetournaments controllers.TournamentDatabase.getMyTournaments()
 #edit user profile
 POST /edituserprofile controllers.UserProfileDatabase.editUserProfile()
 
-#Get to retrieve Profile page, renders edit or other depending onc urrent user
+
+#Get to retrieve Profile page, renders edit or other depending on current user
 GET   /profile/:user controllers.Application.showProfile(user: String)
 
+#Get all profiles
 GET /profile controllers.UserProfileDatabase.getProfiles()
 
+#Get current user's profile
 GET /myprofile controllers.Application.getMyProfile()
 
 #add new user profile
