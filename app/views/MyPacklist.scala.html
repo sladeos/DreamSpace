@@ -7,8 +7,7 @@
     <head>
         @Templates.head()
         <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/userprofile.css")">
-        <script src="@routes.Assets.at("javascripts/jquery.bracket.min.js")" type="text/javascript"></script>
-        <link rel="stylesheet"  href="@routes.Assets.at("stylesheets/jquery.bracket.min.css")">
+
        @Templates.facebookHeadScript()
 
       </head>
@@ -33,7 +32,7 @@
 
                 <form>
                     <div data-role="fieldcontain">
-                        <fieldset data-role="controlgroup" id="test">
+                        
 
                 <label><input type="checkbox" name="checkbox-0" id="pc" value="unchecked" @packlist.pc>Personal computer with all cables</label>
                 <label><input type="checkbox" name="checkbox-0" id="powerstrip" value="unchecked" @packlist.powerstrip>Powerstrip so you can connect all your stuff</label>
@@ -71,7 +70,7 @@
                 
                 <div Style="float:right"><input type="button" value="Save" id="save"  data-mini="true"></div>
 
-                </fieldset>
+                
                 </div>
               </form>
      
