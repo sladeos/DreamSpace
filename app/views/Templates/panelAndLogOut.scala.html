@@ -1,4 +1,4 @@
-              <div data-role="panel" id="bars" data-display="overlay" data-position="right" class = "slide-menu" style = "background: black">
+                <div data-role="panel" id="bars" data-display="overlay" data-position="right" class = "slide-menu" style = "background: black">
 
                      <a href="#" id="EArena" data-role="button" data-icon="tag">EARENA</a>
                      <a href="#" id="etournament" data-role="button" data-icon="tag">ETOURNAMENT</a>
@@ -6,7 +6,7 @@
                      <a href="#" id="gallery" data-role="button" data-icon="action">GALLERY</a>
                         <button id="logout">Logout</button>
                         <br>
-                     <a href="#panelmenu" data-role = "button" data-rel="close" data-icon="delete">Close panel</a>
+                     <a id = "close" href="#" data-role = "button" data-rel="close" data-icon="delete">Close panel</a>
                      
                      <script>
                             $('#EArena').click(function() {
@@ -33,4 +33,8 @@
                         });
 
                     </script>
-            </div>
+                    <script>
+                        $("#EArena, #etournament, #packlist, #gallery, #close").css("background","  #FF9900");
+                        $("#logout").css("background","#666666");
+                    </script>
+                </div>

@@ -4,18 +4,16 @@
 
 <html>
     <head>
-        @Templates.head()
-       <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/loginSignUp.css")">
+       @Templates.loginSignUpHead()
         @Templates.facebookHeadScript()
     </head>
     <body>
         <div data-role="page" id = "choosename" data-theme="b" class = "page">
-           <div data-role="header" class = "header"> 
-           @Templates.loginSignUpHeader() 
-            </div>
-            <div data-role = "content" class = "content">
-            
-                <h1>Choose a username for you account</h1>
+           
+            <div data-role = "content" class = "loginContent">
+             <h1 class = "headerPic"><img src="@routes.Assets.at("images/e3.png")" class = "fullscreen"></h1> 
+            <div class = "loginBox"> 
+                <h3 class = "headerPic" >Choose a username</h3>
 
                 
                     <div data-role="fieldcontain"class="ui-hide-label">
@@ -28,7 +26,8 @@
               
                         <button onclick="window.location.href='/login'">Return to login</button>
                 <p id="warning">@message</p>
- 
+            </div>
+            
                 
              <script type="text/javascript">
              function errorInField(){
@@ -138,7 +137,7 @@
             }
 </script>
 </div>
-@Templates.loginSignUpFooter()
+
 </div>
 </div>
 </body>
