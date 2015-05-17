@@ -5,7 +5,6 @@
 # Home page
 GET     /                           controllers.Application.mainMethod()
 
-
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)
 
@@ -81,7 +80,6 @@ GET /earenaad/:id controllers.Application.showIndividualAd(id: Integer)
 #Posts reply to an individual EArena Ad. Ajax call.
 POST /postreply controllers.EArenaDatabase.addReply()
 
-<<<<<<< HEAD
 #add new user profile
 POST /saveuserprofile controllers.UserProfileDatabase.addUserProfile()
 
