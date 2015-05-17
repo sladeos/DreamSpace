@@ -106,15 +106,7 @@ public class Application extends Controller {
 		}
 	}
 
-	public static Result packlist() {
-		String user = session("connected");
-		if (user != null) {
-			return ok(Packlist.render("You are logged in as " + user));
-		} else {
-			return unauthorized(LoginUserPage
-					.render("Welcome, login to explore the website"));
-		}
-	}
+
 
 	public static Result showIndividualAd(Integer id) {
 		String user = session("connected");
@@ -188,4 +180,13 @@ public class Application extends Controller {
 		}
 	}
 
+			 public static Result showPacklist() {
+				String user = session("connected");
+			 		if (user != null){
+			 			return ok(MyPacklist.render(PacklistDatabase.getPacklist(user))); 
+			 	 } else {
+			 	 	return unauthorized(LoginUserPage
+			 	 			.render("Welcome, login to explore the website"));
+			 	 }
+			 }
 }

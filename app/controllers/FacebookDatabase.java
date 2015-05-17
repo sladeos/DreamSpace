@@ -89,6 +89,7 @@ public class FacebookDatabase extends Controller {
 			preparedStatement.executeUpdate();
 
 			session("connected", username);
+			PacklistDatabase.addPacklist();
 			UserProfileDatabase.addUserProfile();
 			return redirect(routes.Application.mainMethod());
 

@@ -5,9 +5,6 @@
 # Home page
 GET     /                           controllers.Application.mainMethod()
 
-#Get to packlist html-page
-GET   /packlist controllers.Application.packlist()
-
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)
 
@@ -83,6 +80,20 @@ GET /earenaad/:id controllers.Application.showIndividualAd(id: Integer)
 #Posts reply to an individual EArena Ad. Ajax call.
 POST /postreply controllers.EArenaDatabase.addReply()
 
+#add new user profile
+POST /saveuserprofile controllers.UserProfileDatabase.addUserProfile()
+
+#edit user profile
+POST /edituserprofile controllers.UserProfileDatabase.editUserProfile()
+
+#edit Packlist
+POST /editpacklist controllers.PacklistDatabase.editPacklist()
+
+#add Packlist
+POST /addpacklist controllers.PacklistDatabase.addPacklist()
+
+GET  /packlist controllers.Application.showPacklist()
+
 #Sends update data for EArena Ad to method
 POST /updateearenaad controllers.EArenaDatabase.updateEArenaAd()
 
@@ -115,6 +126,7 @@ GET /myprofile controllers.Application.getMyProfile()
 
 #add new user profile
 POST /saveuserprofile controllers.UserProfileDatabase.addUserProfile()
+
 
 
 

@@ -1,0 +1,242 @@
+@(packlist: Packlist)
+
+
+<!DOCTYPE html>
+
+<html>
+    <head>
+        @Templates.head()
+        <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/userprofile.css")">
+
+       @Templates.facebookHeadScript()
+
+      </head>
+
+    <body>         
+        <div data-role="page" data-theme="b" class = "page"  >   
+            <div data-role="header" class = "header">
+                @Templates.header()
+            </div>
+            
+            <div data-role="content" class = "content">
+            
+                <h1 align="center">My personal packlist</h1>
+                <img src="@routes.Assets.at("images/packlist.jpg")"> 
+                <p>
+                Here is your packlist and checklist for DreamHack, ideal for you who are first time visitors but also for you who have been at DreamHack before, it is easy to forget something important! Do not forget to read the rules of the festival, where you’ll also find useful tips and regulations, please note the information regarding yours, and all other visitors’ safety and comfort.
+                </p>
+                <p>
+                Tip!
+                Always take your valuables and smaller devices with you when you leave your seat or ask your friends and neighbours to watch your belongings. Secure the screen, computer and other valuable hardware with cables and computer security lock. Never leave your mobile phone and wallet on the table. The occasion makes the thief!
+                </p>
+
+                <form>
+                    <div data-role="fieldcontain">
+                        
+
+                <label><input type="checkbox" name="checkbox-0" id="pc" value="unchecked" @packlist.pc>Personal computer with all cables</label>
+                <label><input type="checkbox" name="checkbox-0" id="powerstrip" value="unchecked" @packlist.powerstrip>Powerstrip so you can connect all your stuff</label>
+                <label><input type="checkbox" name="checkbox-0" id="screenAndCables" value="unchecked" @packlist.screenAndCables >Screen and associated cables</label>
+                <label><input type="checkbox" name="checkbox-0" id="keyboard" value="unchecked" @packlist.keyboard>Keyboard and mouse</label>
+                <label><input type="checkbox" name="checkbox-0" id="headset" value="unchecked" @packlist.headset>headset</label>
+                <label><input type="checkbox" name="checkbox-0" id="networkCable" value="unchecked" @packlist.networkCable>networkCable</label>
+                <label><input type="checkbox" name="checkbox-0" id="screwdriver" value="unchecked" @packlist.screwdriver>screwdriver</label>
+                <label><input type="checkbox" name="checkbox-0" id="cableTies" value="unchecked" @packlist.cableTies>Cable Ties</label>
+                <label><input type="checkbox" name="checkbox-0" id="ductTape" value="unchecked" @packlist.ductTape>ductTape</label>
+                <label><input type="checkbox" name="checkbox-0" id="gameConsole" value="unchecked" @packlist.gameConsole>GameConsole</label>
+                <label><input type="checkbox" name="checkbox-0" id="mobilePhone" value="unchecked" @packlist.mobilePhone>Mobile</label>
+                <label><input type="checkbox" name="checkbox-0" id="camera" value="unchecked" @packlist.camera>camera</label>
+                <label><input type="checkbox" name="checkbox-0" id="flashlight" value="unchecked" @packlist.flashlight>flashlight</label>
+                <label><input type="checkbox" name="checkbox-0" id="chair" value="unchecked" @packlist.chair>chair</label>
+                <label><input type="checkbox" name="checkbox-0" id="safe" value="unchecked" @packlist.safe>safe</label>
+                <label><input type="checkbox" name="checkbox-0" id="installationMedia" value="unchecked" @packlist.installationMedia>installationMedia</label>
+                <label><input type="checkbox" name="checkbox-0" id="drivers" value="unchecked" @packlist.drivers>drivers</label>
+                <label><input type="checkbox" name="checkbox-0" id="games" value="unchecked" @packlist.games>games</label>
+                <label><input type="checkbox" name="checkbox-0" id="antiVirus" value="unchecked" @packlist.antiVirus>antiVirus</label>
+                <label><input type="checkbox" name="checkbox-0" id="toothbrush" value="unchecked" @packlist.toothbrush>toothbrush</label>
+                <label><input type="checkbox" name="checkbox-0" id="soap" value="unchecked" @packlist.soap>soap</label>
+                <label><input type="checkbox" name="checkbox-0" id="handCream" value="unchecked" @packlist.handCream>handcream</label>
+                <label><input type="checkbox" name="checkbox-0" id="shampoo" value="unchecked" @packlist.shampoo>shampoo</label>
+                <label><input type="checkbox" name="checkbox-0" id="deo" value="unchecked" @packlist.deo>deo</label>
+                <label><input type="checkbox" name="checkbox-0" id="aspirin" value="unchecked" @packlist.aspirin>aspirin</label>
+                <label><input type="checkbox" name="checkbox-0" id="earplugs" value="unchecked" @packlist.earplugs>earplugs</label>
+                <label><input type="checkbox" name="checkbox-0" id="medication" value="unchecked" @packlist.medication>medication</label>
+                <label><input type="checkbox" name="checkbox-0" id="clothes" value="unchecked" @packlist.clothes>clothes</label>
+                <label><input type="checkbox" name="checkbox-0" id="swimwear" value="unchecked" @packlist.swimwear>swimwear</label>
+                <label><input type="checkbox" name="checkbox-0" id="sheets" value="unchecked" @packlist.sheets>sheets</label>
+                <label><input type="checkbox" name="checkbox-0" id="sleepingBag" value="unchecked" @packlist.sleepingBag>sleepingbag</label>
+                <label><input type="checkbox" name="checkbox-0" id="pillow" value="unchecked" @packlist.pillow>pillow</label>
+                <label><input type="checkbox" name="checkbox-0" id="mattress" value="unchecked" @packlist.mattress>mattress</label>
+                
+                <div Style="float:right"><input type="button" value="Save" id="save"  data-mini="true"></div>
+
+                
+                </div>
+              </form>
+     
+    <script>
+        $("#save").click(function() {
+          
+//kollar om checkboxen med det givna ID:et är checked eller inte. Om checked ändrar värdet till 1 annars har den kvar sitt ursprunliga 0. 
+          if($('#pc').is(':checked')){
+            document.getElementById("pc").value = "checked";
+            } 
+            if($('#powerstrip').is(':checked')){
+            document.getElementById("powerstrip").value = "checked";
+            } 
+            if($('#screenAndCables').is(':checked')){
+            document.getElementById("screenAndCables").value = "checked";
+            } 
+            if($('#keyboard').is(':checked')){
+            document.getElementById("keyboard").value = "checked";
+            } 
+            if($('#headset').is(':checked')){
+            document.getElementById("headset").value = "checked";
+            } 
+            if($('#networkCable').is(':checked')){
+            document.getElementById("networkCable").value = "checked";
+            } 
+            if($('#screwdriver').is(':checked')){
+            document.getElementById("screwdriver").value = "checked";
+            } 
+            if($('#cableTies').is(':checked')){
+            document.getElementById("cableTies").value = "checked";
+            } 
+            if($('#ductTape').is(':checked')){
+            document.getElementById("ductTape").value = "checked";
+            } 
+            if($('#gameConsole').is(':checked')){
+            document.getElementById("gameConsole").value = "checked";
+            } 
+            if($('#mobilePhone').is(':checked')){
+            document.getElementById("mobilePhone").value = "checked";
+            } 
+            if($('#camera').is(':checked')){
+            document.getElementById("camera").value = "checked";
+            } 
+            if($('#flashlight').is(':checked')){
+            document.getElementById("flashlight").value = "checked";
+            } 
+            if($('#chair').is(':checked')){
+            document.getElementById("chair").value = "checked";
+            } 
+            if($('#safe').is(':checked')){
+            document.getElementById("safe").value = "checked";
+            } 
+            if($('#installationMedia').is(':checked')){
+            document.getElementById("installationMedia").value = "checked";
+            } 
+            if($('#drivers').is(':checked')){
+            document.getElementById("drivers").value = "checked";
+            } 
+            if($('#games').is(':checked')){
+            document.getElementById("games").value = "checked";
+            } 
+            if($('#antiVirus').is(':checked')){
+            document.getElementById("antiVirus").value = "checked";
+            } 
+            if($('#toothbrush').is(':checked')){
+            document.getElementById("toothbrush").value = "checked";
+            } 
+            if($('#soap').is(':checked')){
+            document.getElementById("soap").value = "checked";
+            } 
+            if($('#handCream').is(':checked')){
+            document.getElementById("handCream").value = "checked";
+            } 
+            if($('#shampoo').is(':checked')){
+            document.getElementById("shampoo").value = "checked";
+            } 
+            if($('#deo').is(':checked')){
+            document.getElementById("deo").value = "checked";
+            } 
+            if($('#aspirin').is(':checked')){
+            document.getElementById("aspirin").value = "checked";
+            } 
+            if($('#earplugs').is(':checked')){
+            document.getElementById("earplugs").value = "checked";
+            } 
+            if($('#medication').is(':checked')){
+            document.getElementById("medication").value = "checked";
+            } 
+            if($('#clothes').is(':checked')){
+            document.getElementById("clothes").value = "checked";
+            } 
+            if($('#swimwear').is(':checked')){
+            document.getElementById("swimwear").value = "checked";
+            } 
+            if($('#sheets').is(':checked')){
+            document.getElementById("sheets").value = "checked";
+            } 
+            if($('#sleepingBag').is(':checked')){
+            document.getElementById("sleepingBag").value = "checked";
+            } 
+            if($('#pillow').is(':checked')){
+            document.getElementById("pillow").value = "checked";
+            } 
+            if($('#mattress').is(':checked')){
+            document.getElementById("mattress").value = "checked";
+            } 
+
+ //POSTen.         
+          $.ajax({
+                url: "/editpacklist",
+                type: 'POST',
+                contentType:'application/json',
+                data: JSON.stringify({pc: $('#pc').val(), powerstrip: $('#powerstrip').val(), screenAndCables: $('#screenAndCables').val(), keyboard: $('#keyboard').val(), headset: $('#headset').val(), networkCable: $('#networkCable').val(), screwdriver: $('#screwdriver').val(), cableTies: $('#cableTies').val(), ductTape: $('#ductTape').val(), gameConsole: $('#gameConsole').val(), mobilePhone: $('#mobilePhone').val(), camera: $('#camera').val(), flashlight: $('#flashlight').val(), chair: $('#chair').val(), safe: $('#safe').val(), installationMedia: $('#installationMedia').val(), drivers: $('#drivers').val(), games: $('#games').val(), antiVirus: $('#antiVirus').val(), toothbrush: $('#toothbrush').val(), soap: $('#soap').val(), handCream: $('#handCream').val(), shampoo: $('#shampoo').val(), deo: $('#deo').val(), aspirin: $('#aspirin').val(), earplugs: $('#earplugs').val(), medication: $('#medication').val(), clothes: $('#clothes').val(), swimwear: $('#swimwear').val(), sheets: $('#sheets').val(), sleepingBag: $('#sleepingBag').val(), pillow: $('#pillow').val(), mattress: $('#mattress').val()}),
+                dataType : 'html',
+                success: function(){
+                    window.location.replace(document.URL);
+                }
+          });
+
+ //"nollställer" checkrutorna     
+      document.getElementById("pc").value = "unchecked";
+      document.getElementById("powerstrip").value = "unchecked";
+      document.getElementById("screenAndCables").value = "unchecked";
+      document.getElementById("keyboard").value = "unchecked";
+      document.getElementById("headset").value = "unchecked";
+      document.getElementById("networkCable").value = "unchecked";
+      document.getElementById("screwdriver").value = "unchecked";
+      document.getElementById("cableTies").value = "unchecked";
+      document.getElementById("ductTape").value = "unchecked";
+      document.getElementById("gameConsole").value = "unchecked";
+      document.getElementById("mobilePhone").value = "unchecked";
+      document.getElementById("camera").value = "unchecked";
+      document.getElementById("flashlight").value = "unchecked";
+      document.getElementById("chair").value = "unchecked";
+      document.getElementById("safe").value = "unchecked";
+      document.getElementById("installationMedia").value = "unchecked";
+      document.getElementById("drivers").value = "unchecked";
+      document.getElementById("games").value = "unchecked";
+      document.getElementById("antiVirus").value = "unchecked";
+      document.getElementById("toothbrush").value = "unchecked";
+      document.getElementById("soap").value = "unchecked";
+      document.getElementById("handCream").value = "unchecked";
+      document.getElementById("shampoo").value = "unchecked";
+      document.getElementById("deo").value = "unchecked";
+      document.getElementById("aspirin").value = "unchecked";
+      document.getElementById("earplugs").value = "unchecked";
+      document.getElementById("medication").value = "unchecked";
+      document.getElementById("clothes").value = "unchecked";
+      document.getElementById("swimwear").value = "unchecked";
+      document.getElementById("sheets").value = "unchecked";
+      document.getElementById("sleepingBag").value = "unchecked";
+      document.getElementById("pillow").value = "unchecked";
+      document.getElementById("mattress").value = "unchecked";
+
+        });
+      </script>
+
+
+                  
+            </div>
+
+            @Templates.footer()
+            @Templates.panelAndLogOut()
+
+        </div>
+
+    </body>
+
+</html>
