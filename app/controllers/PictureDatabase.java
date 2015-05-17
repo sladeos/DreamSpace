@@ -227,7 +227,7 @@ public class PictureDatabase extends Controller {
 
 				conn = DB.getConnection();
 
-				String insertIntoDatabase = "SELECT * FROM Picture";
+				String insertIntoDatabase = "SELECT * FROM Picture ORDER BY created_date DESC";
 				preparedStatement = conn.prepareStatement(insertIntoDatabase);
 				ResultSet rs = preparedStatement.executeQuery();
 
