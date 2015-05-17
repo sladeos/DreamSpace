@@ -1,0 +1,83 @@
+@(profile: Profile)
+
+<!DOCTYPE html>
+
+<html>
+    <head>
+      @Templates.head()
+      <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/userprofile.css")">
+        <script src="@routes.Assets.at("javascripts/jquery.bracket.min.js")" type="text/javascript"></script>
+    <link rel="stylesheet"  href="@routes.Assets.at("stylesheets/jquery.bracket.min.css")">
+       @Templates.facebookHeadScript()
+
+    </head>
+    <body>
+        <div data-role="page" data-theme="b" class="page">
+
+            <div data-role="header" class = "header">
+                @Templates.header()
+            </div>
+        
+            <div data-role="content" class = "content">   
+              </ul>
+
+              <h1 align="center">Other User Profile</h1>
+              <div class="section" Style="border:none">
+                
+                <div class="divLayoutcontact" Style = "width:20%" Style = "heigth:100%">
+                  <img src="@routes.Assets.at("images/Avatars/avatarett.gif")" class = "fullscreen" id="avatarpic" onclick="changeImage()">
+
+                  <div Style = "width:90%" Style="float:right">
+                    <input type="button" data-icon="plus" value="Favourite" id="addfavourite">
+                  </div>
+                </div>
+                
+                   
+                <div class="divLayoutcontact" Style = "width:80%">
+                
+                    <div data-role="fieldcontain">
+                      <label for="username">Username:</label>
+                      <input readonly type="text" name="username" id="username" maxlength="30" value="@profile.username" >  
+                      <label for="skypeID">Skype:</label>
+                      <input readonly type="text" name="skypeID" id="skypeID" maxlength="30" value="@profile.skypeID" placeholder="Skype">
+                      <label for="battlenetID">Battle.net:</label>
+                      <input readonly type="text" name="battlenetID" id="battlenetID" maxlength="30" value="@profile.battlenetID" placeholder="Battle.net">
+                      <label for="steamID">Steam:</label>
+                      <input readonly type="text" name="steamID" id="steamID" maxlength="30" value="@profile.steamID" placeholder="Steam">
+                      <label for="twitchID">Twitch:</label>
+                      <input readonly type="text" name="twitchID" id="twitchID" maxlength="30" value="@profile.twitchID" placeholder="Twitch">
+                      <label for="uplayID">UPlay:</label>
+                      <input readonly type="text" name="uplayID" id="uplayID" maxlength="30" value="@profile.uplayID" placeholder="UPlay">       
+                    </div>
+   
+                  </div>
+                </div>
+                
+                <div class="section">
+                  <div data-role="fieldcontain">
+                    <label for="favouritegames">Favourite Games:</label>
+                    <textarea readonly cols="40" rows="8" name="favouritegames" id="favouritegames" placeholder="Favourite Games"></textarea>
+                  </div>      
+                </div>
+         
+                <div class="section">
+                  <div data-role="fieldcontain">
+                    <label for="about">About:</label>
+                    <textarea readonly cols="40" rows="8" name="about" id="about" placeholder="About"></textarea>
+                  </div> 
+                </div>
+                
+
+
+                 <script>
+                //   $('#addfavourite').click(function() {      // ska användas till att adda favorit. 
+                //   window.location='/'; });
+                 </script> 
+            
+            </div>
+            @Templates.footer()
+            @Templates.panelAndLogOut()
+
+        </div>
+    </body>
+</html>
