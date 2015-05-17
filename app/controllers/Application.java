@@ -131,19 +131,13 @@ public class Application extends Controller {
 				}
 			}
 
-
-//		public static Result showProfile() {
-//			String user = session("connected");
-//			if (user != null) {
-//				if (user.equals(UserProfileDatabase.getProfile(user).username)) {
-//					return ok(MyProfile.render(UserProfileDatabase.getProfile(user)));
-//				} else {
-//					return ok(OtherUserProfile.render(UserProfileDatabase.getProfile(user)));
-//				}
-//			} else {
-//				return unauthorized(LoginUserPage
-//						.render("Welcome, login to explore the website"));
-//			}
-//		}
+public static Result getMyProfile(){
+	String user = session("connected");
+	if (user != null) {
+	return ok(MyProfile.render(UserProfileDatabase.getProfile(user)));
+	}else{
+		return unauthorized(LoginUserPage.render("Welcome, login to explore the website"));
+	}
+}
 
 }
