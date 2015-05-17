@@ -4,9 +4,10 @@
 
 <html>
     <head>
-        @Templates.head()
-          <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/loginSignUp.css")">
+        @Templates.loginSignUpHead()
+     
         @Templates.facebookHeadScript()
+
     </head>
     <body>
     
@@ -117,48 +118,93 @@
   Below we include the Login Button social plugin. This button uses
   the JavaScript SDK to present a graphical Login button that triggers
   the FB.login() function when clicked.
+    <div data-role = "content" class = "content" >
+    
+            <button id="show_login" type="button"  data-icon="arrow-d"data-iconpos="right" >Login</button>
+                <div id="loginForm" style="display: none;">
+
+                  <form id ="loginform" action="@routes.UserDatabase.getUser()" method ="post" data-ajax="false">
+            
+                        <div data-role="fieldcontain"class="ui-hide-label">
+                            <label for="username">Username:</label>
+                            <input type="text" name="username" id="username" value="" placeholder="Username"/>
+                        </div>
+              
+                        <div data-role="fieldcontain" class="ui-hide-label">
+                            <label for="Password" >Password:</label>
+                            <input type="password" name="password" id="password" value="" placeholder="Password"/>
+                        </div>
+                      
+                    </form>
+                      <button class = "my-btn" type="submit" value="Login" onclick="return validate()">Login </button>
+                </div>
+           
+                    <script>
+         $(function() {
+           
+            $('#show_login').click(function() {        
+               $('#loginForm').toggle('show');
+            });
+               });
+            </script>
 -->
 <div id="status">
 </div>
     
 
- 
-  <div data-role="page" id = "login" data-theme="b" class = "page">
-       <div data-role="header" class = "header"> 
-           @Templates.loginSignUpHeader() 
-            </div>
+    <div data-role="page" id = "login" data-theme="b" class = "page">
+        
+  
                       
-		  <div data-role = "content" class = "content" >
-		
-          <h1 >Log in</h1>
-            	<form id ="loginform" action="@routes.UserDatabase.getUser()" method ="post" data-ajax="false">
-            
-               <div data-role="fieldcontain"class="ui-hide-label">
-               <label for="username">Username:</label>
-               <input type="text" name="username" id="username" value="" placeholder="Username"/>
-               </div>
-          
-               <div data-role="fieldcontain" class="ui-hide-label">
-               <label for="Password" >Password:</label>
-               <input type="password" name="password" id="password" value="" placeholder="Password"/>
-               </div>
-      
-				<button class = "my-btn" type="submit" value="Login" onclick="return validate()">Login </button>
-       
-		        </form>
-		        
+		  <div data-role = "content" class = "loginContent"  >
+		             
+              <div class = "loginBox"> 
 
-		        <button data-role = "button" id="button1" class = "my-btn">Register a new account</button>
-		
+                <h1 class = "headerPic"><img src="@routes.Assets.at("images/e3.png")" class = "fullscreen"></h1> 
+                <div data-role="collapsible" class="ui-icon-alt" data-collapsed-icon="arrow-r" data-expanded-icon="arrow-d" data-iconpos="right"  >
+                    <h1 class="custom-centercollheader">Login</h1>
+            	    <form id ="loginform" action="@routes.UserDatabase.getUser()" method ="post" data-ajax="false">
+                        <div data-role="fieldcontain"class="ui-hide-label" data-theme="b">
+                            <label for="username">Username:</label>
+                            <input type="text" name="username" id="username" value="" placeholder="Username"/>
+                        </div>
+                        <div data-role="fieldcontain" class="ui-hide-label">
+                            <label for="Password" >Password:</label>
+                            <input type="password" name="password" id="password" value="" placeholder="Password"/>
+                        </div>
+                        <p id="warning">@message</p>
+				        <button id = "button3" class = "my-btn" type="submit" value="Login" onclick="return validate()">Login </button>
+		           </form>
+		        </div>
 
-		        <fb:login-button scope="public_profile,email" onlogin="checkLoginState();" data-size="xlarge" data-max-rows="1">
-                </fb:login-button>
+                <script>
+                     
+                    $('#username').textinput({ theme: "a" });
+                    $('#password').textinput({ theme: "a" });
+
+                    $(function() {
+                        $('#show_login').click(function() {        
+                            $('#loginForm').toggle('show');
+                        });
+                    });
+                </script>
+                <br>
+    		        <button data-role = "button" id="button1" class = "my-btn"  data-icon="arrow-r" data-iconpos="right">Register a new account</button>
+    		
+                <br>
+		        <div id = "facebook"> <fb:login-button scope="public_profile,email" onlogin="checkLoginState();" data-size="xlarge" data-max-rows="1">
+                    </fb:login-button>
+                </div>
                 
-		        <p id="warning">@message</p>
+		        
+          </div> 
 <script>
 $('#button1').click(function() {
 	window.location='/register'; });
 	</script>
+  <script>
+     $("#button1, #button3 ").css("background","  #FF9900");
+  </script>
 		
 		
 
@@ -190,7 +236,8 @@ function isBlank(elementID){
 }
 </script>	        
 </div>
-@Templates.loginSignUpFooter()
+
+
 </div>        
 </body>
 </html>

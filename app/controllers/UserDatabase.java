@@ -7,9 +7,12 @@ import views.html.*;
 import play.data.Form;
 import play.db.*;
 import views.*;
+
 import java.sql.*;
+
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.io.IOException;
@@ -101,6 +104,8 @@ public class UserDatabase extends Controller {
 			preparedStatement.executeUpdate();
 			session("connected", userUsername);
 			PacklistDatabase.addPacklist();
+			UserProfileDatabase.addUserProfile();
+
 			return redirect(routes.Application.mainMethod());
 
 		} catch (com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException ice) {

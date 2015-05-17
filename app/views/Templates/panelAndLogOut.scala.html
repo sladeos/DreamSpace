@@ -1,20 +1,23 @@
-              <div data-role="panel" id="bars" data-display="overlay" class = "slide-menu">
+<div data-role="panel" id="bars" data-display="overlay" data-position="right" class = "slide-menu" style = "background: black">
 
-                     <a href="#" id="myProfile" data-role="button" data-icon="user" class="my-btn">MyProfile</a>
-                     <a href="#" id="packlist" data-role="button" data-icon="tag" class="my-btn">MyPacklist</a>
-                     <a href="#" id="earena" data-role="button" data-icon="action" class="my-btn">MyEarena</a>
-                     <a href="#" id="etournament" data-role="button" data-icon="action" class="my-btn">MyEtournament</a>
-                    <button id="logout">Logout</button>
+                     <a href="#" id="EArena" data-role="button" data-icon="tag">EARENA</a>
+                     <a href="#" id="etournament" data-role="button" data-icon="tag">ETOURNAMENT</a>
+                     <a href="#" id="packlist" data-role="button" data-icon="action">PACKLIST</a>
+                     <a href="#" id="gallery" data-role="button" data-icon="action">GALLERY</a>
+                        <button id="logout">Logout</button>
+                        <br>
+                     <a id = "close" href="#" data-role = "button" data-rel="close" data-icon="delete">Close panel</a>
                      
                      <script>
-                            $('#myProfile').click(function() {
-                                window.location=''; });
+                            $('#EArena').click(function() {
+                                window.location='/mainearena'; });
+                            $('#etournament').click(function() {
+                                window.location='/mainetournament'; });
                             $('#packlist').click(function() {
                                 window.location='/packlist'; });
-                            $('#earena').click(function() {
-                                window.location=''; });
-                            $('#etournament').click(function() {
-                                window.location=''; });
+                            $('#gallery').click(function() {
+                                window.location='/pictures'; });
+                           
                       
                         $('#logout').click(function() {
                              FB.getLoginStatus(function(response) {
@@ -27,6 +30,9 @@
                                  }
                             });
                         });
-
                     </script>
-            </div>
+                    <script>
+                        $("#EArena, #etournament, #packlist, #gallery, #close").css("background","  #FF9900");
+                        $("#logout").css("background","#666666");
+                    </script>
+                </div>

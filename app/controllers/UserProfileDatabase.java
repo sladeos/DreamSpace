@@ -22,113 +22,71 @@ import java.util.List;
 
 public class UserProfileDatabase extends Controller {
 
-	
+	public static Profile getProfile(String user) {
 
+		Connection conn = null;
+		PreparedStatement preparedStatement = null;
 
+		Profile p = new Profile();
+		try {
 
-	// public static Result getTournaments() {
-	// 	String currentUser = session("connected");
-	// 	if (currentUser == null) {
-	// 		return unauthorized(LoginUserPage
-	// 				.render("You have to login to access this page!"));
-	// 	} else {
-	// 		Connection conn = null;
-	// 		PreparedStatement preparedStatement = null;
-	// 		List<Tournament> tList = new ArrayList<Tournament>();
-	// 		try {
+			conn = DB.getConnection();
+			String insertIntoDatabase = "SELECT * FROM UserProfile WHERE username=?;";
+			preparedStatement = conn.prepareStatement(insertIntoDatabase);
+			preparedStatement.setString(1, user);
 
-	// 			conn = DB.getConnection();
+			ResultSet rs = preparedStatement.executeQuery();
 
-	// 			String insertIntoDatabase = "SELECT * FROM ETournament et WHERE admin=?";
-	// 			preparedStatement = conn.prepareStatement(insertIntoDatabase);
-	// 			preparedStatement.setString(1, currentUser);
-	// 			ResultSet rs = preparedStatement.executeQuery();
-	// 			// boolean next =
+			if (rs.isBeforeFirst()) {
+				rs.next();
+				p.username = rs.getString("username");
+				p.favouritegames = rs.getString("favouritegames");
+				p.userbio = rs.getString("userbio");
+				p.skypeID = rs.getString("skypeID");
+				p.steamID = rs.getString("steamID");
+				p.battlenetID = rs.getString("battlenetID");
+				p.uplayID = rs.getString("uplayID");
+				p.twitchID = rs.getString("twitchID");
+				p.userID = rs.getInt("userID");
+			}
 
-	// 			while (rs.next()) {
-	// 				Tournament t = new Tournament();
-	// 				t.tournamentname = rs.getString("tournamentName");
-	// 				t.participant_count = rs.getInt("teamAmount");
-	// 				t.tournamentcreator = rs.getString("admin");
-	// 				t.tournamentdata = rs.getString("tournamentData");
-	// 				t.tournamentID = rs.getInt("tournamentID");
-	// 				tList.add(t);
-	// 			}
+			return p;
 
-	// 			rs.close();
-	// 			return ok(MainTournamentPage.render(tList));
-	// 		} catch (com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException ice) {
-	// 			return badRequest(ice.toString());
-	// 		} catch (NumberFormatException nfe) {
-	// 			return badRequest(nfe.toString());
-	// 		} catch (SQLException se) {
-	// 			// Handle sql errors
-	// 			return internalServerError(se.toString());
-	// 		} catch (Exception e) {
-	// 			// Handle errors for Class.forName
-	// 			return internalServerError(e.toString());
-	// 		} finally {
-	// 			// finally block used to close resources
-	// 			// try {
-	// 			// if (preparedStatement != null)
-	// 			// conn.close();
-	// 			// } catch (SQLException se) {
-	// 			// } //do nothing
-	// 			try {
-	// 				if (conn != null)
-	// 					conn.close();
-	// 			} catch (SQLException se) {
-	// 				return internalServerError(se.toString());
-	// 			} // end finally try
-	// 		} // end try
-	// 	}
-	// }
+		} catch (SQLException se) {
+			return null;
+		} catch (Exception e) {
+			// Handle errors for Class.forName
+			return null;
+		} finally {
+			// finally block used to close resources
+			try {
+				if (preparedStatement != null)
+					conn.close();
+			} catch (SQLException se) {
+			}// do nothing
+		}
 
-
+	}
 
 	public static Result addUserProfile() {
 
 		Connection conn = null;
 		PreparedStatement preparedStatement = null;
-		JsonNode json = request().body().asJson();
-
-
 		String username = session("connected");
-		//String avatarIDstring = json.findPath("avatarID").textValue();
-		String skypeID = json.findPath("skypeID").textValue();
-		String battlenetID = json.findPath("battlenetID").textValue();
-		String steamID = json.findPath("steamID").textValue();
-		String twitchID = json.findPath("twitchID").textValue();
-		String uplayID = json.findPath("uplayID").textValue();
-		String favouritegames = json.findPath("favouritegames").textValue();
-		String userbio = json.findPath("about").textValue();
-
-		
 		try {
 
 			conn = DB.getConnection();
+			String insertIntoDatabase = "INSERT INTO UserProfile (username) VALUES(?)";
 
-			//int avatarID = Integer.parseInt(avatarIDstring);
-			String insertIntoDatabase = "INSERT INTO UserProfile (username, favouritegames, userbio, skypeID, steamID, battlenetID, uplayID, twitchID) VALUES(?,?,?,?,?,?,?,?)";
-			
 			preparedStatement = conn.prepareStatement(insertIntoDatabase);
 
 			preparedStatement.setString(1, username);
-			preparedStatement.setString(2, favouritegames);
-			preparedStatement.setString(3, userbio);
-			preparedStatement.setString(4, skypeID);
-			preparedStatement.setString(5, steamID);
-			preparedStatement.setString(6, battlenetID);
-			preparedStatement.setString(7, uplayID);
-			preparedStatement.setString(8, twitchID);
-		//	preparedStatement.setInt(13, avatarID);
 
 			preparedStatement.executeUpdate();
-			return ok("Succesful Reply!");
+			return ok();
 		} catch (com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException ice) {
 			return badRequest(ice.toString() + "HEYEYEY");
-		} 
-		catch (NumberFormatException nfe) {
+		} catch (NumberFormatException nfe) {
 			return badRequest(nfe.toString() + "WOW");
 		} catch (SQLException se) {
 			// Handle sql errors
@@ -146,22 +104,14 @@ public class UserProfileDatabase extends Controller {
 		} // end try
 	}
 
-	
+	public static Result editUserProfile() {
 
-
-
-
-
-
-	 public static Result editUserProfile() {
-		
 		Connection conn = null;
 		PreparedStatement preparedStatement = null;
 		JsonNode json = request().body().asJson();
 
-
 		String username = session("connected");
-		//String avatarIDstring = json.findPath("avatarID").textValue();
+		// String avatarIDstring = json.findPath("avatarID").textValue();
 		String skypeID = json.findPath("skypeID").textValue();
 		String battlenetID = json.findPath("battlenetID").textValue();
 		String steamID = json.findPath("steamID").textValue();
@@ -170,17 +120,12 @@ public class UserProfileDatabase extends Controller {
 		String favouritegames = json.findPath("favouritegames").textValue();
 		String userbio = json.findPath("about").textValue();
 
-		
 		try {
-
 			conn = DB.getConnection();
-
-			//int avatarID = Integer.parseInt(avatarIDstring);
+			// int avatarID = Integer.parseInt(avatarIDstring);
 			String insertIntoDatabase = "UPDATE UserProfile SET favouritegames=?, userbio=?, skypeID=?, steamID=?, battlenetID=?, uplayID=?, twitchID=? WHERE username=?";
-			
-			preparedStatement = conn.prepareStatement(insertIntoDatabase);
 
-			
+			preparedStatement = conn.prepareStatement(insertIntoDatabase);
 			preparedStatement.setString(1, favouritegames);
 			preparedStatement.setString(2, userbio);
 			preparedStatement.setString(3, skypeID);
@@ -188,15 +133,14 @@ public class UserProfileDatabase extends Controller {
 			preparedStatement.setString(5, battlenetID);
 			preparedStatement.setString(6, uplayID);
 			preparedStatement.setString(7, twitchID);
-		//	preparedStatement.setInt(13, avatarID);
 			preparedStatement.setString(8, username);
+			// preparedStatement.setInt(13, avatarID);
 
 			preparedStatement.executeUpdate();
 			return ok("Succesful Reply!");
 		} catch (com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException ice) {
 			return badRequest(ice.toString() + "HEYEYEY");
-		} 
-		catch (NumberFormatException nfe) {
+		} catch (NumberFormatException nfe) {
 			return badRequest(nfe.toString() + "WOW");
 		} catch (SQLException se) {
 			// Handle sql errors
@@ -213,9 +157,61 @@ public class UserProfileDatabase extends Controller {
 			} // end finally try
 		} // end try
 	}
-	
 
+	public static Result getProfiles() {
+		  String currentUser = session("connected");
+		  if (currentUser == null) {
+		   return unauthorized(LoginUserPage
+		     .render("You have to login to access this page!"));
+		  } else {
+		   Connection conn = null;
+		   PreparedStatement preparedStatement = null;
+		   List<Profile> proList = new ArrayList<Profile>();
+		   try {
 
+		    conn = DB.getConnection();
 
+		    String selectProfiles = "SELECT * FROM UserProfile";
+		    preparedStatement = conn.prepareStatement(selectProfiles);
+		   
+		    ResultSet rs = preparedStatement.executeQuery();
 
- }
+		    while (rs.next()) {
+		     Profile p = new Profile();
+		    
+		     p.username = rs.getString("username");
+		     p.userbio = rs.getString("userbio");
+		     p.favouritegames = rs.getString("favouritegames");
+		     proList.add(p);
+		    }
+
+		    rs.close();
+		    return ok(MainProfilePage.render(proList));
+		   } catch (com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException ice) {
+		    return badRequest(ice.toString());
+		   } catch (NumberFormatException nfe) {
+		    return badRequest(nfe.toString());
+		   } catch (SQLException se) {
+		    // Handle sql errors
+		    return internalServerError(se.toString());
+		   } catch (Exception e) {
+		    // Handle errors for Class.forName
+		    return internalServerError(e.toString());
+		   } finally {
+		    // finally block used to close resources
+		    // try {
+		    // if (preparedStatement != null)
+		    // conn.close();
+		    // } catch (SQLException se) {
+		    // } //do nothing
+		    try {
+		     if (conn != null)
+		      conn.close();
+		    } catch (SQLException se) {
+		     return internalServerError(se.toString());
+		    } // end finally try
+		   } // end try
+		  }
+		 }
+
+}

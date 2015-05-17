@@ -1,37 +1,43 @@
-<div data-role = "footer" class = "footer">
+  <div data-role = "footer" class = "footer">
+  
                 <footer class="footer-basic-centered" id = "foot">
                     <p class="footer-company-motto">Life is short play more</p>
                  
                     <p class="footer-company-name">DREAMSPACE AB &copy; 2015</p>
+                    <br>
+                       <p class="footer-company-name"> Copyright  &copy; 2011 Teijo Laine</p>
                 </footer>
+               
             </div>
 
 <div data-role="footer" data-tap-toggle="false" class = "footer" data-position="fixed">
     <div data-role="navbar">
         <ul>
-            <li><a id="h" rel = "external" href='#' data-icon="home"class="ui-alt-icon ui-btn ui-shadow"></a></li>
-            <li><a id="mail"rel = "external" href='#' data-icon="mail" class="ui-alt-icon ui-btn ui-shadow" ></a></li>
-            <li><a id = "user" rel = "external" href='#' data-icon="user" class="ui-alt-icon ui-btn ui-shadow"></a></li>
-            <li><a id="panelmenu" rel = "external" href='#bars' data-icon="bars" class="ui-alt-icon ui-btn ui-shadow"></a></li>
+            <li><a id="h" href="#h"  data-icon="home"class="ui-alt-icon ui-btn ui-shadow"></a></li>
+            <li><a id="mail" href="#mail" data-icon="mail" class="ui-alt-icon ui-btn ui-shadow" ></a></li>
+            <li><a id = "user" data-icon="user" class="ui-alt-icon ui-btn ui-shadow"></a></li>
+            <li><a id="panelmenu" href="#bars" data-icon="bars" class="ui-alt-icon ui-btn ui-shadow"></a></li>
         </ul>
     </div>
 </div>
 
-      <script>
-       $(document).ready(function() {
+        <script>
+       
             $('#h').click(function() {
-                window.location='/'; 
-            });
+                
+                window.location='/'; });
+
             $('#mail').click(function() {
                  
                 window.location='/'; });
+
             $('#user').click(function() {
                window.location='/'; });
+
             $('#info').click(function() {
                 window.location='/'; });
-        });
+   
     </script>
-
      <script>
         $("#h, #mail, #user, #panelmenu ").css("background","  #FF9900");
      </script>

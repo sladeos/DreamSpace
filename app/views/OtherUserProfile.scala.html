@@ -1,4 +1,4 @@
-@(message: String)
+@(profile: Profile)
 
 <!DOCTYPE html>
 
@@ -21,7 +21,7 @@
             <div data-role="content" class = "content">   
               </ul>
 
-              <h1 align="center">User Profile</h1>
+              <h1 align="center">Other User Profile</h1>
               <div class="section" Style="border:none">
                 
                 <div class="divLayoutcontact" Style = "width:20%" Style = "heigth:100%">
@@ -34,41 +34,39 @@
                 
                    
                 <div class="divLayoutcontact" Style = "width:80%">
-                  <form name="contactInfoGenerate" >
+                
                     <div data-role="fieldcontain">
                       <label for="username">Username:</label>
-                      <input readonly type="text" name="username" id="username" maxlength="30" placeholder="Placeholder"> 
+                      <input readonly type="text" name="username" id="username" maxlength="30" value="@profile.username" >  
                       <label for="skypeID">Skype:</label>
-                      <input readonly type="text" name="skypeID" id="skypeID" maxlength="30" placeholder="Placeholder">
+                      <input readonly type="text" name="skypeID" id="skypeID" maxlength="30" value="@profile.skypeID" placeholder="Skype">
                       <label for="battlenetID">Battle.net:</label>
-                      <input readonly type="text" name="battlenetID" id="battlenetID" maxlength="30" placeholder="Placeholder">
+                      <input readonly type="text" name="battlenetID" id="battlenetID" maxlength="30" value="@profile.battlenetID" placeholder="Battle.net">
                       <label for="steamID">Steam:</label>
-                      <input readonly type="text" name="steamID" id="steamID" maxlength="30" placeholder="Placeholder">
+                      <input readonly type="text" name="steamID" id="steamID" maxlength="30" value="@profile.steamID" placeholder="Steam">
                       <label for="twitchID">Twitch:</label>
-                      <input readonly type="text" name="twitchID" id="twitchID" maxlength="30" placeholder="Placeholder">
+                      <input readonly type="text" name="twitchID" id="twitchID" maxlength="30" value="@profile.twitchID" placeholder="Twitch">
                       <label for="uplayID">UPlay:</label>
-                      <input readonly type="text" name="uplayID" id="uplayID" maxlength="30" placeholder="Placeholder">
+                      <input readonly type="text" name="uplayID" id="uplayID" maxlength="30" value="@profile.uplayID" placeholder="UPlay">       
                     </div>
    
                   </div>
                 </div>
                 
                 <div class="section">
-
                   <div data-role="fieldcontain">
                     <label for="favouritegames">Favourite Games:</label>
-                    <textarea cols="40" rows="8" name="favouritegames" id="favouritegames" placeholder="Placeholder"></textarea>
+                    <textarea readonly cols="40" rows="8" name="favouritegames" id="favouritegames" placeholder="Favourite Games"></textarea>
                   </div>      
                 </div>
          
-
                 <div class="section">
                   <div data-role="fieldcontain">
                     <label for="about">About:</label>
-                    <textarea cols="40" rows="8" name="about" id="about" placeholder="Placeholder"></textarea>
+                    <textarea readonly cols="40" rows="8" name="about" id="about" placeholder="About"></textarea>
                   </div> 
                 </div>
-                </form>
+                
 
 
                  <script>
@@ -77,13 +75,9 @@
                  </script> 
             
             </div>
-
-
- 
             @Templates.footer()
             @Templates.panelAndLogOut()
 
         </div>
-
     </body>
 </html>

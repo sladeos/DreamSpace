@@ -4,7 +4,9 @@ import models.*;
 import play.*;
 import play.mvc.*;
 
+import java.io.ByteArrayInputStream;
 import java.io.UnsupportedEncodingException;
+
 import java.sql.*;
 
 import views.html.*;
@@ -19,6 +21,8 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.io.IOException;
 import java.security.SecureRandom;
+
+import javax.persistence.Entity;
 
 import play.libs.Json;
 
@@ -86,7 +90,6 @@ public class Application extends Controller {
 		return redirect(routes.Application.loginUserPage());
 	}
 
-
 	public static Result showTournament(Integer id) {
 		String user = session("connected");
 		if (user != null) {
@@ -105,42 +108,77 @@ public class Application extends Controller {
 
 
 
-			public static Result myprofile() {
-			String user = session("connected");
-			if (user != null) {
-				return ok(MyProfile.render("You are logged in as "
-						+ user));
+	public static Result showIndividualAd(Integer id) {
+		String user = session("connected");
+		if (user != null) {
+			if (user.equals(EArenaDatabase.getIndividualEArena(id).admin)) {
+				return ok(EditEArena.render(
+						EArenaDatabase.getIndividualEArena(id),
+						EArenaDatabase.getEArenaReplies(id)));
 			} else {
-				return unauthorized(LoginUserPage
-						.render("Welcome, login to explore the website"));
+				return ok(ShowIndividualEArena.render(
+						EArenaDatabase.getIndividualEArena(id),
+						EArenaDatabase.getEArenaReplies(id)));
 			}
+		} else {
+			return unauthorized(LoginUserPage
+					.render("Please login to access this feature!"));
+
 		}
+	}
 
+	public static Result mainearena(String search, String game,
+			String username, String players, String minutes) {
+		String userS = session("connected");
+		if (userS != null) {
+			return ok(MainEArenaPage.render(EArenaDatabase.getEArenaAds(search,
+					game, username, players, minutes), EArenaDatabase
+					.getEArenaGames()));
+		} else {
+			return unauthorized(LoginUserPage
+					.render("Welcome, login to explore the website"));
+		}
+	}
 
+	public static Result createArenaAd() {
+		String user = session("connected");
+		if (user != null) {
+			return ok(CreateArenaAd.render(EArenaDatabase.getEArenaGames()));
+		} else {
+			return unauthorized(LoginUserPage
+					.render("Welcome, login to explore the website"));
+		}
+	}
+	
+    public static Result newPicture(){
+    	return ok(NewPicturePage.render());
+    }
 
-		public static Result editprofile() {
-			String user = session("connected");
-			if (user != null) {
-				return ok(EditProfile.render("You are logged in as "
-						+ user));
+	public static Result showProfile(String userUrl) {
+		String user = session("connected");
+		if (user != null) {
+			if (user.equals(userUrl)) {
+				return ok(MyProfile.render(UserProfileDatabase
+						.getProfile(userUrl)));
 			} else {
-				return unauthorized(LoginUserPage
-						.render("Welcome, login to explore the website"));
+				return ok(OtherUserProfile.render(UserProfileDatabase
+						.getProfile(userUrl)));
 			}
+		} else {
+			return unauthorized(LoginUserPage
+					.render("Welcome, login to explore the website"));
 		}
+	}
 
-
-		public static Result otheruser() {
-			String user = session("connected");
-			if (user != null) {
-				return ok(OtherUserProfile.render("You are logged in as "
-						+ user));
-			} else {
-				return unauthorized(LoginUserPage
-						.render("Welcome, login to explore the website"));
-			}
+	public static Result getMyProfile() {
+		String user = session("connected");
+		if (user != null) {
+			return ok(MyProfile.render(UserProfileDatabase.getProfile(user)));
+		} else {
+			return unauthorized(LoginUserPage
+					.render("Welcome, login to explore the website"));
 		}
- 
+	}
 
 			 public static Result showPacklist() {
 				String user = session("connected");

@@ -1,71 +1,223 @@
+﻿
 #bracket {
+	
     color:black;
     text-shadow:0 0px 0 #111;
-    
-    
+    overflow:auto;
 }
 
+.ui-autocomplete {
+    list-style-position: inside;
+    padding: 0;
+    border: 1px solid #1D1D1D;
+    background-color: #2A2A2A;
+    list-style-type: none;
+    width:300px;
+    cursor:pointer;
+    box-shadow:0 0 15px #195166;
+}
+
+.ui-autocomplete li:hover{
+    background-color:#1A586F;
+}
+.ui-page{
+    background: url("../images/main.jpg");
+}
+
+.content{
+    background: #151515;
+    padding: 5% 5%;
+    margin:0 auto;
+
+}
+.fullscreen{
+    max-height: 100%;
+    max-width: 100%;
+}
+/*Färgen för alla knappar alla skärmar*/
+.ui-page .ui-btn  {
+color      : white;
+background : #FF9900;
+}​
+
+.slide-menu{ 
+    max-width:75%;
+}
+/*Färgen för header alla skärmar*/
+.ui-page .ui-header {
+    background:#151515;
+}
+/*Färgen för footer alla skärmar*/
+.ui-page .ui-footer {
+    background:#151515;
+}
+    #adinfo{    
+        width: 100%;    
+}
     .ui-page{
         background: url("../images/main.jpg");
     }
-   .content{
-        background: #151515;
-        padding: 5% 5%;
-        margin:0 auto;
+    
+    #grid{
+        padding-left: 2%;
+        padding-right: 2%;
     }
-    .fullscreen{
-        max-height: 100%;
-        max-width: 100%;
+    #adreplies{
+        width: 100%;
+        
     }
-    /*Färgen för alla knappar alla skärmar*/
-    .ui-page .ui-btn  {
+    #replyfielddiv{
+        width: 100%;
+    }
+    .MEArenaContent{
+    width: 100%;
+    margin: 0 auto;
+    }
+        .ui-page .ui-btn.myFace{
+        background: #3A5795;
+    }
+        .faceButton{
+        width: 150px;
+        max-width: 150px;
+    }
+    .ui-page .ui-btn.submitReplay{
+        background: #FF9900;
+    }
+ 
+    .custom-centercollheader a {
+        text-align: center !important;
+        padding-right: 2.5em !important;
+    }
+    .search{
+        width: 300px;
+        margin: 0 auto;
+    }
+
+    .ui-page .ui-btn.goBackButton  {
     color      : white;
-    background : #FA7C04;
-
-
+    background : #996600;
     }​
-    .slide-menu{ 
-        max-width:75%;
-    }
-    /*Färgen för header alla skärmar*/
-    .ui-page .ui-header {
-        background:#151515;
-    }
-    /*Färgen för footer alla skärmar*/
-    .ui-page .ui-footer {
-        background:#151515;
-    }
-
-
 @media all and (max-width: 36em){
  
     .ui-content{
         background: #151515;
     }
+    .MEArenaContent{
+        width: 100%;
+        }
+    
 
+    .faceButton{
+        width: 150px;
+        max-width: 150px;
+
+    }
 }
 
-@media all and (min-width: 50em){
+
+@media all and (min-width: 60em){
     .page{
-        background: url("../images/main.jpg");ß
+        background: url("../images/main.jpg");
+    
+
     }
     .content{
-        padding: 5% 5%;
+        padding: 15px 15px;
         margin:0 auto;
-        width:70%;
+        width:900px;
         background: #151515;
+        
 
     }
     .header{
         margin:0 auto;
-        width: 80%;
+        width: 930px;
     }
 
     .footer {
+       
         margin:0 auto;
-        width: 80%;
+		width: 930px;
 
     } 
+    .MEArenaContent{
+        width: 500px;
+        margin: 0 auto;
+    }
+    .my-breakpoint .ui-block-a, 
+    .my-breakpoint .ui-block-b, 
+    .my-breakpoint .ui-block-c{ 
+        width: 100%; 
+        float:none; 
+    }
+    #MAEcheckbox{
+        width: 500px;
+        margin: 0 auto;
+    }
+    #createAEform{
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+    .wrap{
+        overflow:hidden;
+        width:99%;
+        margin: 0 auto;
+        max-width: 800px;
+    
+    
+    }
+    #wrap2{
+        overflow:hidden;
+        width:100%;
+        margin: 0 auto;
+        max-width: 800px;
+        padding-left: 1%;
+        padding-right: 1%;
+    }
+    #adinfo{
+        position: relative;
+        float: left;
+        width: 49%;
+        padding-left: 1%;
+        
+
+    }
+    #adreplies{
+        position: relative;
+        width: 49%;
+        float: right;
+        padding-left: 1%;
+    }
+    #replyfielddiv{
+        position: relative;
+        float: left;
+        width: 49%;
+        padding-left: 1%;
+
+    }
+        .search{
+        width: 350px;
+        margin:0 auto;
+        max-width: 350px;
+        
+    }
+    .faceButton{
+        width: 150px;
+        max-width: 150px;
+
+    }
+    .mainButton{
+        margin:0 auto;
+        width: 200px;
+        max-width: 200px;
+    }
+    #test{
+        position: fixed;
+        bottom:0px;
+
+    }
+
     /*Ta bort detta innehåll vid skapande av ny sida*/
     #img1{
         padding: 1em;

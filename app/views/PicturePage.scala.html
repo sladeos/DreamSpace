@@ -1,0 +1,48 @@
+@(pictures: List[Picture])
+
+<!DOCTYPE html>
+
+<html>
+    <head>
+        @Templates.head()
+          @Templates.loadimage()
+        @Templates.facebookHeadScript()
+      
+    </head>
+    <body>
+        <div data-role="page" data-theme="b" class="page">   
+            <div data-role="header" class = "header">
+                @Templates.header()
+            </div>
+            <div data-role="content" class = "content" >
+                    <h1 align="center">Photo Stream</h1>
+                    <div class = "search">
+                    <a data-role = "button" id = "btn2"  rel="external" href="/newpicture" data-icon="arrow-r" data-iconpos="right">Take and Upload a Picture</a>
+                    </div>
+                   @for(pictures <- pictures) {
+                           
+                               <p>Creator:   @pictures.creator </p> 
+                              
+                               <img id="@pictures.pictureID" src="/pic/@pictures.pictureID" /> 
+					
+
+<script>
+
+$('#@pictures.pictureID').width(500);
+$('#@pictures.pictureID').height(500);
+</script>
+                      }
+                    </ul>
+                        <script>
+                        $("#btn2").css("background","  #FF9900");
+                    </script>
+
+
+                </div>
+            @Templates.footer()
+            @Templates.panelAndLogOut()
+            </div>
+
+
+    </body>
+</html>

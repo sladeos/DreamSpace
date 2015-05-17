@@ -5,8 +5,9 @@
 <html>
     <head>
         @Templates.head()
+
         <script src="@routes.Assets.at("javascripts/jquery.bracket.min.js")" type="text/javascript"></script>
-		<link rel="stylesheet"  href="@routes.Assets.at("stylesheets/jquery.bracket.min.css")">+
+		<link rel="stylesheet"  href="@routes.Assets.at("stylesheets/jquery.bracket.min.css")">
         @Templates.facebookHeadScript()
         
     </head>
@@ -16,19 +17,34 @@
      <div data-role="page" data-theme="b" class="page">   
         <div data-role="header" class = "header">
             @Templates.header()
+            <a id = "back" rel="external" href="/mainetournament" data-role="button" role="button" data-icon="back" data-iconpos="notext">Back</a>
+            <script>
+              $("#back").css("background","  #FF9900");
+            </script>
         </div>
-        <div data-role="content" class = "content" >   
+        <div data-role="content" class = "content">   
            
  
-            <h1 align="center">Create your tournament</h1>
-            You can change the name of the teams in your tournament by clicking the respective team label, you can also change the score by clicking the label after the team name. This updates the bracket.
-   
+          <h1 align="center">Create your tournament</h1>
+
+
+            
+     <div id = "bracketcontent">
    <div id='bracket'></div>
-                <div id='bracketForm'>
-                <form name="bracketGenerate" >
+                <div id='bracketForm' class = "search">
+                <br>
+                <br>
+           
+            <a href="#popupCloseRight" data-rel="popup" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-icon-info ui-btn-icon-right ui-mini">Info</a>
+            <div data-role="popup" id="popupCloseRight" class="ui-content" style="max-width:280px">
+            <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext  ui-btn-right">Close</a>
+            <p>You can change the name of the teams in your tournament by clicking the respective team label, you can also change the score by clicking the label after the team name. This updates the bracket.</p>
+            </div>
+
+            <form name="bracketGenerate">
                 Name of your tournament: <input type="text" name="fname" id="fname">
                 Amount of players: 
-        <select id="amount">
+        <select id="amount" data-role = "button" data-inline = "true" data-mini = "true">
             <option value="4">4</option>
             <option value="8">8</option>
             <option value="16">16</option>
@@ -36,50 +52,14 @@
         </select> 
         
        
-        <input type="button" value="Create" id="create">
+        <input data-role = "button"  type="button" value="Create" id="create">
             <p id="warning"></p>
         
     </form>
-    
+  
     </div>
    <script type="text/javascript">
-    var tNameOkay = true;
-        $(function() {
-    	function errorInField(){
-    	 $("#warning").css('color', 'red');
-         $('#warning').prepend('<img id="redcross" src="@routes.Assets.at("images/redcross.png")" />')
-         $('#redcross').width(40);
-         $('#redcross').height(40);
-         tNameOkay = false;
-    }
-    	
-    	function fieldOkay(){
-    	    $("#warning").css('color', 'green');
-            $('#warning').prepend('<img id="greentick" src="@routes.Assets.at("images/greentick.png")" />')
-            $('#greentick').width(40);
-            $('#greentick').height(40);
-            tNameOkay = true;
-    		
-    	}
-    
-    $('#fname').change(function() {
-   	 if( $('#fname').val().length <4){
-   		 $("#warning").html('Tournament Name is too short! Please enter a minimum of 4 characters');
-   		errorInField()
-            return;
-   	 }else{
-       $("#warning").html("Tournament Name is okay!");
-	   fieldOkay()
-	   
-   }
-
-    })
-        })
-    
-    
-    </script>
    
-    <script>
 $(function() {
     
     generateBracket($('#amount').val());
@@ -141,7 +121,7 @@ $(function() {
 
 
 $("#create").click(function() {
-    if(tNameOkay && $('#fname').val().length >4){
+    if($('#fname').val().length >3){
     var teams = data.teams
     var results = data.results
 
@@ -152,12 +132,14 @@ $("#create").click(function() {
             data: JSON.stringify({name :  $('#fname').val(), amount: $('#amount').val(), teams: teams, results: results }),
             dataType : 'html',
             success: function(){
-                window.location.replace("/tournament");
+                alert("Tournament created!");
+                window.location = "/myetournaments"; 
+
             }
         });
     }else{
     	
-    	 $("#warning").html("There are errors in your tournament! Fix them and try again.");
+    	 $("#warning").html("Tournament Name is too short! Please enter a minimum of 4 characters");
     	 $("#warning").css('color', 'red');
          $('#warning').prepend('<img id="redcross" src="@routes.Assets.at("images/redcross.png")" />')
          $('#redcross').width(40);
@@ -168,9 +150,10 @@ $("#create").click(function() {
 
 });
     </script>
+    </div>
         </div>
   
-            @Templates.footer()
+             @Templates.mitLicens()
             @Templates.panelAndLogOut()
         </div>
     

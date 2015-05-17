@@ -1,36 +1,65 @@
 @(tournament: Tournament)
-
 <!DOCTYPE html>
-
 <html>
-    <head>
-        @Templates.head()
-        <script src="@routes.Assets.at("javascripts/jquery.bracket.min.js")" type="text/javascript"></script>
-		<link rel="stylesheet"  href="@routes.Assets.at("stylesheets/jquery.bracket.min.css")">
-        @Templates.facebookHeadScript()
-    </head>
-    <body>
-         
-
-	
-        <div data-role="page" data-theme="b" class="page">   
+   <head>
+      @Templates.head()
+      <script src="@routes.Assets.at("javascripts/jquery.bracket.min.js")" type="text/javascript"></script>
+      <link rel="stylesheet"  href="@routes.Assets.at("stylesheets/jquery.bracket.min.css")">
+      @Templates.facebookHeadScript()
+   </head>
+   <body>
+      <div data-role="page" data-theme="b" class="page">
             <div data-role="header" class = "header">
                 @Templates.header()
+                <a id = "back" rel="external" href="/mainetournament" data-role="button" role="button" data-icon="back" data-iconpos="notext">Back</a>
+                <script>
+                    $("#back").css("background","  #FF9900");
+                </script>
             </div>
-        <div data-role="content" class = "content">   
-            </ul>
-            <p>
-            <h1 align="center">This is not your tournament sir</h1>
-            <div id="bracket"></div>
+            <div data-role="content" class = "content">
+                <h1 align="center">ETournament</h1>
+                <button id="share_button" class = "myFace faceButton search" data-mini="true">Facebook Share</button>
+                <br>
+                <div id = "bracketcontent" >
 
+                    <div id="bracket"></div>
+                    <script type="text/javascript">
+                        $(document).ready(function() {
+                            $('#share_button').click(function(e) {
+                                e.preventDefault();
+                                FB.ui({
+                                    method: 'feed',
+                                    name: 'Tournament: @tournament.tournamentname',
+                                    link: document.URL,
+                                    caption: "@tournament.tournamentcreator" + "'s " + "tournament",
+                                    description: "Size of Tournament: @tournament.participant_count"
+                                });
+                            });
+                        });
+                    </script>
+                    <div id="bracket"></div>
+                    <script type="text/javascript">  
+                        var a = @Html(tournament.tournamentdata);
+                        $(function() {
+                  
+                              var container = $('#bracket')
+                              container.bracket({
+                                init: a
+                               
+                   
+                            })
+                    
+                            $('.tools').remove();
+                        });
+                  
+                    </script>    
+            
+                </div>
 
-        </div>
+            </div>
 
-            @Templates.footer()
+            @Templates.mitLicens()
             @Templates.panelAndLogOut()
- 
-
-        </div>
-
-    </body>
+      </div>
+   </body>
 </html>

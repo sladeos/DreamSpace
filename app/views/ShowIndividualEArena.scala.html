@@ -1,0 +1,107 @@
+@(eAd: EArenaAd, eAdReplies: List[AdReply])
+<!DOCTYPE html>
+<html>
+   <head>
+        <title>EArenaAd</title>
+        @Templates.head()
+        @Templates.facebookHeadScript()
+        <meta charset="UTF-8">
+        <script> 
+            $(document).ready(function() {
+                $("#replyarea").val('');
+            });
+        </script>
+   </head>
+   <body>
+   
+
+        <div data-role="page" data-theme="b" id = "main" class = "page"  >
+              <div data-role="header" class = "header">
+	       @Templates.header()
+         <a id = "back" rel="external" href="/mainearena" data-role="button" role="button" data-icon="back" data-iconpos="notext">Back</a>
+            <script>
+              $("#back").css("background","  #FF9900");
+            </script>
+
+	       </div>
+            <div data-role="content" class = "content">
+            <div class ="wrap">
+                <h1 align="center">EArena Ad</h1>
+            <button id="share_button" class = "myFace faceButton search" data-mini="true">Facebook Share</button>
+            <script type="text/javascript">
+            $(document).ready(function() {
+              $('#share_button').click(function(e) {
+                e.preventDefault();
+                FB.ui({
+                  method: 'feed',
+                  name: 'EArenaAd: eAd.arenaName',
+                  link: document.URL,
+                  caption: "@eAd.admin" +" is looking for people to play @eAd.gameName" ,
+                  description: "Information about EArenaAd: @eAd.information"
+                });
+              });
+            });
+            </script>
+                    <div id = "adinfo">               
+                          <article data-role="listview" data-inset="true" data-dividertheme="a"> 
+                              <li><h2>@eAd.arenaName</h2>
+                                  <p>id: @eAd.arenaID</p>
+                                  <p>Creator: @eAd.admin</p>
+                                  <p>Game: @eAd.gameName</p>
+                                  <p>Created: @eAd.createdDate</p>
+                                  <p>Players required: @eAd.playersRequired</p>
+                                  <p>Information:</p> 
+                                  <textarea readonly name="textarea" id="text">@eAd.information</textarea>
+                              </li>
+                          </article>
+                        <label for="reply">Reply:</label>
+                        <hr>
+                        <textarea placeholder="Post your reply here" name="reply" id="replyarea" rows="4" cols="50"></textarea>
+                        <div data-role="controlgroup" data-type="horizontal" style="text-align:center;">
+                        <button data-role = "button" type="submit" id="postreply"value="Submit Reply" class = "submitReplay" data-inline = "true">Submit Reply</button>
+                        </div>
+                        <p id="warning"></p>
+                    </div>
+                    <div id = "adreplies">  
+                      <article data-role="listview" data-inset="true" data-dividertheme="a">
+                        @for(eAdReplies <- eAdReplies) {
+                          <li  data-role = "list-divider" ></li>
+                          <li><h2>@{eAdReplies.user + " - " + eAdReplies.createdDate}</h2>
+                           <p>Reply:</p>
+                           <textarea readonly name="textarea" id="text" style = "overflow:auto;resize:none">@{eAdReplies.content}
+                            </textarea>
+                            </li>
+                        } 
+                      </article> 
+                    </div>
+                  </div>
+                  
+                <script>
+                    $("#postreply").click(function() {
+                        if($('#replyarea').val().length >2){
+                            var data = {"contents":$("#replyarea").val(), "adID": "@eAd.arenaID"};
+                            $.ajax({
+                                url: "/postreply",
+                                type: 'POST',
+                                contentType:'application/json',
+                                data: JSON.stringify(data),
+                                dataType : 'html',
+                                success: function(data ){
+                               	    location.reload();
+                                }
+                            });
+                        }else{
+                       	    $("#warning").html("Your reply is too short! Please enter a minimum of 3 characters");
+                       	    $("#warning").css('color', 'red');
+                            $('#warning').prepend('<img id="redcross" src="@routes.Assets.at("images/redcross.png")" />')
+                            $('#redcross').width(40);
+                            $('#redcross').height(40);
+                        }
+                    });
+                </script>
+                </div>
+            @Templates.footer()
+            @Templates.panelAndLogOut()
+        </div>
+   </body>
+</html>

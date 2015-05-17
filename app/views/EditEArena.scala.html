@@ -1,0 +1,250 @@
+@(eAd: EArenaAd, eAdReplies: List[AdReply])
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>Edit your EArena Ad</title>
+      @Templates.head()
+      
+      @Templates.facebookHeadScript()
+      <meta charset="UTF-8">
+              <script> 
+            $(document).ready(function() {
+                $("#replyarea").val('');
+            });
+        </script>
+   </head>
+   <body>
+
+        <div data-role="page" data-theme="b" id = "main" class = "page"  >
+             <div data-role="header" class = "header">
+	       @Templates.header()
+             <a id = "back" rel="external" href="/mainearena"  data-role="button" role="button" data-icon="back" data-iconpos="notext">Back</a>
+            <script type="text/javascript">
+               $("#back").css("background","  #FF9900");
+            </script>
+	       </div>
+            <div data-role="content" class = "content">
+
+                 <h1 align="center">Your EArena Ad</h1>
+
+                <div class = "search">
+                    <button id="share_button" class = "myFace faceButton search" data-mini="true">Facebook Share</button>
+                    <div data-role="collapsible" class="ui-icon-alt" data-collapsed-icon="arrow-r" data-inline="true" data-expanded-icon="arrow-d" data-iconpos="right"  >
+
+                   
+                    
+                
+                     <h3 class = "custom-centercollheader" >Edit ad</h3>
+                   
+
+                            <input type="text" name="arenaName" id="arenaName" value="@eAd.arenaName" placeholder="Arena Ad Name"/>
+                    
+                            <input type="text" name="gameName" id="game" value="@eAd.gameName" placeholder="Game "/>
+             
+                            <input type="number" min="1" max="100" name="playersRequired" id="playersRequired" value="@eAd.playersRequired" placeholder="Players Required"/>
+                   
+                            <textarea placeholder="Enter some information about your ad here!" name="information" id="informationArea" rows="4" cols="50"  >@eAd.information</textarea>
+                    
+                        <div style="display: none;">
+                            <input type="id" name="id" id="id" value="@eAd.arenaID"/>
+                        </div>
+                        <button  class = "my-btn"  id="updateearena"  value="Update EArena Ad" onclick="validate()">Update EArena Ad </button>
+                        <button data-role = "button" value="Delete EArena" id="deletearena" class = "submitReplay goBackButton" data-icon="delete" data-iconpos="right">Delete EArena</button>
+                            <p id="warning"></p>
+                        </div>
+                    </div>
+
+            <script type="text/javascript">
+            $(document).ready(function() {
+              $('#share_button').click(function(e) {
+                e.preventDefault();
+                FB.ui({
+                  method: 'feed',
+                  name: 'EArenaAd: @eAd.arenaName',
+                  link: document.URL,
+                  caption: "@eAd.admin" +" is looking for people to play @eAd.gameName" ,
+                  description: "Information about EArenaAd: @eAd.information"
+                });
+              });
+            });
+            </script>
+            
+            <script type="text/javascript">
+              
+
+               function errorInField(){
+                	 $("#warning").css('color', 'red');
+                     $('#warning').prepend('<img id="redcross" src="@routes.Assets.at("images/redcross.png")" />')
+                     $('#redcross').width(40);
+                     $('#redcross').height(40);
+                }
+               
+                  function validate() {
+                	   var blnValid = true;
+               
+                	   if (isBlank("arenaName")) {
+                	     blnValid = false;
+                	     $("#warning").html('Please enter a name for your EArena Ad!');
+                	     errorInField()
+                	     document.getElementById("arenaName").focus();
+                	   }
+                	   if (blnValid) {
+                	     if (isBlank("game")) {
+                	       blnValid = false;
+                	       $("#warning").html('Please enter the name of your game!');
+                	       errorInField()
+                	       document.getElementById("game").focus();
+                	     }
+                	   }
+                	   if (blnValid) {
+                	     if (isBlank("playersRequired")) {
+                	       blnValid = false;
+                	       $("#warning").html('Please provide the amount of players you are lookng for! Numbers only!');
+                	       errorInField()
+                	       document.getElementById("playersRequired").focus();
+                	     }
+                	   }
+               
+                	   if (blnValid) {
+                	     if (isBlank("informationArea")) {
+                	       blnValid = false;
+                	       $("#warning").html('Please provide some information about your ad!');
+                	       errorInField()
+                	       document.getElementById("informationArea").focus();
+                	     }
+                	   }
+                       if(blnValid){
+                            send()               
+                    }else{
+                        	   return blnValid;
+                       }
+                	 }
+               
+                	 function isBlank(elementID) {
+                	   if (document.getElementById(elementID).value.length == 0) {
+                	     return true;
+                	   }
+               
+                	   return false;
+                	 }
+                
+               function send() {
+                  
+                
+                      $('#editad').toggle('show');
+               
+                 var data = {"arenaName":$('#arenaName').val(), "information":$('#informationArea').val(),"gameName":$('#game').val(),"playersRequired":$('#playersRequired').val(),"id":$('#id').val()};
+                    $.ajax({
+                          url: "/updateearenaad",
+                          type: 'POST',
+                          contentType:'application/json',
+                          data: JSON.stringify(data),
+                          dataType : 'html',
+                          success: function(data ){
+                          	location.reload();
+                          }
+                      });
+                  }
+               
+               
+               
+               ////////////////////////////////////Delete button////
+               
+             
+                $("#deletearena").click(function() {
+
+             var is_sure = confirm("Are you sure you want to delete?");   	
+    if(is_sure == true){
+
+          
+        var data = {"id":"@eAd.arenaID"}
+        $.ajax({
+            url: "/deleteearena",
+            type: 'POST',
+            contentType:'application/json',
+            data: JSON.stringify(data),
+            dataType : 'html',
+            success: function(){
+                alert("Ad deleted");
+                window.location.replace("/myearena");
+            }
+        });
+
+        }
+
+
+        });
+               $(document).ready(function(){
+               
+                  $('#editearenaad').click(function() {        
+                       $('#editad').toggle('show');
+                  });
+                           
+               });
+            </script>
+                
+                <div class = "wrap">
+
+                    <div id="adinfo">
+                        <article data-role="listview" data-inset="true" data-dividertheme="a"> 
+                            <li><h2>@eAd.arenaName</h2>
+                                <p>id: @eAd.arenaID</p>
+                                <p>Creator: @eAd.admin</p>
+                                <p>Game: @eAd.gameName</p>
+                                <p>Created: @eAd.createdDate</p>
+                                <p>Players required: @eAd.playersRequired</p>
+                                <p>Information:</p> 
+                                <textarea readonly name="textarea" id="text" style = "overflow:auto;resize:none">@eAd.information</textarea>
+                            </li>
+                        </article>
+                        <label for="reply">Reply:</label>
+                        <hr>
+                        <textarea placeholder="Post your reply here" name="reply" id="replyarea" rows="4" cols="50"></textarea>
+                        <div data-role="controlgroup" data-type="horizontal" style="text-align:center;">
+                          <button type="submit" id="postreply" data-inline = "true" value="Submit Reply" class = "submitReplay" >Submit Reply </button>
+                        </div>
+                        <p id="warningreply"></p>
+                    </div>
+                    <div id="adreplies">
+                         <article data-role="listview" data-inset="true" data-dividertheme="a">
+                            @for(eAdReplies <- eAdReplies) {
+                              <li  data-role = "list-divider" ></li>
+                              <li><h2>@{eAdReplies.user + " - " + eAdReplies.createdDate}</h2>
+                               <p>Reply:</p>
+                               <textarea readonly name="textarea" id="text" style = "overflow:auto;resize:none">@{eAdReplies.content}
+                                </textarea>
+                                </li>
+                            } 
+                          </article>
+                    </div>
+                </div>
+                
+                <script>
+                    $("#postreply").click(function() {
+                        if($('#replyarea').val().length >2){
+                            var data = {"contents":$("#replyarea").val(), "adID": "@eAd.arenaID"};
+                            $.ajax({
+                                url: "/postreply",
+                                type: 'POST',
+                                contentType:'application/json',
+                                data: JSON.stringify(data),
+                                dataType : 'html',
+                                success: function(data ){
+                                    location.reload();
+                                }
+                            });
+                            }else{
+                   	             $("#warningreply").html("Your reply is too short! Please enter a minimum of 3 characters");
+                   	             $("#warningreply").css('color', 'red');
+                                $('#warningreply').prepend('<img id="redcross" src="@routes.Assets.at("images/redcross.png")" />')
+                                $('#redcross').width(40);
+                                $('#redcross').height(40);
+                            }
+                        });
+                </script>
+            </div>
+            @Templates.footer()
+            @Templates.panelAndLogOut()
+      </div>
+   </body>
+</html>
