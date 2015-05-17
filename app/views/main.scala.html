@@ -6,6 +6,7 @@
     <head>
       @Templates.head()
       @Templates.facebookHeadScript()
+     
     </head>
     <body>         
         <div data-role="page" data-theme="b" id = "main" class = "page"  >   
@@ -27,6 +28,7 @@
                                                         <a href="#" class="ui-btn ui-shadow "><h3>ETOURNAMENT</h3></a><br>
                                                     </div>
                                                  </div>
+                                           
                                                  Veritus nominavi postulant ex nec. Quis utamur vix cu, no vix ullum dolorem maiestatis. Ei mel quidam vituperatoribus, id ius doctus phaedrum, quaeque maiorum detraxit vix cu. Ea amet case indoctum sed. Ei zril patrioque nam.ati instructior mel ne, mel elit cibo oporteat at, no qui assum soluta. Omnesque democritum et pro, no duo elit salutatus disputationi. Inani harum ea eos, pro te vivendo blandit, movet habemus ullamcorper eos te.<h2><img src="@routes.Assets.at("images/e2.png")" class = "fullscreen" id = "img1"></h2>
 
                                             <p id = "col1">
@@ -59,6 +61,11 @@
             </div>
             @Templates.footer()
           @Templates.panelAndLogOut()
+          <script>
+                $('#h').removeClass('ui-alt-icon');
+                $('#mail').addClass('ui-alt-icon');
+                $('#user').addClass('ui-alt-icon');
+          </script>
 
         </div>
 

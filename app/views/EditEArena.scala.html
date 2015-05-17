@@ -208,7 +208,8 @@
                
                
                 $("#deletearena").click(function() {
-    if(true){
+             var is_sure = confirm("Are you sure you want to delete?");   	
+    if(is_sure == true){
           
    var data = {"id":"@eAd.arenaID"}
       $.ajax({
@@ -221,7 +222,8 @@
                 window.location.replace("/myearena");
             }
         });
-    }else{
+    }
+    /* else{
     	
     	 $("#warning").html("There are errors in your Ad! Fix them and try again.");
     	 $("#warning").css('color', 'red');
@@ -229,7 +231,7 @@
          $('#redcross').width(40);
          $('#redcross').height(40);
     	
-    }
+    } */
         });
                $(document).ready(function(){
                

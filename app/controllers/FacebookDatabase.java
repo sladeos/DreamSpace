@@ -89,6 +89,7 @@ public class FacebookDatabase extends Controller {
 			preparedStatement.executeUpdate();
 
 			session("connected", username);
+			UserProfileDatabase.addUserProfile();
 			return redirect(routes.Application.mainMethod());
 
 		} catch (com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException ice) {

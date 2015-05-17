@@ -1,7 +1,9 @@
 ﻿
 #bracket {
+	
     color:black;
     text-shadow:0 0px 0 #111;
+    overflow:auto;
 }
 
 .ui-autocomplete {
