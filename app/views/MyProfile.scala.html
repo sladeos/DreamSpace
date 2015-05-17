@@ -79,24 +79,21 @@
                           <img src="@routes.Assets.at("images/Avatars/wow_2.png")" class = "fullscreen" id="tre">
                         </label>
                       </fieldset>
-
-                      
                     </div>
                   </div>
                 </div>
-                
-                   
+                    
                 <div class="divLayoutcontact" Style = "width:80%">
                   <form name="contactInfoGenerate" >
                     <div data-role="fieldcontain">
                       <label for="username">Username:</label>
-                      <input readonly type="text" name="username" id="username" maxlength="30" value="@profile.username" >  
+                      <input disabled type="text" name="username" id="username" maxlength="30" value="@profile.username" >  
                       <label for="skypeID">Skype:</label>
                       <input type="text" name="skypeID" id="skypeID" maxlength="30" value="@profile.skypeID" placeholder="Skype">
                       <label for="battlenetID">Battle.net:</label>
                       <input type="text" name="battlenetID" id="battlenetID" maxlength="30" value="@profile.battlenetID" placeholder="Battle.net">
                       <label for="steamID">Steam:</label>
-                      <input type="text" name="steamID" id="steamID" maxlength="30" value=" @profile.steamID" placeholder="Steam">
+                      <input type="text" name="steamID" id="steamID" maxlength="30" value="@profile.steamID" placeholder="Steam">
                       <label for="twitchID">Twitch:</label>
                       <input type="text" name="twitchID" id="twitchID" maxlength="30" value="@profile.twitchID" placeholder="Twitch">
                       <label for="uplayID">UPlay:</label>
@@ -104,7 +101,6 @@
                     </div>
                     </form>
                       
-
                     <div data-role="collapsible" data-collapsed-icon="gear">
                       <h1>Edit Favourites</h1>
                       <p> 
@@ -118,15 +114,14 @@
               <div class="section">
                 <div data-role="fieldcontain">
                   <label for="favouritegames">Favourite Games:</label>
-                  <textarea cols="40" rows="8" name="favouritegames" id="favouritegames"></textarea>
+                  <textarea cols="40" rows="8" name="favouritegames" id="favouritegames" placeholder="Favourite Games"></textarea>
                 </div>
               </div>
          
-
               <div class="section">   
                 <div data-role="fieldcontain">
                   <label for="about">About:</label>
-                  <textarea cols="40" rows="8" name="about" id="about"></textarea>
+                  <textarea cols="40" rows="8" name="about" id="about" placeholder="About"></textarea>
                    <div Style="float:right"><input type="button" value="Save" id="save"  data-mini="true"></div>
                 </div> 
               </div>
@@ -136,29 +131,22 @@
                 
                 <div class="divLayoutcontact" Style = "width:20%" Style = "heigth:100%">
                   <img src="@routes.Assets.at("images/Avatars/avatarett.gif")" class = "fullscreen" id="avatarpic" onclick="changeImage()">
-
-                  <div Style = "width:90%" Style="float:right">
-                    <input type="button" data-icon="arrow-r" value="Edit profile" id="edit">
-                  </div>
                 </div>
                 
-                   
                 <div class="divLayoutcontact" Style = "width:80%">
-                    <div id="proinfo">
-                      <p>
-                        @profile.username
-                        <br />
-                        @profile.skypeID
-                        <br />
-                        @profile.battlenetID
-                        <br />
-                        @profile.steamID
-                        <br />
-                        @profile.twitchID
-                        <br />
-                        @profile.uplayID
-                        <br />
-                      </p>
+                           <div data-role="fieldcontain">
+                      <label for="username">Username:</label>
+                      <input readonly type="text" name="username" id="username" maxlength="30" value="@profile.username" >  
+                      <label for="skypeID">Skype:</label>
+                      <input readonly type="text" name="skypeID" id="skypeID" maxlength="30" value="@profile.skypeID" placeholder="Skype">
+                      <label for="battlenetID">Battle.net:</label>
+                      <input readonly type="text" name="battlenetID" id="battlenetID" maxlength="30" value="@profile.battlenetID" placeholder="Battle.net">
+                      <label for="steamID">Steam:</label>
+                      <input readonly type="text" name="steamID" id="steamID" maxlength="30" value="@profile.steamID" placeholder="Steam">
+                      <label for="twitchID">Twitch:</label>
+                      <input readonly type="text" name="twitchID" id="twitchID" maxlength="30" value="@profile.twitchID" placeholder="Twitch">
+                      <label for="uplayID">UPlay:</label>
+                      <input readonly type="text" name="uplayID" id="uplayID" maxlength="30" value="@profile.uplayID" placeholder="UPlay">       
                     </div>
                       
                         
@@ -174,12 +162,9 @@
                 </div>
                 
                 <div class="section">
-
                   <div data-role="fieldcontain">
                     <label for="favouritegames">Favourite Games:</label>
-                    <p>
-                        @profile.favouritegames
-                    </p>
+                    <textarea readonly cols="40" rows="8" name="favouritegames" id="favouritegames" placeholder="Favourite Games"></textarea>
                   </div>      
                 </div>
          
@@ -187,9 +172,7 @@
                 <div class="section">
                   <div data-role="fieldcontain">
                     <label for="about">About:</label>
-                    <p>
-                        @profile.userbio
-                    </p>
+                    <textarea readonly cols="40" rows="8" name="about" id="about" placeholder="About"></textarea>
                   </div> 
                 </div>
            
@@ -209,13 +192,8 @@
       </script>
             
             </div>
-
-
- 
             @Templates.footer()
             @Templates.panelAndLogOut()
-
         </div>
-
     </body>
 </html>
