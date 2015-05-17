@@ -68,11 +68,19 @@
                var prevAmt;
                
                
-               $(document).on("pageload",function(){                               
+               $(document).on("pageload",function(){ 
+            	  
                });
                
+           
+               $(document).ready(function() {
+            	 
+            	});
+        	   
+        	  
+               
                $(document).on('click','.increment',function(){
-                   
+            	  
                    switch(amount) {
                        case "4":
                        amount = "8"; 
@@ -87,6 +95,11 @@
                        case "32":
                            break;                       
                    }
+                   
+                   $('.decrement').width('30');
+             	   $('.decrement').height('30');
+             	   $('.increment').width('30');
+             	   $('.increment').height('30');
                    
                });
                
@@ -106,6 +119,10 @@
                        amount = "16";
                            break;
                    }
+                   $('.decrement').width('30');
+             	   $('.decrement').height('30');
+             	   $('.increment').width('30');
+             	   $('.increment').height('30');
                });
                
                $('#bracket').click(function() {
@@ -114,6 +131,7 @@
                });
                
                $(function() {
+            	 
                    
                    $("#fname").val(name);
                    $("#amount").val(amount);
@@ -131,6 +149,10 @@
                    }
                    
                    $('.doubleElimination').remove();
+                   $('.decrement').width('30');
+             	   $('.decrement').height('30');
+             	   $('.increment').width('30');
+             	   $('.increment').height('30');
                 
                });
                
