@@ -74,5 +74,5 @@ POST /editpacklist controllers.PacklistDatabase.editPacklist()
 #add Packlist
 POST /addpacklist controllers.PacklistDatabase.addPacklist()
 
-GET  /packlist:user controllers.Application.showPacklist(user: String)
+GET  /packlist controllers.Application.showPacklist()
 

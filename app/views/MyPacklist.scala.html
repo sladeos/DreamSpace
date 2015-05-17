@@ -36,8 +36,8 @@
                         <fieldset data-role="controlgroup" id="test">
 
                 <label><input type="checkbox" name="checkbox-0" id="pc" value="unchecked" @packlist.pc>Personal computer with all cables</label>
-                <label><input type="checkbox" name="checkbox-0" id="powerstrip" value="unchecked" @packlist.>Powerstrip so you can connect all your stuff</label>
-                <label><input type="checkbox" name="checkbox-0" id="screenAnd" value="unchecked" @packlist.screenAndCables >Screen and associated cables</label>
+                <label><input type="checkbox" name="checkbox-0" id="powerstrip" value="unchecked" @packlist.powerstrip>Powerstrip so you can connect all your stuff</label>
+                <label><input type="checkbox" name="checkbox-0" id="screenAndCables" value="unchecked" @packlist.screenAndCables >Screen and associated cables</label>
                 <label><input type="checkbox" name="checkbox-0" id="keyboard" value="unchecked" @packlist.keyboard>Keyboard and mouse</label>
                 <label><input type="checkbox" name="checkbox-0" id="headset" value="unchecked" @packlist.headset>headset</label>
                 <label><input type="checkbox" name="checkbox-0" id="networkCable" value="unchecked" @packlist.networkCable>networkCable</label>
@@ -85,8 +85,8 @@
             if($('#powerstrip').is(':checked')){
             document.getElementById("powerstrip").value = "checked";
             } 
-            if($('#screenAnd').is(':checked')){
-            document.getElementById("screenAnd").value = "checked";
+            if($('#screenAndCables').is(':checked')){
+            document.getElementById("screenAndCables").value = "checked";
             } 
             if($('#keyboard').is(':checked')){
             document.getElementById("keyboard").value = "checked";
@@ -184,7 +184,7 @@
                 url: "/editpacklist",
                 type: 'POST',
                 contentType:'application/json',
-                data: JSON.stringify({pc: $('#pc').val(), powerstrip: $('#powerstrip').val(), screenAnd: $('#screenAnd').val(), keyboard: $('#keyboard').val(), headset: $('#headset').val(), networkCable: $('#networkCable').val(), screwdriver: $('#screwdriver').val(), cableTies: $('#cableTies').val(), ductTape: $('#ductTape').val(), gameConsole: $('#gameConsole').val(), mobilePhone: $('#mobilePhone').val(), camera: $('#camera').val(), flashlight: $('#flashlight').val(), chair: $('#chair').val(), safe: $('#safe').val(), installationMedia: $('#installationMedia').val(), drivers: $('#drivers').val(), games: $('#games').val(), antiVirus: $('#antiVirus').val(), toothbrush: $('#toothbrush').val(), soap: $('#soap').val(), handCream: $('#handCream').val(), shampoo: $('#shampoo').val(), deo: $('#deo').val(), aspirin: $('#aspirin').val(), earplugs: $('#earplugs').val(), medication: $('#medication').val(), clothes: $('#clothes').val(), swimwear: $('#swimwear').val(), sheets: $('#sheets').val(), sleepingBag: $('#sleepingBag').val(), pillow: $('#pillow').val(), mattress: $('#mattress').val()}),
+                data: JSON.stringify({pc: $('#pc').val(), powerstrip: $('#powerstrip').val(), screenAndCables: $('#screenAndCables').val(), keyboard: $('#keyboard').val(), headset: $('#headset').val(), networkCable: $('#networkCable').val(), screwdriver: $('#screwdriver').val(), cableTies: $('#cableTies').val(), ductTape: $('#ductTape').val(), gameConsole: $('#gameConsole').val(), mobilePhone: $('#mobilePhone').val(), camera: $('#camera').val(), flashlight: $('#flashlight').val(), chair: $('#chair').val(), safe: $('#safe').val(), installationMedia: $('#installationMedia').val(), drivers: $('#drivers').val(), games: $('#games').val(), antiVirus: $('#antiVirus').val(), toothbrush: $('#toothbrush').val(), soap: $('#soap').val(), handCream: $('#handCream').val(), shampoo: $('#shampoo').val(), deo: $('#deo').val(), aspirin: $('#aspirin').val(), earplugs: $('#earplugs').val(), medication: $('#medication').val(), clothes: $('#clothes').val(), swimwear: $('#swimwear').val(), sheets: $('#sheets').val(), sleepingBag: $('#sleepingBag').val(), pillow: $('#pillow').val(), mattress: $('#mattress').val()}),
                 dataType : 'html',
                 success: function(){
                     window.location.replace(document.URL);
@@ -194,7 +194,7 @@
  //"nollställer" checkrutorna     
       document.getElementById("pc").value = "unchecked";
       document.getElementById("powerstrip").value = "unchecked";
-      document.getElementById("screenAnd").value = "unchecked";
+      document.getElementById("screenAndCables").value = "unchecked";
       document.getElementById("keyboard").value = "unchecked";
       document.getElementById("headset").value = "unchecked";
       document.getElementById("networkCable").value = "unchecked";

@@ -30,8 +30,38 @@ public class PacklistDatabase extends Controller {
 		String username = session("connected");
 		String personalComputer = json.findPath("pc").textValue();
 		String powerstrip = json.findPath("powerstrip").textValue();
-		String screenAndCables = json.findPath("screenAnd").textValue();
+		String screenAndCables = json.findPath("screenAndCables").textValue();
 		String keyboard = json.findPath("keyboard").textValue();
+		String headset = json.findPath("headset").textValue();
+		String networkCable = json.findPath("networkCable").textValue();
+		String screwdriver = json.findPath("screwdriver").textValue();
+		String cableTies = json.findPath("cableTies").textValue();
+		String ductTape = json.findPath("ductTape").textValue();
+		String gameConsole = json.findPath("gameConsole").textValue();
+		String mobilePhone = json.findPath("mobilePhone").textValue();
+		String camera = json.findPath("camera").textValue();
+		String flashlight = json.findPath("flashlight").textValue();
+		String chair = json.findPath("chair").textValue();
+		String safe = json.findPath("safe").textValue();
+		String installationMedia = json.findPath("installationMedia").textValue();
+		String drivers = json.findPath("drivers").textValue();
+		String games = json.findPath("games").textValue();
+		String antiVirus = json.findPath("antiVirus").textValue();
+		String toothbrush = json.findPath("toothbrush").textValue();
+		String soap = json.findPath("soap").textValue();
+		String handCream = json.findPath("handCream").textValue();
+		String shampoo = json.findPath("shampoo").textValue();
+		String deo = json.findPath("deo").textValue();
+		String aspirin = json.findPath("aspirin").textValue();
+		String earplugs = json.findPath("earplugs").textValue();
+		String medication = json.findPath("medication").textValue();
+		String clothes = json.findPath("clothes").textValue();
+		String swimwear = json.findPath("swimwear").textValue();
+		String sheets = json.findPath("sheets").textValue();
+		String sleepingBag = json.findPath("sleepingBag").textValue();
+		String pillow = json.findPath("pillow").textValue();
+		String mattress = json.findPath("mattress").textValue();
+
 
 		try {
 
@@ -108,7 +138,7 @@ public static Result addPacklist() {
 		String username = session("connected");
 		String personalComputer = json.findPath("pc").textValue();
 		String powerstrip = json.findPath("powerstrip").textValue();
-		String screenAndCables = json.findPath("screenAnd").textValue();
+		String screenAndCables = json.findPath("screenAndCables").textValue();
 		String keyboard = json.findPath("keyboard").textValue();
 		String headset = json.findPath("headset").textValue();
 		String networkCable = json.findPath("networkCable").textValue();
@@ -141,7 +171,7 @@ public static Result addPacklist() {
 		String mattress = json.findPath("mattress").textValue();
 
 //Testutskrift i activators system bara för att se att 1:orna och 0:orna blir rätt.  
-		System.out.println("ADD -> PC: " + personalComputer + " , " + "POWERSTRIP: " + powerstrip + " , " + "SCREENAND: " + screenAndCables);
+	
 
 		try {
 

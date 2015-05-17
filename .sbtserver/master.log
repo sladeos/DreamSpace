@@ -1,5 +1,5 @@
-New log file opened at Sun May 17 17:33:37 CEST 2015 by 8304@Sabina
-jvm 8304@Sabina
+New log file opened at Sun May 17 21:43:25 CEST 2015 by 14548@Sabina
+jvm 14548@Sabina
 jvm vmName=Java HotSpot(TM) 64-Bit Server VM vmVendor=Oracle Corporation vmVersion=25.45-b02
 jvm specName=Java Virtual Machine Specification specVendor=Oracle Corporation specVersion=1.8
 jvm arguments: [-Xms256m, -Xmx1024m, -XX:MetaspaceSize=64m, -XX:MaxMetaspaceSize=256m]
@@ -27,7 +27,7 @@ sorting: ns: List(sbt.plugins.CorePlugin, sbt.plugins.IvyPlugin, sbt.plugins.Jvm
   :: sorted deduced result: List(sbt.plugins.CorePlugin, sbt.plugins.IvyPlugin, sbt.plugins.JvmPlugin, sbt.plugins.JUnitXmlReportPlugin)
 [Loading] Done in C:\Users\Sabina\Documents\GitHub\DreamSpace\project, returning: (dreamspace-build)
 Loading project definition from C:\Users\Sabina\Documents\GitHub\DreamSpace\project
-Running task... Cancel: sbt.TaskCancellationStrategy$Null$@407f94c7, check cycles: false
+Running task... Cancel: sbt.TaskCancellationStrategy$Null$@77d60795, check cycles: false
 
 Initial source changes: 
 	removed:Set()
@@ -67,79 +67,125 @@ Set current project to DreamSpace (in build file:/C:/Users/Sabina/Documents/GitH
 > server-handle-next-server-request
 > {file:/C:/Users/Sabina/Documents/GitHub/DreamSpace/}root/compile:discoveredMainClasses
 Evaluating tasks: compile:discoveredMainClasses
-Running task... Cancel: sbt.server.ServerTaskCancellation@bc7dd72, check cycles: false
+Running task... Cancel: sbt.server.ServerTaskCancellation@5eba493, check cycles: false
 
 Initial source changes: 
 	removed:Set()
 	added: Set()
-	modified: Set(C:\Users\Sabina\Documents\GitHub\DreamSpace\app\controllers\PacklistDatabase.java)
+	modified: Set()
 Removed products: Set()
 External API changes: API Changes: Set()
 Modified binary dependencies: Set()
-Initial directly invalidated sources: Set(C:\Users\Sabina\Documents\GitHub\DreamSpace\app\controllers\PacklistDatabase.java)
+Initial directly invalidated sources: Set()
 
 Sources indirectly invalidated by:
 	product: Set()
 	binary dep: Set()
 	external source: Set()
-All initially invalidated sources: Set(C:\Users\Sabina\Documents\GitHub\DreamSpace\app\controllers\PacklistDatabase.java)
+All initially invalidated sources: Set()
 
-Read from stdout: Compiling 1 Java source to C:\Users\Sabina\Documents\GitHub\DreamSpace\target\scala-2.11\classes...
-Compiling 1 Java source to C:\Users\Sabina\Documents\GitHub\DreamSpace\target\scala-2.11\classes...
-Read from stdout: C:\Users\Sabina\Documents\GitHub\DreamSpace\app\controllers\PacklistDatabase.java:49:  error: cannot find symbol
-C:\Users\Sabina\Documents\GitHub\DreamSpace\app\controllers\PacklistDatabase.java:49:  error: cannot find symbol
-Read from stdout: 			preparedStatement.setString(5, headset);
-Read from stdout: 			                               ^
-			preparedStatement.setString(5, headset);
-			                               ^
-Read from stdout: (compile:compileIncremental) javac returned nonzero exit code
-(compile:compileIncremental) javac returned nonzero exit code
-Total time: 5 s, completed 2015-maj-17 17:33:58
-> server-post-command-error-handler
+Total time: 4 s, completed 2015-maj-17 21:43:42
 > server-post-command-cleanup
 > server-handle-next-server-request
 > {file:/C:/Users/Sabina/Documents/GitHub/DreamSpace/}root/compile:mainClass
 Evaluating tasks: compile:mainClass
-Running task... Cancel: sbt.server.ServerTaskCancellation@5fa69e6c, check cycles: false
-Total time: 0 s, completed 2015-maj-17 17:33:58
+Running task... Cancel: sbt.server.ServerTaskCancellation@63034958, check cycles: false
+Total time: 0 s, completed 2015-maj-17 21:43:42
 > server-post-command-cleanup
 > server-handle-next-server-request
 > {file:/C:/Users/Sabina/Documents/GitHub/DreamSpace/}root/compile:discoveredMainClasses
 Evaluating tasks: compile:discoveredMainClasses
-Running task... Cancel: sbt.server.ServerTaskCancellation@5ad249ff, check cycles: false
+Running task... Cancel: sbt.server.ServerTaskCancellation@175d427e, check cycles: false
 
 Initial source changes: 
 	removed:Set()
 	added: Set()
-	modified: Set(C:\Users\Sabina\Documents\GitHub\DreamSpace\app\controllers\PacklistDatabase.java)
+	modified: Set()
 Removed products: Set()
 External API changes: API Changes: Set()
 Modified binary dependencies: Set()
-Initial directly invalidated sources: Set(C:\Users\Sabina\Documents\GitHub\DreamSpace\app\controllers\PacklistDatabase.java)
+Initial directly invalidated sources: Set()
 
 Sources indirectly invalidated by:
 	product: Set()
 	binary dep: Set()
 	external source: Set()
-All initially invalidated sources: Set(C:\Users\Sabina\Documents\GitHub\DreamSpace\app\controllers\PacklistDatabase.java)
+All initially invalidated sources: Set()
 
-Read from stdout: Compiling 1 Java source to C:\Users\Sabina\Documents\GitHub\DreamSpace\target\scala-2.11\classes...
-Compiling 1 Java source to C:\Users\Sabina\Documents\GitHub\DreamSpace\target\scala-2.11\classes...
-Read from stdout: C:\Users\Sabina\Documents\GitHub\DreamSpace\app\controllers\PacklistDatabase.java:49:  error: cannot find symbol
-C:\Users\Sabina\Documents\GitHub\DreamSpace\app\controllers\PacklistDatabase.java:49:  error: cannot find symbol
-Read from stdout: 			preparedStatement.setString(5, headset);
-Read from stdout: 			                               ^
-			preparedStatement.setString(5, headset);
-			                               ^
-Read from stdout: (compile:compileIncremental) javac returned nonzero exit code
-(compile:compileIncremental) javac returned nonzero exit code
-Total time: 4 s, completed 2015-maj-17 17:34:02
-> server-post-command-error-handler
+Total time: 2 s, completed 2015-maj-17 21:43:44
+> server-post-command-cleanup
+> server-handle-next-server-request
+> {file:/C:/Users/Sabina/Documents/GitHub/DreamSpace/}root/compile:discoveredMainClasses
+Evaluating tasks: compile:discoveredMainClasses
+Running task... Cancel: sbt.server.ServerTaskCancellation@5eb157c6, check cycles: false
+
+Initial source changes: 
+	removed:Set()
+	added: Set()
+	modified: Set()
+Removed products: Set()
+External API changes: API Changes: Set()
+Modified binary dependencies: Set()
+Initial directly invalidated sources: Set()
+
+Sources indirectly invalidated by:
+	product: Set()
+	binary dep: Set()
+	external source: Set()
+All initially invalidated sources: Set()
+
+Total time: 1 s, completed 2015-maj-17 21:43:45
 > server-post-command-cleanup
 > server-handle-next-server-request
 > {file:/C:/Users/Sabina/Documents/GitHub/DreamSpace/}root/compile:mainClass
 Evaluating tasks: compile:mainClass
-Running task... Cancel: sbt.server.ServerTaskCancellation@52d673cc, check cycles: false
-Total time: 0 s, completed 2015-maj-17 17:34:02
+Running task... Cancel: sbt.server.ServerTaskCancellation@2fa02056, check cycles: false
+Total time: 0 s, completed 2015-maj-17 21:43:45
+> server-post-command-cleanup
+> server-handle-next-server-request
+> backgroundRun
+Evaluating tasks: compile:backgroundRun
+Running task... Cancel: sbt.server.ServerTaskCancellation@212284ee, check cycles: false
+Total time: 0 s, completed 2015-maj-17 21:44:14
+> server-post-command-cleanup
+> server-handle-next-server-request
+> {file:/C:/Users/Sabina/Documents/GitHub/DreamSpace/}root/*:playForkConfig
+Evaluating tasks: *:playForkConfig
+Running task... Cancel: sbt.server.ServerTaskCancellation@766a2322, check cycles: false
+Total time: 1 s, completed 2015-maj-17 21:44:20
+> server-post-command-cleanup
+> server-handle-next-server-request
+> root/playForkNotifyStart http://localhost:9000
+Evaluating tasks: *:playForkNotifyStart
+Running task... Cancel: sbt.server.ServerTaskCancellation@3de68ff1, check cycles: false
+Total time: 0 s, completed 2015-maj-17 21:44:21
+> server-post-command-cleanup
+> server-handle-next-server-request
+> {file:/C:/Users/Sabina/Documents/GitHub/DreamSpace/}root/*:playForkReload
+Evaluating tasks: *:playForkReload
+Running task... Cancel: sbt.server.ServerTaskCancellation@6ac48ec3, check cycles: false
+
+Initial source changes: 
+	removed:Set()
+	added: Set()
+	modified: Set()
+Removed products: Set()
+External API changes: API Changes: Set()
+Modified binary dependencies: Set()
+Initial directly invalidated sources: Set()
+
+Sources indirectly invalidated by:
+	product: Set()
+	binary dep: Set()
+	external source: Set()
+All initially invalidated sources: Set()
+
+Copy resource mappings: 
+	(C:\Users\Sabina\Documents\GitHub\DreamSpace\conf\application.conf,C:\Users\Sabina\Documents\GitHub\DreamSpace\target\scala-2.11\classes\application.conf)
+	(C:\Users\Sabina\Documents\GitHub\DreamSpace\conf\evolutions,C:\Users\Sabina\Documents\GitHub\DreamSpace\target\scala-2.11\classes\evolutions)
+	(C:\Users\Sabina\Documents\GitHub\DreamSpace\conf\routes,C:\Users\Sabina\Documents\GitHub\DreamSpace\target\scala-2.11\classes\routes)
+	(C:\Users\Sabina\Documents\GitHub\DreamSpace\conf\evolutions\default,C:\Users\Sabina\Documents\GitHub\DreamSpace\target\scala-2.11\classes\evolutions\default)
+	(C:\Users\Sabina\Documents\GitHub\DreamSpace\conf\evolutions\default\1.sql,C:\Users\Sabina\Documents\GitHub\DreamSpace\target\scala-2.11\classes\evolutions\default\1.sql)
+Total time: 3 s, completed 2015-maj-17 21:44:25
 > server-post-command-cleanup
 > server-handle-next-server-request
