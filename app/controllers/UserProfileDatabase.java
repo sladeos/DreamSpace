@@ -123,14 +123,11 @@ public class UserProfileDatabase extends Controller {
 		String userbio = json.findPath("about").textValue();
 
 		try {
-
 			conn = DB.getConnection();
-
 			// int avatarID = Integer.parseInt(avatarIDstring);
 			String insertIntoDatabase = "UPDATE UserProfile SET favouritegames=?, userbio=?, skypeID=?, steamID=?, battlenetID=?, uplayID=?, twitchID=? WHERE username=?";
 
 			preparedStatement = conn.prepareStatement(insertIntoDatabase);
-
 			preparedStatement.setString(1, favouritegames);
 			preparedStatement.setString(2, userbio);
 			preparedStatement.setString(3, skypeID);
@@ -138,8 +135,8 @@ public class UserProfileDatabase extends Controller {
 			preparedStatement.setString(5, battlenetID);
 			preparedStatement.setString(6, uplayID);
 			preparedStatement.setString(7, twitchID);
-			// preparedStatement.setInt(13, avatarID);
 			preparedStatement.setString(8, username);
+			// preparedStatement.setInt(13, avatarID);
 
 			preparedStatement.executeUpdate();
 			return ok("Succesful Reply!");

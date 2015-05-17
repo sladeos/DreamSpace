@@ -121,9 +121,9 @@ public class Application extends Controller {
 				String user = session("connected");
 				if (user != null) {
 					if (user.equals(userUrl)) {
-						return ok(MyProfile.render(UserProfileDatabase.getProfile(user)));
+						return ok(MyProfile.render(UserProfileDatabase.getProfile(userUrl)));
 					} else {
-						return ok(OtherUserProfile.render(UserProfileDatabase.getProfile(user)));
+						return ok(OtherUserProfile.render(UserProfileDatabase.getProfile(userUrl)));
 					}
 				} else {
 					return unauthorized(LoginUserPage
