@@ -9,8 +9,7 @@ GET     /                           controllers.Application.mainMethod()
 #Get to otheruserprofile html-page
 GET   /otheruser controllers.Application.otheruser()
 
-#Get to packlist html-page
-GET   /packlist controllers.Application.packlist()
+
 
 #Get to MyProfile html-page
 GET   /myprofile controllers.Application.myprofile()
@@ -76,3 +75,4 @@ POST /editpacklist controllers.PacklistDatabase.editPacklist()
 POST /addpacklist controllers.PacklistDatabase.addPacklist()
 
 GET  /packlist:user controllers.Application.showPacklist(user: String)
+

@@ -100,6 +100,7 @@ public class UserDatabase extends Controller {
 			preparedStatement.setString(4, sSalt);
 			preparedStatement.executeUpdate();
 			session("connected", userUsername);
+			PacklistDatabase.addPacklist();
 			return redirect(routes.Application.mainMethod());
 
 		} catch (com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException ice) {

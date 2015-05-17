@@ -37,7 +37,7 @@ public class PacklistDatabase extends Controller {
 
 			conn = DB.getConnection();
 
-			String insertIntoDatabase = "UPDATE Packlist SET personalComputer = ?, powerstrip = ?, screenAndCables =? WHERE username = ?";
+			String insertIntoDatabase = "UPDATE Packlist SET personalComputer=?, powerstrip=?, screenAndCables=?, keyboard=?, headset=?, networkCable=?, screwdriver=?, cableTies=?, ductTape=?, gameConsole=?, mobilePhone=?, camera=?, flashlight=?, chair=?, safe=?, installationMedia=?, drivers=?, games=?, antiVirus=?, toothbrush=?, soap=?, handCream=?, shampoo=?, deo=?, aspirin=?, earplugs=?, medication=?, clothes=?, swimwear=?, sheets=?, sleepingBag=?, pillow=?, mattress=? WHERE username = ?";
 						
 			preparedStatement = conn.prepareStatement(insertIntoDatabase);
 
@@ -45,7 +45,37 @@ public class PacklistDatabase extends Controller {
 			preparedStatement.setString(1, personalComputer);
 			preparedStatement.setString(2, powerstrip);
 			preparedStatement.setString(3, screenAndCables);
-			preparedStatement.setString(4, username);
+			preparedStatement.setString(4, keyboard);
+			preparedStatement.setString(5, headset);
+			preparedStatement.setString(6, networkCable);
+			preparedStatement.setString(7, screwdriver);
+			preparedStatement.setString(8, cableTies);
+			preparedStatement.setString(9, ductTape);
+			preparedStatement.setString(10, gameConsole);
+			preparedStatement.setString(11, mobilePhone);
+			preparedStatement.setString(12, camera);
+			preparedStatement.setString(13, flashlight);
+			preparedStatement.setString(14, chair);
+			preparedStatement.setString(15, safe);
+			preparedStatement.setString(16, installationMedia);
+			preparedStatement.setString(17, drivers);
+			preparedStatement.setString(18, games);
+			preparedStatement.setString(19, antiVirus);
+			preparedStatement.setString(20, toothbrush);
+			preparedStatement.setString(21, soap);
+			preparedStatement.setString(22, handCream);
+			preparedStatement.setString(23, shampoo);
+			preparedStatement.setString(24, deo);
+			preparedStatement.setString(25, aspirin);
+			preparedStatement.setString(26, earplugs);
+			preparedStatement.setString(27, medication);
+			preparedStatement.setString(28, clothes);
+			preparedStatement.setString(29, swimwear);
+			preparedStatement.setString(30, sheets);
+			preparedStatement.setString(31, sleepingBag);
+			preparedStatement.setString(32, pillow);
+			preparedStatement.setString(33, mattress);
+			preparedStatement.setString(34, username);
 			
 			preparedStatement.executeUpdate();
 			return ok("Succesful Reply!");
@@ -83,7 +113,7 @@ public static Result addPacklist() {
 		String headset = json.findPath("headset").textValue();
 		String networkCable = json.findPath("networkCable").textValue();
 		String screwdriver = json.findPath("screwdriver").textValue();
-		String cable_Ties = json.findPath("cable_Ties").textValue();
+		String cableTies = json.findPath("cableTies").textValue();
 		String ductTape = json.findPath("ductTape").textValue();
 		String gameConsole = json.findPath("gameConsole").textValue();
 		String mobilePhone = json.findPath("mobilePhone").textValue();
@@ -117,7 +147,7 @@ public static Result addPacklist() {
 
 			conn = DB.getConnection();
 
-			String insertIntoDatabase = "INSERT INTO Packlist (username, personalComputer, powerstrip, screenAndCables, keyboard, headset, networkCable, screwdriver, cable_Ties, ductTape, gameConsole, mobilePhone, camera, flashlight, chair, safe, installationMedia, drivers, games, antiVirus, toothbrush, soap, handCream, shampoo, deo, aspirin, earplugs, medication, clothes, swimwear, sheets, sleepingBag, pillow, mattress) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+			String insertIntoDatabase = "INSERT INTO Packlist (username, personalComputer, powerstrip, screenAndCables, keyboard, headset, networkCable, screwdriver, cableTies, ductTape, gameConsole, mobilePhone, camera, flashlight, chair, safe, installationMedia, drivers, games, antiVirus, toothbrush, soap, handCream, shampoo, deo, aspirin, earplugs, medication, clothes, swimwear, sheets, sleepingBag, pillow, mattress) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 							
 			preparedStatement = conn.prepareStatement(insertIntoDatabase);
 
@@ -129,7 +159,7 @@ public static Result addPacklist() {
 			preparedStatement.setString(6, headset);
 			preparedStatement.setString(7, networkCable);
 			preparedStatement.setString(8, screwdriver);
-			preparedStatement.setString(9, cable_Ties);
+			preparedStatement.setString(9, cableTies);
 			preparedStatement.setString(10, ductTape);
 			preparedStatement.setString(11, gameConsole);
 			preparedStatement.setString(12, mobilePhone);
@@ -179,7 +209,7 @@ public static Result addPacklist() {
 		} // end try
 	}
 
- public static Result getPacklist(String user) {
+ public static Packlist getPacklist(String user) {
  		Connection conn = null;
  		PreparedStatement preparedStatement = null;
 		
@@ -198,12 +228,12 @@ public static Result addPacklist() {
 				rs.next();
  				pL.pc = rs.getString("personalComputer");
  				pL.powerstrip = rs.getString("powerstrip");
-				pL.screenAnd = rs.getString("screenAnd");
+				pL.screenAndCables = rs.getString("screenAndCables");
  				pL.keyboard = rs.getString("keyboard");
  				pL.headset = rs.getString("headset");
  				pL.networkCable = rs.getString("networkCable");
 				pL.screwdriver = rs.getString("screwdriver");
-				pL.cable_Ties = rs.getString("cable_Ties");
+				pL.cableTies = rs.getString("cableTies");
 				pL.ductTape = rs.getString("ductTape");
 				pL.gameConsole = rs.getString("gameConsole");
 				pL.mobilePhone = rs.getString("mobilePhone");
@@ -229,7 +259,7 @@ public static Result addPacklist() {
  				pL.sleepingBag = rs.getString("sleepingBag");
  				pL.pillow = rs.getString("pillow");
  				pL.mattress = rs.getString("mattress");
- 				pL.userID = rs.getInt("userId");
+ 				pL.username = rs.getString("username");
 
  			}
 

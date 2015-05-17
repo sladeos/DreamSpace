@@ -35,54 +35,45 @@
                     <div data-role="fieldcontain">
                         <fieldset data-role="controlgroup" id="test">
 
-                <label><input type="checkbox" name="checkbox-0" id="pc" value="unchecked">Personal computer with all cables</label>
-                <label><input type="checkbox" name="checkbox-0" id="powerstrip" value="unchecked">Powerstrip so you can connect all your stuff</label>
-                <label><input type="checkbox" name="checkbox-0" id="screenAnd" value="unchecked">Screen and associated cables</label>
-                <label><input type="checkbox" name="checkbox-0" id="keyboard" value="unchecked">Keyboard and mouse</label>
-                <label><input type="checkbox" name="checkbox-0" id="headset" value="unchecked">headset</label>
-                <label><input type="checkbox" name="checkbox-0" id="networkCable" value="unchecked">networkCable</label>
-                <label><input type="checkbox" name="checkbox-0" id="screwdriver" value="unchecked">screwdriver</label>
-                <label><input type="checkbox" name="checkbox-0" id="cable_Ties" value="unchecked">Cable Ties</label>
-                <label><input type="checkbox" name="checkbox-0" id="ductTape" value="unchecked">ductTape</label>
-                <label><input type="checkbox" name="checkbox-0" id="gameConsole" value="unchecked">GameConsole</label>
-                <label><input type="checkbox" name="checkbox-0" id="mobilePhone" value="unchecked">Mobile</label>
-                <label><input type="checkbox" name="checkbox-0" id="camera" value="unchecked">camera</label>
-                <label><input type="checkbox" name="checkbox-0" id="flashlight" value="unchecked">flashlight</label>
-                <label><input type="checkbox" name="checkbox-0" id="chair" value="unchecked">chair</label>
-                <label><input type="checkbox" name="checkbox-0" id="safe" value="unchecked">safe</label>
-                <label><input type="checkbox" name="checkbox-0" id="installationMedia" value="unchecked">installationMedia</label>
-                <label><input type="checkbox" name="checkbox-0" id="drivers" value="unchecked">drivers</label>
-                <label><input type="checkbox" name="checkbox-0" id="games" value="unchecked">games</label>
-                <label><input type="checkbox" name="checkbox-0" id="antiVirus" value="unchecked">antiVirus</label>
-                <label><input type="checkbox" name="checkbox-0" id="toothbrush" value="unchecked">toothbrush</label>
-                <label><input type="checkbox" name="checkbox-0" id="soap" value="unchecked">soap</label>
-                <label><input type="checkbox" name="checkbox-0" id="handCream" value="unchecked">handcream</label>
-                <label><input type="checkbox" name="checkbox-0" id="shampoo" value="unchecked">shampoo</label>
-                <label><input type="checkbox" name="checkbox-0" id="deo" value="unchecked">deo</label>
-                <label><input type="checkbox" name="checkbox-0" id="aspirin" value="unchecked">aspirin</label>
-                <label><input type="checkbox" name="checkbox-0" id="earplugs" value="unchecked">earplugs</label>
-                <label><input type="checkbox" name="checkbox-0" id="medication" value="unchecked">medication</label>
-                <label><input type="checkbox" name="checkbox-0" id="clothes" value="unchecked">clothes</label>
-                <label><input type="checkbox" name="checkbox-0" id="swimwear" value="unchecked">swimwear</label>
-                <label><input type="checkbox" name="checkbox-0" id="sheets" value="unchecked">sheets</label>
-                <label><input type="checkbox" name="checkbox-0" id="sleepingBag" value="unchecked">sleepingbag</label>
-                <label><input type="checkbox" name="checkbox-0" id="pillow" value="unchecked">pillow</label>
-                <label><input type="checkbox" name="checkbox-0" id="mattress" value="unchecked">mattress</label>
+                <label><input type="checkbox" name="checkbox-0" id="pc" value="unchecked" @packlist.pc>Personal computer with all cables</label>
+                <label><input type="checkbox" name="checkbox-0" id="powerstrip" value="unchecked" @packlist.>Powerstrip so you can connect all your stuff</label>
+                <label><input type="checkbox" name="checkbox-0" id="screenAnd" value="unchecked" @packlist.screenAndCables >Screen and associated cables</label>
+                <label><input type="checkbox" name="checkbox-0" id="keyboard" value="unchecked" @packlist.keyboard>Keyboard and mouse</label>
+                <label><input type="checkbox" name="checkbox-0" id="headset" value="unchecked" @packlist.headset>headset</label>
+                <label><input type="checkbox" name="checkbox-0" id="networkCable" value="unchecked" @packlist.networkCable>networkCable</label>
+                <label><input type="checkbox" name="checkbox-0" id="screwdriver" value="unchecked" @packlist.screwdriver>screwdriver</label>
+                <label><input type="checkbox" name="checkbox-0" id="cableTies" value="unchecked" @packlist.cableTies>Cable Ties</label>
+                <label><input type="checkbox" name="checkbox-0" id="ductTape" value="unchecked" @packlist.ductTape>ductTape</label>
+                <label><input type="checkbox" name="checkbox-0" id="gameConsole" value="unchecked" @packlist.gameConsole>GameConsole</label>
+                <label><input type="checkbox" name="checkbox-0" id="mobilePhone" value="unchecked" @packlist.mobilePhone>Mobile</label>
+                <label><input type="checkbox" name="checkbox-0" id="camera" value="unchecked" @packlist.camera>camera</label>
+                <label><input type="checkbox" name="checkbox-0" id="flashlight" value="unchecked" @packlist.flashlight>flashlight</label>
+                <label><input type="checkbox" name="checkbox-0" id="chair" value="unchecked" @packlist.chair>chair</label>
+                <label><input type="checkbox" name="checkbox-0" id="safe" value="unchecked" @packlist.safe>safe</label>
+                <label><input type="checkbox" name="checkbox-0" id="installationMedia" value="unchecked" @packlist.installationMedia>installationMedia</label>
+                <label><input type="checkbox" name="checkbox-0" id="drivers" value="unchecked" @packlist.drivers>drivers</label>
+                <label><input type="checkbox" name="checkbox-0" id="games" value="unchecked" @packlist.games>games</label>
+                <label><input type="checkbox" name="checkbox-0" id="antiVirus" value="unchecked" @packlist.antiVirus>antiVirus</label>
+                <label><input type="checkbox" name="checkbox-0" id="toothbrush" value="unchecked" @packlist.toothbrush>toothbrush</label>
+                <label><input type="checkbox" name="checkbox-0" id="soap" value="unchecked" @packlist.soap>soap</label>
+                <label><input type="checkbox" name="checkbox-0" id="handCream" value="unchecked" @packlist.handCream>handcream</label>
+                <label><input type="checkbox" name="checkbox-0" id="shampoo" value="unchecked" @packlist.shampoo>shampoo</label>
+                <label><input type="checkbox" name="checkbox-0" id="deo" value="unchecked" @packlist.deo>deo</label>
+                <label><input type="checkbox" name="checkbox-0" id="aspirin" value="unchecked" @packlist.aspirin>aspirin</label>
+                <label><input type="checkbox" name="checkbox-0" id="earplugs" value="unchecked" @packlist.earplugs>earplugs</label>
+                <label><input type="checkbox" name="checkbox-0" id="medication" value="unchecked" @packlist.medication>medication</label>
+                <label><input type="checkbox" name="checkbox-0" id="clothes" value="unchecked" @packlist.clothes>clothes</label>
+                <label><input type="checkbox" name="checkbox-0" id="swimwear" value="unchecked" @packlist.swimwear>swimwear</label>
+                <label><input type="checkbox" name="checkbox-0" id="sheets" value="unchecked" @packlist.sheets>sheets</label>
+                <label><input type="checkbox" name="checkbox-0" id="sleepingBag" value="unchecked" @packlist.sleepingBag>sleepingbag</label>
+                <label><input type="checkbox" name="checkbox-0" id="pillow" value="unchecked" @packlist.pillow>pillow</label>
+                <label><input type="checkbox" name="checkbox-0" id="mattress" value="unchecked" @packlist.mattress>mattress</label>
                 
                 <div Style="float:right"><input type="button" value="Save" id="save"  data-mini="true"></div>
 
                 </fieldset>
                 </div>
               </form>
-
-              <div class="section">
-                <div data-role="fieldcontain">
-                    <label for="pc">Personal computer:</label>
-                    <p>
-                        @packlist.pc
-                    </p>
-                </div>
-            </div>
      
     <script>
         $("#save").click(function() {
@@ -109,8 +100,8 @@
             if($('#screwdriver').is(':checked')){
             document.getElementById("screwdriver").value = "checked";
             } 
-            if($('#cable_Ties').is(':checked')){
-            document.getElementById("cable_Ties").value = "checked";
+            if($('#cableTies').is(':checked')){
+            document.getElementById("cableTies").value = "checked";
             } 
             if($('#ductTape').is(':checked')){
             document.getElementById("ductTape").value = "checked";
@@ -190,13 +181,13 @@
 
  //POSTen.         
           $.ajax({
-                url: "/addpacklist",
+                url: "/editpacklist",
                 type: 'POST',
                 contentType:'application/json',
-                data: JSON.stringify({pc: $('#pc').val(), powerstrip: $('#powerstrip').val(), screenAnd: $('#screenAnd').val(), keyboard: $('#keyboard').val(), headset: $('#headset').val(), networkCable: $('#networkCable').val(), screwdriver: $('#screwdriver').val(), cable_Ties: $('#cable_Ties').val(), ductTape: $('#ductTape').val(), gameConsole: $('#gameConsole').val(), mobilePhone: $('#mobilePhone').val(), camera: $('#camera').val(), flashlight: $('#flashlight').val(), chair: $('#chair').val(), safe: $('#safe').val(), installationMedia: $('#installationMedia').val(), drivers: $('#drivers').val(), games: $('#games').val(), antiVirus: $('#antiVirus').val(), toothbrush: $('#toothbrush').val(), soap: $('#soap').val(), handCream: $('#handCream').val(), shampoo: $('#shampoo').val(), deo: $('#deo').val(), aspirin: $('#aspirin').val(), earplugs: $('#earplugs').val(), medication: $('#medication').val(), clothes: $('#clothes').val(), swimwear: $('#swimwear').val(), sheets: $('#sheets').val(), sleepingBag: $('#sleepingBag').val(), pillow: $('#pillow').val(), mattress: $('#mattress').val()}),
+                data: JSON.stringify({pc: $('#pc').val(), powerstrip: $('#powerstrip').val(), screenAnd: $('#screenAnd').val(), keyboard: $('#keyboard').val(), headset: $('#headset').val(), networkCable: $('#networkCable').val(), screwdriver: $('#screwdriver').val(), cableTies: $('#cableTies').val(), ductTape: $('#ductTape').val(), gameConsole: $('#gameConsole').val(), mobilePhone: $('#mobilePhone').val(), camera: $('#camera').val(), flashlight: $('#flashlight').val(), chair: $('#chair').val(), safe: $('#safe').val(), installationMedia: $('#installationMedia').val(), drivers: $('#drivers').val(), games: $('#games').val(), antiVirus: $('#antiVirus').val(), toothbrush: $('#toothbrush').val(), soap: $('#soap').val(), handCream: $('#handCream').val(), shampoo: $('#shampoo').val(), deo: $('#deo').val(), aspirin: $('#aspirin').val(), earplugs: $('#earplugs').val(), medication: $('#medication').val(), clothes: $('#clothes').val(), swimwear: $('#swimwear').val(), sheets: $('#sheets').val(), sleepingBag: $('#sleepingBag').val(), pillow: $('#pillow').val(), mattress: $('#mattress').val()}),
                 dataType : 'html',
                 success: function(){
-                    window.location.replace("/myprofile");
+                    window.location.replace(document.URL);
                 }
           });
 
@@ -208,7 +199,7 @@
       document.getElementById("headset").value = "unchecked";
       document.getElementById("networkCable").value = "unchecked";
       document.getElementById("screwdriver").value = "unchecked";
-      document.getElementById("cable_Ties").value = "unchecked";
+      document.getElementById("cableTies").value = "unchecked";
       document.getElementById("ductTape").value = "unchecked";
       document.getElementById("gameConsole").value = "unchecked";
       document.getElementById("mobilePhone").value = "unchecked";

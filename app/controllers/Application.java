@@ -103,16 +103,16 @@ public class Application extends Controller {
 		}
 	}
 
-	public static Result packlist() {
-			String user = session("connected");
-			if (user != null) {
-				return ok(MyPacklist.render("You are logged in as "
-						+ user));
-			} else {
-				return unauthorized(LoginUserPage
-						.render("Welcome, login to explore the website"));
-			}
-		}
+	// public static Result packlist() {
+	// 		String user = session("connected");
+	// 		if (user != null) {
+	// 			return ok(MyPacklist.render("You are logged in as "
+	// 					+ user));
+	// 		} else {
+	// 			return unauthorized(LoginUserPage
+	// 					.render("Welcome, login to explore the website"));
+	// 		}
+	// 	}
 
 
 			public static Result myprofile() {
@@ -154,13 +154,11 @@ public class Application extends Controller {
 
 			 public static Result showPacklist(String userUrl) {
 				String user = session("connected");
-			 	if (user != null) {
-			 		if (user.equals(userUrl)) {
-			 			return ok(Packlist.render(PacklistDatabase.getPacklist(user)));
-			 		} 
-			 	} else {
-			 		return unauthorized(LoginUserPage
-			 				.render("Welcome, login to explore the website"));
-			 	}
+			 	// if (user != null && user.equals(userUrl)) {
+			 			return ok(MyPacklist.render(PacklistDatabase.getPacklist(user))); 
+			 	// } else {
+			 	// 	return unauthorized(LoginUserPage
+			 	// 			.render("Welcome, login to explore the website"));
+			 	// }
 			 }
 }

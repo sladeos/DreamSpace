@@ -11,7 +11,7 @@ import play.db.ebean.Model;
 public class Packlist extends Model{
 
 @Id @Constraints.Required
-public String userID;
+public String username;
 
 @Constraints.Required
 public String pc;
@@ -20,7 +20,7 @@ public String pc;
 public String powerstrip;
 
 @Constraints.Required
-public String screenAnd;
+public String screenAndCables;
 
 @Constraints.Required 
 public String keyboard;
@@ -35,7 +35,7 @@ public String networkCable;
 public String screwdriver;
 
 @Constraints.Required 
-public String cable_Ties;
+public String cableTies;
 
 @Constraints.Required
 public String ductTape;
