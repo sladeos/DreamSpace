@@ -4,7 +4,9 @@ import models.*;
 import play.*;
 import play.mvc.*;
 
+import java.io.ByteArrayInputStream;
 import java.io.UnsupportedEncodingException;
+
 import java.sql.*;
 
 import views.html.*;
@@ -19,6 +21,8 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.io.IOException;
 import java.security.SecureRandom;
+
+import javax.persistence.Entity;
 
 import play.libs.Json;
 
@@ -153,6 +157,10 @@ public class Application extends Controller {
 					.render("Welcome, login to explore the website"));
 		}
 	}
+	
+    public static Result newPicture(){
+    	return ok(NewPicturePage.render());
+    }
 
 	public static Result showProfile(String userUrl) {
 		String user = session("connected");

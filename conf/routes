@@ -83,9 +83,23 @@ GET /earenaad/:id controllers.Application.showIndividualAd(id: Integer)
 #Posts reply to an individual EArena Ad. Ajax call.
 POST /postreply controllers.EArenaDatabase.addReply()
 
+#Sends update data for EArena Ad to method
 POST /updateearenaad controllers.EArenaDatabase.updateEArenaAd()
 
+#Retrieves User's tournaments
 GET /myetournaments controllers.TournamentDatabase.getMyTournaments()
+
+#Gets new picture page
+GET /newpicture controllers.Application.newPicture()
+
+#Post to save User's Picture
+POST /savepicture controllers.PictureDatabase.savePicture()
+
+#Get to retrive pictures
+GET /pictures controllers.PictureDatabase.getPictures()
+
+#Retrives Blob from the Id, renders blob as mimetype and send back to client
+GET /pic/:id controllers.PictureDatabase.render(id: Integer)
 
 #edit user profile
 POST /edituserprofile controllers.UserProfileDatabase.editUserProfile()
@@ -101,5 +115,6 @@ GET /myprofile controllers.Application.getMyProfile()
 
 #add new user profile
 POST /saveuserprofile controllers.UserProfileDatabase.addUserProfile()
+
 
 
