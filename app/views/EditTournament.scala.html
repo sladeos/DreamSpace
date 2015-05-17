@@ -11,6 +11,10 @@
         <div data-role="page" data-theme="b" class="page">
             <div data-role="header" class = "header">
                 @Templates.header()
+                  <a id = "back" rel="external" href="/mainetournament" data-role="button" role="button" data-icon="back" data-iconpos="notext">Back</a>
+                <script>
+                  $("#back").css("background","  #FF9900");
+                </script>
             </div>
         <div data-role="content" class = "content">   
             </ul>
@@ -18,6 +22,7 @@
             <h1 align="center">Edit your tournament</h1>
 
             <button id="share_button" class = "myFace faceButton search" data-mini="true">Facebook Share</button>
+            <br>
             <script type="text/javascript">
             $(document).ready(function() {
               $('#share_button').click(function(e) {
@@ -34,12 +39,20 @@
             </script>
             
             <div id="bracket"></div>
-             <div id='bracketForm' class = "tEdit">
+             <div id='bracketForm' class = "search">
+
+               <br>
+               <br>
+                <a href="#popupCloseRight" data-rel="popup" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-icon-info ui-btn-icon-right ui-mini">Info</a>
+                <div data-role="popup" id="popupCloseRight" class="ui-content" style="max-width:280px">
+                <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext  ui-btn-right">Close</a>
+                <p>You can change the name of the teams in your tournament by clicking the respective team label, you can also change the score by clicking the label after the team name. This updates the bracket.</p>
+                </div><br>
 
                 Name of your tournament: <input type="text" name="fname" id="fname">
-                <button data-role = "button"  value="Save changes" id="save" class = "submitReplay">Save changes</button>
+                <button data-role = "button"  value="Save changes" id="save" >Save changes</button>
                 
-                <button data-role = "button"  value="Delete tournament" id="delete" class = "submitReplay">Delete tournament</button>
+                <button data-role = "button"  value="Delete tournament" id="delete" data-icon="delete" data-iconpos="right" >Delete tournament</button>
                     <p id="warning"></p>
                 
                         </div>
@@ -56,11 +69,19 @@
                var prevAmt;
                
                
-               $(document).on("pageload",function(){                               
+               $(document).on("pageload",function(){ 
+            	  
                });
                
+           
+               $(document).ready(function() {
+            	 
+            	});
+        	   
+        	  
+               
                $(document).on('click','.increment',function(){
-                   
+            	  
                    switch(amount) {
                        case "4":
                        amount = "8"; 
@@ -75,6 +96,11 @@
                        case "32":
                            break;                       
                    }
+                   
+                   $('.decrement').width('30');
+             	   $('.decrement').height('30');
+             	   $('.increment').width('30');
+             	   $('.increment').height('30');
                    
                });
                
@@ -94,6 +120,10 @@
                        amount = "16";
                            break;
                    }
+                   $('.decrement').width('30');
+             	   $('.decrement').height('30');
+             	   $('.increment').width('30');
+             	   $('.increment').height('30');
                });
                
                $('#bracket').click(function() {
@@ -102,6 +132,7 @@
                });
                
                $(function() {
+            	 
                    
                    $("#fname").val(name);
                    $("#amount").val(amount);
@@ -119,6 +150,10 @@
                    }
                    
                    $('.doubleElimination').remove();
+                   $('.decrement').width('30');
+             	   $('.decrement').height('30');
+             	   $('.increment').width('30');
+             	   $('.increment').height('30');
                 
                });
                
@@ -160,13 +195,12 @@
                
                });
                /////////////////////////////////////////////////delete button /////////////////////          
-               var deleteconfirmation = false;
+             
                $("#delete").click(function() {
-               if (deleteconfirmation == false){
-                    $("#delete").html("Are you sure?");
-                    deleteconfirmation = true;
-                } else {
-          
+
+               var is_sure = confirm("Are you sure you want to delete?");
+           if (is_sure == true) {
+
              var data = {
                "id": "@tournament.tournamentID"
 
@@ -185,13 +219,18 @@
                }
 
              });
+
                 }
+
+           
+
+
          });
 
             </script>
             
          </div>
-         @Templates.footer()
+         @Templates.mitLicens()
          @Templates.panelAndLogOut()
       </div>
    </body>

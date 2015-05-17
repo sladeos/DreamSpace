@@ -18,6 +18,11 @@
         <div data-role="page" data-theme="b" id = "main" class = "page"  >
               <div data-role="header" class = "header">
 	       @Templates.header()
+         <a id = "back" rel="external" href="/mainearena" data-role="button" role="button" data-icon="back" data-iconpos="notext">Back</a>
+            <script>
+              $("#back").css("background","  #FF9900");
+            </script>
+
 	       </div>
             <div data-role="content" class = "content">
             <div class ="wrap">
@@ -50,8 +55,11 @@
                               </li>
                           </article>
                         <label for="reply">Reply:</label>
+                        <hr>
                         <textarea placeholder="Post your reply here" name="reply" id="replyarea" rows="4" cols="50"></textarea>
-                        <button data-role = "button" type="submit" id="postreply"value="Submit Reply" class = "submitReplay" >Submit Reply</button>
+                        <div data-role="controlgroup" data-type="horizontal" style="text-align:center;">
+                        <button data-role = "button" type="submit" id="postreply"value="Submit Reply" class = "submitReplay" data-inline = "true">Submit Reply</button>
+                        </div>
                         <p id="warning"></p>
                     </div>
                     <div id = "adreplies">  

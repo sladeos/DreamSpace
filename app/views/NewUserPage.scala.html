@@ -36,13 +36,16 @@
                         </div>
                            <p id="warning">@message</p>
                        <div style="text-align: center">
-                         <button class=" ui-btn ui-corner-all ui-btn-inline"  type="submit" value="Create account" onclick="return validate()" >Create account </button>
+                         <button id = "creatButton"class=" ui-btn ui-corner-all ui-btn-inline"  type="submit" value="Create account" onclick="return validate()" >Create account </button>
                          </div>
                     </form>
                     <div style="text-align: center">
                         <button data-role = "button" onclick="window.location.href='/login'" class=" ui-btn ui-icon-delete ui-btn-icon-right ui-btn  ui-corner-all ui-btn-inline  goBackButton ui-mini">Cancel</button>
                     </div>
             </div> 
+                <script type="text/javascript">
+                $("#creatButton ").css("background","  #FF9900");
+                </script>
                 <script>
                     $('#username').textinput({ theme: "a" });
                     $('#email').textinput({ theme: "a" });
