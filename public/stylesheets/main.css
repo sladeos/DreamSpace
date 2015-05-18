@@ -1,4 +1,14 @@
-﻿
+﻿#pagebuttons{
+	float:right;
+}
+
+.navrow{
+	list-style:none;
+display:inline; 
+padding: 0 10px;
+float: right;
+}
+
 #bracket {
 	
     color:black;
@@ -21,7 +31,7 @@
     background-color:#1A586F;
 }
 .ui-page{
-    background: url("../images/main.jpg");
+    background: url("../images/1379587156536.jpg");
 }
 
 .content{
@@ -55,7 +65,7 @@ background : #FF9900;
         width: 100%;    
 }
     .ui-page{
-        background: url("../images/main.jpg");
+        background: url("../images/1379587156536.jpg");
     }
     
     #grid{
@@ -117,7 +127,7 @@ background : #FF9900;
 
 @media all and (min-width: 60em){
     .page{
-        background: url("../images/main.jpg");
+        background: url("../images/1379587156536.jpg");
     
 
     }

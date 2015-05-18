@@ -1,4 +1,4 @@
-@(eads: List[EArenaAd], games: List[String])
+@(eads: List[EArenaAd], games: List[String], rowcount: Integer)
 <!DOCTYPE html>
 <html>
 	<head>
@@ -23,7 +23,6 @@
                   <button data-role = "button" id = "creatAd"  rel="external" href="/" data-icon="arrow-r" data-iconpos="right" >Create ad</button>
                 </div>
 
- 
                   <script type="text/javascript">
 
                         $('#creatAd').click(function() {
@@ -47,10 +46,7 @@
               });
             });
             </script>
-            <scrip>
-               
-                   
-            </scrip>
+         
             
                 
                 
@@ -71,7 +67,7 @@
                          
                             
                                 <input type="number" name="players" placeholder="Players" id="players">
-                          
+
                                 <input type="number" name="minutes" placeholder="Search X minutes ago" id="minutes">
                             </div>
  	                      <div data-role="controlgroup" data-type="horizontal" style="text-align:center;">
@@ -104,7 +100,7 @@
                         } 
                     </article>
                 </div>
-        
+
         <script>
          $(function() {
            
@@ -120,7 +116,97 @@
     		});
     	});
         </script>
-            </div>
+        @Templates.navIcons()
+
+                        <script>
+                       var rowcount = @rowcount;
+                       var pageDecimal = rowcount / 10;
+                       var pages = Math.ceil(pageDecimal);
+                        $(document).ready(function(){
+                       if(pages > 1){
+                       $("#pagebuttons").append(pages + " Pages " + rowcount + " Results");
+                       }else{
+                       $("#pagebuttons").append(pages + " Page " + rowcount + " Results");
+                       }
+                        })
+                        
+                        
+                        var lastPart = window.location.href.split("/").pop();
+
+                        var lastPartInt = parseInt(lastPart)
+                        var currentAdress = window.location.href;
+                       var rest  = currentAdress.substring(0, currentAdress.lastIndexOf("/")+1);
+                  
+                       
+                       $('#prev').click(function(){
+                    	   if(lastPart.includes("page")){
+	                    	var currentPage = lastPart.slice(-1);
+	                    	if(currentPage ==1){
+	                    		alert("You're on the first page")
+	                    		return
+	                    	}
+	                    	var splitLast = lastPart.substring(0, lastPart.length-1);
+	                    	alert(splitLast)
+	                    	currentPage--;	
+	                    	splitLast += currentPage;
+	                    	document.location.href = splitLast
+                    	   }else{
+   	                    	alert("You're on the first page")
+                    	   }
+                       })
+                       
+                       $('#next').click(function(){
+                    	   if(lastPart.includes("page")){
+   	                    	var currentPage = lastPart.slice(-1);
+   	                    	if(currentPage == pages){
+   	                  	   alert("You're on the last page")
+                		   return; 
+   	                    	}
+   	                    	var splitLast = lastPart.substring(0, lastPart.length-1);
+	                    	currentPage++;	
+	                    	splitLast += currentPage;
+	                    	document.location.href = splitLast
+                    	   } else  if(lastPart.includes("search")){
+          	                    	
+                          		 currentAdress += "&page=2"
+         	                    document.location.href = currentAdress;
+                          		 
+                          	   }else{
+                          		 currentAdress += "?page=2"
+              	                    document.location.href = currentAdress;
+                        	   }
+
+                        })
+                        
+                       
+                       $('#first').click(function(){
+                    	   if(lastPart.includes("page")){
+      	                    	var currentAdress = lastPart.slice(-7);
+								document.location.href = currentAdress
+                   		   return; 
+      	                    	}
+      	                    	var splitLast = lastPart.substring(0, lastPart.length-1);
+   	                    	currentPage++;	
+   	                    	splitLast += currentPage;
+   	                    	document.location.href = splitLast
+                       	   } else  if(lastPart.includes("search")){
+             	                    	
+                             		 currentAdress += "&page=2"
+            	                    document.location.href = currentAdress;
+                             		 
+                             	   }else{
+                             		 currentAdress += "?page=2"
+                 	                    document.location.href = currentAdress;
+                           	   }
+                       
+                       })
+                       
+                       $('#last').click(function(){
+                    	   location.replace(rest+pages) 
+                       })
+                        </script>
+
+                    </div>
             @Templates.footer()
             @Templates.panelAndLogOut()
         </div>

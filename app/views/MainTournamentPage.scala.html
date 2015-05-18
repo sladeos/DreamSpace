@@ -1,4 +1,4 @@
-@(tournament: List[Tournament])
+@(tournament: List[Tournament], rowcount: Integer)
 
 <!DOCTYPE html>
 
@@ -31,6 +31,62 @@
                             </li>
                         } 
                         </ul>
+                        
+                        @Templates.navIcons()
+                        <script>
+                       var rowcount = @rowcount;
+                       var pageDecimal = rowcount / 10;
+                       var pages = Math.ceil(pageDecimal);
+                        $(document).ready(function(){
+                       if(pages > 1){
+                       $("#pagebuttons").append(pages + " Pages " + rowcount + " Results");
+                       }else{
+                       $("#pagebuttons").append(pages + " Page " + rowcount + " Results");
+                       }
+                      
+                        })
+                        
+                        
+                        var lastPart = window.location.href.split("/").pop();
+                        var lastPartInt = parseInt(lastPart)
+                        var currentAdress = window.location.href;
+                       var rest  = currentAdress.substring(0, currentAdress.lastIndexOf("/")+1);
+                       
+                       $('#prev').click(function(){
+                    	   if(lastPart==1){
+                    		   alert("You're on the first page")
+                    		   return;  
+                    	   }else{
+                    		   lastPart--;
+                    		   rest += lastPart;
+                    		   location.replace(rest) 
+                    	   }
+                       })
+                       
+                       $('#next').click(function(){
+                        	   if(lastPart==pages){
+                        		   alert("You're on the last page")
+                        		   return;  
+                        	   }else{
+                        		   lastPart ++;
+                        		   rest += lastPart;
+                        		   location.replace(rest) 
+                        	   }
+                        	
+                        })
+                        
+                       
+                       $('#first').click(function(){
+                    	   location.replace(rest+1) 
+                       })
+                       
+                       $('#last').click(function(){
+                    	   location.replace(rest+pages) 
+                       })
+                        </script>
+                        
+                        
+                        
                     </div>    
                     <script>
                         $("#btn1").css("background","  #FF9900");

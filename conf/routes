@@ -60,7 +60,7 @@ POST /edittournament controllers.TournamentDatabase.editTournament()
 GET  /showtournament/:id controllers.Application.showTournament(id: Integer)
 
 #Retrives list of currentuser's tournaments
-GET /mainetournament controllers.TournamentDatabase.getTournaments()
+GET /mainetournament/:page controllers.TournamentDatabase.getTournaments(page: Integer)
 
 # Shows createAd webpage
 GET /createarenaad controllers.Application.createArenaAd()
@@ -69,7 +69,7 @@ GET /createarenaad controllers.Application.createArenaAd()
 POST /savearenaad controllers.EArenaDatabase.addEArenaAd()
 
 #Shows Main EArena Page with all/newest Ads
-GET /mainearena controllers.Application.mainearena(search: String ?= "", game: String ?= "", username: String ?= "", players: String ?= "", minutes: String ?= "")
+GET /mainearena controllers.EArenaDatabase.getEArenaAds(search: String ?= "", game: String ?= "", username: String ?= "", players: String ?= "", minutes: String ?= "", page:Integer ?=1 )
 
 #Shows User's EArena Ads
 GET /myearena controllers.EArenaDatabase.getMyEArenaAds()
@@ -98,7 +98,7 @@ GET  /packlist controllers.Application.showPacklist()
 POST /updateearenaad controllers.EArenaDatabase.updateEArenaAd()
 
 #Retrieves User's tournaments
-GET /myetournaments controllers.TournamentDatabase.getMyTournaments()
+GET /myetournaments/:page controllers.TournamentDatabase.getMyTournaments(page: Integer)
 
 #Gets new picture page
 GET /newpicture controllers.Application.newPicture()
@@ -126,7 +126,3 @@ GET /myprofile controllers.Application.getMyProfile()
 
 #add new user profile
 POST /saveuserprofile controllers.UserProfileDatabase.addUserProfile()
-
-
-
-
