@@ -127,6 +127,7 @@ GET /myprofile controllers.Application.getMyProfile()
 #add new user profile
 POST /saveuserprofile controllers.UserProfileDatabase.addUserProfile()
 
-
+#Invite to tournament
+POST /invitePlayer controllers.InviteDatabase.invitePlayer()
 
 
