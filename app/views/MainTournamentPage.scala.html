@@ -7,6 +7,8 @@
         @Templates.head()
         
         @Templates.facebookHeadScript()
+        <script type="text/javascript" src="@routes.Assets.at("javascripts/jquery-ias.min.js")"></script>
+       
     </head>
     <body>
         <div data-role="page" data-theme="b" class="page">   
@@ -21,6 +23,8 @@
                     <a data-role = "button" id = "btn2"  rel="external" href="/createtournament" data-icon="arrow-r" data-iconpos="right">Create a new tournament</a>
                     <h3>Available tournaments</h3>
                     </div>
+                    
+                    <div id="tournaments">
                     <div class ="MEArenaContent">
                             
                             <hr>
@@ -31,63 +35,54 @@
                             </li>
                         } 
                         </ul>
-                        
-                        @Templates.navIcons()
-                        <script>
-                       var rowcount = @rowcount;
-                       var pageDecimal = rowcount / 10;
-                       var pages = Math.ceil(pageDecimal);
-                        $(document).ready(function(){
-                       if(pages > 1){
-                       $("#pagebuttons").append(pages + " Pages " + rowcount + " Results");
-                       }else{
-                       $("#pagebuttons").append(pages + " Page " + rowcount + " Results");
-                       }
-                      
-                        })
-                        
-                        
-                        var lastPart = window.location.href.split("/").pop();
-                        var lastPartInt = parseInt(lastPart)
-                        var currentAdress = window.location.href;
-                       var rest  = currentAdress.substring(0, currentAdress.lastIndexOf("/")+1);
-                       
-                       $('#prev').click(function(){
-                    	   if(lastPart==1){
-                    		   alert("You're on the first page")
-                    		   return;  
-                    	   }else{
-                    		   lastPart--;
-                    		   rest += lastPart;
-                    		   location.replace(rest) 
-                    	   }
-                       })
-                       
-                       $('#next').click(function(){
-                        	   if(lastPart==pages){
-                        		   alert("You're on the last page")
-                        		   return;  
-                        	   }else{
-                        		   lastPart ++;
-                        		   rest += lastPart;
-                        		   location.replace(rest) 
-                        	   }
-                        	
-                        })
-                        
-                       
-                       $('#first').click(function(){
-                    	   location.replace(rest+1) 
-                       })
-                       
-                       $('#last').click(function(){
-                    	   location.replace(rest+pages) 
-                       })
-                        </script>
-                        
-                        
-                        
+                        </div>
                     </div>    
+                    	
+                    
+                    <script>
+                    var rowcount = @rowcount;
+                    var pageDecimal = rowcount / 10;
+                    var pages = Math.ceil(pageDecimal);
+                    
+                    $(document).ready(function() {
+                    var ias = jQuery.ias({
+                    	  container:  '#tournaments',
+                    	  item:       '.MEArenaContent',
+                    	  pagination: '#pagination',
+                    	  next:       '.Next'
+                    	});
+                    
+                    
+                   
+                    var cPage;
+                    ias.on('load', function(event) {
+                    	if(cPage > pages){
+                    		alert("FINAL")
+                    		jQuery.ias().unbind();
+                    	}
+                        var url = event.url;
+                    	var beforeLastEquals = url.slice(0, url.lastIndexOf("=")+1);
+                    	beforeLastEquals += cPage
+                    	event.url = beforeLastEquals
+                    	
+                    })
+                    
+                    jQuery.ias().extension(new IASPagingExtension());
+                    jQuery.ias().on('pageChange', function(pageNum, scrollOffset, url) {
+                    	cPage = pageNum;
+                    });
+                    
+               
+
+                    });
+                    
+                    
+                    </script>
+                        <div id="pagination">
+			 			<a href="?page=1" class="Next" id="Next1">next</a>
+			 			</div>
+
+                        
                     <script>
                         $("#btn1").css("background","  #FF9900");
                          $("#btn2").css("background","  #FF9900");

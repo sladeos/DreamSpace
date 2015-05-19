@@ -321,39 +321,6 @@ public class EArenaDatabase extends Controller {
 		} // end try
 	}
 
-	public static int allAdRowCount() {
-		Connection conn = null;
-		PreparedStatement preparedStatement = null;
-
-		try {
-			conn = DB.getConnection();
-			String rowCountStatement = "SELECT COUNT(*) FROM EArena";
-			preparedStatement = conn.prepareStatement(rowCountStatement);
-
-			ResultSet rc = preparedStatement.executeQuery();
-			rc.next();
-			int rowcount = rc.getInt(1);
-			rc.close();
-
-			return rowcount;
-		} catch (com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException ice) {
-			return -1;
-		} catch (NumberFormatException nfe) {
-			return -1;
-		} catch (SQLException se) {
-			return -1;
-		} catch (Exception e) {
-			return -1;
-		} finally {
-			try {
-				if (conn != null)
-					conn.close();
-			} catch (SQLException se) {
-				return -1;
-			} // end finally try
-		} // end try
-	}
-
 	public static List<String> getEArenaGames() {
 		Connection conn = null;
 		PreparedStatement preparedStatement = null;
@@ -639,7 +606,7 @@ public class EArenaDatabase extends Controller {
 		} // end try
 	}
 
-	public static Result getMyEArenaAds() {
+	public static Result getMyEArenaAds(int page) {
 		String currentUser = session("connected");
 		if (currentUser == null) {
 			return unauthorized(LoginUserPage
@@ -649,12 +616,13 @@ public class EArenaDatabase extends Controller {
 			PreparedStatement preparedStatement = null;
 			List<EArenaAd> adList = new ArrayList<EArenaAd>();
 			try {
-
+				page = (page - 1) * 10;
 				conn = DB.getConnection();
 
-				String selectAdminAds = "SELECT * FROM EArena WHERE admin=? ORDER BY created_date DESC";
+				String selectAdminAds = "SELECT * FROM EArena WHERE admin=? ORDER BY created_date DESC LIMIT 10 OFFSET ? ";
 				preparedStatement = conn.prepareStatement(selectAdminAds);
 				preparedStatement.setString(1, currentUser);
+				preparedStatement.setInt(2, page);
 				ResultSet rs = preparedStatement.executeQuery();
 
 				while (rs.next()) {
@@ -672,7 +640,17 @@ public class EArenaDatabase extends Controller {
 				}
 
 				rs.close();
-				return ok(MyEArenaPage.render(adList));
+				
+				String rowCountStatement = "SELECT COUNT(*) FROM EArena WHERE admin=?";
+				preparedStatement = conn.prepareStatement(rowCountStatement);
+				preparedStatement.setString(1, currentUser);
+
+				ResultSet rc = preparedStatement.executeQuery();
+				rc.next();
+				int rowcount = rc.getInt(1);
+				rc.close();
+				
+				return ok(MyEArenaPage.render(adList, rowcount));
 			} catch (com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException ice) {
 				return badRequest(ice.toString());
 			} catch (NumberFormatException nfe) {

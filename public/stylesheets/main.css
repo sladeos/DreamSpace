@@ -1,4 +1,12 @@
-﻿#pagebuttons{
+﻿#pagination{
+	visibility: hidden;
+}
+
+#currentPage{
+	float: right;
+}
+
+#pagebuttons{
 	float:right;
 }
 

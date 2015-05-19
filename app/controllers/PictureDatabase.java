@@ -192,7 +192,7 @@ public class PictureDatabase extends Controller {
 				preparedStatement.setString(3, suffix);
 				preparedStatement.executeUpdate();
 
-				return redirect(routes.PictureDatabase.getPictures());
+				return redirect(routes.PictureDatabase.getPictures(1));
 
 			} else {
 
@@ -213,7 +213,7 @@ public class PictureDatabase extends Controller {
 
 	}
 
-	public static Result getPictures() {
+	public static Result getPictures(int page) {
 		String currentUser = session("connected");
 		if (currentUser == null) {
 			return unauthorized(LoginUserPage
@@ -224,11 +224,12 @@ public class PictureDatabase extends Controller {
 			List<Picture> pList = new ArrayList<Picture>();
 
 			try {
-
+				page = (page - 1) * 10;
 				conn = DB.getConnection();
 
-				String insertIntoDatabase = "SELECT * FROM Picture ORDER BY created_date DESC";
+				String insertIntoDatabase = "SELECT * FROM Picture ORDER BY created_date DESC LIMIT 10 OFFSET ?";
 				preparedStatement = conn.prepareStatement(insertIntoDatabase);
+				preparedStatement.setInt(1, page);
 				ResultSet rs = preparedStatement.executeQuery();
 
 				while (rs.next()) {
@@ -239,7 +240,16 @@ public class PictureDatabase extends Controller {
 				}
 
 				rs.close();
-				return ok(PicturePage.render(pList));
+				
+				
+				String rowCountStatement = "SELECT COUNT(*) FROM Picture";
+				preparedStatement = conn.prepareStatement(rowCountStatement);
+
+				ResultSet rc = preparedStatement.executeQuery();
+				rc.next();
+				int rowcount = rc.getInt(1);
+				rc.close();
+				return ok(PicturePage.render(pList, rowcount));
 
 			} catch (com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException ice) {
 				return badRequest(ice.toString());

@@ -1,214 +1,217 @@
 @(eads: List[EArenaAd], games: List[String], rowcount: Integer)
 <!DOCTYPE html>
 <html>
-	<head>
-	   <title>EArena</title>
-	   @Templates.head()
-	    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-	   @Templates.facebookHeadScript()
-        <meta charset="UTF-8">
-	</head>
-    <body>
-        <div data-role="page" data-theme="b" id = "main" class = "page"  >
-        <div data-role="header" class = "header">
-	       @Templates.header()
-	       </div>
-            <div data-role="content" class = "content">   
-                <h1 align="center">EArena</h1>
-           
-                <button id="share_button" class = "myFace faceButton search" data-mini="true">Facebook Share</button>
-                 <div class ="search">
-                  <button data-role = "button" id = "MYEArena"  rel="external" href="/" data-icon="user" data-iconpos="right" >My Ads</button>
-                  <p>
+   <head>
+      <title>EArena</title>
+      @Templates.head()
+      <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+      @Templates.facebookHeadScript()
+      <meta charset="UTF-8">
+   </head>
+   <body>
+      <div data-role="page" data-theme="b" id = "main" class = "page"  >
+         <div data-role="header" class = "header">
+            @Templates.header()
+         </div>
+         <div data-role="content" class = "content">
+            <h1 align="center">EArena</h1>
+            <button id="share_button" class = "myFace faceButton search" data-mini="true">Facebook Share</button>
+            <div class ="search">
+               <button data-role = "button" id = "MYEArena"  rel="external" href="/" data-icon="user" data-iconpos="right" >My Ads</button>
+               <p>
                   <button data-role = "button" id = "creatAd"  rel="external" href="/" data-icon="arrow-r" data-iconpos="right" >Create ad</button>
-                </div>
-
-                  <script type="text/javascript">
-
-                        $('#creatAd').click(function() {
-                    window.location='/createarenaad'; });
-
-                        $('#MYEArena').click(function() {
-                        window.location='/myearena'; });
-
-                  </script>
-            <script type="text/javascript">
-            $(document).ready(function() {
-              $('#share_button').click(function(e) {
-                e.preventDefault();
-                FB.ui({
-                  method: 'feed',
-                  name: 'DreamSpace EArenaAds',
-                  link: document.URL,
-                  caption: "EArenaAds" ,
-                  description: ""
-                });
-              });
-            });
-            </script>
-         
-            
-                
-                
-        <div class ="search">
-               <div data-role="collapsible" class="ui-icon-alt" data-collapsed-icon="arrow-r" data-expanded-icon="arrow-d" data-iconpos="right"  >
-                       <h3 class = "custom-centercollheader" >Search ad</h3>
-     	       <form data-ajax="false">
-
-     	         
-                           <input type="search" name="search" id="search-basic" value="" />
- 	                          <p>Advanced search</p>
-                            <hr>
-                            <div data-role="fieldcontain"class="ui-hide-label" >
-                                <input type="text" name="game" placeholder="Game" id="game">
-                            
-                            
-                                <input type="text" name="username" placeholder="Username" id="username">
-                         
-                            
-                                <input type="number" name="players" placeholder="Players" id="players">
-
-                                <input type="number" name="minutes" placeholder="Search X minutes ago" id="minutes">
-                            </div>
- 	                      <div data-role="controlgroup" data-type="horizontal" style="text-align:center;">
- 	                        <button data-inline="true" type="submit"  data-icon="search" data-mini="true">GO!</button>
-                      </div>
-                </form>
             </div>
-        </div>  
-        <div class = "search">    
-        <h3>Ads found</h3>  
+            <script type="text/javascript">
+               $('#creatAd').click(function() {
+               window.location='/createarenaad'; });
+               
+               $('#MYEArena').click(function() {
+               window.location='/myearena'; });
+               
+            </script>
+            <script type="text/javascript">
+               $(document).ready(function() {
+                 $('#share_button').click(function(e) {
+                   e.preventDefault();
+                   FB.ui({
+                     method: 'feed',
+                     name: 'DreamSpace EArenaAds',
+                     link: document.URL,
+                     caption: "EArenaAds" ,
+                     description: ""
+                   });
+                 });
+               });
+            </script>
+            <div class ="search">
+               <div data-role="collapsible" class="ui-icon-alt" data-collapsed-icon="arrow-r" data-expanded-icon="arrow-d" data-iconpos="right"  >
+                  <h3 class = "custom-centercollheader" >Search ad</h3>
+                  <form data-ajax="false">
+                     <input type="search" name="search" id="search-basic" value="" />
+                     <p>Advanced search</p>
+                     <hr>
+                     <div data-role="fieldcontain"class="ui-hide-label" >
+                        <input type="text" name="game" placeholder="Game" id="game">
+                        <input type="text" name="username" placeholder="Username" id="username">
+                        <input type="number" name="players" placeholder="Players" id="players">
+                        <input type="number" name="minutes" placeholder="Search X minutes ago" id="minutes">
+                     </div>
+                     <div data-role="controlgroup" data-type="horizontal" style="text-align:center;">
+                        <button data-inline="true" type="submit"  data-icon="search" data-mini="true">GO!</button>
+                     </div>
+                  </form>
+               </div>
+            </div>
+            <div class = "search">
+               <h3>Ads found</h3>
+            </div>
+            <div class ="MEArenaContent">
+               <hr>
+               <article  data-role="listview" data-inset="true" data-dividertheme="a">
+                  @for(eads <- eads) {
+                  <li  data-role = "list-divider" ></li>
+                  <li>
+                     <a rel="external"  href="/earenaad/@eads.arenaID" style = "background: #373737" >
+                        <h2>@{" " + eads.arenaName}</h2>
+                        <p>@{" Host: " + eads.admin}</p>
+                        <p>@{" Game: " + eads.gameName }</p>
+                        <p>@{" Created: " + eads.createdDate }</p>
+                        <p>@{" Players required: " + eads.playersRequired}</p>
+                        <p>Information:</p>
+                        <textarea readonly name="textarea" id="text" style = "overflow:auto;resize:none" >@{eads.information}</textarea>
+                        <br>
+                     </a>
+                  </li>
+                  } 
+               </article>
+            </div>
+            <script>
+               $(function() {
                  
-                 </div>
-                
-                <div class ="MEArenaContent">
-                <hr>
-                    <article  data-role="listview" data-inset="true" data-dividertheme="a"> 
-                        @for(eads <- eads) {
-                            <li  data-role = "list-divider" ></li>
-                            <li><a rel="external"  href="/earenaad/@eads.arenaID" style = "background: #373737" >
-                            <h2>@{" " + eads.arenaName}</h2>
-                            <p>@{" Host: " + eads.admin}</p>
-                            <p>@{" Game: " + eads.gameName }</p>
-                            <p>@{" Created: " + eads.createdDate }</p>
-                            <p>@{" Players required: " + eads.playersRequired}</p>
-                            <p>Information:</p><textarea readonly name="textarea" id="text" style = "overflow:auto;resize:none" >@{eads.information}</textarea>
-
-                            <br>
-                            </a>
-                            </li>
-                        } 
-                    </article>
-                </div>
-
-        <script>
-         $(function() {
-           
-            $('#showAdv').click(function() {        
-               $('#advSearch').toggle('show');
-            });
-            
-            var games = @Html(games.toString());
-		   
-		   
-    		$( "#game" ).autocomplete({
-    		  source: games
-    		});
-    	});
-        </script>
-        @Templates.navIcons()
-
-                        <script>
-                       var rowcount = @rowcount;
-                       var pageDecimal = rowcount / 10;
-                       var pages = Math.ceil(pageDecimal);
-                        $(document).ready(function(){
-                       if(pages > 1){
-                       $("#pagebuttons").append(pages + " Pages " + rowcount + " Results");
-                       }else{
-                       $("#pagebuttons").append(pages + " Page " + rowcount + " Results");
-                       }
-                        })
-                        
-                        
-                        var lastPart = window.location.href.split("/").pop();
-
-                        var lastPartInt = parseInt(lastPart)
-                        var currentAdress = window.location.href;
-                       var rest  = currentAdress.substring(0, currentAdress.lastIndexOf("/")+1);
+                  $('#showAdv').click(function() {        
+                     $('#advSearch').toggle('show');
+                  });
                   
-                       
-                       $('#prev').click(function(){
-                    	   if(lastPart.includes("page")){
-	                    	var currentPage = lastPart.slice(-1);
-	                    	if(currentPage ==1){
-	                    		alert("You're on the first page")
-	                    		return
-	                    	}
-	                    	var splitLast = lastPart.substring(0, lastPart.length-1);
-	                    	alert(splitLast)
-	                    	currentPage--;	
-	                    	splitLast += currentPage;
-	                    	document.location.href = splitLast
-                    	   }else{
-   	                    	alert("You're on the first page")
-                    	   }
-                       })
-                       
-                       $('#next').click(function(){
-                    	   if(lastPart.includes("page")){
-   	                    	var currentPage = lastPart.slice(-1);
-   	                    	if(currentPage == pages){
-   	                  	   alert("You're on the last page")
-                		   return; 
-   	                    	}
-   	                    	var splitLast = lastPart.substring(0, lastPart.length-1);
-	                    	currentPage++;	
-	                    	splitLast += currentPage;
-	                    	document.location.href = splitLast
-                    	   } else  if(lastPart.includes("search")){
-          	                    	
-                          		 currentAdress += "&page=2"
-         	                    document.location.href = currentAdress;
-                          		 
-                          	   }else{
-                          		 currentAdress += "?page=2"
-              	                    document.location.href = currentAdress;
-                        	   }
+                  var games = @Html(games.toString());
+               
+               
+               $( "#game" ).autocomplete({
+               source: games
+               });
+               });
+            </script>
+            @Templates.navIcons()
+            <script>
+            
+            
+            var rowcount = @rowcount;
+            var pageDecimal = rowcount / 10;
+            var pages = Math.ceil(pageDecimal);
+            $(document).ready(function() {
+              if (pages > 1) {
+                $("#pagebuttons").append(pages + " Pages " + rowcount + " Results");
+              }
+              else {
+                $("#pagebuttons").append(pages + " Page " + rowcount + " Results");
+              }
+            })
 
-                        })
-                        
-                       
-                       $('#first').click(function(){
-                    	   if(lastPart.includes("page")){
-      	                    	var currentAdress = lastPart.slice(-7);
-								document.location.href = currentAdress
-                   		   return; 
-      	                    	}
-      	                    	var splitLast = lastPart.substring(0, lastPart.length-1);
-   	                    	currentPage++;	
-   	                    	splitLast += currentPage;
-   	                    	document.location.href = splitLast
-                       	   } else  if(lastPart.includes("search")){
-             	                    	
-                             		 currentAdress += "&page=2"
-            	                    document.location.href = currentAdress;
-                             		 
-                             	   }else{
-                             		 currentAdress += "?page=2"
-                 	                    document.location.href = currentAdress;
-                           	   }
-                       
-                       })
-                       
-                       $('#last').click(function(){
-                    	   location.replace(rest+pages) 
-                       })
-                        </script>
 
-                    </div>
-            @Templates.footer()
-            @Templates.panelAndLogOut()
-        </div>
-    </body>
+            var afterEquals = window.location.href.split("=").pop();
+            var currentAdress = window.location.href;
+            var afterSlash = currentAdress.substring(0, currentAdress.lastIndexOf("/") + 1);
+			var beforeLastEquals = currentAdress.slice(0, currentAdress.lastIndexOf("=")+1);
+			$(function() {
+				var afterEqual = window.location.href.split("=").pop();
+	            if (afterEqual > pages){
+	            	beforeLastEquals += pages
+	            	document.location.href = beforeLastEquals
+	            }else if(afterEqual >=1){
+	            $('#currentPage').append("Current Page " + afterEqual);
+	            	}else{
+	            	  $('#currentPage').append("Current Page " + "1");
+	            	}
+	            
+            })
+
+            $('#prev').click(function() {
+              if (beforeLastEquals.includes("page")) {
+                
+                if (afterEquals == 1) {
+                  alert("You're on the first page")
+                  return
+                }
+                afterEquals--;
+                beforeLastEquals += afterEquals;
+                document.location.href = beforeLastEquals
+              }
+              else {
+                alert("You're on the first page")
+              }
+            })
+
+            $('#next').click(function() {
+              if (beforeLastEquals.includes("page")) {
+                if (afterEquals >= pages) {
+                  alert("You're on the last page")
+                  return;
+                }
+                afterEquals++;
+                beforeLastEquals += afterEquals;
+                document.location.href = beforeLastEquals
+              }else if(beforeLastEquals.includes("search")) {
+
+                beforeLastEquals += "&page=2"
+                document.location.href =  beforeLastEquals;
+
+              } else {
+            	 beforeLastEquals += "?page=2"
+                document.location.href = beforeLastEquals;
+              }
+
+            })
+
+
+            $('#first').click(function(){
+            	if(afterEquals == 1){
+            		alert("You're on the first page")
+            		return
+            	}
+            	 if (beforeLastEquals.includes("page")) {
+            		 beforeLastEquals += 1;
+                     document.location.href = beforeLastEquals
+            	 }else{
+            		 alert("You're on the first page")
+            	 }
+
+            })
+
+            $('#last').click(function() {
+                if (beforeLastEquals.includes("page")) {
+                    if (afterEquals == pages) {
+                      alert("You're on the last page")
+                      return;
+                    }
+                    
+                    beforeLastEquals += pages;
+                    document.location.href = beforeLastEquals
+                  }else if(beforeLastEquals.includes("search")) {
+
+                    beforeLastEquals += "&page="+pages
+                    document.location.href =  beforeLastEquals;
+
+                  } else {
+                	 beforeLastEquals += "?page="+pages
+                    document.location.href = beforeLastEquals;
+                  }
+
+                })
+            
+            
+            </script>
+         </div>
+         @Templates.footer()
+         @Templates.panelAndLogOut()
+      </div>
+   </body>
 </html>
