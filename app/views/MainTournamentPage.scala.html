@@ -5,7 +5,6 @@
 <html>
     <head>
         @Templates.head()
-        
         @Templates.facebookHeadScript()
         <script type="text/javascript" src="@routes.Assets.at("javascripts/jquery-ias.min.js")"></script>
        
@@ -57,7 +56,6 @@
                     var cPage;
                     ias.on('load', function(event) {
                     	if(cPage > pages){
-                    		alert("FINAL")
                     		jQuery.ias().unbind();
                     	}
                         var url = event.url;

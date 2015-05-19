@@ -26,7 +26,9 @@ import play.mvc.Http.Response;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.awt.Rectangle;
 import java.awt.geom.AffineTransform;
+import java.awt.geom.Rectangle2D;
 import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
 
@@ -131,9 +133,16 @@ public class PictureDatabase extends Controller {
 			AffineTransform transform) throws Exception {
 		AffineTransformOp affineTransformOp = new AffineTransformOp(transform,
 				AffineTransformOp.TYPE_BILINEAR);
-		BufferedImage destinationImage = new BufferedImage(
-				originalImage.getWidth(), originalImage.getHeight(),
+
+		Rectangle2D rec = affineTransformOp.getBounds2D(originalImage);
+
+		int height = (int) rec.getHeight();
+
+		int width = (int) rec.getWidth();
+
+		BufferedImage destinationImage = new BufferedImage(width, height,
 				originalImage.getType());
+
 		destinationImage = affineTransformOp.filter(originalImage,
 				destinationImage);
 
@@ -163,7 +172,7 @@ public class PictureDatabase extends Controller {
 				String suffix = "image/";
 				String type = picture.getContentType().substring(
 						picture.getContentType().lastIndexOf("/") + 1);
-					
+
 				suffix += type;
 
 				if (readImageInformation(file) != null) {
@@ -172,7 +181,7 @@ public class PictureDatabase extends Controller {
 					AffineTransform info = getExifTransformation(imageF);
 
 					finalImg = transformImage(img, info);
-					
+
 					ByteArrayOutputStream os = new ByteArrayOutputStream();
 					ImageIO.write(finalImg, type, os);
 					inputStream = new ByteArrayInputStream(os.toByteArray());
@@ -180,12 +189,6 @@ public class PictureDatabase extends Controller {
 				} else {
 					inputStream = new FileInputStream(file);
 				}
-
-				
-
-			
-
-	
 
 				preparedStatement.setString(1, currentuser);
 				preparedStatement.setBlob(2, inputStream);
@@ -240,8 +243,7 @@ public class PictureDatabase extends Controller {
 				}
 
 				rs.close();
-				
-				
+
 				String rowCountStatement = "SELECT COUNT(*) FROM Picture";
 				preparedStatement = conn.prepareStatement(rowCountStatement);
 

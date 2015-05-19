@@ -5,9 +5,8 @@
 <html>
     <head>
         @Templates.head()
-          @Templates.loadimage()
         @Templates.facebookHeadScript()
-      
+              <script type="text/javascript" src="@routes.Assets.at("javascripts/jquery-ias.min.js")"></script>
     </head>
     <body>
         <div data-role="page" data-theme="b" class="page">   
@@ -19,6 +18,9 @@
                     <div class = "search">
                     <a data-role = "button" id = "btn2"  rel="external" href="/newpicture" data-icon="arrow-r" data-iconpos="right">Take and Upload a Picture</a>
                     </div>
+                    
+                    <div id="outerpictures">
+                    <div class="innerpictures">
                    @for(pictures <- pictures) {
                            
                                <p>Creator:   @pictures.creator </p> 
@@ -32,105 +34,56 @@ $('#@pictures.pictureID').height(500);
 </script>
                       }
                     </ul>
+                    </div>
+                    </div>
+                    
+                   <script>
+                    var rowcount = @rowcount;
+                    var pageDecimal = rowcount / 10;
+                    var pages = Math.ceil(pageDecimal);
+                    
+                    $(document).ready(function() {
+                    var ias = jQuery.ias({
+                    	  container:  '#outerpictures',
+                    	  item:       '.innerpictures',
+                    	  pagination: '#pagination',
+                    	  next:       '.Next'
+                    	});
+                    
+                    
+                   
+                    var cPage;
+                    ias.on('load', function(event) {
+                    	if(cPage > pages){
+                    		jQuery.ias().unbind();
+                    		$('.ias-spinner').remove();
+                    	}
+                        var url = event.url;
+                    	var beforeLastEquals = url.slice(0, url.lastIndexOf("=")+1);
+                    	beforeLastEquals += cPage
+                    	event.url = beforeLastEquals
+                    	
+                    })
+                    
+                    jQuery.ias().extension(new IASPagingExtension());
+                    jQuery.ias().on('pageChange', function(pageNum, scrollOffset, url) {
+                    	cPage = pageNum;
+                    });
+                    
+                    ias.extension(new IASSpinnerExtension({
+                        src: "@routes.Assets.at("images/loading.gif")",
+                    }));
+                    });
+                    
+                    
+                    </script>
+                        <div id="pagination">
+			 			<a href="?page=1" class="Next" id="Next1">next</a>
+                    </div>
                         <script>
                         $("#btn2").css("background","  #FF9900");
                     </script>
-@Templates.navIcons()
-                <script>
-            
-            
-            var rowcount = @rowcount;
-            var pageDecimal = rowcount / 10;
-            var pages = Math.ceil(pageDecimal);
-            $(document).ready(function() {
-              if (pages > 1) {
-                $("#pagebuttons").append(pages + " Pages " + rowcount + " Results");
-              }
-              else {
-                $("#pagebuttons").append(pages + " Page " + rowcount + " Results");
-              }
-            })
 
-
-            var afterEquals = window.location.href.split("=").pop();
-            var currentAdress = window.location.href;
-            var afterSlash = currentAdress.substring(0, currentAdress.lastIndexOf("/") + 1);
-			var beforeLastEquals = currentAdress.slice(0, currentAdress.lastIndexOf("=")+1);
-			$(function() {
-				var afterEqual = window.location.href.split("=").pop();
-	            if (afterEqual > pages){
-	            	beforeLastEquals += pages
-	            	document.location.href = beforeLastEquals
-	            }else if(afterEqual >=1){
-	            $('#currentPage').append("Current Page " + afterEqual);
-	            	}else{
-	            	  $('#currentPage').append("Current Page " + "1");
-	            	}
-	            
-            })
-
-            $('#prev').click(function() {
-              if (beforeLastEquals.includes("page")) {
-                
-                if (afterEquals == 1) {
-                  alert("You're on the first page")
-                  return
-                }
-                afterEquals--;
-                beforeLastEquals += afterEquals;
-                document.location.href = beforeLastEquals
-              }
-              else {
-                alert("You're on the first page")
-              }
-            })
-
-            $('#next').click(function() {
-              if (beforeLastEquals.includes("page")) {
-                if (afterEquals >= pages) {
-                  alert("You're on the last page")
-                  return;
-                }
-                afterEquals++;
-                beforeLastEquals += afterEquals;
-                document.location.href = beforeLastEquals
-              }else {
-            	 beforeLastEquals += "?page=2"
-                document.location.href = beforeLastEquals;
-              }
-
-            })
-
-
-            $('#first').click(function(){
-            	if(afterEquals == 1){
-            		alert("You're on the first page")
-            		return
-            	}
-            	 if (beforeLastEquals.includes("page")) {
-            		 beforeLastEquals += 1;
-                     document.location.href = beforeLastEquals
-            	 }else{
-            		 alert("You're on the first page")
-            	 }
-
-            })
-
-            $('#last').click(function() {
-                if (beforeLastEquals.includes("page")) {
-                    if (afterEquals == pages) {
-                      alert("You're on the last page")
-                      return;
-                    }                    
-                    beforeLastEquals += pages;
-                    document.location.href = beforeLastEquals
-                  } else {
-                	 beforeLastEquals += "?page="+pages
-                    document.location.href = beforeLastEquals;
-                  }
-
-                })
-            </script>
 
                 </div>
             @Templates.footer()
