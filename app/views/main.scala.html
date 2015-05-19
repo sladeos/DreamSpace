@@ -1,14 +1,16 @@
-@(message: String)
-@(eads: List[EArenaAd])
+@(message: String, eads: List[EArenaAd], tournament: List[Tournament])
 <!DOCTYPE html>
 
 <html>
     <head>
       @Templates.head()
       @Templates.facebookHeadScript()
-     
+
     </head>
-    <body>         
+    <body>  
+              <script> 
+            $("#pages div:not(#1)").css("display", "none");​
+          </script>       
         <div data-role="page" data-theme="b" id = "main" class = "page"  >   
                       
                
@@ -18,44 +20,72 @@
         </div>
         
         <div data-role="content" class = "content">
-                        
+                      
 
               <h1 align="center">HomePage</h1>
-
-              <div class="ui-grid-a ui-responsive">
-                <div class="ui-block-a"  >
-                  <a href="#" class="ui-btn ui-shadow " ><h3>EARENA</h3></a><br>
-                </div>
-                <div class="ui-block-b">
-                  <a href="#" class="ui-btn ui-shadow "><h3>ETOURNAMENT</h3></a><br>
+              
+              <div id="buttons">
+                <div class="ui-grid-a ui-responsive">
+                  <div class="ui-block-a" >
+                    <a href="#" id="1" class="ui-btn ui-shadow"><h3>EARENA</h3></a>
+                  </div>
+                  <div class="ui-block-b">
+                    <a href="#" id="2" class="ui-btn ui-shadow"><h3>ETOURNAMENT</h3></a>
+                  </div>
                 </div>
               </div>
-                                           
-              <div class ="MEArenaContent">
-                    <article  data-role="listview" data-inset="true" data-dividertheme="a"> 
-                        @for(eads <- eads) {
-                            <li  data-role = "list-divider" ></li>
-                            <li>
-                              <a rel="external"  href="/earenaad/@eads.arenaID" style = "background: #373737" >
-                                <h2>@{" " + eads.arenaName}</h2>
-                                <p>@{" Host: " + eads.admin}</p>
-                                <p>@{" Game: " + eads.gameName }</p>
-                                <p>@{" Created: " + eads.createdDate }</p>
-                                <p>@{" Players required: " + eads.playersRequired}</p>
-                                <p>Information:</p>
-                                <textarea readonly name="textarea" id="text" style = "overflow:auto;resize:none" >@{eads.information}</textarea>
-                                <br>
-                              </a>
-                            </li>
-                        } 
-                    </article>
-              </div>
 
-                  
+
+
+              <div id="pages">                          
+                <div id = "1" class ="MEArenaContent">
+                      <article  data-role="listview" data-inset="true" data-dividertheme="a"> 
+                          @for(eads <- eads) {
+                              <li  data-role = "list-divider" ></li>
+                              <li>
+                                <a rel="external"  href="/earenaad/@eads.arenaID" style = "background: #373737" >
+                                  <h2>@{" " + eads.arenaName}</h2>
+                                  <p>@{" Host: " + eads.admin}</p>
+                                  <p>@{" Game: " + eads.gameName }</p>
+                                  <p>@{" Created: " + eads.createdDate }</p>
+                                  <p>@{" Players required: " + eads.playersRequired}</p>
+                                  <p>Information:</p>
+                                  <textarea readonly name="textarea" id="text" style = "overflow:auto;resize:none" >@{eads.information}</textarea>
+                                  <br>
+                                </a>
+                              </li>
+                          } 
+                      </article>
+              </div>
+     
+              <div id = "2">
+                <ul data-role="listview" data-inset="true" data-dividertheme="a" data-theme = "b"> 
+                  @for(tournament <- tournament) {
+                    <li  data-role = "list-divider" ></li>
+                    <li>
+                        <a data-role = "button"  rel="external"  href="/showtournament/@tournament.tournamentID" class = "greyBtn"><img src="@routes.Assets.at("images/sun.jpg")" alt="Dreamhack" class = "fullscreen"  />
+                        <h2>@{"Name: " + tournament.tournamentname}</h2> 
+                        <p>@{" Size: " +  tournament.participant_count }</p>
+                      </a>
+                    </li>
+                  } 
+                </ul>
+              </div>             
+            </div>
           </div>
             
             @Templates.footer()
           @Templates.panelAndLogOut()
+          
+          <script>
+              $("#buttons a").click(function() {
+                var id = $(this).attr("id");
+              $("#pages div").css("display", "none");
+              $("#pages div#" + id + "").css("display", "block");
+            });
+           </script>
+
+
           <script>
                 $('#h').removeClass('ui-alt-icon');
                 $('#mail').addClass('ui-alt-icon');

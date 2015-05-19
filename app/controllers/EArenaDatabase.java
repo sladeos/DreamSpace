@@ -643,30 +643,33 @@ public static List<EArenaAd> getEArenaAdsMainPage() {
 		
 				conn = DB.getConnection();
            
-				String selectEAds = "SELECT * FROM EArena";
+				String selectEAds = "SELECT * FROM EArena ORDER BY created_date DESC";
 
 				preparedStatement = conn.prepareStatement(selectEAds);
 				ResultSet rs = preparedStatement.executeQuery();
-
+				int index = 0;
 				while (rs.next()) {
-					EArenaAd a = new EArenaAd();
-					a.arenaID = rs.getInt("arenaID");
-					a.arenaName = rs.getString("arenaname");
-					a.information = rs.getString("arenainformation");
-					a.gameName = rs.getString("gamename");
-					a.playersRequired = rs.getInt("playersrequired");
-					a.admin = rs.getString("admin");
-					a.createdDate = rs.getString("created_date");
-					adList.add(a);
+					if (index<5) {
+						EArenaAd a = new EArenaAd();
+						a.arenaID = rs.getInt("arenaID");
+						a.arenaName = rs.getString("arenaname");
+						a.information = rs.getString("arenainformation");
+						a.gameName = rs.getString("gamename");
+						a.playersRequired = rs.getInt("playersrequired");
+						a.admin = rs.getString("admin");
+						a.createdDate = rs.getString("created_date");
+						adList.add(a);
+						index++;
+					}
+				
 				}
 
 				rs.close();
-		    }
 
 				
 			return adList;
 			
-			 catch (com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException ice) {
+			} catch (com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException ice) {
 					return null;
 			} catch (NumberFormatException nfe) {
 		            return null;
@@ -686,8 +689,8 @@ public static List<EArenaAd> getEArenaAdsMainPage() {
 						conn.close();
 				} catch (SQLException se) {
 					return null;
+				
 				} // end finally try
 			} // end try
-	}		
-
+	 	}		
 }
