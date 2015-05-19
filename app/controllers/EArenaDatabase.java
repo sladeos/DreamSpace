@@ -114,7 +114,7 @@ public class EArenaDatabase extends Controller {
 	}
 
 	public static Result getEArenaAds(String search, String game,
-		String username, String players, String minutes, int page) {
+			String username, String players, String minutes, int page) {
 		String userS = session("connected");
 		if (userS == null) {
 			return unauthorized(LoginUserPage
@@ -138,15 +138,13 @@ public class EArenaDatabase extends Controller {
 				search = "%" + search + "%";
 				String selectAdvSearch = "SELECT * FROM EArena WHERE arenaname LIKE ? OR admin LIKE ? OR arenainformation LIKE ? OR gamename LIKE ? OR playersrequired LIKE ? ORDER BY created_date DESC LIMIT 10 OFFSET ?";
 				rowCountAdvSearch = "SELECT COUNT(*) FROM EArena WHERE arenaname LIKE ? OR admin LIKE ? OR arenainformation LIKE ? OR gamename LIKE ? OR playersrequired LIKE ?";
-				rowCountStatement= conn.prepareStatement(rowCountAdvSearch);
+				rowCountStatement = conn.prepareStatement(rowCountAdvSearch);
 				rowCountStatement.setString(1, search);
 				rowCountStatement.setString(2, search);
 				rowCountStatement.setString(3, search);
 				rowCountStatement.setString(4, search);
 				rowCountStatement.setString(5, search);
-				
-				
-				
+
 				preparedStatement = conn.prepareStatement(selectAdvSearch);
 				preparedStatement.setString(1, search);
 				preparedStatement.setString(2, search);
@@ -182,7 +180,7 @@ public class EArenaDatabase extends Controller {
 				search = wildcard(search);
 				game = wildcard(game);
 				username = wildcard(username);
-				dickbutt="55";
+				dickbutt = "55";
 				String selectAdvSearch = "SELECT * FROM EArena WHERE";
 				selectAdvSearch += generateSQL(search, "arenaname");
 				selectAdvSearch += generateSQL(search, "arenainformation");
@@ -193,9 +191,9 @@ public class EArenaDatabase extends Controller {
 				selectAdvSearch += " ORDER BY created_date DESC";
 				selectAdvSearch += " LIMIT 10 OFFSET ?";
 				preparedStatement = conn.prepareStatement(selectAdvSearch);
-				dickbutt="-1";
-				
-				first=true;
+				dickbutt = "-1";
+
+				first = true;
 				rowCountAdvSearch = "SELECT COUNT(*) FROM EArena WHERE";
 				rowCountAdvSearch += generateSQL(search, "arenaname");
 				rowCountAdvSearch += generateSQL(search, "arenainformation");
@@ -203,8 +201,8 @@ public class EArenaDatabase extends Controller {
 				rowCountAdvSearch += generateSQL(username, "admin");
 				rowCountAdvSearch += generateSQL(players, "playersrequired");
 				rowCountAdvSearch += generateSQL(minutes, "created_date");
-				rowCountStatement= conn.prepareStatement(rowCountAdvSearch);
-				dickbutt="0";
+				rowCountStatement = conn.prepareStatement(rowCountAdvSearch);
+				dickbutt = "0";
 
 				int counter = 1;
 
@@ -244,7 +242,7 @@ public class EArenaDatabase extends Controller {
 					rowCountStatement.setString(counter, minutes);
 					counter++;
 				}
-				dickbutt="1";
+				dickbutt = "1";
 				preparedStatement.setInt(counter, page);
 				ResultSet rs = preparedStatement.executeQuery();
 
@@ -258,10 +256,10 @@ public class EArenaDatabase extends Controller {
 					a.admin = rs.getString("admin");
 					a.createdDate = rs.getString("created_date");
 					a.createdDate = a.createdDate.substring(0,
-					a.createdDate.lastIndexOf("."));
+							a.createdDate.lastIndexOf("."));
 					adList.add(a);
 				}
-				dickbutt="2";
+				dickbutt = "2";
 				first = true;
 				rs.close();
 
@@ -270,7 +268,7 @@ public class EArenaDatabase extends Controller {
 				conn = DB.getConnection();
 
 				String selectAdminAds = "SELECT * FROM EArena ORDER BY created_date DESC LIMIT 10 OFFSET ?";
-				
+
 				preparedStatement = conn.prepareStatement(selectAdminAds);
 				preparedStatement.setInt(1, page);
 				ResultSet rs = preparedStatement.executeQuery();
@@ -290,15 +288,14 @@ public class EArenaDatabase extends Controller {
 				}
 				rs.close();
 				rowCountAdvSearch = "SELECT COUNT(*) FROM EArena";
-				rowCountStatement= conn.prepareStatement(rowCountAdvSearch);
-				
-				
+				rowCountStatement = conn.prepareStatement(rowCountAdvSearch);
+
 			}
-			dickbutt="22";
+			dickbutt = "22";
 			ResultSet rc = rowCountStatement.executeQuery();
-			dickbutt="55";
+			dickbutt = "55";
 			rc.next();
-			dickbutt="99";
+			dickbutt = "99";
 			int rowcount = rc.getInt(1);
 			rc.close();
 			return ok(MainEArenaPage.render(adList,
@@ -308,9 +305,9 @@ public class EArenaDatabase extends Controller {
 		} catch (NumberFormatException nfe) {
 			return ok(nfe.toString());
 		} catch (SQLException se) {
-			return ok(se.toString() + " "+ dickbutt +" " +rowCountAdvSearch);
-		} catch (Exception e  ) {
-			return ok(e.toString()  +" " +dickbutt);
+			return ok(se.toString() + " " + dickbutt + " " + rowCountAdvSearch);
+		} catch (Exception e) {
+			return ok(e.toString() + " " + dickbutt);
 		} finally {
 			try {
 				if (conn != null)
@@ -635,12 +632,12 @@ public class EArenaDatabase extends Controller {
 					a.admin = rs.getString("admin");
 					a.createdDate = rs.getString("created_date");
 					a.createdDate = a.createdDate.substring(0,
-							a.createdDate.lastIndexOf("."));
+					a.createdDate.lastIndexOf("."));
 					adList.add(a);
 				}
 
 				rs.close();
-				
+
 				String rowCountStatement = "SELECT COUNT(*) FROM EArena WHERE admin=?";
 				preparedStatement = conn.prepareStatement(rowCountStatement);
 				preparedStatement.setString(1, currentUser);
@@ -649,7 +646,7 @@ public class EArenaDatabase extends Controller {
 				rc.next();
 				int rowcount = rc.getInt(1);
 				rc.close();
-				
+
 				return ok(MyEArenaPage.render(adList, rowcount));
 			} catch (com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException ice) {
 				return badRequest(ice.toString());

@@ -7,6 +7,7 @@
       <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
       @Templates.facebookHeadScript()
       <meta charset="UTF-8">
+      <script type="text/javascript" src="@routes.Assets.at("javascripts/jquery-ias.min.js")"></script>
    </head>
    <body>
       <div data-role="page" data-theme="b" id = "main" class = "page"  >
@@ -65,6 +66,8 @@
             <div class = "search">
                <h3>Ads found</h3>
             </div>
+            <div id="pagebuttons"></div>
+             <div id ="earenas">
             <div class ="MEArenaContent">
                <hr>
                <article  data-role="listview" data-inset="true" data-dividertheme="a">
@@ -82,8 +85,13 @@
                         <br>
                      </a>
                   </li>
+                  <script>
+                        $('.ui-page-active .ui-listview').listview('refresh');
+                        $('.ui-page-active :jqmData(role=content)').trigger('create');
+                     </script>
                   } 
                </article>
+            </div>
             </div>
             <script>
                $(function() {
@@ -100,115 +108,74 @@
                });
                });
             </script>
-            @Templates.navIcons()
+
             <script>
-            
-            
             var rowcount = @rowcount;
             var pageDecimal = rowcount / 10;
             var pages = Math.ceil(pageDecimal);
+            var cPage;
+            
             $(document).ready(function() {
-              if (pages > 1) {
-                $("#pagebuttons").append(pages + " Pages " + rowcount + " Results");
-              }
-              else {
-                $("#pagebuttons").append(pages + " Page " + rowcount + " Results");
-              }
-            })
-
-
-            var afterEquals = window.location.href.split("=").pop();
-            var currentAdress = window.location.href;
-            var afterSlash = currentAdress.substring(0, currentAdress.lastIndexOf("/") + 1);
-			var beforeLastEquals = currentAdress.slice(0, currentAdress.lastIndexOf("=")+1);
-			$(function() {
-				var afterEqual = window.location.href.split("=").pop();
-	            if (afterEqual > pages){
-	            	beforeLastEquals += pages
-	            	document.location.href = beforeLastEquals
-	            }else if(afterEqual >=1){
-	            $('#currentPage').append("Current Page " + afterEqual);
-	            	}else{
-	            	  $('#currentPage').append("Current Page " + "1");
-	            	}
-	            
-            })
-
-            $('#prev').click(function() {
-              if (beforeLastEquals.includes("page")) {
-                
-                if (afterEquals == 1) {
-                  alert("You're on the first page")
-                  return
+                if (rowcount > 1) {
+                  $("#pagebuttons").append(rowcount + " Results");
                 }
-                afterEquals--;
-                beforeLastEquals += afterEquals;
-                document.location.href = beforeLastEquals
-              }
-              else {
-                alert("You're on the first page")
-              }
-            })
-
-            $('#next').click(function() {
-              if (beforeLastEquals.includes("page")) {
-                if (afterEquals >= pages) {
-                  alert("You're on the last page")
-                  return;
+                else {
+                  $("#pagebuttons").append(rowcount + " Result");
                 }
-                afterEquals++;
-                beforeLastEquals += afterEquals;
-                document.location.href = beforeLastEquals
-              }else if(beforeLastEquals.includes("search")) {
-
-                beforeLastEquals += "&page=2"
-                document.location.href =  beforeLastEquals;
-
-              } else {
-            	 beforeLastEquals += "?page=2"
-                document.location.href = beforeLastEquals;
-              }
-
+              })
+            
+            $(document).ready(function() {
+  
+            var ias = jQuery.ias({
+            	  container:  '#earenas',
+            	  item:       '.MEArenaContent',
+            	  pagination: '#pagination',
+            	  next:       '.Next'
+            	});
+            
+            ias.on('load', function(event) {
+            	   if(cPage > pages){
+               		jQuery.ias().unbind();
+               		$('.ias-spinner img:last-child').remove()
+               		$('.ias-spinner').append("No more results")
+               		console.log("removed")
+               		return false;
+               	}else{  
+              var url = event.url;
+              var currentAdress = window.location.href;
+              var afterQuestion = currentAdress.substring(currentAdress.indexOf("?"));
+           	  var beforeLastEquals = url.slice(0, url.lastIndexOf("=")+1);
+         	  if (afterQuestion.includes("search")) {
+         		 afterQuestion += "&page="
+         			afterQuestion += cPage
+         		event.url = afterQuestion
+         		  
+         	  }else{
+         		  console.log("NORMAL LOAD")
+            	beforeLastEquals += cPage
+            	event.url = beforeLastEquals
+         	  }
+         	  }
             })
-
-
-            $('#first').click(function(){
-            	if(afterEquals == 1){
-            		alert("You're on the first page")
-            		return
-            	}
-            	 if (beforeLastEquals.includes("page")) {
-            		 beforeLastEquals += 1;
-                     document.location.href = beforeLastEquals
-            	 }else{
-            		 alert("You're on the first page")
-            	 }
-
-            })
-
-            $('#last').click(function() {
-                if (beforeLastEquals.includes("page")) {
-                    if (afterEquals == pages) {
-                      alert("You're on the last page")
-                      return;
-                    }
-                    
-                    beforeLastEquals += pages;
-                    document.location.href = beforeLastEquals
-                  }else if(beforeLastEquals.includes("search")) {
-
-                    beforeLastEquals += "&page="+pages
-                    document.location.href =  beforeLastEquals;
-
-                  } else {
-                	 beforeLastEquals += "?page="+pages
-                    document.location.href = beforeLastEquals;
-                  }
-
-                })
+            
+            jQuery.ias().extension(new IASPagingExtension());
+            jQuery.ias().on('pageChange', function(pageNum, scrollOffset, url) {
+            	cPage = pageNum;
+            	console.log(cPage + " cPage")
+            });
+            
+            ias.extension(new IASSpinnerExtension({
+                src: "@routes.Assets.at("images/loading.gif")",
+            }))
+            	
+            });
+            	
             
             
             </script>
+            <div id="pagination">
+               <a href="?page=1" class="Next" id="Next1">next</a>
+            </div>
          </div>
          @Templates.footer()
          @Templates.panelAndLogOut()

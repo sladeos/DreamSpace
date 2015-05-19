@@ -1,95 +1,94 @@
 @(pictures: List[Picture], rowcount: Integer)
-
 <!DOCTYPE html>
-
 <html>
-    <head>
-        @Templates.head()
-        @Templates.facebookHeadScript()
-              <script type="text/javascript" src="@routes.Assets.at("javascripts/jquery-ias.min.js")"></script>
-    </head>
-    <body>
-        <div data-role="page" data-theme="b" class="page">   
-            <div data-role="header" class = "header">
-                @Templates.header()
+   <head>
+      @Templates.head()
+      @Templates.facebookHeadScript()
+      <script type="text/javascript" src="@routes.Assets.at("javascripts/jquery-ias.min.js")"></script>
+   </head>
+   <body>
+      <div data-role="page" data-theme="b" class="page">
+         <div data-role="header" class = "header">
+            @Templates.header()
+         </div>
+         <div data-role="content" class = "content" >
+            <h1 align="center">Photo Stream</h1>
+            <div id="pagebuttons"></div>
+            <div class = "search">
+               <a data-role = "button" id = "btn2"  rel="external" href="/newpicture" data-icon="arrow-r" data-iconpos="right">Take and Upload a Picture</a>
             </div>
-            <div data-role="content" class = "content" >
-                    <h1 align="center">Photo Stream</h1>
-                    <div class = "search">
-                    <a data-role = "button" id = "btn2"  rel="external" href="/newpicture" data-icon="arrow-r" data-iconpos="right">Take and Upload a Picture</a>
-                    </div>
-                    
-                    <div id="outerpictures">
-                    <div class="innerpictures">
-                   @for(pictures <- pictures) {
-                           
-                               <p>Creator:   @pictures.creator </p> 
-                              
-                               <img id="@pictures.pictureID" src="/pic/@pictures.pictureID" /> 
-					<br>
-
-<script>
-$('#@pictures.pictureID').width(500);
-$('#@pictures.pictureID').height(500);
-</script>
+            <div id="outerpictures">
+               <div class="innerpictures">
+                  @for(pictures <- pictures) {
+                  <p>Creator:   @pictures.creator </p>
+                  <img id="@pictures.pictureID" src="/pic/@pictures.pictureID" /> 
+                  <br>
+                  <script>
+                     $('#@pictures.pictureID').width(500);
+                     $('#@pictures.pictureID').height(500);
+                  </script>
+                  }
+                  </ul>
+               </div>
+            </div>
+            <script>
+               var rowcount = @rowcount;
+               var pageDecimal = rowcount / 10;
+               var pages = Math.ceil(pageDecimal);
+               
+               $(document).ready(function() {
+            	    if (rowcount > 1) {
+                        $("#pagebuttons").append(rowcount + " Pictures");
                       }
-                    </ul>
-                    </div>
-                    </div>
-                    
-                   <script>
-                    var rowcount = @rowcount;
-                    var pageDecimal = rowcount / 10;
-                    var pages = Math.ceil(pageDecimal);
-                    
-                    $(document).ready(function() {
-                    var ias = jQuery.ias({
-                    	  container:  '#outerpictures',
-                    	  item:       '.innerpictures',
-                    	  pagination: '#pagination',
-                    	  next:       '.Next'
-                    	});
-                    
-                    
-                   
-                    var cPage;
-                    ias.on('load', function(event) {
-                    	if(cPage > pages){
-                    		jQuery.ias().unbind();
-                    		$('.ias-spinner').remove();
-                    	}
-                        var url = event.url;
-                    	var beforeLastEquals = url.slice(0, url.lastIndexOf("=")+1);
-                    	beforeLastEquals += cPage
-                    	event.url = beforeLastEquals
-                    	
+                      else {
+                        $("#pagebuttons").append(rowcount + " Picture");
+                      }
                     })
-                    
-                    jQuery.ias().extension(new IASPagingExtension());
-                    jQuery.ias().on('pageChange', function(pageNum, scrollOffset, url) {
-                    	cPage = pageNum;
-                    });
-                    
-                    ias.extension(new IASSpinnerExtension({
-                        src: "@routes.Assets.at("images/loading.gif")",
-                    }));
-                    });
-                    
-                    
-                    </script>
-                        <div id="pagination">
-			 			<a href="?page=1" class="Next" id="Next1">next</a>
-                    </div>
-                        <script>
-                        $("#btn2").css("background","  #FF9900");
-                    </script>
-
-
-                </div>
-            @Templates.footer()
-            @Templates.panelAndLogOut()
+                    $(document).ready(function() {
+               var ias = jQuery.ias({
+               	  container:  '#outerpictures',
+               	  item:       '.innerpictures',
+               	  pagination: '#pagination',
+               	  next:       '.Next'
+               	});
+               
+               
+               
+               var cPage;
+               ias.on('load', function(event) {
+            	   if(cPage > pages){
+               		jQuery.ias().unbind();
+               		$('.ias-spinner img:last-child').remove()
+               		$('.ias-spinner').append("No more results")
+               	}
+                   var url = event.url;
+               	var beforeLastEquals = url.slice(0, url.lastIndexOf("=")+1);
+               	beforeLastEquals += cPage
+               	event.url = beforeLastEquals
+               	
+               })
+               
+               jQuery.ias().extension(new IASPagingExtension());
+               jQuery.ias().on('pageChange', function(pageNum, scrollOffset, url) {
+               	cPage = pageNum;
+               });
+               
+               ias.extension(new IASSpinnerExtension({
+                   src: "@routes.Assets.at("images/loading.gif")",
+               }));
+               });
+               
+               
+            </script>
+            <div id="pagination">
+               <a href="?page=1" class="Next" id="Next1">next</a>
             </div>
-
-
-    </body>
+            <script>
+               $("#btn2").css("background","  #FF9900");
+            </script>
+         </div>
+         @Templates.footer()
+         @Templates.panelAndLogOut()
+      </div>
+   </body>
 </html>
