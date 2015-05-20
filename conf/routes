@@ -128,6 +128,10 @@ GET /myprofile controllers.Application.getMyProfile()
 POST /saveuserprofile controllers.UserProfileDatabase.addUserProfile()
 
 #Invite to tournament
-POST /invitePlayer controllers.InviteDatabase.invitePlayer()
+POST /invitePlayer controllers.NotificationDatabase.invitePlayer()
 
+#Invite to tournament
+POST /handleInvite controllers.NotificationDatabase.handleInvite()
 
+#Get current user's notifications
+GET /mynotifications controllers.NotificationDatabase.getMyNotifications()

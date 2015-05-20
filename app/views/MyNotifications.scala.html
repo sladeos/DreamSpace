@@ -1,0 +1,86 @@
+@(notifications: List[Notification])
+
+<!DOCTYPE html>
+
+<html>
+    <head>
+        @Templates.head()
+        @Templates.facebookHeadScript()
+      
+    </head>
+    <body>
+        <div data-role="page" data-theme="b" class="page">   
+            <div data-role="header" class = "header">
+                @Templates.header()
+            </div>
+            <div data-role="content" class = "content" >
+                    <h1 align="center">My Notifications</h1>
+                    
+            
+                    
+                   @for(notifications <- notifications) {
+                           
+                            <p>Tournament: @notifications.tournamentID </p> 
+                            <p>Admin:   @notifications.admin </p>
+                            <p>Accepted:@notifications.accepted </p>
+                            <p>Viewed:  @notifications.viewed </p>
+					        <div class="ui-grid-a">
+                                <div class="ui-block-a"><button data-role = "button" value="@notifications.tournamentID" class = "accept">Accept Invitation</button></div>
+                                <div class="ui-block-b"><button data-role = "button" value="@notifications.tournamentID" class = "delete">Delete Invitation</button></div>
+                            </div>
+                      }
+                    
+                       <script>
+                       
+                $('.accept, .delete').click(function() {
+                           
+                    var tournamentID = $(this).val();
+                    var action = "";
+                    
+                    if ($(this).attr("class").indexOf("accept") >= 0){
+                        action = "accept";
+                    } else {
+                        action = "delete";
+                    }
+                        
+                       
+                       $.ajax({
+                           url: "/handleInvite",
+                           type: 'POST',
+                           contentType: 'application/json',
+                           data: JSON.stringify({tournamentID: tournamentID, action: action}),
+                           dataType: 'html',
+                           success: function(data) {
+                               if (data == "accepted"){
+                                    alert("Invite accepted");
+                                    location.reload();
+                               } else if (data == "deleted") {
+                                    alert("Invite deleted");
+                                    location.reload();
+                               } else {
+                                   alert("An error occurred");
+                               } 
+                           },
+                           error: function(){
+                              
+                           }
+                        });
+                        
+                           
+                });         
+                           
+                           
+                           
+                           
+                           
+                       </script>
+
+
+                </div>
+            @Templates.footer()
+            @Templates.panelAndLogOut()
+            </div>
+
+
+    </body>
+</html>
