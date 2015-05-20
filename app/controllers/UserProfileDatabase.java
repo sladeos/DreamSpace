@@ -20,13 +20,13 @@ import javax.xml.datatype.DatatypeConstants;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
+import java.awt.geom.Rectangle2D;
 import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
 
 import play.mvc.Http.MultipartFormData;
 import play.mvc.Http.MultipartFormData.FilePart;
 import play.mvc.Http.Response;
-
 import views.html.*;
 import models.FacebookUser;
 import play.data.Form;
@@ -46,7 +46,6 @@ import java.io.InputStream;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.Path;
@@ -332,9 +331,15 @@ public class UserProfileDatabase extends Controller {
 			AffineTransform transform) throws Exception {
 		AffineTransformOp affineTransformOp = new AffineTransformOp(transform,
 				AffineTransformOp.TYPE_BILINEAR);
-		BufferedImage destinationImage = new BufferedImage(
-				originalImage.getWidth(), originalImage.getHeight(),
+		Rectangle2D rec = affineTransformOp.getBounds2D(originalImage);
+
+		int height = (int) rec.getHeight();
+
+		int width = (int) rec.getWidth();
+
+		BufferedImage destinationImage = new BufferedImage(width, height,
 				originalImage.getType());
+		
 		destinationImage = affineTransformOp.filter(originalImage,
 				destinationImage);
 
