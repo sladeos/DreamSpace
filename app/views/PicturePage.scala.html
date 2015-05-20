@@ -20,12 +20,24 @@
             <div id="outerpictures">
                <div class="innerpictures">
                   @for(pictures <- pictures) {
+                  <button id="share_button@pictures.pictureID" class = "myFace faceButton search" data-mini="true">Facebook Share</button>
                   <p>Creator:   @pictures.creator </p>
                   <img id="@pictures.pictureID" src="/pic/@pictures.pictureID" /> 
                   <br>
                   <script>
                      $('#@pictures.pictureID').width(200);
                      $('#@pictures.pictureID').height(200);
+                     
+                     $('#share_button@pictures.pictureID').click(function(e) {
+                         e.preventDefault();
+                         FB.ui({
+                           method: 'feed',
+                           name: 'DreamSpace EArenaAds',
+                           link: 'http://localhost:9000/pic/@pictures.pictureID',
+                           caption: "EArenaAds" ,
+                           description: ""
+                         });
+                       });
                   </script>
                   }
                   </ul>
