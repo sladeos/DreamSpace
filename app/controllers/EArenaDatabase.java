@@ -380,26 +380,28 @@ public class EArenaDatabase extends Controller {
 
 		String adID = json.findPath("adID").textValue();
 		String contents = json.findPath("contents").textValue();
+		String adAdmin = json.findPath("adAdmin").textValue();
 		
 		String currentUser = session("connected");
 		try {
 			int adIDint = Integer.parseInt(adID);
 			conn = DB.getConnection();
-			String insertIntoDatabase = "INSERT INTO EArenaReply (arenaID, username,replycontent) VALUES(?,?,?)";
+			String insertIntoDatabase = "INSERT INTO EArenaReply (arenaID, arenaadmin, username,replycontent) VALUES(?,?,?,?)";
 			preparedStatement = conn.prepareStatement(insertIntoDatabase);
 
 			preparedStatement.setInt(1, adIDint);
-			preparedStatement.setString(2, currentUser);
-			preparedStatement.setString(3, contents);
+			preparedStatement.setString(2, adAdmin);
+			preparedStatement.setString(3, currentUser);
+			preparedStatement.setString(4, contents);
 
 
 			preparedStatement.executeUpdate();
 			return ok("Succesful Reply!");
 		} catch (com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException ice) {
-			return badRequest(ice.toString() + "HEYEYEY");
+			return badRequest(ice.toString());
 		} 
 		catch (NumberFormatException nfe) {
-			return badRequest(nfe.toString() + "WOW");
+			return badRequest(nfe.toString());
 		} catch (SQLException se) {
 			// Handle sql errors
 			return internalServerError(se.toString());

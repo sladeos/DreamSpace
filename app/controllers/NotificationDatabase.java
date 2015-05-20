@@ -145,36 +145,150 @@ public class NotificationDatabase extends Controller {
 	}
 	
 	
+	public static Result setViewed() {
+		Connection conn = null;
+		PreparedStatement preparedStatement;
+	
+		try {
+		    
+            String currentUser = session("connected");
+			conn = DB.getConnection();
+			
+    			String updateDatabase = "UPDATE TournamentInvite SET viewed = 1 WHERE participant = ?";
+    			preparedStatement = conn.prepareStatement(updateDatabase);
+    			preparedStatement.setString(1, currentUser);
+    			preparedStatement.executeUpdate();
+    			
+    			updateDatabase = "UPDATE EArenaReply SET viewed = 1 WHERE arenaadmin = ?";
+    			preparedStatement = conn.prepareStatement(updateDatabase);
+    			preparedStatement.setString(1, currentUser);
+    			preparedStatement.executeUpdate();
+
+    			return ok("success");
+
+		} catch (com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException ice) {
+			return ok("fail");
+		} catch (SQLException se) {
+			// Handle sql errors
+			return ok("fail");
+		} catch (Exception e) {
+			// Handle errors for Class.forName
+			return ok("fail");
+		} finally {
+		    // finally block used to close resources
+			// try {
+			// if (preparedStatement != null)
+			// conn.close();
+			// } catch (SQLException se) {
+			// }// do nothing
+			try {
+				if (conn != null)
+					conn.close();
+			} catch (SQLException se) {
+				return internalServerError(se.toString());
+			}// end finally try
+		}// end try
+
+	}
+	
+	public static Result hideReply() {
+		Connection conn = null;
+		PreparedStatement preparedStatement;
+		
+		JsonNode json = request().body().asJson();
+
+		int replyID = json.findPath("replyID").asInt();
+	
+		try {
+		    
+            String currentUser = session("connected");
+			conn = DB.getConnection();
+			
+    			String updateDatabase = "UPDATE EArenaReply SET hidden = 1 WHERE replyID = ?";
+    			preparedStatement = conn.prepareStatement(updateDatabase);
+    			preparedStatement.setInt(1, replyID);
+    			preparedStatement.executeUpdate();
+    			
+    			return ok("success");
+
+		} catch (com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException ice) {
+			return ok("fail");
+		} catch (SQLException se) {
+			// Handle sql errors
+			return ok("fail");
+		} catch (Exception e) {
+			// Handle errors for Class.forName
+			return ok("fail");
+		} finally {
+		    // finally block used to close resources
+			// try {
+			// if (preparedStatement != null)
+			// conn.close();
+			// } catch (SQLException se) {
+			// }// do nothing
+			try {
+				if (conn != null)
+					conn.close();
+			} catch (SQLException se) {
+				return internalServerError(se.toString());
+			}// end finally try
+		}// end try
+
+	}
+	
+	
     public static Result getMyNotifications() {
     	String currentUser = session("connected");
     	if (currentUser == null) {
     		return unauthorized(LoginUserPage.render("You have to login to access this page!"));
     	} else {
     		Connection conn = null;
-    		PreparedStatement preparedStatement = null;
-    		List < Notification > notiList = new ArrayList < Notification > ();
+    		PreparedStatement preparedIStatement = null;
+    		PreparedStatement preparedRStatement = null;
+    		List < InviteNotification > notiList = new ArrayList < InviteNotification > ();
+    		List < ReplyNotification > notrList = new ArrayList < ReplyNotification > ();
     		try {
     
     			conn = DB.getConnection();
     
-    			String selectNotifications = "SELECT * FROM TournamentInvite WHERE participant=?";
-    			preparedStatement = conn.prepareStatement(selectNotifications);
-    			preparedStatement.setString(1, currentUser);
-    			ResultSet rs = preparedStatement.executeQuery();
+    			String selectINotifications = "SELECT * FROM TournamentInvite WHERE participant=? AND accepted=0";
+    			preparedIStatement = conn.prepareStatement(selectINotifications);
+    			preparedIStatement.setString(1, currentUser);
+    			ResultSet rsI = preparedIStatement.executeQuery();
     
-    			while (rs.next()) {
-    				Notification n = new Notification();
-    				n.tournamentID = rs.getInt("tournamentID");
-    				n.admin = rs.getString("admin");
-    			    n.participant = rs.getString("participant");
-    			    n.accepted = rs.getInt("accepted");
-    			    n.viewed = rs.getInt("viewed");
+    			while (rsI.next()) {
+    				InviteNotification n = new InviteNotification();
+    				n.tournamentID = rsI.getInt("tournamentID");
+    				n.admin = rsI.getString("admin");
+    			    n.participant = rsI.getString("participant");
+    			    n.accepted = rsI.getInt("accepted");
+    			    n.viewed = rsI.getInt("viewed");
     			    
     				notiList.add(n);
     			}
+    			rsI.close();
+    			
+    			
+    		    String selectRNotifications = "SELECT * FROM EArenaReply WHERE arenaadmin=? AND hidden=0";
+    			preparedRStatement = conn.prepareStatement(selectRNotifications);
+    			preparedRStatement.setString(1, currentUser);
+    			ResultSet rsR = preparedRStatement.executeQuery();
     
-    			rs.close();
-    			return ok(MyNotifications.render(notiList));
+    			while (rsR.next()) {
+    				ReplyNotification r = new ReplyNotification();
+    				r.replyID = rsR.getInt("replyID");
+    				r.arenaID = rsR.getInt("arenaID");
+    				r.arenaadmin = rsR.getString("arenaadmin");
+    			    r.username = rsR.getString("username");
+    			    r.created_date = rsR.getString("created_date");
+    			    r.created_date = r.created_date.substring(0, r.created_date.lastIndexOf("."));
+    			    r.viewed = rsR.getInt("viewed");
+    			    
+    				notrList.add(r);
+    			}
+    
+    			rsR.close();
+    			return ok(MyNotifications.render(notiList, notrList));
     		} catch (com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException ice) {
     			return badRequest(ice.toString());
     		} catch (NumberFormatException nfe) {

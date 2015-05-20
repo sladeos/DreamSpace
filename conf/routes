@@ -142,5 +142,11 @@ POST /invitePlayer controllers.NotificationDatabase.invitePlayer()
 #Invite to tournament
 POST /handleInvite controllers.NotificationDatabase.handleInvite()
 
+#Set notifications as viewed
+POST /setViewed controllers.NotificationDatabase.setViewed()
+
+#Hide replies
+POST /hideReply controllers.NotificationDatabase.hideReply()
+
 #Get current user's notifications
 GET /mynotifications controllers.NotificationDatabase.getMyNotifications()

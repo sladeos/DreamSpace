@@ -79,7 +79,7 @@
                 <script>
                     $("#postreply").click(function() {
                         if($('#replyarea').val().length >2){
-                            var data = {"contents":$("#replyarea").val(), "adID": "@eAd.arenaID"};
+                            var data = {"contents":$("#replyarea").val(), "adID": "@eAd.arenaID", "adAdmin": "@eAd.admin"};
                             $.ajax({
                                 url: "/postreply",
                                 type: 'POST',
