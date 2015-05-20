@@ -106,17 +106,26 @@ GET /newpicture controllers.Application.newPicture()
 #Post to save User's Picture
 POST /savepicture controllers.PictureDatabase.savePicture()
 
+#Post to save User's profile picture
+POST /saveprofilepicture controllers.UserProfileDatabase.savePicture()
+
+#Post to deleteprofilepicture User's profile picture
+POST /deleteprofilepicture controllers.UserProfileDatabase.deletePicture()
+
 #Get to retrive pictures
 GET /pictures controllers.PictureDatabase.getPictures()
 
 #Retrives Blob from the Id, renders blob as mimetype and send back to client
 GET /pic/:id controllers.PictureDatabase.render(id: Integer)
 
+#Retrives Blob from DB, renders blob as mimetype and send back to client
+GET /profilepic/:username controllers.UserProfileDatabase.render(username: String)
+
 #edit user profile
 POST /edituserprofile controllers.UserProfileDatabase.editUserProfile()
 
 #Get to retrieve Profile page, renders edit or other depending on current user
-GET   /profile/:user controllers.Application.showProfile(user: String)
+GET  /profile/:user controllers.Application.showProfile(user: String)
 
 #Get all profiles
 GET /profile controllers.UserProfileDatabase.getProfiles()
