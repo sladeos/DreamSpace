@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import views.html.*;
@@ -156,6 +157,7 @@ public class PictureDatabase extends Controller {
 		BufferedImage img = null;
 		BufferedImage finalImg = null;
 		InputStream inputStream;
+		String[] acceptedTypes = new String[] {"jpeg", "jpg", "jfif", "jpeg 2000", "tiff", "riff", "png", "gif","bmp", "png", "jpeg xr", "img", "bpg", "webp" };
 		try {
 			conn = DB.getConnection();
 
@@ -163,7 +165,6 @@ public class PictureDatabase extends Controller {
 			preparedStatement = conn.prepareStatement(sql);
 
 			MultipartFormData body = request().body().asMultipartFormData();
-
 			FilePart picture = body.getFile("picture");
 
 			if (picture != null) {
@@ -172,6 +173,9 @@ public class PictureDatabase extends Controller {
 				String suffix = "image/";
 				String type = picture.getContentType().substring(
 						picture.getContentType().lastIndexOf("/") + 1);
+				if(!Arrays.asList(acceptedTypes).contains(type)){
+					return badRequest("That file format is not supported");
+				}
 
 				suffix += type;
 

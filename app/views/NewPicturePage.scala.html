@@ -19,53 +19,56 @@
    							
                     <button class = "my-btn"  type="submit" value="Save Picture" >Save Picture </button>
     </form>
+
     <div id="imageshow"></div>
     <canvas id="piccanvas" width="400" height="400"></canvas>
     <script type="text/javascript">
-    /*
-    $('#newpicture').submit(function() {
-    	var canvasData = $('imageshow').first()[0];
-    	alert(canvasData);
-    	var data = canvasData.gettoDataURL();
-    	alert(data)
-    	  var pic = $('#newpic');
-    	  pic.val($('imageshow').children('canvas'));
-    	});
-    */
+    $('#picfield').change(function(e){
+  	var fullPath = document.getElementById('picfield').value;
+	var fileType = fullPath.substring(fullPath.indexOf(".")+1).toLowerCase();
+	var acceptedTypes = ["jpeg", "jpg", "jfif", "jpeg 2000", "tiff", "riff", "png", "gif","bmp", "png", "jpeg xr", "img", "bpg", "webp"];
+	if(acceptedTypes.indexOf(fileType) == -1){
+		$("#imageshow").css('color', 'red');
+		$('#imageshow').html("That file format is not supported")
+	} else{
+		$('#imageshow').html("")
+		    var orientationt = null;
+		  
+		    var file = e.target.files[0];
+		    loadImage.parseMetaData(file, function(data) {
+		        if (data.exif) {
+		            orientationt = data.exif.get('Orientation');
+		          
+		        }
+		          var loadingImage = loadImage(
+		            e.target.files[0],
+		           
+		            function(img) {
+		                document.getElementById("imageshow").appendChild(img);
+		    
+		            }, {
+		              maxWidth: 600,
+		              maxHeight: 300,
+		              minWidth: 100,
+		              minHeight: 50,
+		              orientation: orientationt,
+		            }
+		    
+		          );
+		    });
+		          
+		      if(orientationt != null){
+		          
+		        
+		      }
+		         
+		    
+	}
+    })
     
     
-    document.getElementById('picfield').onchange = function(e) {
-    var orientationt = null;
-  
-    var file = e.target.files[0];
-    loadImage.parseMetaData(file, function(data) {
-        if (data.exif) {
-            orientationt = data.exif.get('Orientation');
-          
-        }
-          var loadingImage = loadImage(
-            e.target.files[0],
-           
-            function(img) {
-                document.getElementById("imageshow").appendChild(img);
     
-            }, {
-              maxWidth: 600,
-              maxHeight: 300,
-              minWidth: 100,
-              minHeight: 50,
-              orientation: orientationt,
-            }
     
-          );
-    });
-          
-      if(orientationt != null){
-          
-        
-      }
-         
-    };
         
 </script>
                 </div>
