@@ -40,7 +40,7 @@ float: right;
     background-color:#1A586F;
 }
 .ui-page{
-    background: url("../images/1379587156536.jpg");
+    background: url("../images/main.jpg");
 }
 
 .content{
@@ -74,7 +74,7 @@ background : #FF9900;
         width: 100%;    
 }
     .ui-page{
-        background: url("../images/1379587156536.jpg");
+        background: url("../images/main.jpg");
     }
     
     #grid{
@@ -136,7 +136,7 @@ background : #FF9900;
 
 @media all and (min-width: 60em){
     .page{
-        background: url("../images/1379587156536.jpg");
+        background: url("../images/main.jpg");
     
 
     }
