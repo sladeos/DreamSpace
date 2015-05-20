@@ -1,6 +1,6 @@
 import NativePackagerKeys._
 
-herokuAppName in Compile := "young-beach-4936"
+herokuAppName in Compile := "floating-dusk-5648"
 
 name := """DreamSpace"""
 

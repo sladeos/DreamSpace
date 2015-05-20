@@ -116,7 +116,7 @@
             var cPage;
             
             $(document).ready(function() {
-                if (rowcount > 1) {
+                if (rowcount > 1 || rowcount == 0) {
                   $("#pagebuttons").append(rowcount + " Results");
                 }
                 else {
@@ -145,15 +145,16 @@
               var currentAdress = window.location.href;
               var afterQuestion = currentAdress.substring(currentAdress.indexOf("?"));
            	  var beforeLastEquals = url.slice(0, url.lastIndexOf("=")+1);
-         	  if (afterQuestion.includes("search")) {
+         	  if (afterQuestion.indexOf("search") != -1) {
+         		  console.log("HEY")
          		 afterQuestion += "&page="
          			afterQuestion += cPage
          		event.url = afterQuestion
          		  
          	  }else{
          		  console.log("NORMAL LOAD")
-            	beforeLastEquals += cPage
-            	event.url = beforeLastEquals
+            	url+=cPage
+            	event.url = url
          	  }
          	  }
             })
@@ -174,7 +175,7 @@
             
             </script>
             <div id="pagination">
-               <a href="?page=1" class="Next" id="Next1">next</a>
+               <a href="?page=" class="Next" id="Next1">next</a>
             </div>
          </div>
          @Templates.footer()
