@@ -5,12 +5,20 @@
     <head>
       @Templates.head()
       @Templates.facebookHeadScript()
-
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
+<script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
+<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
     </head>
     <body>  
-              <script> 
-            $("#pages div:not(#1)").css("display", "none");​
-          </script>       
+      
+
+
+
+
+
+    
+       
         <div data-role="page" data-theme="b" id = "main" class = "page"  >   
                       
                
@@ -38,6 +46,7 @@
 
 
               <div id="pages">                          
+  
                 <div id = "1" class ="MEArenaContent">
                       <article  data-role="listview" data-inset="true" data-dividertheme="a"> 
                           @for(eads <- eads) {
@@ -58,7 +67,7 @@
                       </article>
               </div>
      
-              <div id = "2">
+              <div id = "2" style="display:none;">
                 <ul data-role="listview" data-inset="true" data-dividertheme="a" data-theme = "b"> 
                   @for(tournament <- tournament) {
                     <li  data-role = "list-divider" ></li>

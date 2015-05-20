@@ -637,60 +637,54 @@ public static List<EArenaAd> getEArenaAdsMainPage() {
 		Connection conn = null;
 		PreparedStatement preparedStatement = null;
 		List<EArenaAd> adList = new ArrayList<EArenaAd>();
-			
-			
-			try {
+				
+		try {
 		
-				conn = DB.getConnection();
+			conn = DB.getConnection();
            
-				String selectEAds = "SELECT * FROM EArena ORDER BY created_date DESC";
+			String selectEAds = "SELECT * FROM EArena ORDER BY created_date DESC LIMIT 5";
 
-				preparedStatement = conn.prepareStatement(selectEAds);
-				ResultSet rs = preparedStatement.executeQuery();
-				int index = 0;
-				while (rs.next()) {
-					if (index<5) {
-						EArenaAd a = new EArenaAd();
-						a.arenaID = rs.getInt("arenaID");
-						a.arenaName = rs.getString("arenaname");
-						a.information = rs.getString("arenainformation");
-						a.gameName = rs.getString("gamename");
-						a.playersRequired = rs.getInt("playersrequired");
-						a.admin = rs.getString("admin");
-						a.createdDate = rs.getString("created_date");
-						adList.add(a);
-						index++;
-					}
-				
-				}
+			preparedStatement = conn.prepareStatement(selectEAds);
+			ResultSet rs = preparedStatement.executeQuery();
+			
+			while (rs.next()) {
+				EArenaAd a = new EArenaAd();
+				a.arenaID = rs.getInt("arenaID");
+				a.arenaName = rs.getString("arenaname");
+				a.information = rs.getString("arenainformation");
+				a.gameName = rs.getString("gamename");
+				a.playersRequired = rs.getInt("playersrequired");
+				a.admin = rs.getString("admin");
+				a.createdDate = rs.getString("created_date");
+				adList.add(a);
+			}
 
-				rs.close();
+			rs.close();
 
-				
 			return adList;
 			
-			} catch (com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException ice) {
-					return null;
-			} catch (NumberFormatException nfe) {
-		            return null;
-			} catch (SQLException se) {
-    		        return null;
-			} catch (Exception e) {
-	    	        return null;
-			} finally {
+		} catch (com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException ice) {
+			return null;
+		} catch (NumberFormatException nfe) {
+		    return null;
+		} catch (SQLException se) {
+    		return null;
+		} catch (Exception e) {
+	    	return null;
+		} finally {
 				// finally block used to close resources
 				// try {
 				// if (preparedStatement != null)
 				// conn.close();
 				// } catch (SQLException se) {
 				// } //do nothing
-				try {
-					if (conn != null)
-						conn.close();
-				} catch (SQLException se) {
-					return null;
+			try {
+				if (conn != null)
+					conn.close();
+			} catch (SQLException se) {
+				return null;
 				
-				} // end finally try
-			} // end try
-	 	}		
+			} // end finally try
+		} // end try
+	 }		
 }
