@@ -77,9 +77,8 @@
                  		$('.ias-spinner').append("No more results")
                  	}
                 var url = event.url;
-               	var beforeLastEquals = url.slice(0, url.lastIndexOf("=")+1);
-               	beforeLastEquals += cPage
-               	event.url = beforeLastEquals
+                url += cPage
+               	event.url = url
                	
                })
                

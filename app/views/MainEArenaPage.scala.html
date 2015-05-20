@@ -138,21 +138,16 @@
                		jQuery.ias().unbind();
                		$('.ias-spinner img:last-child').remove()
                		$('.ias-spinner').append("No more results")
-               		console.log("removed")
-               		return false;
                	}else{  
               var url = event.url;
               var currentAdress = window.location.href;
               var afterQuestion = currentAdress.substring(currentAdress.indexOf("?"));
-           	  var beforeLastEquals = url.slice(0, url.lastIndexOf("=")+1);
          	  if (afterQuestion.indexOf("search") != -1) {
-         		  console.log("HEY")
          		 afterQuestion += "&page="
          			afterQuestion += cPage
          		event.url = afterQuestion
          		  
          	  }else{
-         		  console.log("NORMAL LOAD")
             	url+=cPage
             	event.url = url
          	  }
@@ -162,7 +157,6 @@
             jQuery.ias().extension(new IASPagingExtension());
             jQuery.ias().on('pageChange', function(pageNum, scrollOffset, url) {
             	cPage = pageNum;
-            	console.log(cPage + " cPage")
             });
             
             ias.extension(new IASSpinnerExtension({
