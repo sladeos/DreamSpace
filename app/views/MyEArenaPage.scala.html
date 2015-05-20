@@ -19,7 +19,6 @@
          </div>
          <div data-role="content" class = "content">
             <h1 align="center">My EArena</h1>
-            <button id="share_button" class = "myFace faceButton search" data-mini="true">Facebook Share</button>
             <button data-role = "button" id = "creatad" class = "search" rel="external" href="/">Create a new ad</button>
             <div id="pagebuttons"></div>
             <script type="text/javascript">
@@ -38,7 +37,7 @@
                         <p>@{" Host: " + eads.admin}</p>
                         <p>@{" Game: " + eads.gameName }</p>
                         <p>@{" Created: " + eads.createdDate }</p>
-                        <p>@{" Players required: " + eads.playersRequired}</p>
+                        <p>@{" Players: " + eads.playersRequired}</p>
                         <p>Information:</p>
                         <textarea readonly name="textarea" id="text" style = "overflow:auto;resize:none" >@{eads.information}</textarea>
                         <br>
