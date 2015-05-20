@@ -60,7 +60,7 @@ POST /edittournament controllers.TournamentDatabase.editTournament()
 GET  /showtournament/:id controllers.Application.showTournament(id: Integer)
 
 #Retrives list of currentuser's tournaments
-GET /mainetournament controllers.TournamentDatabase.getTournaments()
+GET /mainetournament controllers.TournamentDatabase.getTournaments(page:Integer ?=1)
 
 # Shows createAd webpage
 GET /createarenaad controllers.Application.createArenaAd()
@@ -69,10 +69,10 @@ GET /createarenaad controllers.Application.createArenaAd()
 POST /savearenaad controllers.EArenaDatabase.addEArenaAd()
 
 #Shows Main EArena Page with all/newest Ads
-GET /mainearena controllers.Application.mainearena(search: String ?= "", game: String ?= "", username: String ?= "", players: String ?= "", minutes: String ?= "")
+GET /mainearena controllers.EArenaDatabase.getEArenaAds(search: String ?= "", game: String ?= "", username: String ?= "", players: String ?= "", minutes: String ?= "", page:Integer ?=1 )
 
 #Shows User's EArena Ads
-GET /myearena controllers.EArenaDatabase.getMyEArenaAds()
+GET /myearena controllers.EArenaDatabase.getMyEArenaAds(page:Integer ?=1)
 
 #Shows Individual EArenaAd and determines if the Currentuser is an admin to the ad or not, returns page depending on answer
 GET /earenaad/:id controllers.Application.showIndividualAd(id: Integer)
@@ -98,7 +98,7 @@ GET  /packlist controllers.Application.showPacklist()
 POST /updateearenaad controllers.EArenaDatabase.updateEArenaAd()
 
 #Retrieves User's tournaments
-GET /myetournaments controllers.TournamentDatabase.getMyTournaments()
+GET /myetournaments controllers.TournamentDatabase.getMyTournaments(page:Integer ?=1)
 
 #Gets new picture page
 GET /newpicture controllers.Application.newPicture()
@@ -107,7 +107,7 @@ GET /newpicture controllers.Application.newPicture()
 POST /savepicture controllers.PictureDatabase.savePicture()
 
 #Get to retrive pictures
-GET /pictures controllers.PictureDatabase.getPictures()
+GET /pictures controllers.PictureDatabase.getPictures(page:Integer ?=1)
 
 #Retrives Blob from the Id, renders blob as mimetype and send back to client
 GET /pic/:id controllers.PictureDatabase.render(id: Integer)
@@ -126,7 +126,3 @@ GET /myprofile controllers.Application.getMyProfile()
 
 #add new user profile
 POST /saveuserprofile controllers.UserProfileDatabase.addUserProfile()
-
-
-
-
