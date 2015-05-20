@@ -13,49 +13,53 @@
          </div>
          <div data-role="content" class = "content" >
             <h1 align="center">Photo Stream</h1>
-            <div id="pagebuttons"></div>
             <div class = "search">
                <a data-role = "button" id = "btn2"  rel="external" href="/newpicture" data-icon="arrow-r" data-iconpos="right">Take and Upload a Picture</a>
             </div>
-            <div id="outerpictures">
+            <div id="outerpictures" class = "centerDiv">
                <div class="innerpictures">
                   @for(pictures <- pictures) {
-                  <button id="share_button@pictures.pictureID" class = "myFace faceButton search" data-mini="true">Facebook Share</button>
                   <p>Creator:   @pictures.creator </p>
-                  <img id="@pictures.pictureID" src="/pic/@pictures.pictureID" /> 
-                  <br>
-                  <script>
-                     $('#@pictures.pictureID').width(200);
-                     $('#@pictures.pictureID').height(200);
+                  <button id="share_button@pictures.pictureID" class = "myFace faceButton search" data-mini="true">Facebook Share</button>
+                     <div class="ui-grid-solo">
+                        <div class="ui-block-a">
+                           <a href="#@pictures.pictureID" data-rel="popup" data-position-to="window" class="ui-btn ui-btn-b ui-corner-all ui-shadow " data-transition="fade" style="max-height:512px; width:50%; margin: 0 auto; background:#151515" ><img src="/pic/@pictures.pictureID" style="width: 100%" /></a>
+                        </div>
+                     </div>
+                     <div data-role="popup" id="@pictures.pictureID" class="photopopup" data-overlay-theme="a" data-corners="false" data-tolerance="30,15" >
+                        <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-b ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a><img src="/pic/@pictures.pictureID" style="max-height:512px;" alt="Photo landscape">
+                     </div>
+                     <script>
+                        $('.ui-page-active :jqmData(role=content)').trigger('create');
+                        $("#@pictures.pictureID").css("background","black");
                      
+                     $( document ).on( "pagecreate", function() {
+                        $( ".photopopup" ).on({
+                           popupbeforeposition: function() {
+                              var maxHeight = $( window ).height() - 60 + "px";
+                              $( ".photopopup img" ).css( "max-height", maxHeight );
+                           }
+                        });
+                     });
+
                      $('#share_button@pictures.pictureID').click(function(e) {
                          e.preventDefault();
                          FB.ui({
                            method: 'feed',
-                           name: 'pics',
-                           link: 'https://young-beach-4936.herokuapp.com/pic/@pictures.pictureID',
-                           caption: "EArenaAds" ,
+                           name: 'Dreamspace Picture',
+                           link: 'https://floating-dusk-5648.herokuapp.com/pic/@pictures.pictureID',
+                           caption: "Picture" ,
                            description: ""
                          });
                        });
                   </script>
                   }
-                  </ul>
                </div>
             </div>
             <script>
                var rowcount = @rowcount;
                var pageDecimal = rowcount / 10;
                var pages = Math.ceil(pageDecimal);
-               
-               $(document).ready(function() {
-            	    if (rowcount > 1) {
-                        $("#pagebuttons").append(rowcount + " Pictures");
-                      }
-                      else {
-                        $("#pagebuttons").append(rowcount + " Picture");
-                      }
-                    })
                     $(document).ready(function() {
                var ias = jQuery.ias({
                	  container:  '#outerpictures',

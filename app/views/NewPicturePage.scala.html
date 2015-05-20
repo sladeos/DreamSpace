@@ -21,7 +21,7 @@
     </form>
 
     <div id="imageshow"></div>
-    <canvas id="piccanvas" width="400" height="400"></canvas>
+
     <script type="text/javascript">
     $('#picfield').change(function(e){
   	var fullPath = document.getElementById('picfield').value;
@@ -47,7 +47,7 @@
 		                document.getElementById("imageshow").appendChild(img);
 		    
 		            }, {
-		              maxWidth: 600,
+		              maxWidth: 300,
 		              maxHeight: 300,
 		              minWidth: 100,
 		              minHeight: 50,
