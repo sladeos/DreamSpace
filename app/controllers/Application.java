@@ -31,7 +31,7 @@ public class Application extends Controller {
 	public static Result mainMethod() {
 		String user = session("connected");
 		if (user != null) {
-			return ok(main.render("You are logged in as " + user));
+			return ok(main.render("You are logged in as " + user, EArenaDatabase.getEArenaAdsMainPage(), TournamentDatabase.getTournamentsMainPage()));
 		} else {
 			return unauthorized(LoginUserPage
 					.render("Welcome, login to explore the website"));
@@ -47,7 +47,7 @@ public class Application extends Controller {
 		String currentUser = session("connected");
 		if (currentUser != null) {
 			return ok(main.render("You are already logged in as " + currentUser
-					+ " Please log out if you wish to create another account"));
+					+ " Please log out if you wish to create another account", EArenaDatabase.getEArenaAdsMainPage(), TournamentDatabase.getTournamentsMainPage()));
 		}
 
 		return ok(NewUserPage.render(""));
@@ -57,7 +57,7 @@ public class Application extends Controller {
 		String currentUser = session("connected");
 		if (currentUser != null) {
 			return ok(main.render("You are already logged in as " + currentUser
-					+ " Please log out if you wish to create another account"));
+					+ " Please log out if you wish to create another account", EArenaDatabase.getEArenaAdsMainPage(), TournamentDatabase.getTournamentsMainPage()));
 		}
 
 		return ok(ChooseUsername.render(""));
@@ -68,7 +68,7 @@ public class Application extends Controller {
 		String currentUser = session("connected");
 		if (currentUser != null) {
 			return ok(main
-					.render("You are already logged in as " + currentUser));
+					.render("You are already logged in as " + currentUser, EArenaDatabase.getEArenaAdsMainPage(), TournamentDatabase.getTournamentsMainPage()));
 		}
 
 		return ok(LoginUserPage.render(""));
@@ -178,4 +178,8 @@ public class Application extends Controller {
 			 	 			.render("Welcome, login to explore the website"));
 			 	 }
 			 }
+
+
+
+
 }

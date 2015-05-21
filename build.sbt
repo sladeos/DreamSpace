@@ -20,4 +20,3 @@ libraryDependencies ++= Seq(
   cache,
   javaWs
 )
-
