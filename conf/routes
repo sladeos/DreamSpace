@@ -150,3 +150,6 @@ POST /hideReply controllers.NotificationDatabase.hideReply()
 
 #Get current user's notifications
 GET /mynotifications controllers.NotificationDatabase.getMyNotifications()
+
+#Get current user's notification amount
+GET /getNotificationAmt controllers.NotificationDatabase.getNotificationAmt()

@@ -114,13 +114,14 @@
                         
                         
                         $(function() {
-                            $(".view").css("background","  #FF9900");
-                            $.ajax({
-                                   url: "/setViewed",
-                                   type: 'POST',
-                                  });
-                                
-                        });
+                            
+                                $.ajax({
+                                    url: "/setViewed",
+                                    type: 'POST',
+                                });
+                                  
+                                $(".view").css("background","  #FF9900");
+                            });
                            
                         
                            

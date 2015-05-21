@@ -315,4 +315,55 @@ public class NotificationDatabase extends Controller {
     	}
     }
     
+     public static Result getNotificationAmt() {
+    	String currentUser = session("connected");
+    
+    		Connection conn = null;
+    		PreparedStatement preparedStatement = null;
+            int amt = 0;
+            
+            
+    		try {
+    
+    			conn = DB.getConnection();
+    
+    			String selectNotifications = "SELECT (SELECT COUNT(*) FROM EArenaReply WHERE arenaadmin=? AND viewed=0) AS t1_amount, (SELECT COUNT(*) FROM TournamentInvite WHERE participant=? AND viewed=0) AS t2_amount";
+    			preparedStatement = conn.prepareStatement(selectNotifications);
+    			preparedStatement.setString(1, currentUser);
+    			preparedStatement.setString(2, currentUser);
+    			ResultSet rs = preparedStatement.executeQuery();
+    
+    			while (rs.next()) {
+                amt += rs.getInt("t1_amount");
+                amt += rs.getInt("t2_amount");
+    			}
+    			rs.close();
+    			
+    			return ok("" + amt);
+    		} catch (com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException ice) {
+    			return badRequest(ice.toString());
+    		} catch (NumberFormatException nfe) {
+    			return badRequest(nfe.toString());
+    		} catch (SQLException se) {
+    			// Handle sql errors
+    			return internalServerError(se.toString());
+    		} catch (Exception e) {
+    			// Handle errors for Class.forName
+    			return internalServerError(e.toString());
+    		} finally {
+    			// finally block used to close resources
+    			// try {
+    			// if (preparedStatement != null)
+    			// conn.close();
+    			// } catch (SQLException se) {
+    			// } //do nothing
+    			try {
+    				if (conn != null) conn.close();
+    			} catch (SQLException se) {
+    				return internalServerError(se.toString());
+    			} // end finally try
+    		} // end try
+    	}
+    
+    
 }
