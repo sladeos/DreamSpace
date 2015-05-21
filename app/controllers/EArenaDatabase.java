@@ -557,7 +557,6 @@ public class EArenaDatabase extends Controller {
 	}
 
 	public static Result deleteArena() {
-
 		Connection conn = null;
 		PreparedStatement preparedStatement = null;
 		JsonNode json = request().body().asJson();
@@ -679,4 +678,60 @@ public class EArenaDatabase extends Controller {
 		}
 	}
 
+
+public static List<EArenaAd> getEArenaAdsMainPage() {
+		  	
+		Connection conn = null;
+		PreparedStatement preparedStatement = null;
+		List<EArenaAd> adList = new ArrayList<EArenaAd>();
+				
+		try {
+		
+			conn = DB.getConnection();
+           
+			String selectEAds = "SELECT * FROM EArena ORDER BY created_date DESC LIMIT 5";
+
+			preparedStatement = conn.prepareStatement(selectEAds);
+			ResultSet rs = preparedStatement.executeQuery();
+			
+			while (rs.next()) {
+				EArenaAd a = new EArenaAd();
+				a.arenaID = rs.getInt("arenaID");
+				a.arenaName = rs.getString("arenaname");
+				a.information = rs.getString("arenainformation");
+				a.gameName = rs.getString("gamename");
+				a.playersRequired = rs.getInt("playersrequired");
+				a.admin = rs.getString("admin");
+				a.createdDate = rs.getString("created_date");
+				adList.add(a);
+			}
+
+			rs.close();
+
+			return adList;
+			
+		} catch (com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException ice) {
+			return null;
+		} catch (NumberFormatException nfe) {
+		    return null;
+		} catch (SQLException se) {
+    		return null;
+		} catch (Exception e) {
+	    	return null;
+		} finally {
+				// finally block used to close resources
+				// try {
+				// if (preparedStatement != null)
+				// conn.close();
+				// } catch (SQLException se) {
+				// } //do nothing
+			try {
+				if (conn != null)
+					conn.close();
+			} catch (SQLException se) {
+				return null;
+				
+			} // end finally try
+		} // end try
+	 }		
 }
