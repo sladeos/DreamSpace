@@ -464,7 +464,10 @@ public class UserProfileDatabase extends Controller {
             
             if(mimetype == null){
                 
-                Path path = Paths.get("/assets/images/avatars/default.gif");
+                Path currentRelativePath = Paths.get("");
+                String s = currentRelativePath.toAbsolutePath().toString();
+                
+                Path path = Paths.get(s + "/assets/images/avatars/default.gif");
                 byte[] defaultdata = Files.readAllBytes(path);
                 
                 return ok(defaultdata).as("image/gif");
