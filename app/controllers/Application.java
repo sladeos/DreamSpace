@@ -148,7 +148,7 @@ public class Application extends Controller {
 		if (user != null) {
 			if (user.equals(userUrl)) {
 				return ok(MyProfile.render(UserProfileDatabase
-						.getProfile(userUrl)));
+						.getProfile(userUrl), TournamentDatabase.getJoinedTournaments()));
 			} else {
 				return ok(OtherUserProfile.render(UserProfileDatabase
 						.getProfile(userUrl)));
@@ -162,7 +162,7 @@ public class Application extends Controller {
 	public static Result getMyProfile() {
 		String user = session("connected");
 		if (user != null) {
-			return ok(MyProfile.render(UserProfileDatabase.getProfile(user)));
+			return ok(MyProfile.render(UserProfileDatabase.getProfile(user), TournamentDatabase.getJoinedTournaments()));
 		} else {
 			return unauthorized(LoginUserPage
 					.render("Welcome, login to explore the website"));

@@ -106,17 +106,26 @@ GET /newpicture controllers.Application.newPicture()
 #Post to save User's Picture
 POST /savepicture controllers.PictureDatabase.savePicture()
 
+#Post to save User's profile picture
+POST /saveprofilepicture controllers.UserProfileDatabase.savePicture()
+
+#Post to deleteprofilepicture User's profile picture
+POST /deleteprofilepicture controllers.UserProfileDatabase.deletePicture()
+
 #Get to retrive pictures
 GET /pictures controllers.PictureDatabase.getPictures(page:Integer ?=1)
 
 #Retrives Blob from the Id, renders blob as mimetype and send back to client
 GET /pic/:id controllers.PictureDatabase.render(id: Integer)
 
+#Retrives Blob from DB, renders blob as mimetype and send back to client
+GET /profilepic/:username controllers.UserProfileDatabase.render(username: String)
+
 #edit user profile
 POST /edituserprofile controllers.UserProfileDatabase.editUserProfile()
 
 #Get to retrieve Profile page, renders edit or other depending on current user
-GET   /profile/:user controllers.Application.showProfile(user: String)
+GET  /profile/:user controllers.Application.showProfile(user: String)
 
 #Get all profiles
 GET /profile controllers.UserProfileDatabase.getProfiles()
@@ -125,4 +134,24 @@ GET /profile controllers.UserProfileDatabase.getProfiles()
 GET /myprofile controllers.Application.getMyProfile()
 
 #add new user profile
+
 POST /saveuserprofile controllers.UserProfileDatabase.addUserProfile()
+
+#Invite to tournament
+POST /invitePlayer controllers.NotificationDatabase.invitePlayer()
+
+#Invite to tournament
+POST /handleInvite controllers.NotificationDatabase.handleInvite()
+
+#Set notifications as viewed
+POST /setViewed controllers.NotificationDatabase.setViewed()
+
+#Hide replies
+POST /hideReply controllers.NotificationDatabase.hideReply()
+
+#Get current user's notifications
+GET /mynotifications controllers.NotificationDatabase.getMyNotifications()
+
+#Get current user's notification amount
+GET /getNotificationAmt controllers.NotificationDatabase.getNotificationAmt()
+

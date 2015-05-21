@@ -5,6 +5,9 @@
       @Templates.head()
         <script src="@routes.Assets.at("javascripts/jquery.bracket.min.js")" type="text/javascript"></script>
 		<link rel="stylesheet"  href="@routes.Assets.at("stylesheets/jquery.bracket.min.css")">
+		<script type="text/javascript" src="@routes.Assets.at("stylesheets/jquery-ui/jquery-ui.js")" ></script>
+        <link rel="stylesheet" href="@routes.Assets.at("stylesheets/jquery-ui/jquery-ui.css")">
+
        @Templates.facebookHeadScript()
     </head>
     <body>
@@ -44,14 +47,22 @@
                <br>
                <br>
                 <a href="#popupCloseRight" data-rel="popup" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-icon-info ui-btn-icon-right ui-mini">Info</a>
+                
                 <div data-role="popup" id="popupCloseRight" class="ui-content" style="max-width:280px">
                 <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext  ui-btn-right">Close</a>
                 <p>You can change the name of the teams in your tournament by clicking the respective team label, you can also change the score by clicking the label after the team name. This updates the bracket.</p>
                 </div><br>
 
                 Name of your tournament: <input type="text" name="fname" id="fname">
-                <button data-role = "button"  value="Save changes" id="save" >Save changes</button>
                 
+                <div id="dialog-form" title="Invite player">
+                	<form id="invite" action="" method ="post" data-ajax="false" onsubmit="return false;">
+                		<input id="username" name="username" type="text" placeholder="Participant username" Style="margin-top:20%">
+                		<p id="dialogWarning"></p>
+                </div>
+                	</form>
+                <button data-role = "button" id="inviteDialog" >Invite player</button>               
+                <button data-role = "button"  value="Save changes" id="save" >Save changes</button>
                 <button data-role = "button"  value="Delete tournament" id="delete" data-icon="delete" data-iconpos="right" >Delete tournament</button>
                     <p id="warning"></p>
                 
@@ -203,7 +214,6 @@
 
              var data = {
                "id": "@tournament.tournamentID"
-
              }
 
              $.ajax({
@@ -226,6 +236,57 @@
 
 
          });
+         
+         
+         var dialog = $( "#dialog-form" ).dialog({
+              autoOpen: false,
+              height: 300,
+              width: 350,
+              modal: true,
+              buttons: {
+                "Add player": addPlayer,
+                Cancel: function() {
+                dialog.dialog( "close" );
+                }
+                },
+                close: function() {
+                
+              }
+            });
+            
+       function addPlayer() {
+           var participantUsername = $('#username').val();
+           var tournamentID = @tournament.tournamentID;
+           $.ajax({
+               url: "/invitePlayer",
+               type: 'POST',
+               contentType: 'application/json',
+               data: JSON.stringify({tournamentID: tournamentID, participant: participantUsername}),
+               dataType: 'html',
+               success: function(data) {
+                    if (data == "success") {
+                    alert("Player added");
+                    location.reload();
+                    } else if(data == "non-existent") {
+                    $('#dialogWarning').html("User doesnt exist");
+                    } else {
+                    $('#dialogWarning').html("User is already invited");
+                    }
+                    
+
+               },
+               error: function(){
+                  alert("Error");
+               }
+                });
+       }
+            
+        $("#inviteDialog").click(function() {
+            event.preventDefault();
+            dialog.dialog( "open" );
+            
+            
+        });
 
             </script>
             
