@@ -1,4 +1,23 @@
 ﻿
+#pagination{
+	visibility: hidden;
+}
+
+#currentPage{
+	float: right;
+}
+
+#pagebuttons{
+	float:middle;
+}
+
+.navrow{
+	list-style:none;
+display:inline; 
+padding: 0 10px;
+float: right;
+}
+
 #bracket {
 	
     color:black;
