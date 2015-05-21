@@ -27,10 +27,12 @@
   	var fullPath = document.getElementById('picfield').value;
 	var fileType = fullPath.substring(fullPath.indexOf(".")+1).toLowerCase();
 	var acceptedTypes = ["jpeg", "jpg", "jfif", "jpeg 2000", "tiff", "riff", "png", "gif","bmp", "png", "jpeg xr", "img", "bpg", "webp"];
-	if(acceptedTypes.indexOf(fileType) == -1){
+	if(fullPath == ""){
+		$('#imageshow').html("")
+	}else if (acceptedTypes.indexOf(fileType) == -1){
 		$("#imageshow").css('color', 'red');
 		$('#imageshow').html("That file format is not supported")
-	} else{
+    }else{
 		$('#imageshow').html("")
 		    var orientationt = null;
 		  
@@ -76,6 +78,6 @@
             @Templates.panelAndLogOut()
             </div>
 
-
+@Templates.jsDisabled()
     </body>
 </html>
