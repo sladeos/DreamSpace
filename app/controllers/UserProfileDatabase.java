@@ -467,7 +467,7 @@ public class UserProfileDatabase extends Controller {
                 Path currentRelativePath = Paths.get("");
                 String s = currentRelativePath.toAbsolutePath().toString();
                 
-                Path path = Paths.get("/../../../assets/images/avatars/default.gif");
+                Path path = Paths.get("/app/assets/images/avatars/default.gif");
                 byte[] defaultdata = Files.readAllBytes(path);
                 
                 return ok(defaultdata).as("image/gif");
