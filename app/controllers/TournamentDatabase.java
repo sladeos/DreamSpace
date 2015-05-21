@@ -110,7 +110,7 @@ public class TournamentDatabase extends Controller {
 
 	}
 
-	public static Result getTournaments() {
+	public static Result getTournaments(int page) {
 		String currentUser = session("connected");
 		if (currentUser == null) {
 			return unauthorized(LoginUserPage
@@ -121,12 +121,14 @@ public class TournamentDatabase extends Controller {
 			List<Tournament> tList = new ArrayList<Tournament>();
 			try {
 
+				page = (page - 1) * 10;
+
 				conn = DB.getConnection();
 
-				String insertIntoDatabase = "SELECT * FROM ETournament WHERE 1 ORDER BY created_date DESC";
+				String insertIntoDatabase = "SELECT * FROM ETournament ORDER BY created_date DESC LIMIT 10 OFFSET ? ";
 				preparedStatement = conn.prepareStatement(insertIntoDatabase);
+				preparedStatement.setInt(1, page);
 				ResultSet rs = preparedStatement.executeQuery();
-				// boolean next =
 
 				while (rs.next()) {
 					Tournament t = new Tournament();
@@ -137,9 +139,16 @@ public class TournamentDatabase extends Controller {
 					t.tournamentID = rs.getInt("tournamentID");
 					tList.add(t);
 				}
-
 				rs.close();
-				return ok(MainTournamentPage.render(tList));
+
+				String rowCountStatement = "SELECT COUNT(*) FROM ETournament";
+				preparedStatement = conn.prepareStatement(rowCountStatement);
+
+				ResultSet rc = preparedStatement.executeQuery();
+				rc.next();
+				int rowcount = rc.getInt(1);
+				rc.close();
+				return ok(MainTournamentPage.render(tList, rowcount));
 			} catch (com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException ice) {
 				return badRequest(ice.toString());
 			} catch (NumberFormatException nfe) {
@@ -247,8 +256,6 @@ public class TournamentDatabase extends Controller {
 		String tournamentData = "{teams:" + tournamentData1 + ",results:"
 				+ tournamentData2 + "}";
 
-		String currentUser = session("connected");
-
 		try {
 			if (tournamentID == null || tournamentID.isEmpty()) {
 				throw new SQLException();
@@ -301,9 +308,6 @@ public class TournamentDatabase extends Controller {
 		JsonNode json = request().body().asJson();
 
 		String tournamentID = json.findPath("id").textValue();
-
-		String currentUser = session("connected");
-
 		try {
 			if (tournamentID == null || tournamentID.isEmpty()) {
 				throw new SQLException();
@@ -345,7 +349,7 @@ public class TournamentDatabase extends Controller {
 		} // end try
 	}
 
-	public static Result getMyTournaments() {
+	public static Result getMyTournaments(int page) {
 		String currentUser = session("connected");
 		if (currentUser == null) {
 			return unauthorized(LoginUserPage
@@ -357,9 +361,12 @@ public class TournamentDatabase extends Controller {
 			try {
 				conn = DB.getConnection();
 
-				String insertIntoDatabase = "SELECT * FROM ETournament et WHERE admin=? ORDER BY created_date DESC";
+				page = (page - 1) * 10;
+
+				String insertIntoDatabase = "SELECT * FROM ETournament et WHERE admin=? ORDER BY created_date DESC LIMIT 10 OFFSET ?";
 				preparedStatement = conn.prepareStatement(insertIntoDatabase);
 				preparedStatement.setString(1, currentUser);
+				preparedStatement.setInt(2, page);
 				ResultSet rs = preparedStatement.executeQuery();
 				// boolean next =
 
@@ -372,9 +379,18 @@ public class TournamentDatabase extends Controller {
 					t.tournamentID = rs.getInt("tournamentID");
 					tList.add(t);
 				}
-
 				rs.close();
-				return ok(MyTournamentPage.render(tList));
+				
+				String rowCountStatement = "SELECT COUNT(*) FROM ETournament WHERE admin=?";
+				preparedStatement = conn.prepareStatement(rowCountStatement);
+				preparedStatement.setString(1, currentUser);
+
+				ResultSet rc = preparedStatement.executeQuery();
+				rc.next();
+				int rowcount = rc.getInt(1);
+				rc.close();
+				
+				return ok(MyTournamentPage.render(tList, rowcount));
 			} catch (com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException ice) {
 				return badRequest(ice.toString());
 			} catch (NumberFormatException nfe) {
@@ -402,8 +418,65 @@ public class TournamentDatabase extends Controller {
 		}
 	}
 
+	public static List<Tournament> getJoinedTournaments() {	
+		String currentUser = session("connected");
+		Connection conn = null;
+		PreparedStatement preparedStatement = null;
+		List<Tournament> tList = new ArrayList<Tournament>();
+			
+		try {
+			conn = DB.getConnection();
+			String insertIntoDatabase = "SELECT * FROM ETournament JOIN TournamentInvite ON ETournament.tournamentID=TournamentInvite.tournamentID WHERE participant=?";
+			preparedStatement = conn.prepareStatement(insertIntoDatabase);
+			preparedStatement.setString(1, currentUser);
+			ResultSet rs = preparedStatement.executeQuery();
+
+
+			while (rs.next()) {
+				Tournament t = new Tournament();
+				t.tournamentname = rs.getString("tournamentName");
+				t.participant_count = rs.getInt("teamAmount");
+				t.tournamentcreator = rs.getString("admin");
+				t.tournamentdata = rs.getString("tournamentData");
+				t.tournamentID = rs.getInt("tournamentID");
+				tList.add(t);
+			}
+			
+
+
+
+			rs.close();
+			return tList;
+			
+			}catch (com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException ice) {
+					return null;
+			} catch (NumberFormatException nfe) {
+		            return null;
+			} catch (SQLException se) {
+    		        return null;
+			} catch (NullPointerException npe) {
+	    	        return null;
+			} catch (Exception e) {
+				return null;
+			}
+			finally {
+				// finally block used to close resources
+				// try {
+				// if (preparedStatement != null)
+				// conn.close();
+				// } catch (SQLException se) {
+				// } //do nothing
+				try {
+					if (conn != null)
+						conn.close();
+				} catch (SQLException se) {
+					return null;
+				} // end finally try
+			} // end try
+		}
+	
 	public static List<Tournament> getTournamentsMainPage() {
-		  	
+	  	
 		Connection conn = null;
 		PreparedStatement preparedStatement = null;
 		List<Tournament> tList = new ArrayList<Tournament>();
@@ -454,5 +527,5 @@ public class TournamentDatabase extends Controller {
 				return null;
 			} // end finally try
 		} // end try
-	 }		
+	 }
 }

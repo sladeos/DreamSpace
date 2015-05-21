@@ -1,73 +1,109 @@
-@(eads: List[EArenaAd])
+@(eads: List[EArenaAd], rowcount: Integer)
 <!DOCTYPE html>
 <html>
-	<head>
-	   <title>EArena</title>
-	   @Templates.head()
-	   @Templates.facebookHeadScript()
-        <meta charset="UTF-8">
-	</head>
-    <body>
-        <div data-role="page" data-theme="b" id = "main" class = "page"  >
-	         <div data-role="header" class = "header">
-	       @Templates.header()
+   <head>
+      <title>EArena</title>
+      @Templates.head()
+      @Templates.facebookHeadScript()
+      <meta charset="UTF-8">
+      <script type="text/javascript" src="@routes.Assets.at("javascripts/jquery-ias.min.js")"></script>
+   </head>
+   <body>
+      <div data-role="page" data-theme="b" id = "main" class = "page"  >
+         <div data-role="header" class = "header">
+            @Templates.header()
             <a id = "back" rel="external" href="/mainearena" data-role="button" role="button" data-icon="back" data-iconpos="notext">Back</a>
-              <script>
-              $("#back").css("background","  #FF9900");
+            <script>
+               $("#back").css("background","  #FF9900");
             </script>
-	       </div>
-            <div data-role="content" class = "content"> 
-                <h1 align="center">My EArena</h1>
-           
-
-
-<button id="share_button" class = "myFace faceButton search" data-mini="true">Facebook Share</button>
-                <!-- <button data-role = "button" id = "creatad" class = "search" rel="external" href="/">Create a new ad</button>  -->
-
-<!--                 <script type="text/javascript">
-                  $('#creatad').click(function() {
-                    window.location='/createarenaad'; });
-                    </script>
-
+         </div>
+         <div data-role="content" class = "content">
+            <h1 align="center">My EArena</h1>
+            <button data-role = "button" id = "creatad" class = "search" rel="external" href="/">Create a new ad</button>
+            <div id="pagebuttons"></div>
             <script type="text/javascript">
-            $(document).ready(function() {
-              $('#share_button').click(function(e) {
-                e.preventDefault();
-                FB.ui({
-                  method: 'feed',
-                  name: 'DreamSpace EArenaAds',
-                  link: document.URL,
-                  caption: "EArenaAds" ,
-                  description: ""
-                });
-              });
-            });
-            </script> -->
-              
-              
-
-                <div class ="MEArenaContent">
-           
-                    
-                    <article  data-role="listview" data-inset="true" data-dividertheme="a"> 
-                        @for(eads <- eads) {
-                            <li  data-role = "list-divider" ></li>
-                            <li><a rel="external"  href="/earenaad/@eads.arenaID" style = "background: #373737" >
-                            <h2>@{" " + eads.arenaName}</h2>
-                            <p>@{" Host: " + eads.admin}</p>
-                            <p>@{" Game: " + eads.gameName }</p>
-                            <p>@{" Created: " + eads.createdDate }</p>
-                            <p>@{" Players required: " + eads.playersRequired}</p>
-                            <p>Information:</p><textarea readonly name="textarea" id="text" style = "overflow:auto;resize:none" >@{eads.information}</textarea>
-                            <br>
-                            </a>
-                            </li>
-                        } 
-                    </article>
-                </div>
+               $('#creatad').click(function() {
+                 window.location='/createarenaad'; });
+                 
+            </script>
+            <div id ="earenas">
+            <div class ="MEArenaContent">
+               <article  data-role="listview" data-inset="true" data-dividertheme="a">
+                  @for(eads <- eads) {
+                  <li  data-role = "list-divider" ></li>
+                  <li>
+                     <a rel="external"  href="/earenaad/@eads.arenaID" style = "background: #373737" >
+                        <h2>@{" " + eads.arenaName}</h2>
+                        <p>@{" Host: " + eads.admin}</p>
+                        <p>@{" Game: " + eads.gameName }</p>
+                        <p>@{" Created: " + eads.createdDate }</p>
+                        <p>@{" Players: " + eads.playersRequired}</p>
+                        <p>Information:</p>
+                        <textarea readonly name="textarea" id="text" style = "overflow:auto;resize:none" >@{eads.information}</textarea>
+                        <br>
+                     </a>
+                  </li>
+                  <script>
+                        $('.ui-page-active .ui-listview').listview('refresh');
+                        $('.ui-page-active :jqmData(role=content)').trigger('create');
+                     </script>
+                  } 
+               </article>
+               </div>
+               </div>
+               <script>
+               var rowcount = @rowcount;
+               var pageDecimal = rowcount / 10;
+               var pages = Math.ceil(pageDecimal);
+               
+               $(document).ready(function() {
+                   if (rowcount > 1) {
+                     $("#pagebuttons").append(rowcount + " Results");
+                   }
+                   else {
+                     $("#pagebuttons").append(rowcount + " Result");
+                   }
+                 })
+               
+               $(document).ready(function() {
+               var ias = jQuery.ias({
+               	  container:  '#earenas',
+               	  item:       '.MEArenaContent',
+               	  pagination: '#pagination',
+               	  next:       '.Next'
+               	});
+               
+               var cPage;
+               ias.on('load', function(event) {
+            	   if(cPage > pages){
+               		jQuery.ias().unbind();
+               		$('.ias-spinner img:last-child').remove()
+               		$('.ias-spinner').append("No more results")
+               	}
+                var url = event.url;
+                url += cPage
+               	event.url = url
+               })
+               
+               jQuery.ias().extension(new IASPagingExtension());
+               jQuery.ias().on('pageChange', function(pageNum, scrollOffset, url) {
+               	cPage = pageNum;
+               	
+               });
+               
+               ias.extension(new IASSpinnerExtension({
+                   src: "@routes.Assets.at("images/loading.gif")",
+               }));
+               
+               });
+               </script>
+            <div id="pagination">
+               <a href="?page=" class="Next" id="Next1">next</a>
             </div>
-            @Templates.footer()
-            @Templates.panelAndLogOut()
-        </div>
-    </body>
+         </div>
+         @Templates.footer()
+         @Templates.panelAndLogOut()
+      </div>
+      @Templates.jsDisabled()
+   </body>
 </html>

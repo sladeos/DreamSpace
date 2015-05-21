@@ -1,128 +1,180 @@
-@(eads: List[EArenaAd], games: List[String])
+@(eads: List[EArenaAd], games: List[String], rowcount: Integer)
 <!DOCTYPE html>
 <html>
-	<head>
-	   <title>EArena</title>
-	   @Templates.head()
-	    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-	   @Templates.facebookHeadScript()
-        <meta charset="UTF-8">
-	</head>
-    <body>
-        <div data-role="page" data-theme="b" id = "main" class = "page"  >
-        <div data-role="header" class = "header">
-	       @Templates.header()
-	       </div>
-            <div data-role="content" class = "content">   
-                <h1 align="center">EArena</h1>
-           
-                <button id="share_button" class = "myFace faceButton search" data-mini="true">Facebook Share</button>
-                 <div class ="search">
-                  <button data-role = "button" id = "MYEArena"  rel="external" href="/" data-icon="user" data-iconpos="right" >My Ads</button>
-                  <p>
+   <head>
+      <title>EArena</title>
+      @Templates.head()
+      <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+      @Templates.facebookHeadScript()
+      <meta charset="UTF-8">
+      <script type="text/javascript" src="@routes.Assets.at("javascripts/jquery-ias.min.js")"></script>
+   </head>
+   <body>
+      <div data-role="page" data-theme="b" id = "main" class = "page"  >
+         <div data-role="header" class = "header">
+            @Templates.header()
+         </div>
+         <div data-role="content" class = "content">
+            <h1 align="center">EArena</h1>
+            <button id="share_button" class = "myFace faceButton search" data-mini="true">Facebook Share</button>
+            <div class ="search">
+               <button data-role = "button" id = "MYEArena"  rel="external" href="/" data-icon="user" data-iconpos="right" >My Ads</button>
+               <p>
                   <button data-role = "button" id = "creatAd"  rel="external" href="/" data-icon="arrow-r" data-iconpos="right" >Create ad</button>
-                </div>
-
- 
-                  <script type="text/javascript">
-
-                        $('#creatAd').click(function() {
-                    window.location='/createarenaad'; });
-
-                        $('#MYEArena').click(function() {
-                        window.location='/myearena'; });
-
-                  </script>
+            </div>
             <script type="text/javascript">
-            $(document).ready(function() {
-              $('#share_button').click(function(e) {
-                e.preventDefault();
-                FB.ui({
-                  method: 'feed',
-                  name: 'DreamSpace EArenaAds',
-                  link: document.URL,
-                  caption: "EArenaAds" ,
-                  description: ""
-                });
-              });
-            });
-            </script>
-            <scrip>
+               $('#creatAd').click(function() {
+               window.location='/createarenaad'; });
                
-                   
-            </scrip>
-            
-                
-                
-        <div class ="search">
+               $('#MYEArena').click(function() {
+               window.location='/myearena'; });
+               
+            </script>
+            <script type="text/javascript">
+               $(document).ready(function() {
+                 $('#share_button').click(function(e) {
+                   e.preventDefault();
+                   FB.ui({
+                     method: 'feed',
+                     name: 'DreamSpace EArenaAds',
+                     link: document.URL,
+                     caption: "EArenaAds" ,
+                     description: ""
+                   });
+                 });
+               });
+            </script>
+            <div class ="search">
                <div data-role="collapsible" class="ui-icon-alt" data-collapsed-icon="arrow-r" data-expanded-icon="arrow-d" data-iconpos="right"  >
-                       <h3 class = "custom-centercollheader" >Search ad</h3>
-     	       <form data-ajax="false">
-
-     	         
-                           <input type="search" name="search" id="search-basic" value="" />
- 	                          <p>Advanced search</p>
-                            <hr>
-                            <div data-role="fieldcontain"class="ui-hide-label" >
-                                <input type="text" name="game" placeholder="Game" id="game">
-                            
-                            
-                                <input type="text" name="username" placeholder="Username" id="username">
-                         
-                            
-                                <input type="number" name="players" placeholder="Players" id="players">
-                          
-                                <input type="number" name="minutes" placeholder="Search X minutes ago" id="minutes">
-                            </div>
- 	                      <div data-role="controlgroup" data-type="horizontal" style="text-align:center;">
- 	                        <button data-inline="true" type="submit"  data-icon="search" data-mini="true">GO!</button>
-                      </div>
-                </form>
+                  <h3 class = "custom-centercollheader" >Search ad</h3>
+                  <form data-ajax="false">
+                     <input type="search" name="search" id="search-basic" value="" />
+                     <p>Advanced search</p>
+                     <hr>
+                     <div data-role="fieldcontain"class="ui-hide-label" >
+                        <input type="text" name="game" placeholder="Game" id="game">
+                        <input type="text" name="username" placeholder="Username" id="username">
+                        <input type="number" name="players" placeholder="Players" id="players">
+                        <input type="number" name="minutes" placeholder="Search X minutes ago" id="minutes">
+                     </div>
+                     <div data-role="controlgroup" data-type="horizontal" style="text-align:center;">
+                        <button data-inline="true" type="submit"  data-icon="search" data-mini="true">GO!</button>
+                     </div>
+                  </form>
+               </div>
             </div>
-        </div>  
-        <div class = "search">    
-        <h3>Ads found</h3>  
+            <div class = "search">
+               <h3>Ads found</h3>
+            </div>
+            <div id="pagebuttons"></div>
+             <div id ="earenas">
+            <div class ="MEArenaContent">
+               <hr>
+               <article  data-role="listview" data-inset="true" data-dividertheme="a">
+                  @for(eads <- eads) {
+                  <li  data-role = "list-divider" ></li>
+                  <li>
+                     <a rel="external"  href="/earenaad/@eads.arenaID" style = "background: #373737" >
+                        <h2>@{" " + eads.arenaName}</h2>
+                        <p>@{" Host: " + eads.admin}</p>
+                        <p>@{" Game: " + eads.gameName }</p>
+                        <p>@{" Created: " + eads.createdDate }</p>
+                        <p>@{" Players: " + eads.playersRequired}</p>
+                        <p>Information:</p>
+                        <textarea readonly name="textarea" id="text" style = "overflow:auto;resize:none" >@{eads.information}</textarea>
+                        <br>
+                     </a>
+                  </li>
+                  <script>
+                        $('.ui-page-active .ui-listview').listview('refresh');
+                        $('.ui-page-active :jqmData(role=content)').trigger('create');
+                     </script>
+                  } 
+               </article>
+            </div>
+            </div>
+            <script>
+               $(function() {
                  
-                 </div>
-                
-                <div class ="MEArenaContent">
-                <hr>
-                    <article  data-role="listview" data-inset="true" data-dividertheme="a"> 
-                        @for(eads <- eads) {
-                            <li  data-role = "list-divider" ></li>
-                            <li><a rel="external"  href="/earenaad/@eads.arenaID" style = "background: #373737" >
-                            <h2>@{" " + eads.arenaName}</h2>
-                            <p>@{" Host: " + eads.admin}</p>
-                            <p>@{" Game: " + eads.gameName }</p>
-                            <p>@{" Created: " + eads.createdDate }</p>
-                            <p>@{" Players required: " + eads.playersRequired}</p>
-                            <p>Information:</p><textarea readonly name="textarea" id="text" style = "overflow:auto;resize:none" >@{eads.information}</textarea>
+                  $('#showAdv').click(function() {        
+                     $('#advSearch').toggle('show');
+                  });
+                  
+                  var games = @Html(games.toString());
+               
+               
+               $( "#game" ).autocomplete({
+               source: games
+               });
+               });
+            </script>
 
-                            <br>
-                            </a>
-                            </li>
-                        } 
-                    </article>
-                </div>
-        
-        <script>
-         $(function() {
-           
-            $('#showAdv').click(function() {        
-               $('#advSearch').toggle('show');
+            <script>
+            var rowcount = @rowcount;
+            var pageDecimal = rowcount / 10;
+            var pages = Math.ceil(pageDecimal);
+            var cPage;
+            
+            $(document).ready(function() {
+                if (rowcount > 1 || rowcount == 0) {
+                  $("#pagebuttons").append(rowcount + " Results");
+                }
+                else {
+                  $("#pagebuttons").append(rowcount + " Result");
+                }
+              })
+            
+            $(document).ready(function() {
+  
+            var ias = jQuery.ias({
+            	  container:  '#earenas',
+            	  item:       '.MEArenaContent',
+            	  pagination: '#pagination',
+            	  next:       '.Next'
+            	});
+            
+            ias.on('load', function(event) {
+            	   if(cPage > pages){
+               		jQuery.ias().unbind();
+               		$('.ias-spinner img:last-child').remove()
+               		$('.ias-spinner').append("No more results")
+               	}else{  
+              var url = event.url;
+              var currentAdress = window.location.href;
+              var afterQuestion = currentAdress.substring(currentAdress.indexOf("?"));
+         	  if (afterQuestion.indexOf("search") != -1) {
+         		 afterQuestion += "&page="
+         			afterQuestion += cPage
+         		event.url = afterQuestion
+         		  
+         	  }else{
+            	url+=cPage
+            	event.url = url
+         	  }
+         	  }
+            })
+            
+            jQuery.ias().extension(new IASPagingExtension());
+            jQuery.ias().on('pageChange', function(pageNum, scrollOffset, url) {
+            	cPage = pageNum;
             });
             
-            var games = @Html(games.toString());
-		   
-		   
-    		$( "#game" ).autocomplete({
-    		  source: games
-    		});
-    	});
-        </script>
+            ias.extension(new IASSpinnerExtension({
+                src: "@routes.Assets.at("images/loading.gif")",
+            }))
+            	
+            });
+            	
+            
+            
+            </script>
+            <div id="pagination">
+               <a href="?page=" class="Next" id="Next1">next</a>
             </div>
-            @Templates.footer()
-            @Templates.panelAndLogOut()
-        </div>
-    </body>
+         </div>
+         @Templates.footer()
+         @Templates.panelAndLogOut()
+      </div>
+      @Templates.jsDisabled()
+   </body>
 </html>

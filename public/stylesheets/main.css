@@ -1,4 +1,23 @@
-﻿
+
+#pagination{
+	visibility: hidden;
+}
+
+#currentPage{
+	float: right;
+}
+
+#pagebuttons{
+	float:middle;
+}
+
+.navrow{
+	list-style:none;
+display:inline; 
+padding: 0 10px;
+float: right;
+}
+
 #bracket {
 	
     color:black;
@@ -70,18 +89,22 @@ background : #FF9900;
         width: 100%;
     }
     .MEArenaContent{
-    width: 100%;
-    margin: 0 auto;
+        width: 100%;
+        margin: 0 auto;
     }
-        .ui-page .ui-btn.myFace{
+    .ui-page .ui-btn.myFace{
         background: #3A5795;
     }
-        .faceButton{
+    .faceButton{
         width: 150px;
         max-width: 150px;
     }
     .ui-page .ui-btn.submitReplay{
         background: #FF9900;
+    }
+    .faceButton2{
+        width: 65px;
+        max-width: 65px;
     }
  
     .custom-centercollheader a {
@@ -92,7 +115,6 @@ background : #FF9900;
         width: 300px;
         margin: 0 auto;
     }
-
     .ui-page .ui-btn.goBackButton  {
     color      : white;
     background : #996600;
@@ -105,11 +127,14 @@ background : #FF9900;
     .MEArenaContent{
         width: 100%;
         }
-    
-
     .faceButton{
         width: 150px;
         max-width: 150px;
+
+    }
+    .faceButton2{
+        width: 65px;
+        max-width: 65px;
 
     }
 }
@@ -135,10 +160,8 @@ background : #FF9900;
     }
 
     .footer {
-       
         margin:0 auto;
 		width: 930px;
-
     } 
     .MEArenaContent{
         width: 500px;
@@ -164,8 +187,6 @@ background : #FF9900;
         width:99%;
         margin: 0 auto;
         max-width: 800px;
-    
-    
     }
     #wrap2{
         overflow:hidden;
@@ -180,8 +201,6 @@ background : #FF9900;
         float: left;
         width: 49%;
         padding-left: 1%;
-        
-
     }
     #adreplies{
         position: relative;
@@ -200,12 +219,14 @@ background : #FF9900;
         width: 350px;
         margin:0 auto;
         max-width: 350px;
-        
     }
     .faceButton{
         width: 150px;
         max-width: 150px;
-
+    }
+         .faceButton2{
+        width: 65px;
+        max-width: 65px;
     }
     .mainButton{
         margin:0 auto;
@@ -215,9 +236,7 @@ background : #FF9900;
     #test{
         position: fixed;
         bottom:0px;
-
     }
-
     /*Ta bort detta innehåll vid skapande av ny sida*/
     #img1{
         padding: 1em;

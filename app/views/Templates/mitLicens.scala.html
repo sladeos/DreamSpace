@@ -14,7 +14,7 @@
     <div data-role="navbar">
         <ul>
             <li><a id="h" href="#h"  data-icon="home"class="ui-alt-icon ui-btn ui-shadow"></a></li>
-            <li><a id="mail" href="#mail" data-icon="mail" class="ui-alt-icon ui-btn ui-shadow" ></a></li>
+            <li><div id="icon" class="icon" style="position: relative;"></div><a id="mail" href="#mail" data-icon="mail" class="ui-alt-icon ui-btn ui-shadow" ></a></li>
             <li><a id = "user" data-icon="user" class="ui-alt-icon ui-btn ui-shadow"></a></li>
             <li><a id="panelmenu" href="#bars" data-icon="bars" class="ui-alt-icon ui-btn ui-shadow"></a></li>
         </ul>
@@ -22,6 +22,22 @@
 </div>
 
         <script>
+       $(document).ready(function() {
+           if (window.location.pathname != "/mynotifications"){
+           
+           $.ajax({
+               url: "/getNotificationAmt",
+               type: 'GET',
+               dataType: 'html',
+               success: function(data) {
+                   if (data > 0){
+                   $("#icon").iosbadge({ theme: 'red', size: 22, content:data });
+                   }
+               },
+           
+            });
+           }
+       });
        
             $('#h').click(function() {
                 
@@ -29,10 +45,10 @@
 
             $('#mail').click(function() {
                  
-                window.location='/'; });
+                window.location='/mynotifications'; });
 
             $('#user').click(function() {
-               window.location='/'; });
+               window.location='/myprofile'; });
 
             $('#info').click(function() {
                 window.location='/'; });

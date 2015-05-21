@@ -1,0 +1,140 @@
+@(invitenotifications: List[InviteNotification], replynotifications: List[ReplyNotification])
+
+<!DOCTYPE html>
+
+<html>
+    <head>
+        @Templates.head()
+        @Templates.facebookHeadScript()
+      
+    </head>
+    <body>
+        <div data-role="page" data-theme="b" class="page">   
+            <div data-role="header" class = "header">
+                @Templates.header()
+            </div>
+            <div data-role="content" class = "content" >
+                    <h1 align="center">My Notifications</h1>
+                    
+            
+                    <h2 align="center">Invites</h1>
+                   @for(invitenotifications <- invitenotifications) {
+                           
+                            <p>Tournament: @invitenotifications.tournamentID</p> 
+                            <p>Admin:   @invitenotifications.admin </p>
+                            <p>Accepted: @invitenotifications.accepted </p>
+                            <p>Viewed:  @invitenotifications.viewed </p>
+                            
+					        <div class="ui-grid-a">
+                                <div class="ui-block-a"><button data-role = "button" value="@invitenotifications.tournamentID" class = "accept">Accept Invitation</button></div>
+                                <div class="ui-block-b"><button data-role = "button" value="@invitenotifications.tournamentID" class = "delete">Delete Invitation</button></div>
+                            </div>
+                      }
+                      
+                      <h2 align="center">Replies</h2>
+                      
+                      @for(replynotifications <- replynotifications) {
+                      
+                         
+                           <div id="@replynotifications.replyID">
+                            <p>ReplyID: @replynotifications.replyID</p> 
+                            <p>ArenaID:  @replynotifications.arenaID </p>
+                            <p>User: @replynotifications.username </p>
+                            <p>Date: @replynotifications.created_date </p>
+                            <p>Viewed:  @replynotifications.viewed </p>
+                            
+					        <div class="ui-grid-a">
+                                <div class="ui-block-a"> <a href="/earenaad/@replynotifications.arenaID" data-role="button" class="view">View reply</a></div>
+                                <div class="ui-block-b"><button data-role = "button" value="@replynotifications.replyID" class = "hide">Hide</button></div>
+                            </div>
+                           
+                     </div>
+                      }
+                      
+                    
+                       <script>
+                       
+                        $('.accept, .delete').click(function() {
+                                   
+                            var tournamentID = $(this).val();
+                            var action = "";
+                            
+                            if ($(this).attr("class").indexOf("accept") >= 0){
+                                action = "accept";
+                            } else {
+                                action = "delete";
+                            }
+                                
+                               
+                               $.ajax({
+                                   url: "/handleInvite",
+                                   type: 'POST',
+                                   contentType: 'application/json',
+                                   data: JSON.stringify({tournamentID: tournamentID, action: action}),
+                                   dataType: 'html',
+                                   success: function(data) {
+                                       if (data == "accepted"){
+                                            alert("Invite accepted");
+                                            location.reload();
+                                       } else if (data == "deleted") {
+                                            alert("Invite deleted");
+                                            location.reload();
+                                       } else {
+                                           alert("An error occurred");
+                                       } 
+                                   },
+                                   error: function(){
+                                      
+                                   }
+                                });
+                                
+                                   
+                        });
+                        
+                        $('.hide').click(function() {
+                                   
+                            var replyID = $(this).val();
+                               
+                               $.ajax({
+                                   url: "/hideReply",
+                                   type: 'POST',
+                                   contentType: 'application/json',
+                                   data: JSON.stringify({replyID: replyID}),
+                                   dataType: 'html',
+                                   success: function(data) {
+                                       $('#' + replyID).toggle();
+                                   },
+                                   error: function(){
+                                      
+                                   }
+                                });
+                                
+                                   
+                        });
+                        
+                        
+                        $(function() {
+                            
+                                $.ajax({
+                                    url: "/setViewed",
+                                    type: 'POST',
+                                });
+                                  
+                                $(".view").css("background","  #FF9900");
+                            });
+                           
+                        
+                           
+                           
+                           
+                       </script>
+
+
+                </div>
+            @Templates.footer()
+            @Templates.panelAndLogOut()
+            </div>
+
+@Templates.jsDisabled()
+    </body>
+</html>

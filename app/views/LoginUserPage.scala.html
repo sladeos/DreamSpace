@@ -10,7 +10,7 @@
 
     </head>
     <body>
-    
+<div class="pagecontainer">
     <script>
     var buttonClicked = false;
   // This is called with the results from from FB.getLoginStatus().
@@ -114,40 +114,6 @@
   }
 </script>
 
-<!--
-  Below we include the Login Button social plugin. This button uses
-  the JavaScript SDK to present a graphical Login button that triggers
-  the FB.login() function when clicked.
-    <div data-role = "content" class = "content" >
-    
-            <button id="show_login" type="button"  data-icon="arrow-d"data-iconpos="right" >Login</button>
-                <div id="loginForm" style="display: none;">
-
-                  <form id ="loginform" action="@routes.UserDatabase.getUser()" method ="post" data-ajax="false">
-            
-                        <div data-role="fieldcontain"class="ui-hide-label">
-                            <label for="username">Username:</label>
-                            <input type="text" name="username" id="username" value="" placeholder="Username"/>
-                        </div>
-              
-                        <div data-role="fieldcontain" class="ui-hide-label">
-                            <label for="Password" >Password:</label>
-                            <input type="password" name="password" id="password" value="" placeholder="Password"/>
-                        </div>
-                      
-                    </form>
-                      <button class = "my-btn" type="submit" value="Login" onclick="return validate()">Login </button>
-                </div>
-           
-                    <script>
-         $(function() {
-           
-            $('#show_login').click(function() {        
-               $('#loginForm').toggle('show');
-            });
-               });
-            </script>
--->
 <div id="status">
 </div>
     
@@ -176,6 +142,7 @@
 				        <button id = "button3" class = "my-btn" type="submit" value="Login" onclick="return validate()">Login </button>
 		           </form>
 		        </div>
+
 
                 <script>
                      
@@ -239,5 +206,7 @@ function isBlank(elementID){
 
 
 </div>        
+</div>
+@Templates.jsDisabled()
 </body>
 </html>

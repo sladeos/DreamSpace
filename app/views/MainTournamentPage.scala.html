@@ -1,48 +1,116 @@
-@(tournament: List[Tournament])
-
+@(tournament: List[Tournament], rowcount: Integer)
 <!DOCTYPE html>
-
 <html>
-    <head>
-        @Templates.head()
-        
-        @Templates.facebookHeadScript()
-    </head>
-    <body>
-        <div data-role="page" data-theme="b" class="page">   
-            <div data-role="header" class = "header">
-                @Templates.header()
+   <head>
+      @Templates.head()
+      @Templates.facebookHeadScript()
+      <script type="text/javascript" src="@routes.Assets.at("javascripts/jquery-ias.min.js")"></script>
+   </head>
+   <body>
+      <div data-role="page" data-theme="b" class="page">
+         <div data-role="header" class = "header">
+            @Templates.header()
+         </div>
+         <div data-role="content" class = "content" >
+            <h1 align="center">Tournament</h1>
+            <div class = "search">
+               <a data-role = "button" id = "btn1"  rel="external" href="/myetournaments"  data-icon="user" data-iconpos="right">My tournament</a>
+               <a data-role = "button" id = "btn2"  rel="external" href="/createtournament" data-icon="arrow-r" data-iconpos="right">Create a new tournament</a>
+               <h3>Available tournaments</h3>
             </div>
-            <div data-role="content" class = "content" >
-                  
-                    <h1 align="center">Tournament</h1>
-                    <div class = "search">
-                    <a data-role = "button" id = "btn1"  rel="external" href="/myetournaments"  data-icon="user" data-iconpos="right">My tournament</a>
-                    <a data-role = "button" id = "btn2"  rel="external" href="/createtournament" data-icon="arrow-r" data-iconpos="right">Create a new tournament</a>
-                    <h3>Available tournaments</h3>
-                    </div>
-                    <div class ="MEArenaContent">
-                            
-                            <hr>
-                        <ul data-role="listview" data-inset="true" data-dividertheme="a" data-theme = "b"> 
-                        @for(tournament <- tournament) {
-                            <li  data-role = "list-divider" ></li>
-                                <li><a data-role = "button"  rel="external"  href="/showtournament/@tournament.tournamentID" class = "greyBtn"><img src="@routes.Assets.at("images/sun.jpg")" alt="Dreamhack" class = "fullscreen"  /><h2>@{"Name: " + tournament.tournamentname}</h2> <p>@{" Size: " +  tournament.participant_count }</p></a>
-                            </li>
-                        } 
-                        </ul>
-                    </div>    
-                    <script>
-                        $("#btn1").css("background","  #FF9900");
-                         $("#btn2").css("background","  #FF9900");
-                          $("#bt2").addClass('greyBtn');
-                    </script>
-                
+            <div id="pagebuttons"></div>
+            <div id="tournaments">
+               <div   class ="MEArenaContent">
+                  <hr>
+                  <ul data-role="listview" data-inset="true" data-dividertheme="a" data-theme = "b">
+                     @for(tournament <- tournament) {
+                     <li  data-role = "list-divider" ></li>
+                     <li>
+                        <a  data-role = "button"  rel="external"  href="/showtournament/@tournament.tournamentID" class = "greyBtn">
+                           <img src="@routes.Assets.at("images/sun.jpg")" alt="Dreamhack" class = "fullscreen"  />
+                           <h2>@{"Name: " + tournament.tournamentname}</h2>
+                           <p>@{" Size: " +  tournament.participant_count }</p>
+                        </a>
+                     </li>
+                     <script>
+                        $('.ui-page-active .ui-listview').listview('refresh');
+                        $('.ui-page-active :jqmData(role=content)').trigger('create');
+                        
+                     </script>
+                     } 
+                  </ul>
+               </div>
             </div>
-            @Templates.footer()
-            @Templates.panelAndLogOut()
-
-        </div>
-
-    </body>
+            <script>
+               var rowcount = @rowcount;
+               var pageDecimal = rowcount / 10;
+               var pages = Math.ceil(pageDecimal);
+               
+               $(document).ready(function() {
+                   if (rowcount > 1) {
+                     $("#pagebuttons").append(rowcount + " Results");
+                   }
+                   else {
+                     $("#pagebuttons").append(rowcount + " Result");
+                   }
+                 })
+               
+               
+               
+               $(document).ready(function() {
+               var ias = jQuery.ias({
+               	  container:  '#tournaments',
+               	  item:       '.MEArenaContent',
+               	  pagination: '#pagination',
+               	  next:       '.Next'
+               	});
+               
+               
+               
+               var cPage;
+               ias.on('load', function(event) {
+            	   if(cPage > pages){
+                		jQuery.ias().unbind();
+                		$('.ias-spinner img:last-child').remove()
+                		$('.ias-spinner').append("No more results")
+                	}
+                   var url = event.url;
+               	
+                   url  += cPage
+               	event.url = url
+               	
+               })
+               
+               jQuery.ias().extension(new IASPagingExtension());
+               jQuery.ias().on('pageChange', function(pageNum, scrollOffset, url) {
+               	cPage = pageNum;
+               });
+               
+               ias.extension(new IASSpinnerExtension({
+                   src: "@routes.Assets.at("images/loading.gif")",
+               }));
+               
+               
+               
+               });
+               
+               
+            </script>
+            <div id="pagination">
+               <a href="?page=1" class="Next" id="Next1">next</a>
+            </div>
+            <script>
+               $("#btn1").css("background","  #FF9900");
+                $("#btn2").css("background","  #FF9900");
+                 $("#bt2").addClass('greyBtn');
+            </script>
+            <div id="pagination">
+               <a href="?page=" class="Next" id="Next1">next</a>
+            </div>
+         </div>
+         @Templates.footer()
+         @Templates.panelAndLogOut()
+      </div>
+      @Templates.jsDisabled()
+   </body>
 </html>

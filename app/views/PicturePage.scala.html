@@ -1,48 +1,117 @@
-@(pictures: List[Picture])
-
+@(pictures: List[Picture], rowcount: Integer)
 <!DOCTYPE html>
-
 <html>
-    <head>
-        @Templates.head()
-          @Templates.loadimage()
-        @Templates.facebookHeadScript()
-      
-    </head>
-    <body>
-        <div data-role="page" data-theme="b" class="page">   
-            <div data-role="header" class = "header">
-                @Templates.header()
+   <head>
+      @Templates.head()
+      @Templates.facebookHeadScript()
+      <script type="text/javascript" src="@routes.Assets.at("javascripts/jquery-ias.min.js")"></script>
+   </head>
+   <body>
+      <div data-role="page" data-theme="b" class="page">
+         <div data-role="header" class = "header">
+            @Templates.header()
+         </div>
+         <div data-role="content" class = "content" >
+            <h1 align="center">Photo Stream</h1>
+            <div class = "search">
+               <a data-role = "button" id = "btn2"  rel="external" href="/newpicture" data-icon="arrow-r" data-iconpos="right">Take and Upload a Picture</a>
             </div>
-            <div data-role="content" class = "content" >
-                    <h1 align="center">Photo Stream</h1>
-                    <div class = "search">
-                    <a data-role = "button" id = "btn2"  rel="external" href="/newpicture" data-icon="arrow-r" data-iconpos="right">Take and Upload a Picture</a>
-                    </div>
-                   @for(pictures <- pictures) {
-                           
-                               <p>Creator:   @pictures.creator </p> 
-                              
-                               <img id="@pictures.pictureID" src="/pic/@pictures.pictureID" /> 
-					
+            <div id="outerpictures" class = "centerDiv">
+               <div class="innerpictures">
+                  @for(pictures <- pictures) {
+                  <div class="ui-bar ui-bar-b" style="width:70%; margin:0 auto; padding-top:10px; padding-bottom:10px;"><h3>
+                     Creator:   @pictures.creator  
+                      <button id="share_button@pictures.pictureID" class = "myFace faceButton2 search ui-btn-right ui-btn-inline" data-mini="true"> Share</button>
+                     </h3>
+                  </div>
+                     <div class="ui-grid-solo">
+                        <div class="ui-block-a">
+                           <a href="#@pictures.pictureID" data-rel="popup" data-position-to="window" class="ui-btn ui-btn-b ui-corner-all ui-shadow " data-transition="fade" style="max-height:512px; width:70%; margin: 0 auto; background:#151515" ><img src="/pic/@pictures.pictureID" style="width: 100%" /></a>
+                        </div>
 
-<script>
+                      
 
-$('#@pictures.pictureID').width(500);
-$('#@pictures.pictureID').height(500);
-</script>
-                      }
-                    </ul>
-                        <script>
-                        $("#btn2").css("background","  #FF9900");
-                    </script>
+                     </div>
+                     <br>
+                     <div data-role="popup" id="@pictures.pictureID" class="photopopup" data-overlay-theme="a" data-corners="false" data-tolerance="30,15" >
+                        <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-b ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a><img src="/pic/@pictures.pictureID" style="max-height:512px;" alt="Photo landscape">
+                     </div>
+                     <script>
+                        $('.ui-page-active :jqmData(role=content)').trigger('create');
+                        $("#@pictures.pictureID").css("background","black");
+                     
+                     $( document ).on( "pagecreate", function() {
+                        $( ".photopopup" ).on({
+                           popupbeforeposition: function() {
+                              var maxHeight = $( window ).height() - 60 + "px";
+                              $( ".photopopup img" ).css( "max-height", maxHeight );
+                           }
+                        });
+                     });
 
-
-                </div>
-            @Templates.footer()
-            @Templates.panelAndLogOut()
+                     $('#share_button@pictures.pictureID').click(function(e) {
+                         e.preventDefault();
+                         FB.ui({
+                           method: 'feed',
+                           name: 'Dreamspace Picture',
+                           link: 'https://floating-dusk-5648.herokuapp.com/pic/@pictures.pictureID',
+                           caption: "Picture" ,
+                           description: ""
+                         });
+                       });
+                  </script>
+                  }
+               </div>
             </div>
-
-
-    </body>
+            <script>
+               var rowcount = @rowcount;
+               var pageDecimal = rowcount / 10;
+               var pages = Math.ceil(pageDecimal);
+                    $(document).ready(function() {
+               var ias = jQuery.ias({
+               	  container:  '#outerpictures',
+               	  item:       '.innerpictures',
+               	  pagination: '#pagination',
+               	  next:       '.Next'
+               	});
+               
+               
+               
+               var cPage;
+               ias.on('load', function(event) {
+            	   if(cPage > pages){
+               		jQuery.ias().unbind();
+               		$('.ias-spinner img:last-child').remove()
+               		$('.ias-spinner').append("No more results")
+               	}
+                   var url = event.url;
+                   url += cPage
+               	event.url = url
+               	
+               })
+               
+               jQuery.ias().extension(new IASPagingExtension());
+               jQuery.ias().on('pageChange', function(pageNum, scrollOffset, url) {
+               	cPage = pageNum;
+               });
+               
+               ias.extension(new IASSpinnerExtension({
+                   src: "@routes.Assets.at("images/loading.gif")",
+               }));
+               });
+               
+               
+            </script>
+            <div id="pagination">
+               <a href="?page=" class="Next" id="Next1">next</a>
+            </div>
+            <script>
+               $("#btn2").css("background","  #FF9900");
+            </script>
+         </div>
+         @Templates.footer()
+         @Templates.panelAndLogOut()
+      </div>
+      @Templates.jsDisabled()
+   </body>
 </html>

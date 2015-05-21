@@ -63,7 +63,7 @@
                   name: 'EArenaAd: @eAd.arenaName',
                   link: document.URL,
                   caption: "@eAd.admin" +" is looking for people to play @eAd.gameName" ,
-                  description: "Information about EArenaAd: @eAd.information"
+                  description: "Information: @eAd.information"
                 });
               });
             });
@@ -192,7 +192,7 @@
                                 <p>Creator: @eAd.admin</p>
                                 <p>Game: @eAd.gameName</p>
                                 <p>Created: @eAd.createdDate</p>
-                                <p>Players required: @eAd.playersRequired</p>
+                                <p>Players: @eAd.playersRequired</p>
                                 <p>Information:</p> 
                                 <textarea readonly name="textarea" id="text" style = "overflow:auto;resize:none">@eAd.information</textarea>
                             </li>
@@ -222,7 +222,7 @@
                 <script>
                     $("#postreply").click(function() {
                         if($('#replyarea').val().length >2){
-                            var data = {"contents":$("#replyarea").val(), "adID": "@eAd.arenaID"};
+                            var data = {"contents":$("#replyarea").val(), "adID": "@eAd.arenaID", "adAdmin": "@eAd.admin"};
                             $.ajax({
                                 url: "/postreply",
                                 type: 'POST',
@@ -246,5 +246,6 @@
             @Templates.footer()
             @Templates.panelAndLogOut()
       </div>
+      @Templates.jsDisabled()
    </body>
 </html>
