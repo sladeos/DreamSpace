@@ -67,14 +67,16 @@
                <h3>Ads found</h3>
             </div>
             <div id="pagebuttons"></div>
+              <div class="eadColours" style="background-color:DarkBlue;"><h4> <br><br>Game Ads</h4></div>
+             <div class="eadColours" style="background-color:FireBrick;"><h4><br><br>Tournament Ads</h4></div>
              <div id ="earenas">
             <div class ="MEArenaContent">
                <hr>
                <article  data-role="listview" data-inset="true" data-dividertheme="a">
                   @for(eads <- eads) {
                   <li  data-role = "list-divider" ></li>
-                  <li>
-                     <a rel="external"  href="/earenaad/@eads.arenaID" style = "background: #373737" >
+                  <li >
+                     <a rel="external" id="@eads.arenaID" href="/earenaad/@eads.arenaID" style = "background: #373737" >
                         <h2>@{" " + eads.arenaName}</h2>
                         <p>@{" Host: " + eads.admin}</p>
                         <p>@{" Game: " + eads.gameName }</p>
@@ -85,9 +87,15 @@
                         <br>
                      </a>
                   </li>
+                  
                   <script>
                         $('.ui-page-active .ui-listview').listview('refresh');
                         $('.ui-page-active :jqmData(role=content)').trigger('create');
+                        if("@eads.adType" === "gameAd"){
+                        	$("#@eads.arenaID").css("background", "FireBrick");
+                        }else{
+                        	$("#@eads.arenaID").css("background", "DarkBlue");
+                        }
                      </script>
                   } 
                </article>

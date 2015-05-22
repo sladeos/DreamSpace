@@ -24,10 +24,19 @@
 
             <div class = "search">
                 <form id ="EArenaForm"  method ="post" action="@routes.EArenaDatabase.addEArenaAd()" data-ajax="false">
+                   
+                 <div class="ui-grid-a"> 
+                   <div class="ui-block-a" style="width:40%;"><label><input checked type="radio" name="adType" value="gameAd" class="adType">GameAd</label></div>
+    				<div class="ui-block-b" style="width:60%;"><label><input type="radio" name="adType" value="tournamentAd" class="adType">TournamentAd</label></div>
+                    </div>
+                    
+
+
                     <div data-role="fieldcontain" class="ui-hide-label">
                         <label for="arenaName">Arena Ad Name:</label>
                         <input type="text" name="arenaName" id="arenaName" value="" placeholder="Arena Ad Name"/>
                     </div>
+                 
                     <div data-role="fieldcontain" class="ui-hide-label">
                         <label for="gameName" >Game:</label>
                         <input type="text" name="gameName" id="game" value="" placeholder="Game "/>
@@ -35,13 +44,12 @@
                     <div data-role="fieldcontain" class="ui-hide-label">
                         <label for="playersRequired" >Players Required:</label>
                         <input type="number" min="1" max="100" name="playersRequired" id="playersRequired" value="" placeholder="Players Required"/>
-
                     </div>
                     <div data-role="fieldcontain" class="ui-hide-label">
                         <textarea placeholder="Enter some information about your ad here!" name="information" id="informationArea" rows="4" cols="50" ></textarea>
                     </div>
                     <div data-role="controlgroup" data-type="horizontal" style="text-align:center;">
-                        <button class = "my-btn"  type="submit" value="Create EArena Ad" data-inline = "true"onclick="return validate()">UPLOAD </button>
+                        <button class = "my-btn"  type="submit" value="Create EArena Ad" data-inline = "true"onclick="return validate()">Create </button>
                     </div>
                     <p id="warning"></p>
                 </form>
