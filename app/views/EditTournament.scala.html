@@ -1,4 +1,4 @@
-@(tournament: Tournament)
+@(tournament: Tournament, participant: List[String])
 <!DOCTYPE html>
 <html>
    <head>
@@ -48,6 +48,22 @@
                <br>
                 <a href="#popupCloseRight" data-rel="popup" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-icon-info ui-btn-icon-right ui-mini">Info</a>
                 
+
+                <div class ="deltagare" id="deltagare">
+                  <ul data-role="listview" data-inset="true" data-dividertheme="a" data-theme = "b" id="hej">
+                    <p> Participants: </p> 
+                      @for(participant <- participant) {
+                        <li><a data-role = "button"  rel="external"  href="/profile/@participant" class = "greyBtn"><h2>@{participant}</h2></a>
+                        </li>
+                      } 
+                  </ul>
+                </div> 
+
+
+
+
+
+
                 <div data-role="popup" id="popupCloseRight" class="ui-content" style="max-width:280px">
                 <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext  ui-btn-right">Close</a>
                 <p>You can change the name of the teams in your tournament by clicking the respective team label, you can also change the score by clicking the label after the team name. This updates the bracket.</p>

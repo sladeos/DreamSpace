@@ -95,10 +95,10 @@ public class Application extends Controller {
 		if (user != null) {
 			if (user.equals(TournamentDatabase.getTournamentAdmin(id).tournamentcreator)) {
 				return ok(EditTournament.render(TournamentDatabase
-						.getTournament(id)));
+						.getTournament(id), TournamentDatabase.getParticipants(id)));
 			} else {
 				return ok(ShowTournament.render(TournamentDatabase
-						.getTournament(id)));
+						.getTournament(id), TournamentDatabase.getParticipants(id)));
 			}
 		} else {
 			return unauthorized(LoginUserPage
@@ -148,10 +148,10 @@ public class Application extends Controller {
 		if (user != null) {
 			if (user.equals(userUrl)) {
 				return ok(MyProfile.render(UserProfileDatabase
-						.getProfile(userUrl), TournamentDatabase.getJoinedTournaments()));
+						.getProfile(userUrl), TournamentDatabase.getJoinedTournaments(userUrl)));
 			} else {
 				return ok(OtherUserProfile.render(UserProfileDatabase
-						.getProfile(userUrl)));
+						.getProfile(userUrl), TournamentDatabase.getJoinedTournaments(userUrl)));
 			}
 		} else {
 			return unauthorized(LoginUserPage
@@ -162,7 +162,7 @@ public class Application extends Controller {
 	public static Result getMyProfile() {
 		String user = session("connected");
 		if (user != null) {
-			return ok(MyProfile.render(UserProfileDatabase.getProfile(user), TournamentDatabase.getJoinedTournaments()));
+			return ok(MyProfile.render(UserProfileDatabase.getProfile(user), TournamentDatabase.getJoinedTournaments(user)));
 		} else {
 			return unauthorized(LoginUserPage
 					.render("Welcome, login to explore the website"));

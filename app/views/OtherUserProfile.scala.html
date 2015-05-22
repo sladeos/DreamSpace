@@ -1,4 +1,4 @@
-@(profile: Profile)
+@(profile: Profile, tournament: List[Tournament])
 
 <!DOCTYPE html>
 
@@ -67,12 +67,20 @@
                   </div> 
                 </div>
                 
+                  <div class="section">
+                    <label for="joinedT">Joined ETournaments:</label>
+                    <div class ="MEArenaContent" id="joinedT">
+                        <ul data-role="listview" data-inset="true" data-dividertheme="a" data-theme = "b"> 
+                        @for(tournament <- tournament) {
+                            <li  data-role = "list-divider" ></li>
+                                <li><a data-role = "button"  rel="external"  href="/showtournament/@tournament.tournamentID" class = "greyBtn"><img src="@routes.Assets.at("images/sun.jpg")" alt="Dreamhack" class = "fullscreen"  /><h2>@{tournament.tournamentname}</h2> <p>@{"Admin: " +  tournament.tournamentcreator }</p></a>
+                            </li>
+                        } 
+                        </ul>
+                    </div> 
+                  </div>
 
 
-                 <script>
-                //   $('#addfavourite').click(function() {      // ska användas till att adda favorit. 
-                //   window.location='/'; });
-                 </script> 
             
             </div>
             @Templates.footer()

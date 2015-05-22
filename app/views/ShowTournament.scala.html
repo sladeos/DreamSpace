@@ -1,4 +1,4 @@
-@(tournament: Tournament)
+@(tournament: Tournament, participant: List[String])
 <!DOCTYPE html>
 <html>
    <head>
@@ -38,6 +38,19 @@
                         });
                     </script>
                     <div id="bracket"></div>
+
+
+                    <div class ="deltagare" id="deltagare">
+                      <p> Participants: </p>
+                        <ul data-role="listview" data-inset="true" data-dividertheme="a" data-theme = "b" id="hej"> 
+                        @for(participant <- participant) {
+                                <li><a data-role = "button"  rel="external"  href="/profile/@participant" class = "greyBtn"><h2>@{participant}</h2></a>
+                            </li>
+                        } 
+                        </ul>
+                    </div> 
+
+
                     <script type="text/javascript">  
                         var a = @Html(tournament.tournamentdata);
                         $(function() {

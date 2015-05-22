@@ -428,7 +428,7 @@ public class UserProfileDatabase extends Controller {
 				preparedStatement.setString(2, currentuser);
 				preparedStatement.executeUpdate();
 
-				return ok(MyProfile.render(UserProfileDatabase.getProfile(currentuser), TournamentDatabase.getJoinedTournaments()));
+				return ok(MyProfile.render(UserProfileDatabase.getProfile(currentuser), TournamentDatabase.getJoinedTournaments(currentuser)));
 
 		} catch (Exception e) {
 			// Handle errors for Class.forName
