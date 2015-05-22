@@ -9,15 +9,16 @@
       <script type="text/javascript" src="@routes.Assets.at("javascripts/jquery-ias.min.js")"></script>
    </head>
    <body>
-      <div data-role="page" data-theme="b" id = "main" class = "page"  >
-         <div data-role="header" class = "header">
+      <div data-role="page" data-theme="b" id = "main">
+         <div data-role="header">
             @Templates.header()
             <a id = "back" rel="external" href="/mainearena" data-role="button" role="button" data-icon="back" data-iconpos="notext">Back</a>
             <script>
                $("#back").css("background","  #FF9900");
             </script>
          </div>
-         <div data-role="content" class = "content">
+         <div data-role="content">
+         <div class = "standardBox">
             <h1 align="center">My EArena</h1>
             <button data-role = "button" id = "creatad" class = "search" rel="external" href="/">Create a new ad</button>
             <div id="pagebuttons"></div>
@@ -26,8 +27,9 @@
                  window.location='/createarenaad'; });
                  
             </script>
+            </div>
             <div id ="earenas">
-            <div class ="MEArenaContent">
+            <div class ="flowBox">
                <article  data-role="listview" data-inset="true" data-dividertheme="a">
                   @for(eads <- eads) {
                   <li  data-role = "list-divider" ></li>
@@ -68,7 +70,7 @@
                $(document).ready(function() {
                var ias = jQuery.ias({
                	  container:  '#earenas',
-               	  item:       '.MEArenaContent',
+               	  item:       '.flowBox',
                	  pagination: '#pagination',
                	  next:       '.Next'
                	});

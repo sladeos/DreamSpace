@@ -9,11 +9,11 @@
       
     </head>
     <body>
-        <div data-role="page" data-theme="b" class="page">   
-            <div data-role="header" class = "header">
+        <div data-role="page" data-theme="b">   
+            <div data-role="header">
                 @Templates.header()
             </div>
-            <div data-role="content" class = "content" >
+            <div data-role="content">
                     <h1 align="center">My Notifications</h1>
                     
             
@@ -133,6 +133,11 @@
                 </div>
             @Templates.footer()
             @Templates.panelAndLogOut()
+            <script>
+                $('#mail').removeClass('ui-alt-icon');
+                $('#h').addClass('ui-alt-icon');
+                $('#user').addClass('ui-alt-icon');
+          </script>
             </div>
 
 @Templates.jsDisabled()

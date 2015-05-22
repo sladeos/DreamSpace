@@ -8,17 +8,17 @@
       @Templates.facebookHeadScript()
    </head>
    <body>
-      <div data-role="page" data-theme="b" class="page">
-            <div data-role="header" class = "header">
+      <div data-role="page" data-theme="b">
+            <div data-role="header">
                 @Templates.header()
                 <a id = "back" rel="external" href="/mainetournament" data-role="button" role="button" data-icon="back" data-iconpos="notext">Back</a>
                 <script>
                     $("#back").css("background","  #FF9900");
                 </script>
             </div>
-            <div data-role="content" class = "content">
+            <div data-role="content">
                 <h1 align="center">ETournament</h1>
-                <button id="share_button" class = "myFace faceButton search" data-mini="true">Facebook Share</button>
+                <button id="share_button" class = "facebookColor facebookButton centerButton" data-mini="true">Facebook Share</button>
                 <br>
                 <div id = "bracketcontent" >
 
@@ -55,7 +55,7 @@
                     </script>    
             
                 </div>
-
+              
             </div>
 
             @Templates.mitLicens()

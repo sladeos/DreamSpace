@@ -1,28 +1,70 @@
-
-#pagination{
-	visibility: hidden;
+.ui-page .ui-header {
+    background:#151515;
 }
 
-#currentPage{
-	float: right;
+.ui-page{
+    background: url("../images/main.jpg");
 }
 
-#pagebuttons{
-	float:middle;
+.ui-content{
+    background: #151515;
+    padding: 5% 5%;
+    margin:0 auto;
+
+}
+
+.ui-page .ui-btn  {
+color      : white;
+background : #FF9900;
+}​
+
+.ui-page .ui-footer {
+    background:#151515;
+}
+
+.standardBox{
+    width: 300px;
+    margin: 0 auto;
+}
+
+.flowBox{
+    width: 500px;
+    margin: 0 auto;
+}
+
+.centerDiv{
+    text-align: center;
+}
+.facebookButton{
+    width: 150px;
+    max-width: 150px;
+}
+.ui-page .ui-btn.facebookColor{
+    background: #3A5795;
+}
+.centerButton{
+    margin:0 auto;
+}
+
+.ui-page .ui-btn.goBackButton  {
+    color      : white;
+    background : #996600;
+}​
+
+.ui-page .ui-btn.submitReplay{
+    background: #FF9900;
+}
+
+.facebook2{
+    width: 65px;
+    max-width: 65px;
 }
 
 .navrow{
-	list-style:none;
-display:inline; 
-padding: 0 10px;
-float: right;
-}
-
-#bracket {
-	
-    color:black;
-    text-shadow:0 0px 0 #111;
-    overflow:auto;
+    list-style:none;
+    display:inline; 
+    padding: 0 10px;
+    float: right;
 }
 
 .ui-autocomplete {
@@ -39,226 +81,157 @@ float: right;
 .ui-autocomplete li:hover{
     background-color:#1A586F;
 }
-.ui-page{
-    background: url("../images/main.jpg");
-}
 
-.content{
-    background: #151515;
-    padding: 5% 5%;
-    margin:0 auto;
-
-}
 .fullscreen{
     max-height: 100%;
     max-width: 100%;
 }
-/*Färgen för alla knappar alla skärmar*/
-.ui-page .ui-btn  {
-color      : white;
-background : #FF9900;
-}​
+
 
 .slide-menu{ 
     max-width:75%;
 }
-/*Färgen för header alla skärmar*/
-.ui-page .ui-header {
-    background:#151515;
-}
-/*Färgen för footer alla skärmar*/
-.ui-page .ui-footer {
-    background:#151515;
-}
-    #adinfo{    
-        width: 100%;    
-}
-    .ui-page{
-        background: url("../images/main.jpg");
-    }
-    
-    #grid{
-        padding-left: 2%;
-        padding-right: 2%;
-    }
-    #adreplies{
-        width: 100%;
-        
-    }
-    #replyfielddiv{
-        width: 100%;
-    }
-    .MEArenaContent{
-        width: 100%;
-        margin: 0 auto;
-    }
-    .ui-page .ui-btn.myFace{
-        background: #3A5795;
-    }
-    .faceButton{
-        width: 150px;
-        max-width: 150px;
-    }
-    .ui-page .ui-btn.submitReplay{
-        background: #FF9900;
-    }
-    .faceButton2{
-        width: 65px;
-        max-width: 65px;
-    }
  
-    .custom-centercollheader a {
-        text-align: center !important;
-        padding-right: 2.5em !important;
-    }
-    .search{
-        width: 300px;
-        margin: 0 auto;
-    }
-    .ui-page .ui-btn.goBackButton  {
-    color      : white;
-    background : #996600;
-    }​
+.custom-centercollheader a {
+    text-align: center !important;
+    padding-right: 2.5em !important;
+}
+
+#bracket {
+    color:black;
+    text-shadow:0 0px 0 #111;
+    overflow:auto;
+}
+#pagination{
+    visibility: hidden;
+}
+
+#currentPage{
+    float: right;
+}
+
+#pagebuttons{
+    float:middle;
+}
+
+#adinfo{    
+    width: 100%;    
+} 
+
+#grid{
+    padding-left: 2%;
+    padding-right: 2%;
+}
+
+#adreplies{
+    width: 100%;
+}
+
+#replyfielddiv{
+    width: 100%;
+}
+
 @media all and (max-width: 36em){
- 
+    .ui-page{
+        background: #151515;
+    }
+
     .ui-content{
         background: #151515;
     }
-    .MEArenaContent{
+
+    .flowBox{
         width: 100%;
         }
-    .faceButton{
+
+    .facebookButton{
         width: 150px;
         max-width: 150px;
-
     }
-    .faceButton2{
+
+    .facebookButton2{
         width: 65px;
         max-width: 65px;
-
     }
 }
 
 
 @media all and (min-width: 60em){
-    .page{
-        background: url("../images/main.jpg");
-    
 
+    .ui-page{
+        background: url("../images/main.jpg");
     }
-    .content{
+    .ui-content{
         padding: 15px 15px;
         margin:0 auto;
         width:900px;
         background: #151515;
-        
-
     }
-    .header{
+    .ui-page .ui-header{
         margin:0 auto;
         width: 930px;
     }
 
-    .footer {
+    .ui-page .ui-footer {
         margin:0 auto;
 		width: 930px;
-    } 
-    .MEArenaContent{
+    }
+
+    .flowBox{
         width: 500px;
         margin: 0 auto;
     }
+
+    .standardBox{
+        width: 350px;
+        margin:0 auto;
+        max-width: 350px;
+    }
+
     .my-breakpoint .ui-block-a, 
     .my-breakpoint .ui-block-b, 
     .my-breakpoint .ui-block-c{ 
         width: 100%; 
         float:none; 
     }
-    #MAEcheckbox{
-        width: 500px;
-        margin: 0 auto;
-    }
-    #createAEform{
-    max-width: 500px;
-    margin: 0 auto;
-}
-
     .wrap{
         overflow:hidden;
         width:99%;
         margin: 0 auto;
         max-width: 800px;
     }
-    #wrap2{
-        overflow:hidden;
-        width:100%;
-        margin: 0 auto;
-        max-width: 800px;
-        padding-left: 1%;
-        padding-right: 1%;
+  
+    .faceBookButton{
+        width: 150px;
+        max-width: 150px;
     }
+
+    .facebookButton2{
+        width: 65px;
+        max-width: 65px;
+    }
+
     #adinfo{
         position: relative;
         float: left;
         width: 49%;
         padding-left: 1%;
     }
+
     #adreplies{
         position: relative;
         width: 49%;
         float: right;
         padding-left: 1%;
     }
+
     #replyfielddiv{
         position: relative;
         float: left;
         width: 49%;
         padding-left: 1%;
+    }
 
-    }
-        .search{
-        width: 350px;
-        margin:0 auto;
-        max-width: 350px;
-    }
-    .faceButton{
-        width: 150px;
-        max-width: 150px;
-    }
-         .faceButton2{
-        width: 65px;
-        max-width: 65px;
-    }
-    .mainButton{
-        margin:0 auto;
-        width: 200px;
-        max-width: 200px;
-    }
-    #test{
-        position: fixed;
-        bottom:0px;
-    }
-    /*Ta bort detta innehåll vid skapande av ny sida*/
-    #img1{
-        padding: 1em;
-        float:right;
-    }
-    #col1{
-        padding: 1em;
-        float: left;
-    }
-    #img2{
-        padding: 1em;
-        float:left;
-    }
-    #col2{
-        padding: 1em;
-        float: right;
-    }
-    #img3{
-        padding: 4em;
-        float:right;
-        border: 2px solid orange;
-    }
 
 }
  
