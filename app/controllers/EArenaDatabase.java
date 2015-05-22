@@ -517,22 +517,23 @@ public class EArenaDatabase extends Controller {
 		String arenaName = json.findPath("arenaName").textValue();
 		String information = json.findPath("information").textValue();
 		String gameName = json.findPath("gameName").textValue();
-		String strplayersRequired = json.findPath("playersRequired")
-				.textValue();
+		String strplayersRequired = json.findPath("playersRequired").textValue();
 		String strid = json.findPath("id").textValue();
+		String adType = json.findPath("adType").textValue();
 
 		try {
 			int playersRequired = Integer.parseInt(strplayersRequired);
 			int id = Integer.parseInt(strid);
 			conn = DB.getConnection();
-			String insertIntoDatabase = "UPDATE EArena SET arenaname=?, arenainformation=?, playersrequired=?, gamename=? WHERE arenaID=?";
+			String insertIntoDatabase = "UPDATE EArena SET arenaname=?, arenainformation=?, playersrequired=?, gamename=?, adtype=? WHERE arenaID=?";
 			preparedStatement = conn.prepareStatement(insertIntoDatabase);
 
 			preparedStatement.setString(1, arenaName);
 			preparedStatement.setString(2, information);
 			preparedStatement.setInt(3, playersRequired);
 			preparedStatement.setString(4, gameName);
-			preparedStatement.setInt(5, id);
+			preparedStatement.setString(5, adType);
+			preparedStatement.setInt(6, id);
 
 			preparedStatement.executeUpdate();
 
