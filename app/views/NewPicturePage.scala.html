@@ -7,17 +7,17 @@
         @Templates.facebookHeadScript()
     </head>
     <body>
-        <div data-role="page" data-theme="b" class="page">   
-            <div data-role="header" class = "header">
+        <div data-role="page" data-theme="b">   
+            <div data-role="header">
                 @Templates.header()
             </div>
-            <div data-role="content" class = "content" >
+            <div data-role="content">
                     <h1 align="center">New Photo</h1>
-                    
+                    <div class = "standardBox">
                     <form id ="newpicture" action="@routes.PictureDatabase.savePicture()" method ="post" data-ajax="false" enctype="multipart/form-data">
                     <input id="picfield" name="picture" type="file" accept="image/*;capture=camera">
    							
-                    <button class = "my-btn"  type="submit" value="Save Picture" >Save Picture </button>
+                    <button type="submit" value="Save Picture" >Save Picture </button>
     </form>
 
     <div id="imageshow" align="center"></div>
@@ -73,6 +73,7 @@
     
         
 </script>
+</div>
                 </div>
             @Templates.footer()
             @Templates.panelAndLogOut()

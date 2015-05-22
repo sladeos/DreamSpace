@@ -9,15 +9,15 @@
       <script type="text/javascript" src="@routes.Assets.at("javascripts/jquery-ias.min.js")"></script>
    </head>
    <body>
-      <div data-role="page" data-theme="b" id = "main" class = "page"  >
-         <div data-role="header" class = "header">
+      <div data-role="page" data-theme="b" id = "main">
+         <div data-role="header">
             @Templates.header()
             <a id = "back" rel="external" href="/mainearena" data-role="button" role="button" data-icon="back" data-iconpos="notext">Back</a>
             <script>
                $("#back").css("background","  #FF9900");
             </script>
          </div>
-         <div data-role="content" class = "content">
+         <div data-role="content">
             <h1 align="center">My EArena</h1>
             <button data-role = "button" id = "creatad" class = "search" rel="external" href="/">Create a new ad</button>
             <div id="pagebuttons"></div>
