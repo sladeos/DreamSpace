@@ -2,53 +2,31 @@ package controllers;
 
 import models.*;
 
-import java.security.SecureRandom;
 import java.sql.*;
-
 import com.drew.imaging.ImageMetadataReader;
 import com.drew.imaging.ImageProcessingException;
 import com.drew.metadata.*;
 import com.drew.metadata.exif.ExifIFD0Directory;
 import com.drew.metadata.jpeg.JpegDirectory;
 import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.node.ObjectNode;
-
 import javax.imageio.ImageIO;
-import javax.xml.bind.DatatypeConverter;
-import javax.xml.datatype.DatatypeConstants;
-
-import java.awt.Color;
-import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
-
 import play.mvc.Http.MultipartFormData;
 import play.mvc.Http.MultipartFormData.FilePart;
-import play.mvc.Http.Response;
 import views.html.*;
-import models.FacebookUser;
-import play.data.Form;
 import play.db.DB;
-import play.libs.Json;
 import play.mvc.*;
-import play.db.*;
-import play.libs.Json;
-
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
-import java.io.DataInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.nio.file.Path;
 
 public class UserProfileDatabase extends Controller {
 
@@ -70,7 +48,6 @@ public class UserProfileDatabase extends Controller {
 			if (rs.isBeforeFirst()) {
 				rs.next();
 				p.username = rs.getString("username");
-				p.favouritegames = rs.getString("favouritegames");
 				p.userbio = rs.getString("userbio");
 				p.skypeID = rs.getString("skypeID");
 				p.steamID = rs.getString("steamID");
@@ -78,8 +55,16 @@ public class UserProfileDatabase extends Controller {
 				p.uplayID = rs.getString("uplayID");
 				p.twitchID = rs.getString("twitchID");
 				p.userID = rs.getInt("userID");
+				p.csgorank = rs.getString("csgorank");
+				p.wow2v2rating = rs.getString("wow2v2");
+				p.wow3v3rating = rs.getString("wow3v3");
+				p.wow5v5rating = rs.getString("wow5v5");
+				p.wowrbgrating = rs.getString("wowrbg");
+				p.lolrank = rs.getString("lolrank");
+				p.dota2rank = rs.getString("dota2mmr");
+				p.otherranks = rs.getString("otherranks");
 			}
-
+			
 			return p;
 
 		} catch (SQLException se) {
@@ -147,27 +132,40 @@ public class UserProfileDatabase extends Controller {
 		String steamID = json.findPath("steamID").textValue();
 		String twitchID = json.findPath("twitchID").textValue();
 		String uplayID = json.findPath("uplayID").textValue();
-		String favouritegames = json.findPath("favouritegames").textValue();
 		String userbio = json.findPath("about").textValue();
+
+		String csgorank = json.findPath("csgorank").textValue();
+		String wow2v2 = json.findPath("wow2v2").textValue();
+		String wow3v3 = json.findPath("wow3v3").textValue();
+		String wow5v5 = json.findPath("wow5v5").textValue();
+		String wowrbg = json.findPath("wowrbg").textValue();
+		String lolrank = json.findPath("lolrank").textValue();
+		String dota2mmr = json.findPath("dota2mmr").textValue();
+		String otherranks = json.findPath("otherranks").textValue();
 
 		try {
 			conn = DB.getConnection();
 			// int avatarID = Integer.parseInt(avatarIDstring);
-			String insertIntoDatabase = "UPDATE UserProfile SET favouritegames=?, userbio=?, skypeID=?, steamID=?, battlenetID=?, uplayID=?, twitchID=? WHERE username=?";
+			String insertIntoDatabase = "UPDATE UserProfile SET userbio=?, skypeID=?, steamID=?, battlenetID=?, uplayID=?, twitchID=?,csgorank=?,wow2v2=?,wow3v3=?,wow5v5=?,wowrbg=?,lolrank=?,dota2mmr=?,otherranks=? WHERE username=?";
 
 			preparedStatement = conn.prepareStatement(insertIntoDatabase);
-			preparedStatement.setString(1, favouritegames);
-			preparedStatement.setString(2, userbio);
-			preparedStatement.setString(3, skypeID);
-			preparedStatement.setString(4, steamID);
-			preparedStatement.setString(5, battlenetID);
-			preparedStatement.setString(6, uplayID);
-			preparedStatement.setString(7, twitchID);
-			preparedStatement.setString(8, username);
-			// preparedStatement.setInt(13, avatarID);
-
+			preparedStatement.setString(1, userbio);
+			preparedStatement.setString(2, skypeID);
+			preparedStatement.setString(3, steamID);
+			preparedStatement.setString(4, battlenetID);
+			preparedStatement.setString(5, uplayID);
+			preparedStatement.setString(6, twitchID);
+			preparedStatement.setString(7, csgorank);
+			preparedStatement.setString(8, wow2v2);
+			preparedStatement.setString(9, wow3v3);
+			preparedStatement.setString(10, wow5v5);
+			preparedStatement.setString(11, wowrbg);
+			preparedStatement.setString(12, lolrank);
+			preparedStatement.setString(13, dota2mmr);
+			preparedStatement.setString(14, otherranks);
+			preparedStatement.setString(15, username);
 			preparedStatement.executeUpdate();
-			return ok("Succesful Reply!");
+			return ok("Edited!");
 		} catch (com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException ice) {
 			return badRequest(ice.toString() + "HEYEYEY");
 		} catch (NumberFormatException nfe) {
@@ -189,63 +187,62 @@ public class UserProfileDatabase extends Controller {
 	}
 
 	public static Result getProfiles() {
-		  String currentUser = session("connected");
-		  if (currentUser == null) {
-		   return unauthorized(LoginUserPage
-		     .render("You have to login to access this page!"));
-		  } else {
-		   Connection conn = null;
-		   PreparedStatement preparedStatement = null;
-		   List<Profile> proList = new ArrayList<Profile>();
-		   try {
+		String currentUser = session("connected");
+		if (currentUser == null) {
+			return unauthorized(LoginUserPage
+					.render("You have to login to access this page!"));
+		} else {
+			Connection conn = null;
+			PreparedStatement preparedStatement = null;
+			List<Profile> proList = new ArrayList<Profile>();
+			try {
 
-		    conn = DB.getConnection();
+				conn = DB.getConnection();
 
-		    String selectProfiles = "SELECT * FROM UserProfile";
-		    preparedStatement = conn.prepareStatement(selectProfiles);
-		   
-		    ResultSet rs = preparedStatement.executeQuery();
+				String selectProfiles = "SELECT * FROM UserProfile";
+				preparedStatement = conn.prepareStatement(selectProfiles);
 
-		    while (rs.next()) {
-		     Profile p = new Profile();
-		    
-		     p.username = rs.getString("username");
-		     p.userbio = rs.getString("userbio");
-		     p.favouritegames = rs.getString("favouritegames");
-		     proList.add(p);
-		    }
+				ResultSet rs = preparedStatement.executeQuery();
 
-		    rs.close();
-		    return ok(MainProfilePage.render(proList));
-		   } catch (com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException ice) {
-		    return badRequest(ice.toString());
-		   } catch (NumberFormatException nfe) {
-		    return badRequest(nfe.toString());
-		   } catch (SQLException se) {
-		    // Handle sql errors
-		    return internalServerError(se.toString());
-		   } catch (Exception e) {
-		    // Handle errors for Class.forName
-		    return internalServerError(e.toString());
-		   } finally {
-		    // finally block used to close resources
-		    // try {
-		    // if (preparedStatement != null)
-		    // conn.close();
-		    // } catch (SQLException se) {
-		    // } //do nothing
-		    try {
-		     if (conn != null)
-		      conn.close();
-		    } catch (SQLException se) {
-		     return internalServerError(se.toString());
-		    } // end finally try
-		   } // end try
-		  }
-		 }
-		 
-		 // Inner class containing image information
-    public static class ImageInformation {
+				while (rs.next()) {
+					Profile p = new Profile();
+
+					p.username = rs.getString("username");
+					p.userbio = rs.getString("userbio");
+					proList.add(p);
+				}
+
+				rs.close();
+				return ok(MainProfilePage.render(proList));
+			} catch (com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException ice) {
+				return badRequest(ice.toString());
+			} catch (NumberFormatException nfe) {
+				return badRequest(nfe.toString());
+			} catch (SQLException se) {
+				// Handle sql errors
+				return internalServerError(se.toString());
+			} catch (Exception e) {
+				// Handle errors for Class.forName
+				return internalServerError(e.toString());
+			} finally {
+				// finally block used to close resources
+				// try {
+				// if (preparedStatement != null)
+				// conn.close();
+				// } catch (SQLException se) {
+				// } //do nothing
+				try {
+					if (conn != null)
+						conn.close();
+				} catch (SQLException se) {
+					return internalServerError(se.toString());
+				} // end finally try
+			} // end try
+		}
+	}
+
+	// Inner class containing image information
+	public static class ImageInformation {
 		public final int orientation;
 		public final int width;
 		public final int height;
@@ -339,7 +336,7 @@ public class UserProfileDatabase extends Controller {
 
 		BufferedImage destinationImage = new BufferedImage(width, height,
 				originalImage.getType());
-		
+
 		destinationImage = affineTransformOp.filter(originalImage,
 				destinationImage);
 
@@ -369,7 +366,7 @@ public class UserProfileDatabase extends Controller {
 				String suffix = "image/";
 				String type = picture.getContentType().substring(
 						picture.getContentType().lastIndexOf("/") + 1);
-					
+
 				suffix += type;
 
 				if (readImageInformation(file) != null) {
@@ -378,7 +375,7 @@ public class UserProfileDatabase extends Controller {
 					AffineTransform info = getExifTransformation(imageF);
 
 					finalImg = transformImage(img, info);
-					
+
 					ByteArrayOutputStream os = new ByteArrayOutputStream();
 					ImageIO.write(finalImg, type, os);
 					inputStream = new ByteArrayInputStream(os.toByteArray());
@@ -386,8 +383,7 @@ public class UserProfileDatabase extends Controller {
 				} else {
 					inputStream = new FileInputStream(file);
 				}
-				
-                
+
 				preparedStatement.setBlob(1, inputStream);
 				preparedStatement.setString(2, suffix);
 				preparedStatement.setString(3, currentuser);
@@ -413,22 +409,24 @@ public class UserProfileDatabase extends Controller {
 		}
 
 	}
-    
-    public static Result deletePicture() {
+
+	public static Result deletePicture() {
 		Connection conn = null;
 		PreparedStatement preparedStatement = null;
 		String currentuser = session("connected");
 		try {
-			    conn = DB.getConnection();
+			conn = DB.getConnection();
 
-    			String sql = "UPDATE UserProfile SET mimetype=? WHERE username = ?";
-    			preparedStatement = conn.prepareStatement(sql);
+			String sql = "UPDATE UserProfile SET mimetype=? WHERE username = ?";
+			preparedStatement = conn.prepareStatement(sql);
 
-				preparedStatement.setString(1, null);
-				preparedStatement.setString(2, currentuser);
-				preparedStatement.executeUpdate();
+			preparedStatement.setString(1, null);
+			preparedStatement.setString(2, currentuser);
+			preparedStatement.executeUpdate();
 
-				return ok(MyProfile.render(UserProfileDatabase.getProfile(currentuser), TournamentDatabase.getJoinedTournaments(currentuser)));
+			return ok(MyProfile.render(
+					UserProfileDatabase.getProfile(currentuser),
+					TournamentDatabase.getJoinedTournaments(currentuser)));
 
 		} catch (Exception e) {
 			// Handle errors for Class.forName
@@ -461,32 +459,32 @@ public class UserProfileDatabase extends Controller {
 				mimetype = rs.getString("mimetype");
 				image = rs.getBlob("image");
 			}
-            
-            if(mimetype == null){
-                
-                String mimetypeD = null;
-		        Blob imageD = null;
-		        PreparedStatement preparedStatementD = null;
-                
-                String getDefaultPicDatabase = "SELECT image, mimetype FROM UserProfile WHERE username=?";
-    			preparedStatementD = conn.prepareStatement(getDefaultPicDatabase);
-    			preparedStatementD.setString(1, "defaultpic");
-    			ResultSet rsD = preparedStatementD.executeQuery();
-    			
-        		while (rsD.next()) {
-    				mimetypeD = rsD.getString("mimetype");
-    				imageD = rsD.getBlob("image");
-    			}
-    			
-    			int blobLengthD = (int) imageD.length();
-			    byte[] bytesD = imageD.getBytes(1, blobLengthD);
-			    rsD.close();
-			    
-			    return ok(bytesD).as(mimetypeD);
-                
-                
-            }
-            
+
+			if (mimetype == null) {
+
+				String mimetypeD = null;
+				Blob imageD = null;
+				PreparedStatement preparedStatementD = null;
+
+				String getDefaultPicDatabase = "SELECT image, mimetype FROM UserProfile WHERE username=?";
+				preparedStatementD = conn
+						.prepareStatement(getDefaultPicDatabase);
+				preparedStatementD.setString(1, "defaultpic");
+				ResultSet rsD = preparedStatementD.executeQuery();
+
+				while (rsD.next()) {
+					mimetypeD = rsD.getString("mimetype");
+					imageD = rsD.getBlob("image");
+				}
+
+				int blobLengthD = (int) imageD.length();
+				byte[] bytesD = imageD.getBytes(1, blobLengthD);
+				rsD.close();
+
+				return ok(bytesD).as(mimetypeD);
+
+			}
+
 			rs.close();
 
 			int blobLength = (int) image.length();

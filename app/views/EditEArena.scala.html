@@ -12,6 +12,8 @@
                 $("#replyarea").val('');
             });
         </script>
+        <script type="text/javascript" src="@routes.Assets.at("stylesheets/jquery-ui/jquery-ui.js")" ></script>
+        <link rel="stylesheet" href="@routes.Assets.at("stylesheets/jquery-ui/jquery-ui.css")">
    </head>
    <body>
 
@@ -46,7 +48,7 @@
                             <textarea placeholder="Enter some information about your ad here!" name="information" id="informationArea" rows="4" cols="50"  >@eAd.information</textarea>
                     
                         <div style="display: none;">
-                            <input type="id" name="id" id="id" value="@eAd.arenaID"/>
+                            <input type="text" name="id" id="id" value="@eAd.arenaID"/>
                         </div>
                         <button  class = "my-btn"  id="updateearena"  value="Update EArena Ad" onclick="validate()">Update EArena Ad </button>
                         <button data-role = "button" value="Delete EArena" id="deletearena" class = "submitReplay goBackButton" data-icon="delete" data-iconpos="right">Delete EArena</button>
@@ -63,13 +65,26 @@
                   name: 'EArenaAd: @eAd.arenaName',
                   link: document.URL,
                   caption: "@eAd.admin" +" is looking for people to play @eAd.gameName" ,
-                  description: "Information: @eAd.information"
+                  description: ""
                 });
               });
             });
-            </script>
-            
-            <script type="text/javascript">
+</script>
+<script type="text/javascript">
+          function getProfileRanks(user){
+        	  alert(user)
+                $.ajax({
+                    url: "/replyprofileranks/"+user,
+                    type: 'GET',
+                    contentType:'application/json',
+                    dataType : 'json',
+                    success: function(data ){
+                    	
+                       alert(data['username']);
+                        		}
+                });
+                
+                }
               
 
                function errorInField(){
@@ -208,12 +223,22 @@
                     <div id="adreplies">
                          <article data-role="listview" data-inset="true" data-dividertheme="a">
                             @for(eAdReplies <- eAdReplies) {
+                            <div id="@eAdReplies.arenaID">
+                            
                               <li  data-role = "list-divider" ></li>
                               <li><h2>@{eAdReplies.user + " - " + eAdReplies.createdDate}</h2>
                                <p>Reply:</p>
                                <textarea readonly name="textarea" id="text" style = "overflow:auto;resize:none">@{eAdReplies.content}
                                 </textarea>
                                 </li>
+                                
+                                </div>
+                                <script>
+                                $("#@eAdReplies.arenaID").click(function(event){
+                                	getProfileRanks("@eAdReplies.user");
+                                })
+
+                                </script>
                             } 
                           </article>
                     </div>

@@ -154,3 +154,5 @@ GET /mynotifications controllers.NotificationDatabase.getMyNotifications()
 #Get current user's notification amount
 GET /getNotificationAmt controllers.NotificationDatabase.getNotificationAmt()
 
+GET /replyprofileranks/:user controllers.EArenaDatabase.getReplyProfile(user: String)
+

@@ -7,19 +7,11 @@
     <head>
      
       @Templates.head()
-      
-        
-        <script type="text/javascript" src="@routes.Assets.at("stylesheets/jquery-ui/jquery-ui.js")" ></script>
-        <link rel="stylesheet" href="@routes.Assets.at("stylesheets/jquery-ui/jquery-ui.css")">
         <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/userprofile.css")">
         <script src="@routes.Assets.at("javascripts/jquery.bracket.min.js")" type="text/javascript"></script>
         <link rel="stylesheet"  href="@routes.Assets.at("stylesheets/jquery.bracket.min.css")">
-       
-        
-        
-        
-        
-        
+        <script type="text/javascript" src="@routes.Assets.at("stylesheets/jquery-ui/jquery-ui.js")" ></script>
+        <link rel="stylesheet" href="@routes.Assets.at("stylesheets/jquery-ui/jquery-ui.css")">
        @Templates.facebookHeadScript()
 
     </head>
@@ -80,17 +72,161 @@
                   
                 </div>
               </div>
+              <h3>Game Ranks</h3>
               <div class="section" >
-                <div data-role="fieldcontain">
-                  <label for="favouritegames">Favourite Games:</label>
-                  <textarea cols="40" rows="8" name="favouritegames" id="favouritegames" placeholder="Favourite Games"></textarea>
+                <div data-role="fieldcontain" >
+                	  <label for="CS:GO" class="select">CS:GO Rank</label>
+                      <select name="CS:GO" id="csgorank" data-role = "button" data-inline = "true" data-mini = "true" style="width:200px!important;">
+                      <option value="None">None</option>
+  							<option value="Silver I">Silver I</option>
+  							<option value="Silver II">Silver II</option>
+  							<option value="Silver III">Silver III</option>
+  							<option value="Silver IV">Silver IV</option>
+  							<option value="Silver Elite">Silver Elite</option>
+  							<option value="Silver Elite Master">Silver Elite Master</option>
+  							<option value="Gold Nova I">Gold Nova I</option>
+  							<option value="Gold Nova II">Gold Nova II</option>
+  							<option value="Gold Nova III">Gold Nova III</option>
+  							<option value="Gold Nova Master">Gold Nova Master</option>
+  							<option value="Master Guardian I">Master Guardian I</option>
+  							<option value="Master Guardian II">Master Guardian II</option>
+  							<option value="Master Guardian Elite">Master Guardian Elite</option>
+  							<option value="Distinguished Master Guardian">Distinguished Master Guardian</option>
+  							<option value="Legendary Eagle">Legendary Eagle</option>
+  							<option value="Legendary Eagle Master">Legendary Eagle Master</option>
+  							<option value="Supreme Master First Class">Supreme Master First Class</option>
+  							<option value="The Global Elite">The Global Elite</option>
+					 </select>
                 </div>
-              </div>
-         
+					
+					<div data-role="fieldcontain">
+					<label for="wow2v2" class="select">WoW 2v2 Rating</label>
+                      <select name="wow2v2" id="wow2v2" data-role = "button" data-inline = "true" data-mini = "true" style="width:200px!important;">
+                      <option value="None">None</option>
+  							<option value="0-800">0-800</option>
+  							<option value="801-1000">801-1000</option>
+  							<option value="1001-1300">1001-1300</option>
+  							<option value="1301-1500">1301-1500</option>
+  							<option value="1501-1700">1501-1700</option>
+  							<option value="1701-1800">1701-1800</option>
+  							<option value="1801-1900">1801-1900</option>
+  							<option value="1901-2000">1901-2000</option>
+  							<option value="2001-2100">2001-2100</option>
+  							<option value="2101-2200">2101-2200</option>
+  							<option value="2201-2300">2201-2300</option>
+  							<option value="2301-2400">2301-2400</option>
+  							<option value="2401-2500">2401-2500</option>
+  							<option value="2501-2600">2501-2600</option>
+  							<option value="2601+">2601+</option>
+					 </select>
+                       </div>
+                       
+                       <div data-role="fieldcontain">
+					<label for="wow3v3" class="select">WoW 3v3 Rating</label>
+                      <select name="wow3v3" id="wow3v3" data-role = "button" data-inline = "true" data-mini = "true" style="width:200px!important;">
+                      <option value="None">None</option>
+  							<option value="0-800">0-800</option>
+  							<option value="801-1000">801-1000</option>
+  							<option value="1001-1300">1001-1300</option>
+  							<option value="1301-1500">1301-1500</option>
+  							<option value="1501-1700">1501-1700</option>
+  							<option value="1701-1800">1701-1800</option>
+  							<option value="1801-1900">1801-1900</option>
+  							<option value="1901-2000">1901-2000</option>
+  							<option value="2001-2100">2001-2100</option>
+  							<option value="2101-2200">2101-2200</option>
+  							<option value="2201-2300">2201-2300</option>
+  							<option value="2301-2400">2301-2400</option>
+  							<option value="2401-2500">2401-2500</option>
+  							<option value="2501-2600">2501-2600</option>
+  							<option value="2601+">2601+</option>
+					 </select>
+                       </div>
+                       
+                       <div data-role="fieldcontain">
+					<label for="wow5v5" class="select">WoW 5v5 Rating</label>
+                      <select name="wow5v5" id="wow5v5" data-role = "button" data-inline = "true" data-mini = "true" style="width:200px!important;">
+                      		<option value="None">None</option>
+  							<option value="0-800">0-800</option>
+  							<option value="801-1000">801-1000</option>
+  							<option value="1001-1300">1001-1300</option>
+  							<option value="1301-1500">1301-1500</option>
+  							<option value="1501-1700">1501-1700</option>
+  							<option value="1701-1800">1701-1800</option>
+  							<option value="1801-1900">1801-1900</option>
+  							<option value="1901-2000">1901-2000</option>
+  							<option value="2001-2100">2001-2100</option>
+  							<option value="2101-2200">2101-2200</option>
+  							<option value="2201-2300">2201-2300</option>
+  							<option value="2301-2400">2301-2400</option>
+  							<option value="2401-2500">2401-2500</option>
+  							<option value="2501-2600">2501-2600</option>
+  							<option value="2601+">2601+</option>
+					 </select>
+                       </div>
+                       
+                       <div data-role="fieldcontain">
+					<label for="wowrbg" class="select">WoW RBG Rating</label>
+                      <select name="wowrbg" id="wowrbg" data-role = "button" data-inline = "true" data-mini = "true" style="width:200px!important;">
+                     		 <option value="None">None</option>
+  							<option value="0-800">0-800</option>
+  							<option value="801-1000">801-1000</option>
+  							<option value="1001-1300">1001-1300</option>
+  							<option value="1301-1500">1301-1500</option>
+  							<option value="1501-1700">1501-1700</option>
+  							<option value="1701-1800">1701-1800</option>
+  							<option value="1801-1900">1801-1900</option>
+  							<option value="1901-2000">1901-2000</option>
+  							<option value="2001-2100">2001-2100</option>
+  							<option value="2101-2200">2101-2200</option>
+  							<option value="2201-2300">2201-2300</option>
+  							<option value="2301-2400">2301-2400</option>
+  							<option value="2401-2500">2401-2500</option>
+  							<option value="2501-2600">2501-2600</option>
+  							<option value="2601+">2601+</option>
+					 </select>
+                       </div>
+                       
+                       <div data-role="fieldcontain">
+					<label for="lolrank" class="select">LoL Rank</label>
+                      <select name="lolrank" id="lolrank" data-role = "button" data-inline = "true" data-mini = "true" style="width:200px!important;">
+                     		 <option value="None">None</option>
+                     		 <option value="brone">Bronze</option>
+                     		 <option value="silver">Silver</option>
+                     		 <option value="gold">Gold</option>
+                     		 <option value="platinum">Platinum</option>
+                     		 <option value="diamond">Diamond</option>
+                     		 <option value="challenger">Challenger</option>
+					 </select>
+                       </div>
+                       
+                       <div data-role="fieldcontain">
+					<label for="dota2" class="select">DOTA 2 MMR</label>
+                      <select name="dota2" id="dota2mmr" data-role = "button" data-inline = "true" data-mini = "true" style="width:200px!important;">
+                     		 <option value="None">None</option>
+  							<option value="1500">0-1500</option>
+  							<option value="1501-2000">1501-2000</option>
+  							<option value="2001-2500">2001-2500</option>
+  							<option value="2501-3000">2501-3000</option>
+  							<option value="3001-3500">3001-3500</option>
+  							<option value="3501-4000">3501-4000</option>
+  							<option value="4001-4500">4001-4500</option>
+  							<option value="4501-5000">4501-5000</option>
+  							<option value="5001-5500">5001-5500</option>
+  							<option value="5501-6000">5501-6000</option>
+  							<option value="6001-6500">6001-6500</option>
+  							<option value="6501-7000">6501-7000</option>
+  							<option value="7000">7000+</option>
+					 </select>
+                       </div>
+                  <label for="otherranks">Other Game Ranks:</label>
+                  <textarea cols="40" rows="8" name="otherranks" id="otherranks" placeholder="Type your rank in other games here">@profile.otherranks</textarea>
+                    </div>   
+
               <div class="section">   
                 <div data-role="fieldcontain">
                   <label for="about">About:</label>
-                  <textarea cols="40" rows="8" name="about" id="about" placeholder="About"></textarea>
+                  <textarea cols="40" rows="8" name="about" id="about" placeholder="About">@profile.userbio</textarea>
                    <div Style="float:right"><input type="button" value="Save" id="save"  data-mini="true"></div>
                 </div> 
               </div>
@@ -118,30 +254,40 @@
                       <label for="uplayID">UPlay:</label>
                       <input readonly type="text" name="uplayID" id="uplayID" maxlength="30" value="@profile.uplayID" placeholder="UPlay">       
                     </div>
-                      
-                        
-                  
                   </div>
                 </div>
                 
                 <div class="section">
                   <div data-role="fieldcontain">
-                    <label for="favouritegames">Favourite Games:</label>
-                    <textarea readonly cols="40" rows="8" name="favouritegames" id="favouritegames" placeholder="Favourite Games"></textarea>
+                     <label for="CS:GO Rank">CS:GO Rank:</label>
+                      <input readonly type="text" name="CS:GO Rank" id="CS:GO Rank" maxlength="30" value="@profile.csgorank" placeholder="CS:GO Rank">  
+                      <label for="WoW 2v2 Rating">WoW 2v2 Rating:</label>
+                      <input readonly type="text" name="WoW 2v2 Rating" id="WoW 2v2 Rating" maxlength="30" value="@profile.wow2v2rating" placeholder="WoW 2v2 Rating">
+                      <label for="WoW 3v3 Rating">WoW 3v3 Rating:</label>
+                      <input readonly type="text" name="WoW 3v3 Rating" id="WoW 3v3 Rating" maxlength="30" value="@profile.wow3v3rating" placeholder="WoW 3v3 Rating">
+                      <label for="WoW 5v5 Rating">WoW 5v5 Rating:</label>
+                      <input readonly type="text" name="WoW 5v5 Rating" id="WoW 5v5 Rating" maxlength="30" value="@profile.wow5v5rating" placeholder="WoW 5v5 Rating">
+                      <label for="WoW RBG Rating">WoW RBG Rating:</label>
+                      <input readonly type="text" name="WoW RBG Rating" id="WoW RBG Rating" maxlength="30" value="@profile.wowrbgrating" placeholder="WoW RBG Rating">
+                      <label for="LoL Rank">LoL Rank:</label>
+                      <input readonly type="text" name="LoL Rank" id="LoL Rank" maxlength="30" value="@profile.lolrank" placeholder="LoL Rank">
+                      <label for="DOTA 2">DOTA 2 MMR:</label>
+                      <input readonly type="text" name="DOTA 2" id="DOTA 2" maxlength="30" value="@profile.dota2rank" placeholder="DOTA 2 MMR">
                   </div>      
+                  
+                  <div data-role="fieldcontain">
+                    <label for="otherranksshow">Other Ranks:</label>
+                    <textarea readonly cols="40" rows="8" name="otherranksshow" id="otherranksshow" placeholder="Other Ranks">@profile.otherranks</textarea>
                 </div>
-         
+                  
+                </div>
 
                 <div class="section">
                   <div data-role="fieldcontain">
                     <label for="about">About:</label>
-                    <textarea readonly cols="40" rows="8" name="about" id="about" placeholder="About"></textarea>
+                    <textarea readonly cols="40" rows="8" name="about" id="about" placeholder="About">@profile.userbio</textarea>
                   </div> 
                 </div>
-
-
-
-
 
                   <div class="section">
                     <label for="joinedT">Joined ETournaments:</label>
@@ -155,21 +301,15 @@
                         </ul>
                     </div> 
                   </div>
-
-
-
-
-
            </div>
       <script>
 
-      
         $("#save").click(function() {
           $.ajax({
                 url: "/edituserprofile",
                 type: 'POST',
                 contentType:'application/json',
-                data: JSON.stringify({skypeID: $('#skypeID').val(), battlenetID: $('#battlenetID').val(), steamID: $('#steamID').val(), twitchID: $('#twitchID').val(), uplayID: $('#uplayID').val(), favouritegames: $('#favouritegames').val(), about: $('#about').val()}),
+                data: JSON.stringify({skypeID: $('#skypeID').val(), battlenetID: $('#battlenetID').val(), steamID: $('#steamID').val(), twitchID: $('#twitchID').val(), uplayID: $('#uplayID').val(), about: $('#about').val(), csgorank: $('#csgorank').val(), wow2v2: $('#wow2v2').val(), wow3v3: $('#wow3v3').val(), wow5v5: $('#wow5v5').val(), wowrbg: $('#wowrbg').val(), lolrank: $('#lolrank').val(), dota2mmr: $('#dota2mmr').val(), otherranks: $('#otherranks').val()}),
                 dataType : 'html',
                 success: function(){
                     window.location.replace(document.URL);
@@ -181,9 +321,7 @@
          $('#displayuser').toggle();
          
         });
-     
-        
-       
+
         var dialog = $( "#dialog-form" ).dialog({
               autoOpen: false,
               height: 300,

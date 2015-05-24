@@ -19,7 +19,6 @@
             </div>
         
             <div data-role="content">   
-              </ul>
 
               <h1 align="center">Other User Profile</h1>
               <div class="section" Style="border:none">
@@ -34,8 +33,7 @@
                 
                    
                 <div class="divLayoutcontact" Style = "width:80%">
-                
-                    <div data-role="fieldcontain">
+                           <div data-role="fieldcontain">
                       <label for="username">Username:</label>
                       <input readonly type="text" name="username" id="username" maxlength="30" value="@profile.username" >  
                       <label for="skypeID">Skype:</label>
@@ -49,21 +47,38 @@
                       <label for="uplayID">UPlay:</label>
                       <input readonly type="text" name="uplayID" id="uplayID" maxlength="30" value="@profile.uplayID" placeholder="UPlay">       
                     </div>
-   
                   </div>
                 </div>
                 
                 <div class="section">
                   <div data-role="fieldcontain">
-                    <label for="favouritegames">Favourite Games:</label>
-                    <textarea readonly cols="40" rows="8" name="favouritegames" id="favouritegames" placeholder="Favourite Games"></textarea>
+                     <label for="CS:GO Rank">CS:GO Rank:</label>
+                      <input readonly type="text" name="CS:GO Rank" id="CS:GO Rank" maxlength="30" value="@profile.csgorank" placeholder="CS:GO Rank">  
+                      <label for="WoW 2v2 Rating">WoW 2v2 Rating:</label>
+                      <input readonly type="text" name="WoW 2v2 Rating" id="WoW 2v2 Rating" maxlength="30" value="@profile.wow2v2rating" placeholder="WoW 2v2 Rating">
+                      <label for="WoW 3v3 Rating">WoW 3v3 Rating:</label>
+                      <input readonly type="text" name="WoW 3v3 Rating" id="WoW 3v3 Rating" maxlength="30" value="@profile.wow3v3rating" placeholder="WoW 3v3 Rating">
+                      <label for="WoW 5v5 Rating">WoW 5v5 Rating:</label>
+                      <input readonly type="text" name="WoW 5v5 Rating" id="WoW 5v5 Rating" maxlength="30" value="@profile.wow5v5rating" placeholder="WoW 5v5 Rating">
+                      <label for="WoW RBG Rating">WoW RBG Rating:</label>
+                      <input readonly type="text" name="WoW RBG Rating" id="WoW RBG Rating" maxlength="30" value="@profile.wowrbgrating" placeholder="WoW RBG Rating">
+                      <label for="LoL Rank">LoL Rank:</label>
+                      <input readonly type="text" name="LoL Rank" id="LoL Rank" maxlength="30" value="@profile.lolrank" placeholder="LoL Rank">
+                      <label for="DOTA 2">DOTA 2 MMR:</label>
+                      <input readonly type="text" name="DOTA 2" id="DOTA 2" maxlength="30" value="@profile.dota2rank" placeholder="DOTA 2 MMR">
                   </div>      
+                  
+                  <div data-role="fieldcontain">
+                    <label for="otherranksshow">Other Ranks:</label>
+                    <textarea readonly cols="40" rows="8" name="otherranksshow" id="otherranksshow" placeholder="Other Ranks">@profile.otherranks</textarea>
                 </div>
-         
+                  
+                </div>
+
                 <div class="section">
                   <div data-role="fieldcontain">
                     <label for="about">About:</label>
-                    <textarea readonly cols="40" rows="8" name="about" id="about" placeholder="About"></textarea>
+                    <textarea readonly cols="40" rows="8" name="about" id="about" placeholder="About">@profile.userbio</textarea>
                   </div> 
                 </div>
                 
