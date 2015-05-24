@@ -32,5 +32,7 @@ public class EArenaAd extends Model {
 	
 	@Constraints.Required
 	public String adType;
+	
+	public String logo;
 
 }

@@ -74,12 +74,13 @@ public class EArenaDatabase extends Controller {
 		String gameName = ead.gameName;
 		int playersRequired = ead.playersRequired;
 		String adType = ead.adType;
+		String logo = ead.logo;
 		String admin = session("connected");
 		
 		try {
 
 			conn = DB.getConnection();
-			String insertIntoDatabase = "INSERT INTO EArena (arenaname, admin, arenainformation, playersrequired, gamename, adtype) VALUES(?,?,?,?,?,?)";
+			String insertIntoDatabase = "INSERT INTO EArena (arenaname, admin, arenainformation, playersrequired, gamename, adtype, logo) VALUES(?,?,?,?,?,?,?)";
 			preparedStatement = conn.prepareStatement(insertIntoDatabase);
 			preparedStatement.setString(1, arenaName);
 			preparedStatement.setString(2, admin);
@@ -87,6 +88,7 @@ public class EArenaDatabase extends Controller {
 			preparedStatement.setInt(4, playersRequired);
 			preparedStatement.setString(5, gameName);
 			preparedStatement.setString(6, adType);
+			preparedStatement.setString(7, logo);
 			preparedStatement.executeUpdate();
 
 			return redirect("mainearena");
@@ -170,6 +172,7 @@ public class EArenaDatabase extends Controller {
 					a.createdDate = a.createdDate.substring(0,
 							a.createdDate.lastIndexOf("."));
 					a.adType = rs.getString("adtype");
+					a.logo = rs.getString("logo");
 					adList.add(a);
 				}
 				rs.close();
@@ -262,6 +265,7 @@ public class EArenaDatabase extends Controller {
 					a.createdDate = a.createdDate.substring(0,
 					a.createdDate.lastIndexOf("."));
 					a.adType = rs.getString("adtype");
+					a.logo = rs.getString("logo");
 					adList.add(a);
 				}
 				dickbutt = "2";
@@ -290,6 +294,7 @@ public class EArenaDatabase extends Controller {
 					a.createdDate = a.createdDate.substring(0,
 							a.createdDate.lastIndexOf("."));
 					a.adType = rs.getString("adtype");
+					a.logo = rs.getString("logo");
 					adList.add(a);
 				}
 				rs.close();
@@ -395,6 +400,7 @@ public class EArenaDatabase extends Controller {
 				a.createdDate = a.createdDate.substring(0,
 						a.createdDate.lastIndexOf("."));
 				a.adType = rs.getString("adtype");
+				a.logo = rs.getString("logo");
 			}
 
 			if (a.admin == null) {
@@ -520,12 +526,13 @@ public class EArenaDatabase extends Controller {
 		String strplayersRequired = json.findPath("playersRequired").textValue();
 		String strid = json.findPath("id").textValue();
 		String adType = json.findPath("adType").textValue();
+		String logo = json.findPath("logo").textValue();
 
 		try {
 			int playersRequired = Integer.parseInt(strplayersRequired);
 			int id = Integer.parseInt(strid);
 			conn = DB.getConnection();
-			String insertIntoDatabase = "UPDATE EArena SET arenaname=?, arenainformation=?, playersrequired=?, gamename=?, adtype=? WHERE arenaID=?";
+			String insertIntoDatabase = "UPDATE EArena SET arenaname=?, arenainformation=?, playersrequired=?, gamename=?, adtype=?, logo=? WHERE arenaID=?";
 			preparedStatement = conn.prepareStatement(insertIntoDatabase);
 
 			preparedStatement.setString(1, arenaName);
@@ -533,7 +540,8 @@ public class EArenaDatabase extends Controller {
 			preparedStatement.setInt(3, playersRequired);
 			preparedStatement.setString(4, gameName);
 			preparedStatement.setString(5, adType);
-			preparedStatement.setInt(6, id);
+			preparedStatement.setString(6, logo);
+			preparedStatement.setInt(7, id);
 
 			preparedStatement.executeUpdate();
 
@@ -645,6 +653,7 @@ public class EArenaDatabase extends Controller {
 					a.createdDate = a.createdDate.substring(0,
 					a.createdDate.lastIndexOf("."));
 					a.adType = rs.getString("adtype");
+					a.logo = rs.getString("logo");
 					adList.add(a);
 				}
 
@@ -712,6 +721,7 @@ public static List<EArenaAd> getEArenaAdsMainPage() {
 				a.playersRequired = rs.getInt("playersrequired");
 				a.admin = rs.getString("admin");
 				a.createdDate = rs.getString("created_date");
+				a.logo = rs.getString("logo");
 				adList.add(a);
 			}
 
