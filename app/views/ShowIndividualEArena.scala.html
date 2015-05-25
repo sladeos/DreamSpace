@@ -37,7 +37,7 @@
                   name: 'EArenaAd: @eAd.arenaName',
                   link: document.URL,
                   caption: "@eAd.admin" +" is looking for people to play @eAd.gameName" ,
-                  description: "Information: @eAd.information"
+                  description: ""
                 });
               });
             });
@@ -45,7 +45,8 @@
                     <div id = "adinfo">               
                           <article data-role="listview" data-inset="true" data-dividertheme="a"> 
                               <li><h2>@eAd.arenaName</h2>
-                                  <p>id: @eAd.arenaID</p>
+                              <div style="float:right;"><img src="../assets/images/gamelogos/@eAd.logo"></div>
+                                  <p>AdType: @eAd.adType</p>
                                   <p>Creator: @eAd.admin</p>
                                   <p>Game: @eAd.gameName</p>
                                   <p>Created: @eAd.createdDate</p>

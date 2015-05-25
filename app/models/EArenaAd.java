@@ -29,5 +29,10 @@ public class EArenaAd extends Model {
 	public int playersRequired;
 	
 	public String createdDate;
+	
+	@Constraints.Required
+	public String adType;
+	
+	public String logo;
 
 }
