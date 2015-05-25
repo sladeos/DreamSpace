@@ -428,7 +428,7 @@ public class UserProfileDatabase extends Controller {
 				preparedStatement.setString(2, currentuser);
 				preparedStatement.executeUpdate();
 
-				return ok(MyProfile.render(UserProfileDatabase.getProfile(currentuser), TournamentDatabase.getJoinedTournaments()));
+				return ok(MyProfile.render(UserProfileDatabase.getProfile(currentuser), TournamentDatabase.getJoinedTournaments(currentuser)));
 
 		} catch (Exception e) {
 			// Handle errors for Class.forName
@@ -464,13 +464,27 @@ public class UserProfileDatabase extends Controller {
             
             if(mimetype == null){
                 
-                Path currentRelativePath = Paths.get("");
-                String s = currentRelativePath.toAbsolutePath().toString();
+                String mimetypeD = null;
+		        Blob imageD = null;
+		        PreparedStatement preparedStatementD = null;
                 
-                Path path = Paths.get("/../../../assets/images/avatars/default.gif");
-                byte[] defaultdata = Files.readAllBytes(path);
+                String getDefaultPicDatabase = "SELECT image, mimetype FROM UserProfile WHERE username=?";
+    			preparedStatementD = conn.prepareStatement(getDefaultPicDatabase);
+    			preparedStatementD.setString(1, "defaultpic");
+    			ResultSet rsD = preparedStatementD.executeQuery();
+    			
+        		while (rsD.next()) {
+    				mimetypeD = rsD.getString("mimetype");
+    				imageD = rsD.getBlob("image");
+    			}
+    			
+    			int blobLengthD = (int) imageD.length();
+			    byte[] bytesD = imageD.getBytes(1, blobLengthD);
+			    rsD.close();
+			    
+			    return ok(bytesD).as(mimetypeD);
                 
-                return ok(defaultdata).as("image/gif");
+                
             }
             
 			rs.close();

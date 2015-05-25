@@ -6,9 +6,6 @@
       @Templates.head()
       @Templates.facebookHeadScript()
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
-<script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
-<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
     </head>
     <body>  
       
@@ -19,15 +16,15 @@
 
     
        
-        <div data-role="page" data-theme="b" id = "main" class = "page"  >   
+        <div data-role="page" data-theme="b" id = "main" >   
                       
                
-        <div data-role="header" class = "header">
+        <div data-role="header">
           @message
           @Templates.header()
         </div>
         
-        <div data-role="content" class = "content">
+        <div data-role="content">
                       
 
               <h1 align="center">HomePage</h1>
@@ -47,7 +44,7 @@
 
               <div id="pages">                          
   
-                <div id = "1" class ="MEArenaContent">
+                <div id = "1" class ="flowBox">
                       <article  data-role="listview" data-inset="true" data-dividertheme="a"> 
                           @for(eads <- eads) {
                               <li  data-role = "list-divider" ></li>
@@ -68,7 +65,7 @@
                       </article>
               </div>
      
-              <div id = "2" style="display:none;">
+              <div id = "2" class ="flowBox" style="display:none;">
                 <ul data-role="listview" data-inset="true" data-dividertheme="a" data-theme = "b"> 
                   @for(tournament <- tournament) {
                     <li  data-role = "list-divider" ></li>

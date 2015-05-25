@@ -34,16 +34,17 @@
                 </div>
                 
                 
-        <div data-role="page" data-theme="b" class="page">
+        <div data-role="page" data-theme="b">
 
-            <div data-role="header" class = "header">
+            <div data-role="header">
                 @Templates.header()
             </div>
         
-            <div data-role="content" class = "content">   
+            <div data-role="content">   
              
 
               <h1 align="center">My Profile</h1>
+              
                <div data-role="collapsible" class="ui-icon-alt" data-collapsed-icon="arrow-r" data-inline="true" data-expanded-icon="arrow-d" data-iconpos="right"  >
                
                <h3 id="displayedit" class = "custom-centercollheader" >Edit Profile</h3>
@@ -144,11 +145,11 @@
 
                   <div class="section">
                     <label for="joinedT">Joined ETournaments:</label>
-                    <div class ="MEArenaContent" id="joinedT">
+                    <div class ="flowBox" id="joinedT">
                         <ul data-role="listview" data-inset="true" data-dividertheme="a" data-theme = "b"> 
                         @for(tournament <- tournament) {
                             <li  data-role = "list-divider" ></li>
-                                <li><a data-role = "button"  rel="external"  href="/showtournament/@tournament.tournamentID" class = "greyBtn"><img src="@routes.Assets.at("images/sun.jpg")" alt="Dreamhack" class = "fullscreen"  /><h2>@{"Name: " + tournament.tournamentname}</h2> <p>@{" Size: " +  tournament.participant_count }</p></a>
+                                <li><a data-role = "button"  rel="external"  href="/showtournament/@tournament.tournamentID" class = "greyBtn"><img src="@routes.Assets.at("images/sun.jpg")" alt="Dreamhack" class = "fullscreen"  /><h2>@{tournament.tournamentname}</h2> <p>@{"Admin: " +  tournament.tournamentcreator }</p></a>
                             </li>
                         } 
                         </ul>
@@ -226,6 +227,11 @@
             </div>
             @Templates.footer()
             @Templates.panelAndLogOut()
+            <script>
+                $('#user').removeClass('ui-alt-icon');
+                $('#mail').addClass('ui-alt-icon');
+                $('#h').addClass('ui-alt-icon');
+          </script>
         </div>
         @Templates.jsDisabled()
     </body>

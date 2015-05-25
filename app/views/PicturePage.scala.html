@@ -7,21 +7,21 @@
       <script type="text/javascript" src="@routes.Assets.at("javascripts/jquery-ias.min.js")"></script>
    </head>
    <body>
-      <div data-role="page" data-theme="b" class="page">
-         <div data-role="header" class = "header">
+      <div data-role="page" data-theme="b">
+         <div data-role="header">
             @Templates.header()
          </div>
-         <div data-role="content" class = "content" >
+         <div data-role="content">
             <h1 align="center">Photo Stream</h1>
-            <div class = "search">
+            <div class = "standardBox">
                <a data-role = "button" id = "btn2"  rel="external" href="/newpicture" data-icon="arrow-r" data-iconpos="right">Take and Upload a Picture</a>
             </div>
             <div id="outerpictures" class = "centerDiv">
                <div class="innerpictures">
                   @for(pictures <- pictures) {
-                  <div class="ui-bar ui-bar-b" style="width:70%; margin:0 auto; padding-top:10px; padding-bottom:10px;"><h3>
-                     Creator:   @pictures.creator  
-                      <button id="share_button@pictures.pictureID" class = "myFace faceButton2 search ui-btn-right ui-btn-inline" data-mini="true"> Share</button>
+                  <div class="ui-bar ui-bar-b" style="width:70%; margin:0 auto; padding-top:10px; padding-bottom:10px;"><h3 style="float:left">
+                     Creator:@pictures.creator  
+                      <button id="share_button@pictures.pictureID" class = "facebookColor facebookButton2 standardBox ui-btn-right ui-btn-inline" data-mini="true"> Share</button>
                      </h3>
                   </div>
                      <div class="ui-grid-solo">

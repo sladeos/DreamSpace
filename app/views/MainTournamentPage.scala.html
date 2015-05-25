@@ -7,20 +7,20 @@
       <script type="text/javascript" src="@routes.Assets.at("javascripts/jquery-ias.min.js")"></script>
    </head>
    <body>
-      <div data-role="page" data-theme="b" class="page">
-         <div data-role="header" class = "header">
+      <div data-role="page" data-theme="b">
+         <div data-role="header">
             @Templates.header()
          </div>
-         <div data-role="content" class = "content" >
-            <h1 align="center">Tournament</h1>
-            <div class = "search">
-               <a data-role = "button" id = "btn1"  rel="external" href="/myetournaments"  data-icon="user" data-iconpos="right">My tournament</a>
+         <div data-role="content">
+            <h1 align="center">ETournament</h1>
+            <div class = "standardBox">
+               <a data-role = "button" id = "btn1"  rel="external" href="/myetournaments"  data-icon="user" data-iconpos="right">My tournaments</a>
                <a data-role = "button" id = "btn2"  rel="external" href="/createtournament" data-icon="arrow-r" data-iconpos="right">Create a new tournament</a>
                <h3>Available tournaments</h3>
             </div>
             <div id="pagebuttons"></div>
             <div id="tournaments">
-               <div   class ="MEArenaContent">
+               <div   class ="flowBox">
                   <hr>
                   <ul data-role="listview" data-inset="true" data-dividertheme="a" data-theme = "b">
                      @for(tournament <- tournament) {
@@ -60,7 +60,7 @@
                $(document).ready(function() {
                var ias = jQuery.ias({
                	  container:  '#tournaments',
-               	  item:       '.MEArenaContent',
+               	  item:       '.flowBox',
                	  pagination: '#pagination',
                	  next:       '.Next'
                	});
