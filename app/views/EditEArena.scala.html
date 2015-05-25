@@ -33,9 +33,6 @@
                     <button id="share_button" class = "facebookColor facebookButton centerButton" data-mini="true">Facebook Share</button>
                     <div data-role="collapsible" class="ui-icon-alt" data-collapsed-icon="arrow-r" data-inline="true" data-expanded-icon="arrow-d" data-iconpos="right"  >
 
-                   
-                    
-                
                      <h3 class = "custom-centercollheader" >Edit ad</h3>
                    
 
@@ -55,6 +52,7 @@
                             <p id="warning"></p>
                         </div>
                     </div>
+                    
 
             <script type="text/javascript">
             $(document).ready(function() {
@@ -70,17 +68,20 @@
               });
             });
 </script>
+
+<div data-role="popup" id="replyPopUp" class="ui-content" data-theme="b" data-position-to="origin" style="width:300px;">
+</div>
+
 <script type="text/javascript">
           function getProfileRanks(user){
-        	  alert(user)
                 $.ajax({
                     url: "/replyprofileranks/"+user,
                     type: 'GET',
                     contentType:'application/json',
                     dataType : 'json',
                     success: function(data ){
-                    	
-                       alert(data['username']);
+                    	$('#replyPopUp').html("<a /rel=" +  "external " + "href=" +"/profile/" +data['username'] + "><p> User: " + data['username'] +"</a> "+ "</p> <p> CS:GO Rank: " + data['csgorank']  + "</p> <p> WoW 2v2 Rating: " +  data['wow2v2rating']  + "</p> <p> WoW 3v3 Rating: " +  data['wow3v3rating']  + "</p> <p> WoW 5v5 Rating: " +  data['wow5v5rating']  + "</p> <p> WoW RBG Rating: " + data['wowrbgrating']  + "</p> <p> LoL Rank: " +  data['lolrank']  + "</p> <p> DOTA 2: " +  data['dota2rank']  + "</p> <p> Other Ranks: " +  data['otherranks'])
+                       $("#replyPopUp" ).popup( "open");
                         		}
                 });
                 
