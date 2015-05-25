@@ -4,6 +4,7 @@
    <head>
       <title>Edit your EArena Ad</title>
       @Templates.head()
+      <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
       <script type="text/javascript" src="@routes.Assets.at("javascripts/image-picker/image-picker.min.js")" ></script>
       <link rel="stylesheet" href="@routes.Assets.at("javascripts/image-picker/image-picker.css")">
       @Templates.facebookHeadScript()
@@ -43,7 +44,7 @@
                     		</div>
                      	</form>
                      	
-                     	<div data-role="collapsible" class="ui-icon-alt" data-collapsed-icon="grid" data-expanded-icon="grid" data-iconpos="right"  >
+                     	<div data-role="collapsible" class="ui-icon-alt" data-collapsed-icon="grid" data-expanded-icon="grid" data-iconpos="right" >
                             <h3 class = "custom-centercollheader" >Choose an icon</h3>
                         
                             <select class="image-picker hide-html" id="imgpick" name="logo" >
