@@ -1,3 +1,4 @@
+
 .ui-page .ui-header {
     background:#FFFFFF;
 }
@@ -104,6 +105,7 @@ background : #FF9900;
         border-right: none;    
         background:#FFFFFF;
         font-family:Helvetica;
+        font-weight: bold;
     }
 
     .headerImg{
@@ -188,6 +190,7 @@ background : #FF9900;
         background:#FFFFFF;
         font-family:Helvetica;
         padding-top: 10px;
+        font-weight: bold;
     }
 
     .headerImg{
@@ -267,13 +270,14 @@ background : #FF9900;
     .ui-page .ui-btn.customButton{
 
         width: 120px;
-        font-size: 15px;
+        font-size: 20px;
         border: 7px solid #FF5E01;
         border-top:none;
         border-bottom: none;
         border-right: none;    
         background:#FFFFFF;
         font-family:Helvetica;
+        font-weight: bold;
 
     }
 
@@ -316,4 +320,4 @@ background : #FF9900;
 
 
 }
- 
+
