@@ -31,7 +31,7 @@ public class Application extends Controller {
 	public static Result mainMethod() {
 		String user = session("connected");
 		if (user != null) {
-			return ok(main.render("You are logged in as " + user, EArenaDatabase.getEArenaAdsMainPage(), TournamentDatabase.getTournamentsMainPage()));
+			return ok(main.render(user, EArenaDatabase.getEArenaAdsMainPage(), TournamentDatabase.getTournamentsMainPage()));
 		} else {
 			return unauthorized(LoginUserPage
 					.render("Welcome, login to explore the website"));
