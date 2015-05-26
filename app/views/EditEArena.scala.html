@@ -14,6 +14,8 @@
                 $("#replyarea").val('');
             });
         </script>
+        <script type="text/javascript" src="@routes.Assets.at("stylesheets/jquery-ui/jquery-ui.js")" ></script>
+        <link rel="stylesheet" href="@routes.Assets.at("stylesheets/jquery-ui/jquery-ui.css")">
    </head>
    <body>
 
@@ -33,9 +35,6 @@
                     <button id="share_button" class = "facebookColor facebookButton centerButton" data-mini="true">Facebook Share</button>
                     <div data-role="collapsible" class="ui-icon-alt" data-collapsed-icon="arrow-r" data-inline="true" data-expanded-icon="arrow-d" data-iconpos="right"  >
 
-                   
-                    
-                
                      <h3 class = "custom-centercollheader" >Edit ad</h3>
   						 <form id="adTypes">
                      		<div class="ui-grid-a">   
@@ -73,13 +72,14 @@
                             <textarea placeholder="Enter some information about your ad here!" name="information" id="informationArea" rows="4" cols="50"  >@eAd.information</textarea>
                     
                         <div style="display: none;">
-                            <input type="id" name="id" id="id" value="@eAd.arenaID"/>
+                            <input type="text" name="id" id="id" value="@eAd.arenaID"/>
                         </div>
                         <button  class = "my-btn"  id="updateearena"  value="Update EArena Ad" onclick="validate()">Update EArena Ad </button>
                         <button data-role = "button" value="Delete EArena" id="deletearena" class = "submitReplay goBackButton" data-icon="delete" data-iconpos="right">Delete EArena</button>
                             <p id="warning"></p>
                         </div>
                     </div>
+                    
 
             <script type="text/javascript">
             $(document).ready(function() {
@@ -108,10 +108,29 @@
                 });
               });
             });
+</script>
+
+<div data-role="popup" id="replyPopUp" class="ui-content" data-theme="b" data-position-to="origin" style="width:300px;">
+</div>
+
+<script type="text/javascript">
+          function getProfileRanks(user){
+                $.ajax({
+                    url: "/replyprofileranks/"+user,
+                    type: 'GET',
+                    contentType:'application/json',
+                    dataType : 'json',
+                    success: function(data ){
+                    	$('#replyPopUp').html("<a /rel=" +  "external " + "href=" +"/profile/" +data['username'] + "><p> User: " + data['username'] +"</a> "+ "</p> <p> CS:GO Rank: " + data['csgorank']  + "</p> <p> WoW 2v2 Rating: " +  data['wow2v2rating']  + "</p> <p> WoW 3v3 Rating: " +  data['wow3v3rating']  + "</p> <p> WoW 5v5 Rating: " +  data['wow5v5rating']  + "</p> <p> WoW RBG Rating: " + data['wowrbgrating']  + "</p> <p> LoL Rank: " +  data['lolrank']  + "</p> <p> DOTA 2: " +  data['dota2rank']  + "</p> <p> Other Ranks: " +  data['otherranks'])
+                       $("#replyPopUp" ).popup( "open");
+                        		}
+                });
+                }
+              
+
             </script>
             
             <script type="text/javascript">
-        
 
                function errorInField(){
                 	 $("#warning").css('color', 'red');
@@ -251,12 +270,22 @@
                     <div id="adreplies">
                          <article data-role="listview" data-inset="true" data-dividertheme="a">
                             @for(eAdReplies <- eAdReplies) {
+                            <div id="@eAdReplies.arenaID">
+                            
                               <li  data-role = "list-divider" ></li>
                               <li><h2>@{eAdReplies.user + " - " + eAdReplies.createdDate}</h2>
                                <p>Reply:</p>
                                <textarea readonly name="textarea" id="text" style = "overflow:auto;resize:none">@{eAdReplies.content}
                                 </textarea>
                                 </li>
+                                
+                                </div>
+                                <script>
+                                $("#@eAdReplies.arenaID").click(function(event){
+                                	getProfileRanks("@eAdReplies.user");
+                                })
+
+                                </script>
                             } 
                           </article>
                     </div>
