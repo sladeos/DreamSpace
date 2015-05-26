@@ -24,21 +24,23 @@
           @Templates.header()
         </div>
         
-        <div data-role="content" id="backgroundPic">
+        <div data-role="content" >
           
 
 
-
+ @for(pictures <- pictures) {
           <div class="ui-grid-solo ui-responsive">
-            <div class="ui-block-a ui-responsive">
-    
-              @for(pictures <- pictures) {
-                <div class="ui-responsive" style="width: 20% ; float:left">
-                            <a rel="external" href="/pictures" class="ui-btn ui-btn-b ui-corner-all ui-shadow" style="margin:0 ; padding:0"><img src="/pic/@pictures.pictureID" style="max-height:100px ; width:100%" /></a>
-                </div>
+              <div class="ui-block-a ui-responsive" style="max-height:250px">
+
+                           <div style="float:left"><a href="/pictures" rel="external" class="ui-btn ui-btn-b ui-corner-all ui-shadow imgCut " data-transition="fade" style="max-height:200px; width:70%; margin: 0 auto; background:#151515" ><img src="/pic/@pictures.pictureID" style="width: 100%" /></a>
+                           </div>
+
+
+                        </div>
               } 
             </div>
           </div>
+
 
             
             <div class="ui-grid-a">

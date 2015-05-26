@@ -15,12 +15,12 @@
 }
 
 .ui-page{
-    background: url("../images/main.jpg");
+    background: white;
 
 }
 
 .ui-content{
-    background: #151515;
+    background: white;
     padding: 5% 5%;
     margin:0 auto;
 
@@ -109,7 +109,14 @@ background : #FF9900;
     text-align: center !important;
     padding-right: 2.5em !important;
 }
+  .imgCut{
 
+        max-Width: 300px;
+        max-Height: 300px;
+        min-Width: 100px;
+        min-Height: 50px;
+   
+    }
 #bracket {
     color:black;
     text-shadow:0 0px 0 #111;
@@ -146,11 +153,11 @@ background : #FF9900;
 
 @media all and (max-width: 36em){
     .ui-page{
-        background: #151515;
+        background: white;
     }
 
     .ui-content{
-        background: #151515;
+        background: white;
     }
 
     .flowBox{
@@ -172,13 +179,13 @@ background : #FF9900;
 @media all and (min-width: 60em){
 
     .ui-page{
-        background: url("../images/main.jpg");
+        background: white;
     }
     .ui-content{
         padding: 15px 15px;
         margin:0 auto;
-        width:100%;
-        background: #151515;
+        width:1500px;
+        background: white;
     }
     .ui-page .ui-header{
         margin:0 auto;
@@ -243,6 +250,15 @@ background : #FF9900;
         float: left;
         width: 49%;
         padding-left: 1%;
+    }
+    .imgCut{
+
+        max-Width: 300px;
+        max-Height: 300px;
+        min-Width: 100px;
+        min-Height: 50px;
+        orientation: orientationt;
+   
     }
 
 

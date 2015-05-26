@@ -335,7 +335,7 @@ public static List<Picture> getPicturesMainPage() {
 			try {
 				conn = DB.getConnection();
 
-				String insertIntoDatabase = "SELECT * FROM Picture ORDER BY created_date DESC LIMIT 5";
+				String insertIntoDatabase = "SELECT * FROM Picture ORDER BY created_date DESC LIMIT 4";
 				preparedStatement = conn.prepareStatement(insertIntoDatabase);
 				ResultSet rs = preparedStatement.executeQuery();
 
