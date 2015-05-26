@@ -28,6 +28,7 @@
             <div class ="wrap">
                 <h1 align="center">EArena Ad</h1>
             <button id="share_button" class = "facebookColor facebookButton centerButton" data-mini="true">Facebook Share</button>
+            
             <script type="text/javascript">
             $(document).ready(function() {
               $('#share_button').click(function(e) {
@@ -37,15 +38,36 @@
                   name: 'EArenaAd: @eAd.arenaName',
                   link: document.URL,
                   caption: "@eAd.admin" +" is looking for people to play @eAd.gameName" ,
-                  description: "Information: @eAd.information"
+                  description: ""
                 });
               });
             });
             </script>
+            <div data-role="popup" id="replyPopUp" class="ui-content" data-theme="b" data-position-to="origin" style="width:300px;">
+</div>
+
+<script type="text/javascript">
+          function getProfileRanks(user){
+                $.ajax({
+                    url: "/replyprofileranks/"+user,
+                    type: 'GET',
+                    contentType:'application/json',
+                    dataType : 'json',
+                    success: function(data ){
+                    	$('#replyPopUp').html("<a /rel=" +  "external " + "href=" +"/profile/" +data['username'] + "><p> User: " + data['username'] +"</a> "+ "</p> <p> CS:GO Rank: " + data['csgorank']  + "</p> <p> WoW 2v2 Rating: " +  data['wow2v2rating']  + "</p> <p> WoW 3v3 Rating: " +  data['wow3v3rating']  + "</p> <p> WoW 5v5 Rating: " +  data['wow5v5rating']  + "</p> <p> WoW RBG Rating: " + data['wowrbgrating']  + "</p> <p> LoL Rank: " +  data['lolrank']  + "</p> <p> DOTA 2: " +  data['dota2rank']  + "</p> <p> Other Ranks: " +  data['otherranks'])
+                       $("#replyPopUp" ).popup( "open");
+                        		}
+                });
+                
+                }
+          </script>
+            
+            
                     <div id = "adinfo">               
                           <article data-role="listview" data-inset="true" data-dividertheme="a"> 
                               <li><h2>@eAd.arenaName</h2>
-                                  <p>id: @eAd.arenaID</p>
+                              <div style="float:right;"><img src="../assets/images/gamelogos/@eAd.logo"></div>
+                                  <p>AdType: @eAd.adType</p>
                                   <p>Creator: @eAd.admin</p>
                                   <p>Game: @eAd.gameName</p>
                                   <p>Created: @eAd.createdDate</p>
@@ -65,12 +87,20 @@
                     <div id = "adreplies">  
                       <article data-role="listview" data-inset="true" data-dividertheme="a">
                         @for(eAdReplies <- eAdReplies) {
+                        <div id="@eAdReplies.arenaID">
                           <li  data-role = "list-divider" ></li>
                           <li><h2>@{eAdReplies.user + " - " + eAdReplies.createdDate}</h2>
                            <p>Reply:</p>
                            <textarea readonly name="textarea" id="text" style = "overflow:auto;resize:none">@{eAdReplies.content}
                             </textarea>
                             </li>
+                            </div>
+                            <script>
+                                $("#@eAdReplies.arenaID").click(function(event){
+                                	getProfileRanks("@eAdReplies.user");
+                                })
+
+                                </script>
                         } 
                       </article> 
                     </div>

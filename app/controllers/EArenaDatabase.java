@@ -73,19 +73,23 @@ public class EArenaDatabase extends Controller {
 		String information = ead.information;
 		String gameName = ead.gameName;
 		int playersRequired = ead.playersRequired;
+		String adType = ead.adType;
+		String logo = ead.logo;
 		String admin = session("connected");
+		
 		try {
 
 			conn = DB.getConnection();
-			String insertIntoDatabase = "INSERT INTO EArena (arenaname, admin, arenainformation, playersrequired, gamename) VALUES(?,?,?,?,?)";
+			String insertIntoDatabase = "INSERT INTO EArena (arenaname, admin, arenainformation, playersrequired, gamename, adtype, logo) VALUES(?,?,?,?,?,?,?)";
 			preparedStatement = conn.prepareStatement(insertIntoDatabase);
 			preparedStatement.setString(1, arenaName);
 			preparedStatement.setString(2, admin);
 			preparedStatement.setString(3, information);
 			preparedStatement.setInt(4, playersRequired);
 			preparedStatement.setString(5, gameName);
+			preparedStatement.setString(6, adType);
+			preparedStatement.setString(7, logo);
 			preparedStatement.executeUpdate();
-
 			return redirect("mainearena");
 
 		} catch (com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException ice) {
@@ -166,6 +170,8 @@ public class EArenaDatabase extends Controller {
 					a.createdDate = rs.getString("created_date");
 					a.createdDate = a.createdDate.substring(0,
 							a.createdDate.lastIndexOf("."));
+					a.adType = rs.getString("adtype");
+					a.logo = rs.getString("logo");
 					adList.add(a);
 				}
 				rs.close();
@@ -256,7 +262,9 @@ public class EArenaDatabase extends Controller {
 					a.admin = rs.getString("admin");
 					a.createdDate = rs.getString("created_date");
 					a.createdDate = a.createdDate.substring(0,
-							a.createdDate.lastIndexOf("."));
+					a.createdDate.lastIndexOf("."));
+					a.adType = rs.getString("adtype");
+					a.logo = rs.getString("logo");
 					adList.add(a);
 				}
 				dickbutt = "2";
@@ -284,6 +292,8 @@ public class EArenaDatabase extends Controller {
 					a.createdDate = rs.getString("created_date");
 					a.createdDate = a.createdDate.substring(0,
 							a.createdDate.lastIndexOf("."));
+					a.adType = rs.getString("adtype");
+					a.logo = rs.getString("logo");
 					adList.add(a);
 				}
 				rs.close();
@@ -388,6 +398,8 @@ public class EArenaDatabase extends Controller {
 				a.createdDate = rs.getString("created_date");
 				a.createdDate = a.createdDate.substring(0,
 						a.createdDate.lastIndexOf("."));
+				a.adType = rs.getString("adtype");
+				a.logo = rs.getString("logo");
 			}
 
 			if (a.admin == null) {
@@ -472,11 +484,12 @@ public class EArenaDatabase extends Controller {
 			ResultSet rs = preparedStatement.executeQuery();
 			while (rs.next()) {
 				AdReply a = new AdReply();
+				a.arenaID = rs.getInt("replyID");
 				a.content = rs.getString("replycontent");
 				a.user = rs.getString("username");
 				a.createdDate = rs.getString("created_date");
 				a.createdDate = a.createdDate.substring(0,
-						a.createdDate.lastIndexOf("."));
+				a.createdDate.lastIndexOf("."));
 				adReplyList.add(a);
 			}
 
@@ -510,22 +523,25 @@ public class EArenaDatabase extends Controller {
 		String arenaName = json.findPath("arenaName").textValue();
 		String information = json.findPath("information").textValue();
 		String gameName = json.findPath("gameName").textValue();
-		String strplayersRequired = json.findPath("playersRequired")
-				.textValue();
+		String strplayersRequired = json.findPath("playersRequired").textValue();
 		String strid = json.findPath("id").textValue();
+		String adType = json.findPath("adType").textValue();
+		String logo = json.findPath("logo").textValue();
 
 		try {
 			int playersRequired = Integer.parseInt(strplayersRequired);
 			int id = Integer.parseInt(strid);
 			conn = DB.getConnection();
-			String insertIntoDatabase = "UPDATE EArena SET arenaname=?, arenainformation=?, playersrequired=?, gamename=? WHERE arenaID=?";
+			String insertIntoDatabase = "UPDATE EArena SET arenaname=?, arenainformation=?, playersrequired=?, gamename=?, adtype=?, logo=? WHERE arenaID=?";
 			preparedStatement = conn.prepareStatement(insertIntoDatabase);
 
 			preparedStatement.setString(1, arenaName);
 			preparedStatement.setString(2, information);
 			preparedStatement.setInt(3, playersRequired);
 			preparedStatement.setString(4, gameName);
-			preparedStatement.setInt(5, id);
+			preparedStatement.setString(5, adType);
+			preparedStatement.setString(6, logo);
+			preparedStatement.setInt(7, id);
 
 			preparedStatement.executeUpdate();
 
@@ -636,6 +652,8 @@ public class EArenaDatabase extends Controller {
 					a.createdDate = rs.getString("created_date");
 					a.createdDate = a.createdDate.substring(0,
 					a.createdDate.lastIndexOf("."));
+					a.adType = rs.getString("adtype");
+					a.logo = rs.getString("logo");
 					adList.add(a);
 				}
 
@@ -703,6 +721,7 @@ public static List<EArenaAd> getEArenaAdsMainPage() {
 				a.playersRequired = rs.getInt("playersrequired");
 				a.admin = rs.getString("admin");
 				a.createdDate = rs.getString("created_date");
+				a.logo = rs.getString("logo");
 				adList.add(a);
 			}
 
@@ -733,5 +752,49 @@ public static List<EArenaAd> getEArenaAdsMainPage() {
 				
 			} // end finally try
 		} // end try
-	 }		
+	 }
+
+public static Result getReplyProfile(String user){
+	Connection conn = null;
+	PreparedStatement preparedStatement = null;
+	ObjectNode result = Json.newObject();
+	try {
+
+		conn = DB.getConnection();
+		String getProfiles = "SELECT * FROM UserProfile WHERE username=?";
+		
+		preparedStatement = conn.prepareStatement(getProfiles);
+		preparedStatement.setString(1, user);
+
+
+		ResultSet rs = preparedStatement.executeQuery();
+		if (rs.isBeforeFirst()) {
+			rs.next();
+			result.put("username", user);
+			result.put("csgorank", rs.getString("csgorank"));
+			result.put("wow2v2rating", rs.getString("wow2v2"));
+			result.put("wow3v3rating", rs.getString("wow3v3"));
+			result.put("wow5v5rating", rs.getString("wow5v5"));
+			result.put("wowrbgrating", rs.getString("wowrbg"));
+			result.put("lolrank", rs.getString("lolrank"));
+			result.put("dota2rank", rs.getString("dota2mmr"));
+			result.put("otherranks", rs.getString("otherranks"));
+		}
+		return ok(result);
+	} catch (SQLException se) {
+		return ok("SQL " + se.toString());
+	} catch (Exception e) {
+		// Handle errors for Class.forName
+		return ok("Exception " + e.toString());
+	} finally {
+		// finally block used to close resources
+		try {
+			if (preparedStatement != null)
+				conn.close();
+		} catch (SQLException se) {
+		}// do nothing
+	}
+	
+	
+}
 }

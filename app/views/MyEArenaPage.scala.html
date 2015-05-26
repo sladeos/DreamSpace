@@ -21,21 +21,25 @@
          <div class = "standardBox">
             <h1 align="center">My EArena</h1>
             <button data-role = "button" id = "creatad" class = "search" rel="external" href="/">Create a new ad</button>
-            <div id="pagebuttons"></div>
+            </div>
+            <div id="adsFound" class = "standardBox">
+            </div>
+             <div class="eadColours" style="background-color:DarkBlue;"><h4> <br><br>Game Ads</h4></div>
+             <div class="eadColours" style="background-color:FireBrick;"><h4><br><br>Tournament Ads</h4></div>
+
             <script type="text/javascript">
                $('#creatad').click(function() {
                  window.location='/createarenaad'; });
-                 
             </script>
-            </div>
             <div id ="earenas">
             <div class ="flowBox">
                <article  data-role="listview" data-inset="true" data-dividertheme="a">
                   @for(eads <- eads) {
                   <li  data-role = "list-divider" ></li>
                   <li>
-                     <a rel="external"  href="/earenaad/@eads.arenaID" style = "background: #373737" >
+                     <a rel="external" id="@eads.arenaID" href="/earenaad/@eads.arenaID" style = "background: #373737" >
                         <h2>@{" " + eads.arenaName}</h2>
+                        <div style="float:right;"><img src="assets/images/gamelogos/@eads.logo"></div>
                         <p>@{" Host: " + eads.admin}</p>
                         <p>@{" Game: " + eads.gameName }</p>
                         <p>@{" Created: " + eads.createdDate }</p>
@@ -48,6 +52,11 @@
                   <script>
                         $('.ui-page-active .ui-listview').listview('refresh');
                         $('.ui-page-active :jqmData(role=content)').trigger('create');
+                        if("@eads.adType" === "Tournament Ad"){
+                        	$("#@eads.arenaID").css("background", "FireBrick");
+                        }else{
+                        	$("#@eads.arenaID").css("background", "DarkBlue");
+                        }
                      </script>
                   } 
                </article>
@@ -57,17 +66,9 @@
                var rowcount = @rowcount;
                var pageDecimal = rowcount / 10;
                var pages = Math.ceil(pageDecimal);
-               
+
                $(document).ready(function() {
-                   if (rowcount > 1) {
-                     $("#pagebuttons").append(rowcount + " Results");
-                   }
-                   else {
-                     $("#pagebuttons").append(rowcount + " Result");
-                   }
-                 })
-               
-               $(document).ready(function() {
+            	   $("#adsFound").html("<h3>Ads found: " + rowcount + "</h3>");
                var ias = jQuery.ias({
                	  container:  '#earenas',
                	  item:       '.flowBox',
