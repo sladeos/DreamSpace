@@ -20,12 +20,16 @@
                       
                
         <div data-role="header">
-          @message
+          <div style="float:right; padding-right:30px;">
+      <a id="logged" data-role="button" rel = "external" href='#' data-theme="a" data-icon="user" data-inline = "true" data-shadow="false" style= "background:#FF6E00;  background:white; border:none;  "> @message</a>
+      </div>
           @Templates.header()
+
         </div>
         
         <div data-role="content">
-                      
+  
+
 
               <h1 align="center">HomePage</h1>
               
@@ -93,11 +97,7 @@
            </script>
 
 
-          <script>
-                $('#h').removeClass('ui-alt-icon');
-                $('#mail').addClass('ui-alt-icon');
-                $('#user').addClass('ui-alt-icon');
-          </script>
+        
 
         </div>
 

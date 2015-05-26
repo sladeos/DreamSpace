@@ -1,4 +1,6 @@
 
+<<<<<<< HEAD
+=======
 .eadColours{
 	  width: 60px;
     height: 60px;
@@ -10,17 +12,17 @@
 #pagination{
 	visibility: hidden;
 }
+>>>>>>> master
 .ui-page .ui-header {
-    background:#151515;
+    background:#FFFFFF;
 }
 
 .ui-page{
-    background: url("../images/main.jpg");
-
+    background: #FFFFFF;
 }
 
 .ui-content{
-    background: #151515;
+    background: #FFFFFF;
     padding: 5% 5%;
     margin:0 auto;
 
@@ -32,9 +34,8 @@ background : #FF9900;
 }​
 
 .ui-page .ui-footer {
-    background:#151515;
+    background:#FFFFFF;
 }
-
 .standardBox{
     width: 300px;
     margin: 0 auto;
@@ -109,6 +110,33 @@ background : #FF9900;
     text-align: center !important;
     padding-right: 2.5em !important;
 }
+ .ui-page .ui-btn.customButton{
+        width: 100px;
+        font-size: 15px;
+        border: 7px solid #FF5E01;
+        border-top:none;
+        border-bottom: none;
+        border-right: none;    
+        background:#FFFFFF;
+        font-family:Helvetica;
+        font-weight: bold;
+    }
+
+    .headerImg{
+        margin-bottom: -20px; 
+        padding-right: auto; 
+        padding-left: 0;
+        width: 230px;
+        height:100px;
+         float: center;
+    }
+    .block{
+      
+        height: 100px;
+    }
+    .headern{
+        text-align: center;
+    }
 
 #bracket {
     color:black;
@@ -146,11 +174,11 @@ background : #FF9900;
 
 @media all and (max-width: 36em){
     .ui-page{
-        background: #151515;
+        background: #FFFFFF;
     }
 
     .ui-content{
-        background: #151515;
+        background: #FFFFFF;
     }
 
     .flowBox{
@@ -166,28 +194,57 @@ background : #FF9900;
         width: 65px;
         max-width: 65px;
     }
-}
+     .ui-page .ui-btn.customButton{
+        width: 60px;
+        font-size: 10px;
+        border: 2px solid #FF5E01;
+        border-top:none;
+        border-bottom: none;
+        border-right: none;   
+        background:#FFFFFF;
+        font-family:Helvetica;
+        padding-top: 10px;
+        font-weight: bold;
+    }
 
+    .headerImg{
+        margin-bottom: -30px; 
+        width: 350px;
+        height:100px;
+        text-align:center;
+        padding-bottom: 20px;
+    }
+    .block{
+      
+        height: 60px;
+    }
+    .bottomButton{
+    }
+    .headern{
+        text-align: center;
+    }
+     
+}
 
 @media all and (min-width: 60em){
 
     .ui-page{
-        background: url("../images/main.jpg");
+        background:#FFFFFF;
     }
     .ui-content{
         padding: 15px 15px;
         margin:0 auto;
-        width:900px;
-        background: #151515;
+        width:1000px;
+        background: #FFFFFF;
     }
     .ui-page .ui-header{
         margin:0 auto;
-        width: 930px;
+        
     }
 
     .ui-page .ui-footer {
         margin:0 auto;
-		width: 930px;
+		
     }
 
     .flowBox{
@@ -224,6 +281,36 @@ background : #FF9900;
         max-width: 65px;
     }
 
+    .ui-page .ui-btn.customButton{
+
+        width: 120px;
+        font-size: 20px;
+        border: 7px solid #FF5E01;
+        border-top:none;
+        border-bottom: none;
+        border-right: none;    
+        background:#FFFFFF;
+        font-family:Helvetica;
+        font-weight: bold;
+
+    }
+
+    .headerImg{
+        margin-bottom: -30px; 
+        padding-right: 70px; 
+        padding-left: 50px;
+        width: 300px;
+        height:100px;
+    }
+    .block{
+      
+        height: 100px;
+    }
+  
+      .headern{
+        text-align: left;
+    }
+
     #adinfo{
         position: relative;
         float: left;
@@ -247,4 +334,4 @@ background : #FF9900;
 
 
 }
- 
+

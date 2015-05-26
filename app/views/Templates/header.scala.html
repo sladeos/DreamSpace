@@ -1,2 +1,38 @@
-                <h1><img src="@routes.Assets.at("images/e3.png")" class = "fullscreen"></h1>
+                
+
+         
+          <div  class="ui-bar ui-bar-b headern" style = "background:white; border:none;"> 
+              <img  id ="bild" src="@routes.Assets.at("images/real.png")" class = "fullscreen headerImg" >
+              <a href='#' id="h"  rel = "external" class=" ui-btn ui-btn-a customButton customButtonText bottomButton">Home</a>
+              <a id="mail"rel = "external" href='#' class = "ui-btn ui-btn-a ui-btn-inline customButton customButtonText bottomButton"><div id="icon" class="icon" style="position: relative;"></div>Notification</a>
+              <a id ="panelmenu" href="#popupMenu" data-rel="popup" class="ui-btn ui-btn-a ui-btn-inline customButton customButtonText bottomButton ">Menu</a>
+          </div>  
+
+      <script>
+        $(document).ready(function() {
+           if (window.location.pathname != "/mynotifications"){
+           $.ajax({
+               url: "/getNotificationAmt",
+               type: 'GET',
+               dataType: 'html',
+               success: function(data) {
+                   if (data > 0){
+                   $("#icon").iosbadge({ theme: 'red', size: 22, content:data });
+                   }
+               },
+           
+            });
+           }
+            $('#h').click(function() {
+              window.location='/'; 
+            });
+           $('#mail').click(function() {
+              window.location='/mynotifications'; });
+        });
+    </script>
+    <script>
+        $("#h, #mail, #user, #panelmenu ").css("background","  white");
+     </script> 
+
+  
 
