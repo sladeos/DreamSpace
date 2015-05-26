@@ -184,7 +184,7 @@ background : #FF9900;
     .ui-content{
         padding: 15px 15px;
         margin:0 auto;
-        width:1500px;
+        width:1000px;
         background: white;
     }
     .ui-page .ui-header{
@@ -256,7 +256,7 @@ background : #FF9900;
         max-Width: 300px;
         max-Height: 300px;
         min-Width: 100px;
-        min-Height: 50px;
+        min-Height: 300px;
         orientation: orientationt;
    
     }

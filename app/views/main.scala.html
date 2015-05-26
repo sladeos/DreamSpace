@@ -3,149 +3,134 @@
 
 <html>
     <head>
-      @Templates.head()
-      @Templates.facebookHeadScript()
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/mainpage.css")">
-
-
+        @Templates.head()
+        @Templates.facebookHeadScript()
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/mainpage.css")">
     </head>
     <body>  
-    
 
-
-    
-       
         <div data-role="page" data-theme="c" id = "main" >   
-                      
-               
-        <div data-role="header">
-          @message
-          @Templates.header()
-        </div>
+            <div data-role="header">
+                @message
+                @Templates.header()
+            </div>
         
-        <div data-role="content" >
-          
+            <div data-role="content" >
 
-
- @for(pictures <- pictures) {
-          <div class="ui-grid-solo ui-responsive">
-              <div class="ui-block-a ui-responsive" style="max-height:250px">
-
-                           <div style="float:left"><a href="/pictures" rel="external" class="ui-btn ui-btn-b ui-corner-all ui-shadow imgCut " data-transition="fade" style="max-height:200px; width:70%; margin: 0 auto; background:#151515" ><img src="/pic/@pictures.pictureID" style="width: 100%" /></a>
-                           </div>
-
-
+                   
+                        <div class="ui-grid-solo ui-responsive">
+                            <div class="ui-block-a ui-responsive" style="max-height:250px;">
+                             @for(pictures <- pictures) {
+                                <div style="float:left"><a href="/pictures" rel="external" class="ui-btn ui-btn-b ui-corner-all ui-shadow imgCut " ><img src="/pic/@pictures.pictureID" style="width: 100%" /></a>
+                                </div>
+                             }
+                            </div>
+                           
                         </div>
-              } 
-            </div>
-          </div>
-
-
-            
-            <div class="ui-grid-a">
-              <div class="ui-block-a"  style="width:20%"><div class="ui-bar ui-bar-a"style="background:#000000 ; color:#FFFFFF ; border:none">SPOTLIGHT</div></div>
-              <div class="ui-block-b" style="width:80%"><div class="ui-bar ui-bar-a" style="background:#FF9900 ; color:#FFFFFF ; border:none"><marquee>Sabbi är awesome!</marquee></div></div>
-            </div>
-
-
-          <div class="ui-grid-a ui-responsive"> 
-            <div class="ui-block-a" style = "padding: 20px ; width:40%">
-              <div Style = "width: 90% ; background: #FFFFFF; overflow: hidden ; border-style: solid; border-color: #767575;">
-                <H1 Style ="text-align: center">WELCOME</H1>
-                <p Style ="text-align: center">
-                  ________________
-                  <br><br>
-                  blafoajfo pojfpo
-                  fjojjodjsojdljsdlkjsdkjdojsdösdjklsnklsnv
-                  lksdnvlksdnkd idiohfosdihi
-                  soidhfoishdihi i i i i ishdoifs dis
-                  ofihdihdoihfiso.
-                </p>
-              </div>
-            </div>
-              
-            <div class="ui-block-b" style = "padding: 10px ; width:60%">
-              <div Style = "width: 90% ; overflow: hidden">
-                <div id="buttons">
-                  <div class="ui-grid-a ui-responsive">
-                    <div class="ui-block-a" >
-                      <a href="#" id="1" class="ui-btn ui-shadow" style ="border-color:black"><h3>EARENA</h3></a>
+                   
+                    <div class="ui-grid-a">
+                        <div class="ui-block-a"  style="width:20%">
+                            <div class="ui-bar ui-bar-a"style="background:#000000 ; color:#FFFFFF ; border:none">SPOTLIGHT</div>
+                        </div>
+                        <div class="ui-block-b" style="width:80%">
+                            <div class="ui-bar ui-bar-a" style="background:#FF9900 ; color:#FFFFFF ; border:none">
+                                <marquee>Sabbi är awesome!</marquee>
+                            </div>
+                        </div>
                     </div>
-                    <div class="ui-block-b">
-                      <a href="#" id="2" class="ui-btn ui-shadow" style ="border-color:black"><h3>ETOURNAMENT</h3></a>
-                    </div>
-                  </div>
-                </div>
+
+
+                    <div class="ui-grid-a ui-responsive"> 
+                        <div class="ui-block-a" style = "padding: 20px ; width:40%">
+                            <div Style = "width: 90% ; background: #FFFFFF; overflow: hidden ; border-style: solid; border-color: #767575;">
+                                <H1 Style ="text-align: center">WELCOME</H1>
+                                <p Style ="text-align: center">
+                     
+                                <br><br>
+                                  blafoajfo pojfpo
+                                  fjojjodjsojdljsdlkjsdkjdojsdösdjklsnklsnv
+                                  lksdnvlksdnkd idiohfosdihi
+                                  soidhfoishdihi i i i i ishdoifs dis
+                                  ofihdihdoihfiso.
+                                </p>
+                            </div>
+                        </div>
+                  
+                        <div class="ui-block-b" style = "padding: 10px ; width:60%">
+                            <div Style = "width: 90% ; overflow: hidden">
+                                <div id="buttons">
+                                    <div class="ui-grid-a ui-responsive">
+                                        <div class="ui-block-a" >
+                                            <a href="#" id="1" class="ui-btn ui-shadow" style ="border-color:black"><h3>EARENA</h3></a>
+                                        </div>
+                                        <div class="ui-block-b">
+                                            <a href="#" id="2" class="ui-btn ui-shadow" style ="border-color:black"><h3>ETOURNAMENT</h3></a>
+                                        </div>
+                                    </div>
+                                </div>
 
 
 
-              <div id="pages" class ="ui-responsive" style="overflow: hidden">                          
-  
-                <div id = "1" class ="flowBox ui-responsive">
-                      <article  data-role="listview" data-inset="true" data-dividertheme="a"> 
-                          @for(eads <- eads) {
-                              
-                            <li>
-                              <a rel="external"  href="/earenaad/@eads.arenaID" style = "background: #FFFFFF">
-                                <h2>@{" " + eads.arenaName}</h2>
-                                <div style="float:right;"><img src="../assets/images/gamelogos/@eads.logo"></div>
-                                <p>@{" Host: " + eads.admin}</p>
-                                <p>@{" Game: " + eads.gameName }</p>
-                                <p>@{" Created: " + eads.createdDate }</p>
-                                <p>@{" Players required: " + eads.playersRequired}</p>
-                                <p>Information:</p>
-                                <textarea readonly name="textarea" id="text" style = "overflow:auto ; resize:none ; background: #53585F ; color: white" >@{eads.information}</textarea>
-                                <br>
-                              </a>
-                            </li>
-                            <li  data-role = "list-divider" Style = "background-color : transparent ; border: none"></li>
-                          } 
-                      </article>
-              </div>
-     
-              <div id = "2" class ="flowBox ui-responsive" style="display:none">
-                  <ul data-role="listview" data-inset="true" data-dividertheme="a" data-theme = "b"> 
-                    @for(tournament <- tournament) {
-              
-                      <li>
-                          <a rel="external"  href="/showtournament/@tournament.tournamentID" style = "border: none ; background: #FFFFFF"><img src="@routes.Assets.at("images/sun.jpg")" alt="Dreamhack" class = "fullscreen"  />
-                          <h2>@{"Name: " + tournament.tournamentname}</h2> 
-                          <p>@{" Size: " +  tournament.participant_count }</p>
-                        </a>
-                      </li>
-                      <li  data-role = "list-divider" Style = "background-color : transparent ; border: none"></li>
-                    } 
-                  </ul>
-              </div>             
-            </div>
-          </div>
-        </div>
+                                <div id="pages" class ="ui-responsive" style="overflow: hidden">                          
       
-      </div>
-
-    </div>
-            
-            @Templates.footer()
-          @Templates.panelAndLogOut()
-          
-          <script>
-              $("#buttons a").click(function() {
-                var id = $(this).attr("id");
-              $("#pages div").css("display", "none");
-              $("#pages div#" + id + "").css("display", "block");
-            });
-           </script>
-
-
-          <script>
-                $('#h').removeClass('ui-alt-icon');
-                $('#mail').addClass('ui-alt-icon');
-                $('#user').addClass('ui-alt-icon');
-          </script>
-
+                                    <div id = "1" class ="flowBox ui-responsive">
+                                        <article  data-role="listview" data-inset="true" data-dividertheme="a"> 
+                                            @for(eads <- eads) {
+                                  
+                                                <li>
+                                                    <a rel="external"  href="/earenaad/@eads.arenaID" style = "background: #FFFFFF">
+                                                        <h2>@{" " + eads.arenaName}</h2>
+                                                        <div style="float:right;"><img src="../assets/images/gamelogos/@eads.logo"></div>
+                                                        <p>@{" Host: " + eads.admin}</p>
+                                                        <p>@{" Game: " + eads.gameName }</p>
+                                                        <p>@{" Created: " + eads.createdDate }</p>
+                                                        <p>@{" Players required: " + eads.playersRequired}</p>
+                                                        <p>Information:</p>
+                                                        <textarea readonly name="textarea" id="text" style = "overflow:auto ; resize:none ; background: #53585F ; color: white" >@{eads.information}</textarea>
+                                                        <br>
+                                                    </a>
+                                                </li>
+                                                <li  data-role = "list-divider" Style = "background-color : transparent ; border: none"></li>
+                                            } 
+                                        </article>
+                                    </div>
+         
+                                    <div id = "2" class ="flowBox ui-responsive" style="display:none">
+                                        <ul data-role="listview" data-inset="true" data-dividertheme="a" data-theme = "b"> 
+                                            @for(tournament <- tournament) {
+                                      
+                                              <li>
+                                                    <a rel="external"  href="/showtournament/@tournament.tournamentID" style = "border: none ; background: #FFFFFF"><img src=" @routes.Assets.at("images/sun.jpg")" alt="Dreamhack" class = "fullscreen"  />
+                                                    <h2>@{"Name: " + tournament.tournamentname}</h2> 
+                                                    <p>@{" Size: " +  tournament.participant_count }</p>
+                                                    </a>
+                                              </li>
+                                              <li  data-role = "list-divider" Style = "background-color : transparent ; border: none"></li>
+                                            } 
+                                        </ul>
+                                    </div>             
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                
+            </div>   
+                    @Templates.footer()
+                    @Templates.panelAndLogOut()
+                    <script>
+                          $("#buttons a").click(function() {
+                            var id = $(this).attr("id");
+                          $("#pages div").css("display", "none");
+                          $("#pages div#" + id + "").css("display", "block");
+                        });
+                    </script>
+                    <script>
+                            $('#h').removeClass('ui-alt-icon');
+                            $('#mail').addClass('ui-alt-icon');
+                            $('#user').addClass('ui-alt-icon');
+                    </script>
         </div>
-
     </body>
-@Templates.jsDisabled()
+    @Templates.jsDisabled()
 </html>
