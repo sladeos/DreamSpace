@@ -111,8 +111,8 @@ background : #FF9900;
     .headerImg{
         margin-bottom: -20px; 
         padding-right: auto; 
-        padding-left: auto;
-        width: 250px;
+        padding-left: 0;
+        width: 230px;
         height:100px;
          float: center;
     }
