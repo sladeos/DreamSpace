@@ -177,7 +177,7 @@ background : #FF9900;
     .ui-content{
         padding: 15px 15px;
         margin:0 auto;
-        width:900px;
+        width:100%;
         background: #151515;
     }
     .ui-page .ui-header{

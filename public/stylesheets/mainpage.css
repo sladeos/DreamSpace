@@ -1,0 +1,19 @@
+#backgroundPic {
+
+        background: url("../images/LOGIN.jpg");
+        background-repeat: no-repeat;
+		background-attachment: fixed;
+background-size: 100% 100%
+}
+
+h1 {
+	color: black;
+}
+
+p {
+	color: black;
+}
+
+h2 {
+	color: black;
+}
