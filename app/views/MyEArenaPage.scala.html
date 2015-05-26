@@ -66,17 +66,9 @@
                var rowcount = @rowcount;
                var pageDecimal = rowcount / 10;
                var pages = Math.ceil(pageDecimal);
-               
+
                $(document).ready(function() {
-                   if (rowcount > 1) {
-                     $("#pagebuttons").append(rowcount + " Results");
-                   }
-                   else {
-                     $("#pagebuttons").append(rowcount + " Result");
-                   }
-                 })
-               
-               $(document).ready(function() {
+            	   $("#pagebuttons").html("<h3>Ads found: " + rowcount + "</h3>");
                var ias = jQuery.ias({
                	  container:  '#earenas',
                	  item:       '.flowBox',

@@ -63,7 +63,7 @@
                   </form>
                </div>
             </div>
-            <div class = "standardBox">
+            <div id="adsFound" class = "standardBox">
                <h3>Ads found</h3>
             </div>
             <div id="pagebuttons"></div>
@@ -103,7 +103,7 @@
             </div>
             </div>
             <script>
-               $(function() {
+               $(function(){
                  
                   $('#showAdv').click(function() {        
                      $('#advSearch').toggle('show');
@@ -124,16 +124,12 @@
             var pages = Math.ceil(pageDecimal);
             var cPage;
             
-            $(document).ready(function() {
-                if (rowcount > 1 || rowcount == 0) {
-                  $("#pagebuttons").append(rowcount + " Results");
-                }
-                else {
-                  $("#pagebuttons").append(rowcount + " Result");
-                }
-              })
+           
+               
+               
             
             $(document).ready(function() {
+                  $("#adsFound").html("<h3>Ads found: " + rowcount + "</h3>");
   
             var ias = jQuery.ias({
             	  container:  '#earenas',

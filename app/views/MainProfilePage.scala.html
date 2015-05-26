@@ -28,7 +28,7 @@
                         <ul data-role="listview" data-inset="true" data-dividertheme="a" data-theme = "b"> 
                         @for(profile <- profile) {
                             <li  data-role = "list-divider" ></li>
-                                <li><a data-role = "button"  rel="external"  href="/profile/@profile.username" class = "greyBtn"><img src="@routes.Assets.at("images/sun.jpg")" alt="Dreamhack" class = "fullscreen"  /><h2>@{profile.username}</h2> <p>@{" Favourite Games " +  profile.favouritegames }</p><p>@{"User Bio: " + profile.userbio} </p></a>
+                                <li><a data-role = "button"  rel="external"  href="/profile/@profile.username" class = "greyBtn"><img src="@routes.Assets.at("images/sun.jpg")" alt="Dreamhack" class = "fullscreen"  /><h2>@{profile.username}</h2><p>@{"User Bio: " + profile.userbio} </p></a>
                             </li>
                         } 
                         </ul>

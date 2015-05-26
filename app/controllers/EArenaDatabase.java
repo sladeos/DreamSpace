@@ -90,7 +90,6 @@ public class EArenaDatabase extends Controller {
 			preparedStatement.setString(6, adType);
 			preparedStatement.setString(7, logo);
 			preparedStatement.executeUpdate();
-
 			return redirect("mainearena");
 
 		} catch (com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException ice) {
@@ -485,11 +484,12 @@ public class EArenaDatabase extends Controller {
 			ResultSet rs = preparedStatement.executeQuery();
 			while (rs.next()) {
 				AdReply a = new AdReply();
+				a.arenaID = rs.getInt("replyID");
 				a.content = rs.getString("replycontent");
 				a.user = rs.getString("username");
 				a.createdDate = rs.getString("created_date");
 				a.createdDate = a.createdDate.substring(0,
-						a.createdDate.lastIndexOf("."));
+				a.createdDate.lastIndexOf("."));
 				adReplyList.add(a);
 			}
 
@@ -752,5 +752,49 @@ public static List<EArenaAd> getEArenaAdsMainPage() {
 				
 			} // end finally try
 		} // end try
-	 }		
+	 }
+
+public static Result getReplyProfile(String user){
+	Connection conn = null;
+	PreparedStatement preparedStatement = null;
+	ObjectNode result = Json.newObject();
+	try {
+
+		conn = DB.getConnection();
+		String getProfiles = "SELECT * FROM UserProfile WHERE username=?";
+		
+		preparedStatement = conn.prepareStatement(getProfiles);
+		preparedStatement.setString(1, user);
+
+
+		ResultSet rs = preparedStatement.executeQuery();
+		if (rs.isBeforeFirst()) {
+			rs.next();
+			result.put("username", user);
+			result.put("csgorank", rs.getString("csgorank"));
+			result.put("wow2v2rating", rs.getString("wow2v2"));
+			result.put("wow3v3rating", rs.getString("wow3v3"));
+			result.put("wow5v5rating", rs.getString("wow5v5"));
+			result.put("wowrbgrating", rs.getString("wowrbg"));
+			result.put("lolrank", rs.getString("lolrank"));
+			result.put("dota2rank", rs.getString("dota2mmr"));
+			result.put("otherranks", rs.getString("otherranks"));
+		}
+		return ok(result);
+	} catch (SQLException se) {
+		return ok("SQL " + se.toString());
+	} catch (Exception e) {
+		// Handle errors for Class.forName
+		return ok("Exception " + e.toString());
+	} finally {
+		// finally block used to close resources
+		try {
+			if (preparedStatement != null)
+				conn.close();
+		} catch (SQLException se) {
+		}// do nothing
+	}
+	
+	
+}
 }
