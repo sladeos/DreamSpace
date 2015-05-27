@@ -9,11 +9,11 @@
         <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/mainpage.css")">
     </head>
     <body>  
-
         <div data-role="page" data-theme="c" id = "main" style="overflow:auto ;">   
             <div data-role="header">
                 @message
                 @Templates.header()
+
             </div>
         
             <div data-role="content" >
@@ -111,6 +111,7 @@
                                                     <a rel="external"  href="/showtournament/@tournament.tournamentID" style = "border: none ; background: #FFFFFF"><img src=" @routes.Assets.at("images/sun.jpg")" alt="Dreamhack" class = "fullscreen"  />
                                                     <h2>@{"Name: " + tournament.tournamentname}</h2> 
                                                     <p>@{" Size: " +  tournament.participant_count }</p>
+                                                    <p>@{" Creator: " +  tournament.tournamentcreator }</p>
                                                     </a>
                                               </li>
                                               <li  data-role = "list-divider" Style = "background-color : transparent ; border: none"></li>

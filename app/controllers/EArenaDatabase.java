@@ -794,7 +794,43 @@ public static Result getReplyProfile(String user){
 		} catch (SQLException se) {
 		}// do nothing
 	}
-	
-	
 }
+public static Result deleteAdReply(){
+	Connection conn = null;
+	PreparedStatement preparedStatement = null;
+	JsonNode json = request().body().asJson();
+
+	int replyID = json.findPath("replyId").intValue();
+	try {
+
+		conn = DB.getConnection();
+
+//		int parsedReplyID = Integer.parseInt(replyID);
+
+		String insertIntoDatabase = "DELETE FROM EArenaReply WHERE replyID=?";
+		preparedStatement = conn.prepareStatement(insertIntoDatabase);
+		preparedStatement.setInt(1, replyID);
+
+		preparedStatement.executeUpdate();
+		return ok("DELETED " + replyID);
+	} catch (com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException ice) {
+		return badRequest(ice.toString());
+	} catch (NumberFormatException nfe) {
+		return badRequest(nfe.toString());
+	} catch (SQLException se) {
+		// Handle sql errors
+		return internalServerError(se.toString());
+	} catch (Exception e) {
+		// Handle errors for Class.forName
+		return internalServerError(e.toString());
+	} finally {
+		try {
+			if (conn != null)
+				conn.close();
+		} catch (SQLException se) {
+			return internalServerError(se.toString());
+		} // end finally try
+	} // end try
+}
+
 }
