@@ -1,18 +1,20 @@
-
 .eadColours{
 	  width: 60px;
     height: 60px;
     margin: 5px;
     float: left;
-	
 }
+
+#pagination{
+	visibility: hidden;
+}
+
 .ui-page .ui-header {
-    background:#151515;
+    background:#FFFFFF;
 }
 
 .ui-page{
     background: white;
-
 }
 
 .ui-content{
@@ -27,9 +29,8 @@ background : #FF9900;
 }​
 
 .ui-page .ui-footer {
-    background:#151515;
+    background:#FFFFFF;
 }
-
 .standardBox{
     width: 300px;
     margin: 0 auto;
@@ -104,6 +105,33 @@ background : #FF9900;
     text-align: center !important;
     padding-right: 2.5em !important;
 }
+ .ui-page .ui-btn.customButton{
+        width: 100px;
+        font-size: 15px;
+        border: 7px solid #FF5E01;
+        border-top:none;
+        border-bottom: none;
+        border-right: none;    
+        background:#FFFFFF;
+        font-family:Helvetica;
+        font-weight: bold;
+    }
+
+    .headerImg{
+        margin-bottom: -20px; 
+        padding-right: auto; 
+        padding-left: 0;
+        width: 230px;
+        height:100px;
+         float: center;
+    }
+    .block{
+      
+        height: 100px;
+    }
+    .headern{
+        text-align: center;
+    }
 
 .imgCut{
     max-Width: 150px;
@@ -170,11 +198,13 @@ background : #FF9900;
 
 @media all and (max-width: 36em){
     .ui-page{
+
         background: white;
     }
 
     .ui-content{
         background: white;
+
     }
 
     .flowBox{
@@ -191,42 +221,73 @@ background : #FF9900;
         max-width: 65px;
     }
 
-    .imgCut{
 
+    .imgCut{
         max-Width: 75px;
         max-Height: 75px;
         min-Width: 75px;
         min-Height: 75px;
-   
     }
     .imgFloat{
         display: inline-block;
         padding:2px;
         
     }
-}
 
+
+     .ui-page .ui-btn.customButton{
+        width: 60px;
+        font-size: 10px;
+        border: 2px solid #FF5E01;
+        border-top:none;
+        border-bottom: none;
+        border-right: none;   
+        background:#FFFFFF;
+        font-family:Helvetica;
+        padding-top: 10px;
+        font-weight: bold;
+    }
+
+
+    .headerImg{
+        margin-bottom: -30px; 
+        width: 350px;
+        height:100px;
+        text-align:center;
+        padding-bottom: 20px;
+    }
+    .block{
+      
+        height: 60px;
+    }
+    .bottomButton{
+    }
+    .headern{
+        text-align: center;
+    }
+     
+}
 
 @media all and (min-width: 60em){
 
     .ui-page{
         background: white;
     }
+    
     .ui-content{
         padding: 15px 15px;
         margin:0 auto;
         width:1200px;
         background: white;
-       
     }
+    
     .ui-page .ui-header{
         margin:0 auto;
-        width: 930px;
+        
     }
 
     .ui-page .ui-footer {
-        margin:0 auto;
-		width: 930px;
+        margin:0 auto;	
     }
 
     .flowBox{
@@ -270,7 +331,7 @@ background : #FF9900;
         max-Height: 350px;
         min-Width: 350px;
         min-Height: 350px;
-        orientation: orientationt;
+        
    
     }
    .imgFloat{
@@ -294,6 +355,36 @@ background : #FF9900;
         padding-top:15px;
     }
   
+
+    .ui-page .ui-btn.customButton{
+
+        width: 120px;
+        font-size: 20px;
+        border: 7px solid #FF5E01;
+        border-top:none;
+        border-bottom: none;
+        border-right: none;    
+        background:#FFFFFF;
+        font-family:Helvetica;
+        font-weight: bold;
+
+    }
+
+    .headerImg{
+        margin-bottom: -30px; 
+        padding-right: 70px; 
+        padding-left: 50px;
+        width: 300px;
+        height:100px;
+    }
+    .block{
+      
+        height: 100px;
+    }
+  
+      .headern{
+        text-align: left;
+    }
     #adinfo{
         position: relative;
         float: left;
@@ -314,8 +405,6 @@ background : #FF9900;
         width: 49%;
         padding-left: 1%;
     }
- 
-
 
 }
- 
+

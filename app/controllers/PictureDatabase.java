@@ -326,8 +326,6 @@ public class PictureDatabase extends Controller {
 
 
 public static List<Picture> getPicturesMainPage() {
-		String currentUser = session("connected");
-		
 			Connection conn = null;
 			PreparedStatement preparedStatement = null;
 			List<Picture> pList = new ArrayList<Picture>();
@@ -359,12 +357,6 @@ public static List<Picture> getPicturesMainPage() {
 		} catch (Exception e) {
 	    	return null;
 		} finally {
-				// finally block used to close resources
-				// try {
-				// if (preparedStatement != null)
-				// conn.close();
-				// } catch (SQLException se) {
-				// } //do nothing
 			try {
 				if (conn != null)
 					conn.close();

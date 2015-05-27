@@ -1,5 +1,5 @@
 .footer-basic-centered{
-	background-color: #292c2f;
+	background-color: #FF9900;
 	box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.12);
 	box-sizing: border-box;
 	width: 100%;
@@ -11,14 +11,15 @@
 }
 
 .footer-basic-centered .footer-company-motto{
-	color:  #8d9093;
+	color:  #373737;
 	font-size: 24px;
+	text-align: left;
 	margin: 0;
 }
 
 .footer-basic-centered .footer-company-name{
-	color:  #8f9296;
-	font-size: 14px;
+	color:  #373737;
+	font-size: 30px;
 	margin: 0;
 }
 
@@ -45,11 +46,12 @@
 	}
 
 	.footer-basic-centered .footer-company-motto{
-		font-size: 18px;
+		font-size: 20px;
+		text-align: center;
 	}
 
 	.footer-basic-centered .footer-company-name{
-		font-size: 12px;
+		font-size: 20px;
 	}
 
 	.footer-basic-centered .footer-links{
