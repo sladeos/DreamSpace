@@ -324,4 +324,48 @@ public class PictureDatabase extends Controller {
 		} // end try
 	}
 
+
+public static List<Picture> getPicturesMainPage() {
+			Connection conn = null;
+			PreparedStatement preparedStatement = null;
+			List<Picture> pList = new ArrayList<Picture>();
+
+			try {
+				conn = DB.getConnection();
+
+				String insertIntoDatabase = "SELECT * FROM Picture ORDER BY created_date DESC LIMIT 3";
+				preparedStatement = conn.prepareStatement(insertIntoDatabase);
+				ResultSet rs = preparedStatement.executeQuery();
+
+				while (rs.next()) {
+					Picture p = new Picture();
+					p.creator = rs.getString("creator");
+					p.pictureID = rs.getInt("pictureID");
+					pList.add(p);
+				}
+
+				rs.close();
+
+				return pList;
+
+		} catch (com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException ice) {
+			return null;
+		} catch (NumberFormatException nfe) {
+	        return null;
+		} catch (SQLException se) {
+    		return null;
+		} catch (Exception e) {
+	    	return null;
+		} finally {
+			try {
+				if (conn != null)
+					conn.close();
+			} catch (SQLException se) {
+				return null;
+			} // end finally try
+		} // end try
+	 
+}
+
+
 }

@@ -1,31 +1,26 @@
-
-<<<<<<< HEAD
-=======
 .eadColours{
 	  width: 60px;
     height: 60px;
     margin: 5px;
     float: left;
-	
 }
 
 #pagination{
 	visibility: hidden;
 }
->>>>>>> master
+
 .ui-page .ui-header {
     background:#FFFFFF;
 }
 
 .ui-page{
-    background: #FFFFFF;
+    background: white;
 }
 
 .ui-content{
-    background: #FFFFFF;
+    background: white;
     padding: 5% 5%;
     margin:0 auto;
-
 }
 
 .ui-page .ui-btn  {
@@ -138,6 +133,35 @@ background : #FF9900;
         text-align: center;
     }
 
+.imgCut{
+    max-Width: 150px;
+    max-Height: 150px;
+    min-Width: 100px;
+    min-Height: 50px;
+}
+
+.imgFloat{
+    display: inline-block;
+    padding:2px;
+ 
+}
+
+    .textBox{
+    
+      overflow: auto;
+        margin:0 auto;
+        padding: 5px;
+         box-shadow: 10px 10px 5px #888888;
+
+    }
+    .paddingAblock{
+        padding-top:15px;
+    }
+
+#pagination{
+    visibility: hidden;
+}
+
 #bracket {
     color:black;
     text-shadow:0 0px 0 #111;
@@ -174,11 +198,13 @@ background : #FF9900;
 
 @media all and (max-width: 36em){
     .ui-page{
-        background: #FFFFFF;
+
+        background: white;
     }
 
     .ui-content{
-        background: #FFFFFF;
+        background: white;
+
     }
 
     .flowBox{
@@ -194,6 +220,21 @@ background : #FF9900;
         width: 65px;
         max-width: 65px;
     }
+
+
+    .imgCut{
+        max-Width: 75px;
+        max-Height: 75px;
+        min-Width: 75px;
+        min-Height: 75px;
+    }
+    .imgFloat{
+        display: inline-block;
+        padding:2px;
+        
+    }
+
+
      .ui-page .ui-btn.customButton{
         width: 60px;
         font-size: 10px;
@@ -206,6 +247,7 @@ background : #FF9900;
         padding-top: 10px;
         font-weight: bold;
     }
+
 
     .headerImg{
         margin-bottom: -30px; 
@@ -229,27 +271,29 @@ background : #FF9900;
 @media all and (min-width: 60em){
 
     .ui-page{
-        background:#FFFFFF;
+        background: white;
     }
+    
     .ui-content{
         padding: 15px 15px;
         margin:0 auto;
-        width:1000px;
-        background: #FFFFFF;
+        width:1200px;
+        background: white;
     }
+    
     .ui-page .ui-header{
         margin:0 auto;
         
     }
 
     .ui-page .ui-footer {
-        margin:0 auto;
-		
+        margin:0 auto;	
     }
 
     .flowBox{
         width: 500px;
         margin: 0 auto;
+         box-shadow: 10px 10px 5px #888888;
     }
 
     .standardBox{
@@ -281,6 +325,37 @@ background : #FF9900;
         max-width: 65px;
     }
 
+    .imgCut{
+
+        max-Width: 350px;
+        max-Height: 350px;
+        min-Width: 350px;
+        min-Height: 350px;
+        
+   
+    }
+   .imgFloat{
+        display: inline-block;
+        padding:2px;
+    }
+    .blockPadding{
+        padding:20px;
+    }
+    .textBox{
+      width: 400px;
+      height: 400px;
+      overflow: auto;
+        margin:0 auto;
+         box-shadow: 10px 10px 5px #888888;
+        padding: 5px;
+
+
+    }
+    .paddingAblock{
+        padding-top:15px;
+    }
+  
+
     .ui-page .ui-btn.customButton{
 
         width: 120px;
@@ -310,7 +385,6 @@ background : #FF9900;
       .headern{
         text-align: left;
     }
-
     #adinfo{
         position: relative;
         float: left;
@@ -331,7 +405,6 @@ background : #FF9900;
         width: 49%;
         padding-left: 1%;
     }
-
 
 }
 
