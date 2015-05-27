@@ -68,7 +68,11 @@
                var pages = Math.ceil(pageDecimal);
 
                $(document).ready(function() {
+            	   if(rowcount < 1){
+            		$("#adsFound").html("<h3>It seems like you haven't created any ads, click <a href=/createarenaad rel=external>  here </a> , or on Create a new ad to create a new ad</h3>");
+            	   }else{
             	   $("#adsFound").html("<h3>Ads found: " + rowcount + "</h3>");
+            	   }
                var ias = jQuery.ias({
                	  container:  '#earenas',
                	  item:       '.flowBox',
