@@ -33,22 +33,22 @@
 
 
             <div class = "standardBox">
-               <a data-role = "button" id = "btn"  rel="external" href="/createtournament" data-iconpos="right" style="color:black;background:#DBDBDB;border:transparent">CREATE TOURNAMENT</a>
+               <a data-role = "button" id = "btn"  rel="external" href="/createtournament" data-iconpos="right" style="color:black;border:transparent">CREATE TOURNAMENT</a>
             </div>
 
 
             <div class="ui-grid-solo ui-responsive">
-              <div class="ui-block-a"><b><div id="pagebuttons"></div></b></div>
+              <div class="ui-block-a"><b><h3 style="margin:0"><div id="pagebuttons"></div></h3></b></div>
             </div> 
 
 
             <div id="tournaments">
                <div class ="flowBox">
                   <hr>
-                  <ul data-role="listview" data-inset="true" data-dividertheme="a" data-theme = "c">
+                  <ul data-role="listview" data-inset="true" data-dividertheme="a">
                      @for(tournament <- tournament) {
                      <li>
-                        <a  data-role = "button"  rel="external"  href="/showtournament/@tournament.tournamentID" class = "greyBtn" style="background:#DBDBDB">
+                        <a  data-role = "button"  rel="external"  href="/showtournament/@tournament.tournamentID" class = "greyBtn">
                            <img src="@routes.Assets.at("images/sun.jpg")" alt="Dreamhack" class = "fullscreen"  />
                            <h2 style="color:black">@{tournament.tournamentname}</h2>
                            <p style="color:black">@{" Size: " +  tournament.participant_count }</p>
