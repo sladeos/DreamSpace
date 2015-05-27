@@ -54,11 +54,11 @@
                     contentType:'application/json',
                     dataType : 'json',
                     success: function(data ){
-                    	$('#replyPopUp').html("<a /rel=" +  "external " + "href=" +"/profile/" +data['username'] + "><p> User: " + data['username'] +"</a> "+ "</p> <p> CS:GO Rank: " + data['csgorank']  + "</p> <p> WoW 2v2 Rating: " +  data['wow2v2rating']  + "</p> <p> WoW 3v3 Rating: " +  data['wow3v3rating']  + "</p> <p> WoW 5v5 Rating: " +  data['wow5v5rating']  + "</p> <p> WoW RBG Rating: " + data['wowrbgrating']  + "</p> <p> LoL Rank: " +  data['lolrank']  + "</p> <p> DOTA 2: " +  data['dota2rank']  + "</p> <p> Other Ranks: " +  data['otherranks'])
-                       $("#replyPopUp" ).popup( "open");
+                    	$('#replyPopUp').html("<a rel=external href=/profile/" +data['username'] + " data-iconpos=right data-transition=pop class=my-tooltip-btn ui-btn ui-alt-icon ui-nodisc-icon ui-btn-inline ui-icon-delete>  <p> User: " + data['username'] +"</a> "+ "</p> <p> CS:GO Rank: " + data['csgorank']  + "</p> <p> WoW 2v2 Rating: " +  data['wow2v2rating']  + "</p> <p> WoW 3v3 Rating: " +  data['wow3v3rating']  + "</p> <p> WoW 5v5 Rating: " +  data['wow5v5rating']  + "</p> <p> WoW RBG Rating: " + data['wowrbgrating']  + "</p> <p> LoL Rank: " +  data['lolrank']  + "</p> <p> DOTA 2: " +  data['dota2rank']  + "</p> <p> Other Ranks: " +  data['otherranks'])
+                    	$('#replyPopUp').append("<a href=# class=ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-b data-rel=back>Close</a>")
+                       	$("#replyPopUp" ).popup("open");
                         		}
                 });
-                
                 }
           </script>
             
