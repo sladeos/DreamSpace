@@ -266,10 +266,10 @@ background : #FF9900;
 
     .imgCut{
 
-        max-Width: 300px;
-        max-Height: 300px;
-        min-Width: 100px;
-        min-Height: 300px;
+        max-Width: 350px;
+        max-Height: 350px;
+        min-Width: 350px;
+        min-Height: 350px;
         orientation: orientationt;
    
     }
