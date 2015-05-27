@@ -29,8 +29,9 @@
 }
 
 .ui-page .ui-btn  {
-color      : white;
+color      : black;
 background : #DBDBDB;
+border-color:transparent;
 }
 
 .ui-page .ui-footer {

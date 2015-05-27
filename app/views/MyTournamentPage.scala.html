@@ -12,9 +12,6 @@
          <div data-role="header">
             @Templates.header()
             <a id = "back" rel="external" href="/mainetournament" data-role="button" role="button" data-icon="back" data-iconpos="notext">Back</a>
-            <script>
-               $("#back").css("background","  #FF9900");
-            </script>
          </div>
 
           <div data-role="content" Style = "padding:0">
@@ -33,7 +30,7 @@
 
 
             <div class = "standardBox">
-               <a data-role = "button" id = "btn"  rel="external" href="/createtournament" data-iconpos="right" style="color:black;border:transparent">CREATE TOURNAMENT</a>
+               <a data-role = "button" id = "btn"  rel="external" href="/createtournament" data-iconpos="right">CREATE TOURNAMENT</a>
             </div>
 
 
@@ -48,10 +45,10 @@
                   <ul data-role="listview" data-inset="true" data-dividertheme="a">
                      @for(tournament <- tournament) {
                      <li>
-                        <a  data-role = "button"  rel="external"  href="/showtournament/@tournament.tournamentID" class = "greyBtn">
+                        <a  data-role = "button"  rel="external"  href="/showtournament/@tournament.tournamentID" class = "greyBtn" style="border:none">
                            <img src="@routes.Assets.at("images/sun.jpg")" alt="Dreamhack" class = "fullscreen"  />
-                           <h2 style="color:black">@{tournament.tournamentname}</h2>
-                           <p style="color:black">@{" Size: " +  tournament.participant_count }</p>
+                           <h2>@{tournament.tournamentname}</h2>
+                           <p>@{" Size: " +  tournament.participant_count }</p>
                         </a>
                      </li>
                      <li  data-role = "list-divider" style="background:transparent;border:none" ></li>
