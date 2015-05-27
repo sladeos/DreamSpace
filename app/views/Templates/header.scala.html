@@ -5,8 +5,9 @@
               <img  id ="bild" src="@routes.Assets.at("images/real.png")" class = "fullscreen headerImg" >
               <a href='#' id="h"  rel = "external" class=" ui-btn ui-btn-a customButton customButtonText bottomButton">Home</a>
               <a id="mail"rel = "external" href='#' class = "ui-btn ui-btn-a ui-btn-inline customButton customButtonText bottomButton"><div id="icon" class="icon" style="position: relative;"></div>Notification</a>
-              <a id ="panelmenu" href="#popupMenu" data-rel="popup" class="ui-btn ui-btn-a ui-btn-inline customButton customButtonText bottomButton ">Menu</a>
-          </div>  
+              <a id ="menu-anchor" href="#popupMenu" data-rel="popup" data-position-to="#menu-anchor" class="ui-btn ui-btn-a ui-btn-inline customButton customButtonText bottomButton ">Menu</a>
+          </div> 
+
 
       <script>
         $(document).ready(function() {
@@ -31,7 +32,7 @@
         });
     </script>
     <script>
-        $("#h, #mail, #user, #panelmenu ").css("background","  white");
+        $("#h, #mail, #user, #menu-anchor ").css("background","  white");
      </script> 
 
   
