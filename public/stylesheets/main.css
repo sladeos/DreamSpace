@@ -6,10 +6,6 @@
     float: left;
 	
 }
-
-#pagination{
-	visibility: hidden;
-}
 .ui-page .ui-header {
     background:#151515;
 }
@@ -23,7 +19,6 @@
     background: white;
     padding: 5% 5%;
     margin:0 auto;
-
 }
 
 .ui-page .ui-btn  {
@@ -109,14 +104,36 @@ background : #FF9900;
     text-align: center !important;
     padding-right: 2.5em !important;
 }
-  .imgCut{
 
-        max-Width: 300px;
-        max-Height: 300px;
-        min-Width: 100px;
-        min-Height: 50px;
-   
+.imgCut{
+    max-Width: 150px;
+    max-Height: 150px;
+    min-Width: 100px;
+    min-Height: 50px;
+}
+
+.imgFloat{
+    display: inline-block;
+    padding:2px;
+ 
+}
+
+    .textBox{
+    
+      overflow: auto;
+        margin:0 auto;
+        padding: 5px;
+         box-shadow: 10px 10px 5px #888888;
+
     }
+    .paddingAblock{
+        padding-top:15px;
+    }
+
+#pagination{
+    visibility: hidden;
+}
+
 #bracket {
     color:black;
     text-shadow:0 0px 0 #111;
@@ -173,6 +190,20 @@ background : #FF9900;
         width: 65px;
         max-width: 65px;
     }
+
+    .imgCut{
+
+        max-Width: 75px;
+        max-Height: 75px;
+        min-Width: 75px;
+        min-Height: 75px;
+   
+    }
+    .imgFloat{
+        display: inline-block;
+        padding:2px;
+        
+    }
 }
 
 
@@ -184,8 +215,9 @@ background : #FF9900;
     .ui-content{
         padding: 15px 15px;
         margin:0 auto;
-        width:1000px;
+        width:1200px;
         background: white;
+       
     }
     .ui-page .ui-header{
         margin:0 auto;
@@ -200,6 +232,7 @@ background : #FF9900;
     .flowBox{
         width: 500px;
         margin: 0 auto;
+         box-shadow: 10px 10px 5px #888888;
     }
 
     .standardBox{
@@ -231,6 +264,36 @@ background : #FF9900;
         max-width: 65px;
     }
 
+    .imgCut{
+
+        max-Width: 300px;
+        max-Height: 300px;
+        min-Width: 100px;
+        min-Height: 300px;
+        orientation: orientationt;
+   
+    }
+   .imgFloat{
+        display: inline-block;
+        padding:2px;
+    }
+    .blockPadding{
+        padding:20px;
+    }
+    .textBox{
+      width: 400px;
+      height: 400px;
+      overflow: auto;
+        margin:0 auto;
+         box-shadow: 10px 10px 5px #888888;
+        padding: 5px;
+
+
+    }
+    .paddingAblock{
+        padding-top:15px;
+    }
+  
     #adinfo{
         position: relative;
         float: left;
@@ -251,15 +314,7 @@ background : #FF9900;
         width: 49%;
         padding-left: 1%;
     }
-    .imgCut{
-
-        max-Width: 300px;
-        max-Height: 300px;
-        min-Width: 100px;
-        min-Height: 300px;
-        orientation: orientationt;
-   
-    }
+ 
 
 
 }

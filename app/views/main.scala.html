@@ -10,7 +10,7 @@
     </head>
     <body>  
 
-        <div data-role="page" data-theme="c" id = "main" >   
+        <div data-role="page" data-theme="c" id = "main" style="overflow:auto ;">   
             <div data-role="header">
                 @message
                 @Templates.header()
@@ -19,36 +19,45 @@
             <div data-role="content" >
 
                    
-                        <div class="ui-grid-solo ui-responsive">
-                            <div class="ui-block-a ui-responsive" style="max-height:250px;">
-                             @for(pictures <- pictures) {
-                                <div style="float:left"><a href="/pictures" rel="external" class="ui-btn ui-btn-b ui-corner-all ui-shadow imgCut " ><img src="/pic/@pictures.pictureID" style="width: 100%" /></a>
-                                </div>
-                             }
+                        <div class="ui-grid-solo">
+                            <div class="ui-block-a" style="width:100%; text-align:center; ">
+                               
+                                    @for(pictures <- pictures) {
+                                        <a href="/pictures" rel="external" class="ui-btn ui-btn-b ui-corner-all ui-shadow imgCut imgFloat" ><img  src="/pic/@pictures.pictureID" style="width: 100%" /></a>
+                                    }
                             </div>
-                           
                         </div>
                    
-                    <div class="ui-grid-a">
-                        <div class="ui-block-a"  style="width:20%">
-                            <div class="ui-bar ui-bar-a"style="background:#000000 ; color:#FFFFFF ; border:none">SPOTLIGHT</div>
-                        </div>
-                        <div class="ui-block-b" style="width:80%">
-                            <div class="ui-bar ui-bar-a" style="background:#FF9900 ; color:#FFFFFF ; border:none">
-                                <marquee>Sabbi är awesome!</marquee>
+                    <div class="ui-grid-solo">
+                        <div class="ui-block-a"  style="width:100%">
+                            <div class="ui-bar ui-bar-b"style="background:orange; color:#FFFFFF ; border:none">
+                            <h3 >GALLERY NEWS </h3>
+                            <marquee style=" width:100%; background:orange; font-size:20px;">Screenshots of today! Go visit the gallery to see more</marquee>
+                                
                             </div>
                         </div>
                     </div>
 
 
-                    <div class="ui-grid-a ui-responsive"> 
-                        <div class="ui-block-a" style = "padding: 20px ; width:40%">
-                            <div Style = "width: 90% ; background: #FFFFFF; overflow: hidden ; border-style: solid; border-color: #767575;">
+                    <div class="ui-grid-a ui-responsive paddingAblock"> 
+                        <div class="ui-block-a " >
+                            <div class ="textBox" Style = "background: #FFFFFF; border-style: solid; border-color: #767575;">
                                 <H1 Style ="text-align: center">WELCOME</H1>
-                                <p Style ="text-align: center">
-                     
-                                <br><br>
+                                <hr>
+                                <p class="welcomeTexta"style="text-align:center;">
                                   blafoajfo pojfpo
+                                  fjojjodjsojdljsdlkjsdkjdojsdösdjklsnklsnv
+                                  lksdnvlksdnkd idiohfosdihi
+                                  soidhfoishdihi i i i i ishdoifs dis
+                                  ofihdihdoihfiso.    blafoajfo pojfpo
+                                  fjojjodjsojdljsdlkjsdkjdojsdösdjklsnklsnv
+                                  lksdnvlksdnkd idiohfosdihi
+                                  soidhfoishdihi i i i i ishdoifs dis
+                                  ofihdihdoihfiso.    blafoajfo pojfpo
+                                  fjojjodjsojdljsdlkjsdkjdojsdösdjklsnklsnv
+                                  lksdnvlksdnkd idiohfosdihi
+                                  soidhfoishdihi i i i i ishdoifs dis
+                                  ofihdihdoihfiso.    blafoajfo pojfpo
                                   fjojjodjsojdljsdlkjsdkjdojsdösdjklsnklsnv
                                   lksdnvlksdnkd idiohfosdihi
                                   soidhfoishdihi i i i i ishdoifs dis
@@ -57,8 +66,8 @@
                             </div>
                         </div>
                   
-                        <div class="ui-block-b" style = "padding: 10px ; width:60%">
-                            <div Style = "width: 90% ; overflow: hidden">
+                        <div class="ui-block-b">
+                            
                                 <div id="buttons">
                                     <div class="ui-grid-a ui-responsive">
                                         <div class="ui-block-a" >
@@ -111,7 +120,7 @@
                                         </ul>
                                     </div>             
                                 </div>
-                            </div>
+                            
                         </div>
                     </div>
                 
