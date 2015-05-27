@@ -14,146 +14,166 @@
     
     <body>
 
-     <div data-role="page" data-theme="b">   
+     <div data-role="page" data-theme="c">   
         <div data-role="header">
             @Templates.header()
             <a id = "back" rel="external" href="/myetournaments" data-role="button" role="button" data-icon="back" data-iconpos="notext">Back</a>
-            <script>
-              $("#back").css("background","  #FF9900");
-            </script>
+
         </div>
-        <div data-role="content">   
+        
+        <div data-role="content" style = "padding:0">
+            <div class="ui-grid-solo ui-responsive">
+            <img src="@routes.Assets.at("images/CREATETOURNAMENT.jpg")" alt="tPicture" class = "fullscreen" />
+        </div>
+
+        <div style="width:100% ; text-align:center">
+            <p>
+                <b>Create a tournament!</b><br>
+                Why don’t take the excitement of<br>
+                gaming to the next level and make a<br>
+                tournament for you and your friends?<br>
+                Click on the infobox below to read more<br>
+                of how it’s done!
+                </p> 
+        </div>
+        
+
+        <div id = "bracketcontent" style="text-align:center">
+            <a href="#popupCloseRight" data-rel="popup" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-icon-info ui-btn-icon-left ui-mini">Info</a>
+            <div data-role="popup" id="popupCloseRight" class="ui-content" style="max-width:280px;background:#DBDBDB">
+                <a href="#" id="close" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext  ui-btn-right">Close</a>
+                <p>You can change the name of the teams in your tournament by clicking the respective team label, you can also change the score by clicking the label after the team name. This updates the bracket.</p>
+            </div>
+
+            <script type="text/javascript">
+               $("#close").css("background","  #FF0000 ");
+            </script>
+
+            <div id='bracket' class = "bracket"></div>
+            
+            <div id='bracketForm' class = "standardBox">
+                <br>
+                <br>
            
- 
-          <h1 align="center">Create your tournament</h1>
+
+
+                <form name="bracketGenerate">
+                    <input type="text" name="fname" id="fname" placeholder="Name of your tournament" style="color:white;background:#53585F">
+                        Amount of players: 
+                    <select id="amount" data-role = "button" data-inline = "true" style="color:white;background:#53585F">
+                        <option value="4">4</option>
+                        <option value="8">8</option>
+                        <option value="16">16</option>
+                        <option value="32">32</option>
+                    </select> 
+        
+       
+                    <input data-role = "button"  type="button" value="CREATE" id="create">
+                    <p id="warning"></p>
+                </form>
+                <a data-role = "button"  type="button" rel="external" href="/myetournaments" style="background:#FF9900">CANCEL</a>
+            </div>
 
 
             
-     <div id = "bracketcontent">
-   <div id='bracket' class = "bracket"></div>
-                <div id='bracketForm' class = "standardBox">
-                <br>
-                <br>
-           
-            <a href="#popupCloseRight" data-rel="popup" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-icon-info ui-btn-icon-right ui-mini">Info</a>
-            <div data-role="popup" id="popupCloseRight" class="ui-content" style="max-width:280px">
-            <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext  ui-btn-right">Close</a>
-            <p>You can change the name of the teams in your tournament by clicking the respective team label, you can also change the score by clicking the label after the team name. This updates the bracket.</p>
-            </div>
-
-            <form name="bracketGenerate">
-                Name of your tournament: <input type="text" name="fname" id="fname">
-                Amount of players: 
-        <select id="amount" data-role = "button" data-inline = "true" data-mini = "true">
-            <option value="4">4</option>
-            <option value="8">8</option>
-            <option value="16">16</option>
-            <option value="32">32</option>
-        </select> 
-        
-       
-        <input data-role = "button"  type="button" value="Create" id="create">
-            <p id="warning"></p>
-        
-    </form>
-  
-    </div>
-   <script type="text/javascript">
+            <script type="text/javascript">
    
-$(function() {
-    
-    generateBracket($('#amount').val());
-    
-    var data;
-    
-    function saveFn(data) {
-        
-    }
-    
-    function generateBracket(playerAmount) {
-    
-    var teamData = {
-    teams : [] 
-    };
-    
-    playerAmount = playerAmount /2
-    
-    var j = 1;
-    for (i = 0; i < playerAmount; i++) { 
-    teamData.teams[i] = ["Team " + j, "Team " + ++j];
-    j++;
-    }
-    
-    var container = $('#bracket')
-    container.bracket({
-      init: teamData,
-      save: saveFn
-    })
-    
-    $('.tools').remove();
-  
-    data = container.bracket('data') ;
- 
-    }
-    
-    $("#amount").change(function() {
-   
-    var players = Number($('#amount').val());
-    
-    switch(players) {
-    case 4:
-    generateBracket(4);
-        break;
-    case 8:
-    generateBracket(8);
-        break;
-    case 16:
-    generateBracket(16);
-        break;
-    case 32:
-    generateBracket(32);
-        break;
-    
-    }
-    
-    
-});
+            $(function() {
+                
+                generateBracket($('#amount').val());
+                
+                var data;
+                
+                function saveFn(data) {
+                    
+                }
+                
+                function generateBracket(playerAmount) {
+                
+                var teamData = {
+                teams : [] 
+                };
+                
+                playerAmount = playerAmount /2
+                
+                var j = 1;
+                for (i = 0; i < playerAmount; i++) { 
+                teamData.teams[i] = ["Team " + j, "Team " + ++j];
+                j++;
+                }
+                
+                var container = $('#bracket')
+                container.bracket({
+                  init: teamData,
+                  save: saveFn
+                })
+                
+                $('.tools').remove();
+              
+                data = container.bracket('data') ;
+             
+                }
+                
+                $("#amount").change(function() {
+               
+                var players = Number($('#amount').val());
+                
+                switch(players) {
+                case 4:
+                generateBracket(4);
+                    break;
+                case 8:
+                generateBracket(8);
+                    break;
+                case 16:
+                generateBracket(16);
+                    break;
+                case 32:
+                generateBracket(32);
+                    break;
+                
+                }
+                
+                
+            });
 
 
-$("#create").click(function() {
-    if($('#fname').val().length >3){
-    var teams = data.teams
-    var results = data.results
+            $("#create").click(function() {
+                if($('#fname').val().length >3){
+                var teams = data.teams
+                var results = data.results
 
-      $.ajax({
-            url: "/savetournament",
-            type: 'POST',
-            contentType:'application/json',
-            data: JSON.stringify({name :  $('#fname').val(), amount: $('#amount').val(), teams: teams, results: results }),
-            dataType : 'html',
-            success: function(){
-                alert("Tournament created!");
-                window.location = "/myetournaments"; 
+                  $.ajax({
+                        url: "/savetournament",
+                        type: 'POST',
+                        contentType:'application/json',
+                        data: JSON.stringify({name :  $('#fname').val(), amount: $('#amount').val(), teams: teams, results: results }),
+                        dataType : 'html',
+                        success: function(){
+                            alert("Tournament created!");
+                            window.location = "/myetournaments"; 
 
-            }
-        });
-    }else{
-    	
-    	 $("#warning").html("Tournament Name is too short! Please enter a minimum of 4 characters");
-    	 $("#warning").css('color', 'red');
-         $('#warning').prepend('<img id="redcross" src="@routes.Assets.at("images/redcross.png")" />')
-         $('#redcross').width(40);
-         $('#redcross').height(40);
-    	
-    }
-        });
+                        }
+                    });
+                }else{
+                	
+                	 $("#warning").html("Tournament Name is too short! Please enter a minimum of 4 characters");
+                	 $("#warning").css('color', 'red');
+                     $('#warning').prepend('<img id="redcross" src="@routes.Assets.at("images/redcross.png")" />')
+                     $('#redcross').width(40);
+                     $('#redcross').height(40);
+                	
+                }
+                    });
 
-});
-    </script>
+            });
+        </script>
     </div>
-        </div>
+        
+
+    </div>
   
-             @Templates.mitLicens()
+            @Templates.footer()
             @Templates.panelAndLogOut()
         </div>
     @Templates.jsDisabled()

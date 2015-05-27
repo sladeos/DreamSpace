@@ -11,303 +11,330 @@
        @Templates.facebookHeadScript()
     </head>
     <body>
-        <div data-role="page" data-theme="b">
-            <div data-role="header">
-                @Templates.header()
-                  <a id = "back" rel="external" href="/myetournaments" data-role="button" role="button" data-icon="back" data-iconpos="notext">Back</a>
-                <script>
-                  $("#back").css("background","  #FF9900");
-                </script>
-            </div>
-        <div data-role="content">   
-            </ul>
-            <p>
-            <h1 align="center">Edit your tournament</h1>
+      <div data-role="page" data-theme="c">
+        <div data-role="header">
+          @Templates.header()
+          <a id = "back" rel="external" href="/myetournaments" data-role="button" role="button" data-icon="back" data-iconpos="notext">Back</a>
+        </div>
+        
+        <div data-role="content" style = "padding:0">    
+            
+          <div class="ui-grid-solo ui-responsive">
+            <img src="@routes.Assets.at("images/EDITTOURNAMENT.jpg")" alt="tPicture" class = "fullscreen" />
+          </div>
+            
+          <br>
+            
+          <div class="ui-grid-solo ui-responsive">
+            <div class="ui-block-a"><b><h1 style="margin:0;text-align:center">@tournament.tournamentname</h1></b></div>
+          </div>
 
-            <button id="share_button" class = "facebookColor facebookButton centerButton" data-mini="true">Facebook Share</button>
+          <button id="share_button" class = "facebookColor facebookButton centerButton" data-mini="true">Facebook Share</button>
+          <br>
+            
+                                  <script type="text/javascript">
+                                  $(document).ready(function() {
+                                    $('#share_button').click(function(e) {
+                                      e.preventDefault();
+                                      FB.ui({
+                                        method: 'feed',
+                                        name: 'Tournament: @tournament.tournamentname',
+                                        link: document.URL,
+                                        caption: "@tournament.tournamentcreator" + "'s " + "tournament",
+                                        description: "Size of Tournament: @tournament.participant_count"
+                                      });
+                                    });
+                                  });
+                                  </script>
+            
+          <div id = "bracketcontent" style="text-align:center">
+              
+            <a href="#popupCloseRight" data-rel="popup" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-icon-info ui-btn-icon-right ui-mini">Info</a>
+            <div data-role="popup" id="popupCloseRight" class="ui-content" style="max-width:280px;background:#DBDBDB">
+              <a href="#" id="close" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext  ui-btn-right">Close</a>
+              <p>You can change the name of the teams in your tournament by clicking the respective team label, you can also change the score by clicking the label after the team name. This updates the bracket.</p>
+            </div>
+            
             <br>
-            <script type="text/javascript">
-            $(document).ready(function() {
-              $('#share_button').click(function(e) {
-                e.preventDefault();
-                FB.ui({
-                  method: 'feed',
-                  name: 'Tournament: @tournament.tournamentname',
-                  link: document.URL,
-                  caption: "@tournament.tournamentcreator" + "'s " + "tournament",
-                  description: "Size of Tournament: @tournament.participant_count"
-                });
-              });
-            });
-            </script>
+
+                                <script type="text/javascript">
+                                   $("#close").css("background","  #FF0000 ");
+                                </script>
             
             <div id="bracket"></div>
-             <div id='bracketForm' class = "standardBox">
-
+               
                <br>
                <br>
-                <a href="#popupCloseRight" data-rel="popup" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-icon-info ui-btn-icon-right ui-mini">Info</a>
                 
-
-                <div class ="deltagare" id="deltagare">
-                  <ul data-role="listview" data-inset="true" data-dividertheme="a" data-theme = "b" id="hej">
-                    <p> Participants: </p> 
-                      @for(participant <- participant) {
-                        <li><a data-role = "button"  rel="external"  href="/profile/@participant" class = "greyBtn"><h2>@{participant}</h2></a>
-                        </li>
-                      } 
+              <div class="ui-grid-solo ui-responsive">
+                <div class="ui-block-a"><b><h3 style="margin:0;text-align:center">Participants:</h3></b></div>
+              </div>
+                
+             
+                <div class ="flowBox" style="text-align:center">
+                  <hr>    
+                  <ul data-role="listview" data-inset="true" data-dividertheme="a"> 
+                    @for(participant <- participant) {
+                      <li><a data-role = "button"  rel="external"  href="/profile/@participant" style="background:#FFFFFF"><h2 style="margin:0;text-align:center">@{participant}</h2></a>
+                      </li>
+                    } 
                   </ul>
+                  <hr> 
                 </div> 
+              
 
 
 
 
+              <div id='bracketForm' class = "standardBox">
 
-
-                <div data-role="popup" id="popupCloseRight" class="ui-content" style="max-width:280px">
-                <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext  ui-btn-right">Close</a>
-                <p>You can change the name of the teams in your tournament by clicking the respective team label, you can also change the score by clicking the label after the team name. This updates the bracket.</p>
-                </div><br>
-
-                Name of your tournament: <input type="text" name="fname" id="fname">
+                <input type="text" name="fname" id="fname" style="color:white;background:#53585F">
                 
                 <div id="dialog-form" title="Invite player">
-                	<form id="invite" action="" method ="post" data-ajax="false" onsubmit="return false;">
+                	
+                  <form id="invite" action="" method ="post" data-ajax="false" onsubmit="return false;">
                 		<input id="username" name="username" type="text" placeholder="Participant username" Style="margin-top:20%">
                 		<p id="dialogWarning"></p>
-                </div>
                 	</form>
-                <button data-role = "button" id="inviteDialog" >Invite player</button>               
-                <button data-role = "button"  value="Save changes" id="save" >Save changes</button>
-                <button data-role = "button"  value="Delete tournament" id="delete" data-icon="delete" data-iconpos="right" >Delete tournament</button>
-                    <p id="warning"></p>
+                </div>
+
+                <button data-role = "button" id="inviteDialog" >INVITE PLAYER</button>               
+                <button data-role = "button"  value="Save changes" id="save">SAVE CHANGES</button>
                 
-                        </div>
-
-            <script>
-
-               var data;
-               var a = @Html(tournament.tournamentdata);
-               var tid = @tournament.tournamentID;
-               var name = "@tournament.tournamentname";
-               var tamount = @tournament.participant_count;
-               var amount = tamount.toString(); 
-               var container = $('#bracket');
-               var prevAmt;
-               
-               
-               $(document).on("pageload",function(){ 
-            	  
-               });
-               
-           
-               $(document).ready(function() {
-            	 
-            	});
-        	   
-        	  
-               
-               $(document).on('click','.increment',function(){
-            	  
-                   switch(amount) {
-                       case "4":
-                       amount = "8"; 
-                           break;
-                       case "8":
-                       amount = "16";
-                           break;
-                       case "16":
-                       amount = "32";
-                       $('.increment').remove();
-                           break;
-                       case "32":
-                           break;                       
-                   }
-                   
-                   $('.decrement').width('30');
-             	   $('.decrement').height('30');
-             	   $('.increment').width('30');
-             	   $('.increment').height('30');
-                   
-               });
-               
-               $(document).on('click','.decrement',function(){
-                   
-                   switch(amount) {
-                       case "4":
-                           break;
-                       case "8":
-                        $('.decrement').remove();
-                       amount = "4";
-                           break;
-                       case "16":
-                       amount = "8";
-                           break;
-                       case "32":
-                       amount = "16";
-                           break;
-                   }
-                   $('.decrement').width('30');
-             	   $('.decrement').height('30');
-             	   $('.increment').width('30');
-             	   $('.increment').height('30');
-               });
-               
-               $('#bracket').click(function() {
-                   
-                   $('.doubleElimination').remove();                  
-               });
-               
-               $(function() {
-            	 
-                   
-                   $("#fname").val(name);
-                   $("#amount").val(amount);
-                   $("#amount").selectmenu('refresh');
-                   prevAmt = $('#amount').val();
-                   
-                   container.bracket({
-                   init: a,
-                   save: saveFn
-                   
-                   });
-                   
-                   if (amount == "4"){
-                       $('.decrement').remove();
-                   }
-                   
-                   $('.doubleElimination').remove();
-                   $('.decrement').width('30');
-             	   $('.decrement').height('30');
-             	   $('.increment').width('30');
-             	   $('.increment').height('30');
+                <br>
+                <br>
                 
-               });
-               
-               function saveFn(data) {
-               }
-               
-               $("#save").click(function(event) {
-                    event.preventDefault();
-                   name = $("#fname").val();
-                   if(name.length >3){
-                   amount;
-                   data = container.bracket('data');
-                   var teams = data.teams;
-                   var results = data.results;
-                   var id = tid.toString();
-                    
-                   
-                   $.ajax({
-                           url: "/edittournament",
-                           type: 'POST',
-                           contentType:'application/json',
-                           data: JSON.stringify({ id: id, name: name, amount: amount, teams: teams, results: results }),
-                           dataType : 'html',
-                           success: function(){
-                                alert("Tournament edited!");
-                                location.reload(); 
-
-                           }
-                   });
-                   } else {
-                       
-                        $("#warning").html("Tournament Name is too short! Please enter a minimum of 4 characters");
-                        $("#warning").css('color', 'red');
-                        $('#warning').prepend('<img id="redcross" src="@routes.Assets.at("images/redcross.png")" />')
-                        $('#redcross').width(40);
-                        $('#redcross').height(40);
-                   } 
-                   
-               
-               });
-               /////////////////////////////////////////////////delete button /////////////////////          
-             
-               $("#delete").click(function() {
-
-               var is_sure = confirm("Are you sure you want to delete?");
-           if (is_sure == true) {
-
-             var data = {
-               "id": "@tournament.tournamentID"
-             }
-
-             $.ajax({
-               url: "/deletetournament",
-               type: 'POST',
-               contentType: 'application/json',
-               data: JSON.stringify(data),
-               dataType: 'html',
-               success: function() {
-                    alert("Tournament deleted!");
-                    window.location = "/myetournaments";    
-
-               }
-
-             });
-
-                }
-
-           
-
-
-         });
-         
-         
-         var dialog = $( "#dialog-form" ).dialog({
-              autoOpen: false,
-              height: 300,
-              width: 350,
-              modal: true,
-              buttons: {
-                "Add player": addPlayer,
-                Cancel: function() {
-                dialog.dialog( "close" );
-                }
-                },
-                close: function() {
+                <button data-role = "button"  value="Delete tournament" id="delete" data-iconpos="right" style="background:#FF9900">DELETE TOURNAMENT</button>
                 
-              }
-            });
-            
-       function addPlayer() {
-           var participantUsername = $('#username').val();
-           var tournamentID = @tournament.tournamentID;
-           $.ajax({
-               url: "/invitePlayer",
-               type: 'POST',
-               contentType: 'application/json',
-               data: JSON.stringify({tournamentID: tournamentID, participant: participantUsername}),
-               dataType: 'html',
-               success: function(data) {
-                    if (data == "success") {
-                    alert("Player added");
-                    location.reload();
-                    } else if(data == "non-existent") {
-                    $('#dialogWarning').html("User doesnt exist");
-                    } else {
-                    $('#dialogWarning').html("User is already invited");
-                    }
-                    
+                <p id="warning"></p>
 
-               },
-               error: function(){
-                  alert("Error");
-               }
-                });
-       }
-            
-        $("#inviteDialog").click(function() {
-            event.preventDefault();
-            dialog.dialog( "open" );
-            
-            
-        });
+              </div>
 
-            </script>
+                                                        <script>
+
+                                                           var data;
+                                                           var a = @Html(tournament.tournamentdata);
+                                                           var tid = @tournament.tournamentID;
+                                                           var name = "@tournament.tournamentname";
+                                                           var tamount = @tournament.participant_count;
+                                                           var amount = tamount.toString(); 
+                                                           var container = $('#bracket');
+                                                           var prevAmt;
+                                                           
+                                                           
+                                                           $(document).on("pageload",function(){ 
+                                                        	  
+                                                           });
+                                                           
+                                                       
+                                                           $(document).ready(function() {
+                                                        	 
+                                                        	});
+                                                    	   
+                                                    	  
+                                                           
+                                                           $(document).on('click','.increment',function(){
+                                                        	  
+                                                               switch(amount) {
+                                                                   case "4":
+                                                                   amount = "8"; 
+                                                                       break;
+                                                                   case "8":
+                                                                   amount = "16";
+                                                                       break;
+                                                                   case "16":
+                                                                   amount = "32";
+                                                                   $('.increment').remove();
+                                                                       break;
+                                                                   case "32":
+                                                                       break;                       
+                                                               }
+                                                               
+                                                               $('.decrement').width('30');
+                                                         	   $('.decrement').height('30');
+                                                         	   $('.increment').width('30');
+                                                         	   $('.increment').height('30');
+                                                               
+                                                           });
+                                                           
+                                                           $(document).on('click','.decrement',function(){
+                                                               
+                                                               switch(amount) {
+                                                                   case "4":
+                                                                       break;
+                                                                   case "8":
+                                                                    $('.decrement').remove();
+                                                                   amount = "4";
+                                                                       break;
+                                                                   case "16":
+                                                                   amount = "8";
+                                                                       break;
+                                                                   case "32":
+                                                                   amount = "16";
+                                                                       break;
+                                                               }
+                                                               $('.decrement').width('30');
+                                                         	   $('.decrement').height('30');
+                                                         	   $('.increment').width('30');
+                                                         	   $('.increment').height('30');
+                                                           });
+                                                           
+                                                           $('#bracket').click(function() {
+                                                               
+                                                               $('.doubleElimination').remove();                  
+                                                           });
+                                                           
+                                                           $(function() {
+                                                        	 
+                                                               
+                                                               $("#fname").val(name);
+                                                               $("#amount").val(amount);
+                                                               $("#amount").selectmenu('refresh');
+                                                               prevAmt = $('#amount').val();
+                                                               
+                                                               container.bracket({
+                                                               init: a,
+                                                               save: saveFn
+                                                               
+                                                               });
+                                                               
+                                                               if (amount == "4"){
+                                                                   $('.decrement').remove();
+                                                               }
+                                                               
+                                                               $('.doubleElimination').remove();
+                                                               $('.decrement').width('30');
+                                                         	   $('.decrement').height('30');
+                                                         	   $('.increment').width('30');
+                                                         	   $('.increment').height('30');
+                                                            
+                                                           });
+                                                           
+                                                           function saveFn(data) {
+                                                           }
+                                                           
+                                                           $("#save").click(function(event) {
+                                                                event.preventDefault();
+                                                               name = $("#fname").val();
+                                                               if(name.length >3){
+                                                               amount;
+                                                               data = container.bracket('data');
+                                                               var teams = data.teams;
+                                                               var results = data.results;
+                                                               var id = tid.toString();
+                                                                
+                                                               
+                                                               $.ajax({
+                                                                       url: "/edittournament",
+                                                                       type: 'POST',
+                                                                       contentType:'application/json',
+                                                                       data: JSON.stringify({ id: id, name: name, amount: amount, teams: teams, results: results }),
+                                                                       dataType : 'html',
+                                                                       success: function(){
+                                                                            alert("Tournament edited!");
+                                                                            location.reload(); 
+
+                                                                       }
+                                                               });
+                                                               } else {
+                                                                   
+                                                                    $("#warning").html("Tournament Name is too short! Please enter a minimum of 4 characters");
+                                                                    $("#warning").css('color', 'red');
+                                                                    $('#warning').prepend('<img id="redcross" src="@routes.Assets.at("images/redcross.png")" />')
+                                                                    $('#redcross').width(40);
+                                                                    $('#redcross').height(40);
+                                                               } 
+                                                               
+                                                           
+                                                           });
+                                                           /////////////////////////////////////////////////delete button /////////////////////          
+                                                         
+                                                           $("#delete").click(function() {
+
+                                                           var is_sure = confirm("Are you sure you want to delete?");
+                                                       if (is_sure == true) {
+
+                                                         var data = {
+                                                           "id": "@tournament.tournamentID"
+                                                         }
+
+                                                         $.ajax({
+                                                           url: "/deletetournament",
+                                                           type: 'POST',
+                                                           contentType: 'application/json',
+                                                           data: JSON.stringify(data),
+                                                           dataType: 'html',
+                                                           success: function() {
+                                                                alert("Tournament deleted!");
+                                                                window.location = "/myetournaments";    
+
+                                                           }
+
+                                                         });
+
+                                                            }
+
+                                                       
+
+
+                                                     });
+                                                     
+                                                     
+                                                     var dialog = $( "#dialog-form" ).dialog({
+                                                          autoOpen: false,
+                                                          height: 300,
+                                                          width: 350,
+                                                          modal: true,
+                                                          buttons: {
+                                                            "Add player": addPlayer,
+                                                            Cancel: function() {
+                                                            dialog.dialog( "close" );
+                                                            }
+                                                            },
+                                                            close: function() {
+                                                            
+                                                          }
+                                                        });
+                                                        
+                                                   function addPlayer() {
+                                                       var participantUsername = $('#username').val();
+                                                       var tournamentID = @tournament.tournamentID;
+                                                       $.ajax({
+                                                           url: "/invitePlayer",
+                                                           type: 'POST',
+                                                           contentType: 'application/json',
+                                                           data: JSON.stringify({tournamentID: tournamentID, participant: participantUsername}),
+                                                           dataType: 'html',
+                                                           success: function(data) {
+                                                                if (data == "success") {
+                                                                alert("Player added");
+                                                                location.reload();
+                                                                } else if(data == "non-existent") {
+                                                                $('#dialogWarning').html("User doesnt exist");
+                                                                } else {
+                                                                $('#dialogWarning').html("User is already invited");
+                                                                }
+                                                                
+
+                                                           },
+                                                           error: function(){
+                                                              alert("Error");
+                                                           }
+                                                            });
+                                                   }
+                                                        
+                                                    $("#inviteDialog").click(function() {
+                                                        event.preventDefault();
+                                                        dialog.dialog( "open" );
+                                                        
+                                                        
+                                                    });
+
+                                                        </script>
             
          </div>
-         @Templates.mitLicens()
+       </div>
+         @Templates.footer()
          @Templates.panelAndLogOut()
       </div>
       @Templates.jsDisabled()

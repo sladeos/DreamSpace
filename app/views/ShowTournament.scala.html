@@ -8,18 +8,23 @@
       @Templates.facebookHeadScript()
    </head>
    <body>
-      <div data-role="page" data-theme="b">
+      <div data-role="page" data-theme="c">
             <div data-role="header">
                 @Templates.header()
                 <a id = "back" rel="external" href="/mainetournament" data-role="button" role="button" data-icon="back" data-iconpos="notext">Back</a>
-                <script>
-                    $("#back").css("background","  #FF9900");
-                </script>
+
             </div>
-            <div data-role="content">
-                <h1 align="center">ETournament</h1>
+            <div data-role="content" style = "padding:0">
+                <div class="ui-grid-solo ui-responsive">
+                  <img src="@routes.Assets.at("images/ETOURNAMENT.jpg")" alt="tPicture" class = "fullscreen" />
+                </div>
+                <br>
+                <div class="ui-grid-solo ui-responsive">
+                  <div class="ui-block-a"><b><h1 style="margin:0;text-align:center">@tournament.tournamentname</h1></b></div>
+                </div>
                 <button id="share_button" class = "facebookColor facebookButton centerButton" data-mini="true">Facebook Share</button>
                 <br>
+                
                 <div id = "bracketcontent" >
 
                     <div id="bracket"></div>
@@ -39,16 +44,23 @@
                     </script>
                     <div id="bracket"></div>
 
-
-                    <div class ="deltagare" id="deltagare">
-                      <p> Participants: </p>
-                        <ul data-role="listview" data-inset="true" data-dividertheme="a" data-theme = "b" id="hej"> 
+                <br>
+                <br>
+                <div class="ui-grid-solo ui-responsive">
+                  <div class="ui-block-a"><b><h3 style="margin:0;text-align:center">Participants:</h3></b></div>
+                </div>
+                
+                <div id="participants">
+                    <div class ="flowBox">
+                      <hr>    
+                        <ul data-role="listview" data-inset="true" data-dividertheme="a"> 
                         @for(participant <- participant) {
-                                <li><a data-role = "button"  rel="external"  href="/profile/@participant" class = "greyBtn"><h2>@{participant}</h2></a>
+                                <li><a data-role = "button"  rel="external"  href="/profile/@participant" style="background:#FFFFFF"><h2 style="margin:0;text-align:center">@{participant}</h2></a>
                             </li>
                         } 
-                        </ul>
+                        </ul> 
                     </div> 
+                </div>
 
 
                     <script type="text/javascript">  
@@ -71,7 +83,7 @@
               
             </div>
 
-            @Templates.mitLicens()
+            @Templates.footer()
             @Templates.panelAndLogOut()
       </div>
       @Templates.jsDisabled()
