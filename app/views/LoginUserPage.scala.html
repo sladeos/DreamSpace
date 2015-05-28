@@ -112,7 +112,7 @@
 </div>
     
 
-    <div data-role="page" id = "login" data-theme="b">
+    <div data-role="page" id = "login" data-theme="c">
         
   
                       
@@ -120,11 +120,11 @@
 		             
               <div class = "loginBox"> 
 
-                <h1 class = "headerPic"><img src="@routes.Assets.at("images/e3.png")" class = "fullscreen"></h1> 
-                <div data-role="collapsible" class="ui-icon-alt" data-collapsed-icon="arrow-r" data-expanded-icon="arrow-d" data-iconpos="right"  >
-                    <h1 class="custom-centercollheader">Login</h1>
+                <h1 class = "headerPic"><img src="@routes.Assets.at("images/real.png")" class = "headerImg "></h1> 
+                <div id = "custom-collapsible" data-role="collapsible" class="ui-icon-alt" data-collapsed-icon="arrow-r" data-expanded-icon="arrow-d" data-iconpos="right"  data-content-theme="a" >
+                    <h1 class="custom-centercollheader">SIGN IN</h1>
             	    <form id ="loginform" action="@routes.UserDatabase.getUser()" method ="post" data-ajax="false">
-                        <div data-role="fieldcontain"class="ui-hide-label" data-theme="b">
+                        <div data-role="fieldcontain"class="ui-hide-label">
                             <label for="username">Username:</label>
                             <input type="text" name="username" id="username" value="" placeholder="Username"/>
                         </div>
@@ -133,7 +133,7 @@
                             <input type="password" name="password" id="password" value="" placeholder="Password"/>
                         </div>
                         <p id="warning">@message</p>
-				        <button id = "button3" class = "my-btn" type="submit" value="Login" onclick="return validate()">Login </button>
+				        <button data-role ="button" data-inline="true" id = "button3" class = "my-btn" type="submit" value="Login" onclick="return validate()">Login </button>
 		           </form>
 		        </div>
 
@@ -150,7 +150,7 @@
                     });
                 </script>
                 <br>
-    		        <button data-role = "button" id="button1" class = "my-btn"  data-icon="arrow-r" data-iconpos="right">Register a new account</button>
+    		        <button data-role = "button" id="button1" class = "my-btn"  data-icon="arrow-r" data-iconpos="right" style="border:none;">Register a new account</button>
     		
                 <br>
 		        <div id = "facebook"> <fb:login-button scope="public_profile,email" onlogin="checkLoginState();" data-size="xlarge" data-max-rows="1">
@@ -164,7 +164,12 @@ $('#button1').click(function() {
 	window.location='/register'; });
 	</script>
   <script>
-     $("#button1, #button3 ").css("background","  #FF9900");
+     $("#button1").css("background","  #DADADA");
+      $("#button3").css("background"," #FF9200");
+
+               
+                $("#button3,#button1").css('color','black');
+               
   </script>
 		
 		

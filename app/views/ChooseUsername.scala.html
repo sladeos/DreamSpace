@@ -8,10 +8,10 @@
         @Templates.facebookHeadScript()
     </head>
     <body>
-        <div data-role="page" id = "choosename" data-theme="b">
+        <div data-role="page" id = "choosename" data-theme="c">
            
             <div data-role = "content">
-             <h1 class = "headerPic"><img src="@routes.Assets.at("images/e3.png")" class = "fullscreen"></h1> 
+             <h1 class = "headerPic"><img src="@routes.Assets.at("images/real.png")" class = "headerImg"></h1> 
             <div class = "loginBox"> 
                 <h3 class = "headerPic" >Choose a username</h3>
 
@@ -21,13 +21,15 @@
                         <input type="text" name="username" id="username" value="" placeholder="Username"/>
                     </div>
                     
-                     <input type="submit" value="Create account" onclick="return validate()">
+                     <input type="submit" value="Create account" style="border:none;" onclick="return validate()">
 
               
-                        <button onclick="window.location.href='/login'">Return to login</button>
+                        <button onclick="window.location.href='/login'" style="border:none;">Return to login</button>
                 <p id="warning">@message</p>
             </div>
-            
+            <script>
+                    $('#username').textinput({ theme: "a" });
+                </script>
                 
              <script type="text/javascript">
              function errorInField(){
