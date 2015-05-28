@@ -13,27 +13,23 @@
       </head>
 
     <body>         
-        <div data-role="page" data-theme="b">   
+        <div data-role="page" data-theme="c">   
             <div data-role="header">
                 @Templates.header()
             </div>
             
             <div data-role="content">
             
-                <h1 align="center">My personal packlist</h1>
-                <img src="@routes.Assets.at("images/packlist.jpg")"> 
-                <p>
-                Here is your packlist and checklist for DreamHack, ideal for you who are first time visitors but also for you who have been at DreamHack before, it is easy to forget something important! Do not forget to read the rules of the festival, where you’ll also find useful tips and regulations, please note the information regarding yours, and all other visitors’ safety and comfort.
-                </p>
-                <p>
-                Tip!
-                Always take your valuables and smaller devices with you when you leave your seat or ask your friends and neighbours to watch your belongings. Secure the screen, computer and other valuable hardware with cables and computer security lock. Never leave your mobile phone and wallet on the table. The occasion makes the thief!
-                </p>
+                <img src="@routes.Assets.at("images/PacklistBild.jpg") " Style="width:100%" > 
+                <h2 align="center"><strong>Your own packlist!</strong></h2>
+                <p align="center" style="font-size:130%">Difficult to remember what things you <br> have packed for DreamHack and not? <br> Here is where a list comes in handy!</p>
+
+                <p class="linespacing" style="font-size:170%"><strong>Tick the things you have packed</strong></p>
+                <p>_____________________________________________________________________ </p>
+                
 
                 <form>
                     <div data-role="fieldcontain">
-                        
-
                 <label><input type="checkbox" name="checkbox-0" id="pc" value="unchecked" @packlist.pc>Personal computer with all cables</label>
                 <label><input type="checkbox" name="checkbox-0" id="powerstrip" value="unchecked" @packlist.powerstrip>Powerstrip so you can connect all your stuff</label>
                 <label><input type="checkbox" name="checkbox-0" id="screenAndCables" value="unchecked" @packlist.screenAndCables >Screen and associated cables</label>
@@ -69,8 +65,6 @@
                 <label><input type="checkbox" name="checkbox-0" id="mattress" value="unchecked" @packlist.mattress>Sleeping pad or air mattress</label>
                 
                 <div Style="float:right"><input type="button" value="Save" id="save"  data-mini="true"></div>
-
-                
                 </div>
               </form>
      

@@ -168,10 +168,14 @@ border-color:transparent;
        border:none;
 
 }
+
 .mainFlowBox{
     margin: 0 auto;
 }
 
+.linespacing {
+    line-height: 1px
+}
 
 #pagination{
     visibility: hidden;
@@ -210,6 +214,8 @@ border-color:transparent;
 #replyfielddiv{
     width: 100%;
 }
+
+
 
 @media all and (max-width: 36em){
     .ui-page{
