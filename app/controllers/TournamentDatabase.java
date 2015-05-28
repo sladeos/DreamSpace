@@ -348,6 +348,7 @@ public class TournamentDatabase extends Controller {
 			} // end finally try
 		} // end try
 	}
+	
 
 	public static Result getMyTournaments(int page) {
 		String currentUser = session("connected");
