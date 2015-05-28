@@ -8,6 +8,9 @@
 
         <script src="@routes.Assets.at("javascripts/jquery.bracket.min.js")" type="text/javascript"></script>
 		<link rel="stylesheet"  href="@routes.Assets.at("stylesheets/jquery.bracket.min.css")">
+		
+		<script type="text/javascript" src="@routes.Assets.at("javascripts/image-picker/image-picker.min.js")" ></script>
+        <link rel="stylesheet" href="@routes.Assets.at("javascripts/image-picker/image-picker.css")">
         @Templates.facebookHeadScript()
         
     </head>
@@ -42,7 +45,7 @@
             <a href="#popupCloseRight" data-rel="popup" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-icon-info ui-btn-icon-left ui-mini">Info</a>
             <div data-role="popup" id="popupCloseRight" class="ui-content" style="max-width:280px;background:#DBDBDB">
                 <a href="#" id="close" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext  ui-btn-right">Close</a>
-                <p>You can change the name of the teams in your tournament by clicking the respective team label, you can also change the score by clicking the label after the team name. This updates the bracket.</p>
+                <p>You can change the name of the teams in your tournament by clicking the respective team label, you can also change the score by clicking the label after the team name. The information field will only be visible to players who you have invited to the tournament. <strong>Changing the amount of players resets the entire tournament!</strong></p>
             </div>
 
             <script type="text/javascript">
@@ -52,10 +55,6 @@
             <div id='bracket' class = "bracket"></div>
             
             <div id='bracketForm' class = "standardBox">
-                <br>
-                <br>
-           
-
 
                 <form name="bracketGenerate">
                     <input type="text" name="fname" id="fname" placeholder="Name of your tournament" style="color:white;background:#53585F">
@@ -66,7 +65,28 @@
                         <option value="16">16</option>
                         <option value="32">32</option>
                     </select> 
-        
+        			<div data-role="collapsible" class="ui-icon-alt" data-collapsed-icon="grid" data-expanded-icon="grid" data-iconpos="right"  >
+                    <h3 class = "custom-centercollheader" >Choose a Game Icon</h3>
+                        <select class="image-picker hide-html" id="imgpick" name="logo" >
+                          <option data-img-src="@routes.Assets.at("images/gamelogos/game.png")" value="game.png"></option>
+                          <option data-img-src="@routes.Assets.at("images/gamelogos/brack.png")" value="brack.png"></option>
+                          <option data-img-src="@routes.Assets.at("images/gamelogos/csgo.png")" value="csgo.png"></option>
+                          <option data-img-src="@routes.Assets.at("images/gamelogos/wow.png")" value="wow.png"></option>
+                          <option data-img-src="@routes.Assets.at("images/gamelogos/mc.png")" value="mc.png"></option>
+                          <option data-img-src="@routes.Assets.at("images/gamelogos/hs.png")" value="hs.png"></option>
+                          <option data-img-src="@routes.Assets.at("images/gamelogos/lol.png")" value="lol.png"></option>
+                          <option data-img-src="@routes.Assets.at("images/gamelogos/rust.png")" value="rust.png"></option>
+                          <option data-img-src="@routes.Assets.at("images/gamelogos/bf4.png")" value="bf4.png"></option>
+                          <option data-img-src="@routes.Assets.at("images/gamelogos/sc.png")" value="sc.png"></option>
+                          <option data-img-src="@routes.Assets.at("images/gamelogos/gtav.png")" value="gtav.png"></option>
+                          <option data-img-src="@routes.Assets.at("images/gamelogos/dota.png")" value="dota.png"></option>
+                          <option data-img-src="@routes.Assets.at("images/gamelogos/d3.png")" value="d3.png"></option>
+                        </select>
+                    </div>
+                    
+                    <div data-role="fieldcontain" class="ui-hide-label">
+                        <textarea placeholder="Enter some information about your Tournament here. This will only be visible to invited players" name="information" id="informationArea" rows="4" cols="50" ></textarea>
+                    </div>
        
                     <input data-role = "button"  type="button" value="CREATE" id="create">
                     <p id="warning"></p>
@@ -79,6 +99,8 @@
             <script type="text/javascript">
    
             $(function() {
+					$("#imgpick").imagepicker();
+					
                 function generateBracket(playerAmount) {
     
     var teamData = {
@@ -146,46 +168,37 @@
     });
 
 
-$("#create").click(function() {
-    if($('#fname').val().length >3){
-    var teams = data.teams
-    var results = data.results
+    $("#create").click(function() {
+        if($('#fname').val().length >3){
+        var teams = data.teams
+        var results = data.results
 
-      $.ajax({
-            url: "/savetournament",
-            type: 'POST',
-            contentType:'application/json',
-            data: JSON.stringify({name :  $('#fname').val(), amount: $('#amount').val(), teams: teams, results: results }),
-            dataType : 'html',
-            success: function(){
-                alert("Tournament created!");
-                window.location = "/myetournaments"; 
+          $.ajax({
+                url: "/savetournament",
+                type: 'POST',
+                contentType:'application/json',
+                data: JSON.stringify({name :  $('#fname').val(), amount: $('#amount').val(), teams: teams, results: results, info: $('#informationArea').val(), logo : $('#imgpick').val()}),
+                dataType : 'html',
+                success: function(){
+                    alert("Tournament created!");
+                    window.location = "/myetournaments"; 
 
-            }
-        });
-    }else{
-    	
-    	 $("#warning").html("Tournament Name is too short! Please enter a minimum of 4 characters");
-    	 $("#warning").css('color', 'red');
-         $('#warning').prepend('<img id="redcross" src="@routes.Assets.at("images/redcross.png")" />')
-         $('#redcross').width(40);
-         $('#redcross').height(40);
-    	
-    }
-        });
+                }
+            });
+        }else{
+        	
+        	 $("#warning").html("Tournament Name is too short! Please enter a minimum of 4 characters");
+        	 $("#warning").css('color', 'red');
+             $('#warning').prepend('<img id="redcross" src="@routes.Assets.at("images/redcross.png")" />')
+             $('#redcross').width(40);
+             $('#redcross').height(40);
+        	
+        }
+            });
 
 });
-      
-
-          
         </script>
     </div>
-        
-    
-    
-    
- 
-  
             @Templates.footer()
             @Templates.panelAndLogOut()
         </div>
