@@ -530,11 +530,11 @@ public class TournamentDatabase extends Controller {
 
 
 
-	public static List<String> getParticipants(int tID) {	
+	public static List<Participant> getParticipants(int tID) {	
 		
 		Connection conn = null;
 		PreparedStatement preparedStatement = null;
-		List<String> userNameList = new ArrayList<String>();
+		List<Participant> pList = new ArrayList<Participant>();
 		int acceptedCheck = 1;
 
 		 try {
@@ -548,15 +548,19 @@ public class TournamentDatabase extends Controller {
 
 
 		 	while (rs.next()) {
-		 		String participantName = rs.getString("username");
-		 		userNameList.add(participantName);
+		 	    Participant p = new Participant();
+		 	    
+		 	    p.username = rs.getString("username");
+	            p.tournamentID = tID;
+	            
+		 		pList.add(p);
 		 	}
 			
 
 
 
 		 	rs.close();
-			return userNameList;
+			return pList;
 			
 			}catch (com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException ice) {
 					return null;

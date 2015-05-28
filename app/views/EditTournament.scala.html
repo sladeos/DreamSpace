@@ -1,4 +1,4 @@
-@(tournament: Tournament, participant: List[String])
+@(tournament: Tournament, participant: List[Participant])
 <!DOCTYPE html>
 <html>
    <head>
@@ -75,7 +75,7 @@
                   <hr>    
                   <ul data-role="listview" data-inset="true" data-dividertheme="a"> 
                     @for(participant <- participant) {
-                      <li><a data-role = "button"  rel="external"  href="/profile/@participant" style="background:#FFFFFF"><h2 style="margin:0;text-align:center">@{participant}</h2></a>
+                      <li><a data-role = "button"  rel="external"  href="/profile/@participant" style="background:#FFFFFF"><h2 style="margin:0;text-align:center">@{participant.username}</h2></a>
                       </li>
                     } 
                   </ul>
