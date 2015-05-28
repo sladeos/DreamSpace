@@ -265,9 +265,11 @@
                         <li>
                            <a data-role = "button"  rel="external"  href="/showtournament/@tournament.tournamentID" class = "greyBtn">
                               <img src="@routes.Assets.at("images/sun.jpg")" alt="Dreamhack" class = "fullscreen"  />
+                              <button data-role = "button" class="leaveT" data-inline="true" style="float:right;" value="@tournament.tournamentID">Leave</button>
                               <h2>@{tournament.tournamentname}</h2>
                               <p>@{"Admin: " +  tournament.tournamentcreator }</p>
                            </a>
+                           
                         </li>
                         } 
                      </ul>
@@ -284,6 +286,7 @@
             	$("#lolrank").val('@profile.lolrank');
             	$("#dota2mmr").val('@profile.dota2rank');
             	$('select').selectmenu("refresh", true);
+            	$(".leaveT").css("background","  #FF9900");
             });
             
                $("#save").click(function() {
@@ -304,9 +307,29 @@
                 
                });
                
+               $(".leaveT").click(function(e) {
+                   e.preventDefault();
+                   var is_sure = confirm("Are you sure you want to leave this tournament?");
+                    if (is_sure == true) {
+                        var tId = $(this).val();
+                           $.ajax({
+                               url: "/leavetournament",
+                               type: 'POST',
+                               contentType:'application/json',
+                               data: JSON.stringify({tId: tId}),
+                               dataType : 'html',
+                               success: function(){
+                                  location.reload();;
+                               }
+                            });
+                    }
+               });
               
                
                $("#delete").click(function() {
+                   var is_sure = confirm("Are you sure you want to delete?");
+                    if (is_sure == true) {
+
                    $.ajax({
                        url: "/deleteprofilepicture",
                        type: 'POST',
@@ -314,6 +337,7 @@
                            window.location.replace(document.URL);
                        }
                    });
+                    }
                });
             </script>
          </div>
