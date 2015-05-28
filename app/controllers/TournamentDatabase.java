@@ -1,21 +1,12 @@
 package controllers;
 
 import models.*;
-
-import java.security.SecureRandom;
 import java.sql.*;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.node.ObjectNode;
-
 import views.html.*;
-import models.FacebookUser;
-import play.data.Form;
 import play.db.DB;
 import play.mvc.*;
-import play.db.*;
-import play.libs.Json;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -85,7 +76,8 @@ public class TournamentDatabase extends Controller {
 				t.participant_count = rs.getInt("teamAmount");
 				t.tournamentcreator = rs.getString("admin");
 				t.tournamentdata = rs.getString("tournamentData");
-
+				t.information =rs.getString("information");
+				t.logo =rs.getString("logo");
 			}
 
 			if (t.tournamentdata == null) {
@@ -137,6 +129,8 @@ public class TournamentDatabase extends Controller {
 					t.tournamentcreator = rs.getString("admin");
 					t.tournamentdata = rs.getString("tournamentData");
 					t.tournamentID = rs.getInt("tournamentID");
+					t.information =rs.getString("information");
+					t.logo =rs.getString("logo");
 					tList.add(t);
 				}
 				rs.close();
@@ -189,6 +183,8 @@ public class TournamentDatabase extends Controller {
 
 		String tournamentName = json.findPath("name").textValue();
 		String tournamentAmount = json.findPath("amount").textValue();
+		String information = json.findPath("information").textValue();
+		String logo = json.findPath("logo").textValue();
 		JsonNode tournamentTeams = json.findPath("teams");
 		JsonNode tournamentResults = json.findPath("results");
 
@@ -203,13 +199,15 @@ public class TournamentDatabase extends Controller {
 			conn = DB.getConnection();
 
 			int teamAmount = Integer.parseInt(tournamentAmount);
-			String insertIntoDatabase = "INSERT INTO ETournament (admin, tournamentData, tournamentName, teamAmount) VALUES(?,?,?,?)";
+			String insertIntoDatabase = "INSERT INTO ETournament (admin, tournamentData, tournamentName, teamAmount, information, logo) VALUES(?,?,?,?,?,?)";
 			preparedStatement = conn.prepareStatement(insertIntoDatabase);
 
 			preparedStatement.setString(1, currentUser);
 			preparedStatement.setString(2, tournamentData);
 			preparedStatement.setString(3, tournamentName);
 			preparedStatement.setInt(4, teamAmount);
+			preparedStatement.setString(5, information);
+			preparedStatement.setString(6, logo);
 
 			preparedStatement.executeUpdate();
 			return ok();
@@ -224,12 +222,6 @@ public class TournamentDatabase extends Controller {
 			// Handle errors for Class.forName
 			return internalServerError(e.toString());
 		} finally {
-			// finally block used to close resources
-			// try {
-			// if (preparedStatement != null)
-			// conn.close();
-			// } catch (SQLException se) {
-			// } //do nothing
 			try {
 				if (conn != null)
 					conn.close();
@@ -248,6 +240,8 @@ public class TournamentDatabase extends Controller {
 		String tournamentID = json.findPath("id").textValue();
 		String tournamentName = json.findPath("name").textValue();
 		String tournamentAmount = json.findPath("amount").textValue();
+		String information = json.findPath("information").textValue();
+		String logo = json.findPath("logo").textValue();
 		JsonNode tournamentTeams = json.findPath("teams");
 		JsonNode tournamentResults = json.findPath("results");
 
@@ -265,13 +259,15 @@ public class TournamentDatabase extends Controller {
 			int parsedID = Integer.parseInt(tournamentID);
 			int teamAmount = Integer.parseInt(tournamentAmount);
 
-			String insertIntoDatabase = "UPDATE ETournament SET tournamentData=?, tournamentName=?, teamAmount=? WHERE tournamentID=?";
+			String insertIntoDatabase = "UPDATE ETournament SET tournamentData=?, tournamentName=?, teamAmount=?, information=?, logo=? WHERE tournamentID=?";
 			preparedStatement = conn.prepareStatement(insertIntoDatabase);
 
 			preparedStatement.setString(1, tournamentData);
 			preparedStatement.setString(2, tournamentName);
 			preparedStatement.setInt(3, teamAmount);
-			preparedStatement.setInt(4, parsedID);
+			preparedStatement.setString(4, information);
+			preparedStatement.setString(5, logo);
+			preparedStatement.setInt(6, parsedID);
 
 			preparedStatement.executeUpdate();
 			return ok();
@@ -286,12 +282,6 @@ public class TournamentDatabase extends Controller {
 			// Handle errors for Class.forName
 			return internalServerError(e.toString());
 		} finally {
-			// finally block used to close resources
-			// try {
-			// if (preparedStatement != null)
-			// conn.close();
-			// } catch (SQLException se) {
-			// } //do nothing
 			try {
 				if (conn != null)
 					conn.close();
@@ -334,12 +324,6 @@ public class TournamentDatabase extends Controller {
 			// Handle errors for Class.forName
 			return internalServerError(e.toString());
 		} finally {
-			// finally block used to close resources
-			// try {
-			// if (preparedStatement != null)
-			// conn.close();
-			// } catch (SQLException se) {
-			// } //do nothing
 			try {
 				if (conn != null)
 					conn.close();
@@ -403,12 +387,6 @@ public class TournamentDatabase extends Controller {
 				// Handle errors for Class.forName
 				return internalServerError(e.toString());
 			} finally {
-				// finally block used to close resources
-				// try {
-				// if (preparedStatement != null)
-				// conn.close();
-				// } catch (SQLException se) {
-				// } //do nothing
 				try {
 					if (conn != null)
 						conn.close();
@@ -460,12 +438,6 @@ public class TournamentDatabase extends Controller {
 				return null;
 			}
 			finally {
-				// finally block used to close resources
-				// try {
-				// if (preparedStatement != null)
-				// conn.close();
-				// } catch (SQLException se) {
-				// } //do nothing
 				try {
 					if (conn != null)
 						conn.close();
@@ -514,12 +486,6 @@ public class TournamentDatabase extends Controller {
 		} catch (Exception e) {
 	    	return null;
 		} finally {
-				// finally block used to close resources
-				// try {
-				// if (preparedStatement != null)
-				// conn.close();
-				// } catch (SQLException se) {
-				// } //do nothing
 			try {
 				if (conn != null)
 					conn.close();
@@ -575,12 +541,6 @@ public class TournamentDatabase extends Controller {
 				return null;
 			}
 			finally {
-				// finally block used to close resources
-				// try {
-				// if (preparedStatement != null)
-				// conn.close();
-				// } catch (SQLException se) {
-				// } //do nothing
 				try {
 					if (conn != null)
 						conn.close();
