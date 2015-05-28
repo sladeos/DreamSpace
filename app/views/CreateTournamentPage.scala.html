@@ -79,99 +79,112 @@
             <script type="text/javascript">
    
             $(function() {
-                
-                generateBracket($('#amount').val());
-                
-                var data;
-                
-                function saveFn(data) {
-                    
-                }
-                
                 function generateBracket(playerAmount) {
-                
-                var teamData = {
-                teams : [] 
-                };
-                
-                playerAmount = playerAmount /2
-                
-                var j = 1;
-                for (i = 0; i < playerAmount; i++) { 
-                teamData.teams[i] = ["Team " + j, "Team " + ++j];
-                j++;
-                }
-                
-                var container = $('#bracket')
-                container.bracket({
-                  init: teamData,
-                  save: saveFn
-                })
-                
-                $('.tools').remove();
-              
-                data = container.bracket('data') ;
-             
-                }
-                
-                $("#amount").change(function() {
-               
-                var players = Number($('#amount').val());
-                
-                switch(players) {
-                case 4:
-                generateBracket(4);
-                    break;
-                case 8:
-                generateBracket(8);
-                    break;
-                case 16:
-                generateBracket(16);
-                    break;
-                case 32:
-                generateBracket(32);
-                    break;
-                
-                }
-                
-                
-            });
+    
+    var teamData = {
+    teams : [] 
+    };
+    
+    playerAmount = playerAmount /2
+    
+    var j = 1;
+    for (i = 0; i < playerAmount; i++) { 
+    teamData.teams[i] = ["Team " + j, "Team " + ++j];
+    j++;
+    }
+    
+    var container = $('#bracket')
+    container.bracket({
+      init: teamData,
+      save: saveFn
+    })
+    
+    $('.tools').remove();
+  
+    data = container.bracket('data') ;
+ 
+    }
+    
+    var selAmt = $('#amount')
+    selAmt.data('pre', selAmt.val());
+    
+    var previous = false;
+    $("#amount").change(function() {
+        if (previous == true){
+            previous = false;
+        } else {
+        var is_sure = confirm("Are you sure you want to change the size of your tournament? Data will be lost");
+           if (is_sure == true) {
+
+   
+    var players = Number($('#amount').val());
+    
+    
+    switch(players) {
+    case 4:
+    generateBracket(4);
+        break;
+    case 8:
+    generateBracket(8);
+        break;
+    case 16:
+    generateBracket(16);
+        break;
+    case 32:
+    generateBracket(32);
+        break;
+    
+    }
+    var jqThis = $(this);
+    jqThis.data('pre', jqThis.val());
+    } else {
+    previous = true;
+    var jqThis = $(this);
+    jqThis.val(jqThis.data('pre')).change();
+    }
+    }
+    });
 
 
-            $("#create").click(function() {
-                if($('#fname').val().length >3){
-                var teams = data.teams
-                var results = data.results
+$("#create").click(function() {
+    if($('#fname').val().length >3){
+    var teams = data.teams
+    var results = data.results
 
-                  $.ajax({
-                        url: "/savetournament",
-                        type: 'POST',
-                        contentType:'application/json',
-                        data: JSON.stringify({name :  $('#fname').val(), amount: $('#amount').val(), teams: teams, results: results }),
-                        dataType : 'html',
-                        success: function(){
-                            alert("Tournament created!");
-                            window.location = "/myetournaments"; 
+      $.ajax({
+            url: "/savetournament",
+            type: 'POST',
+            contentType:'application/json',
+            data: JSON.stringify({name :  $('#fname').val(), amount: $('#amount').val(), teams: teams, results: results }),
+            dataType : 'html',
+            success: function(){
+                alert("Tournament created!");
+                window.location = "/myetournaments"; 
 
-                        }
-                    });
-                }else{
-                	
-                	 $("#warning").html("Tournament Name is too short! Please enter a minimum of 4 characters");
-                	 $("#warning").css('color', 'red');
-                     $('#warning').prepend('<img id="redcross" src="@routes.Assets.at("images/redcross.png")" />')
-                     $('#redcross').width(40);
-                     $('#redcross').height(40);
-                	
-                }
-                    });
+            }
+        });
+    }else{
+    	
+    	 $("#warning").html("Tournament Name is too short! Please enter a minimum of 4 characters");
+    	 $("#warning").css('color', 'red');
+         $('#warning').prepend('<img id="redcross" src="@routes.Assets.at("images/redcross.png")" />')
+         $('#redcross').width(40);
+         $('#redcross').height(40);
+    	
+    }
+        });
 
-            });
+});
+      
+
+          
         </script>
     </div>
         
-
-    </div>
+    
+    
+    
+ 
   
             @Templates.footer()
             @Templates.panelAndLogOut()
