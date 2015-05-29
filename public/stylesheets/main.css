@@ -172,6 +172,13 @@ border-color:transparent;
     margin: 0 auto;
 }
 
+.formMyprofile{
+   
+    padding-right:15px;
+        
+}
+
+
 
 #pagination{
     visibility: hidden;
@@ -241,6 +248,7 @@ border-color:transparent;
 
 
     .imgCut{
+
         max-Width: 75px;
         max-Height: 75px;
         min-Width: 75px;
@@ -291,6 +299,7 @@ border-color:transparent;
 
 
     }
+
      
 }
 
@@ -429,6 +438,27 @@ border-color:transparent;
         font-weight: bold;
         border:none;
     }
+    .myProfileImg{
+        width: 200px;
+        height:200px;
+    }
+    .formMyprofile{
+           width: 500px;
+          float:left;
+           padding-left:15px;
+        
+    }
+     .formMyprofile2{
+           width: 500px;
+          float:left;
+           padding-right:15px;
+        
+    }
+    .tournamentMyProfile{
+        margin:0 auto;
+        width: 500px;
+    
+}
 
     #adinfo{
         position: relative;

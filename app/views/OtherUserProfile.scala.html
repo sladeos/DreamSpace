@@ -12,7 +12,7 @@
 
     </head>
     <body>
-        <div data-role="page" data-theme="b">
+        <div data-role="page" data-theme="c">
 
             <div data-role="header">
                 @Templates.header()
@@ -20,38 +20,29 @@
         
             <div data-role="content">   
 
-              <h1 align="center">Other User Profile</h1>
-              <div class="section" Style="border:none">
-                
-                <div class="divLayoutcontact" Style = "width:20%" Style = "heigth:100%">
-                  <img src="/profilepic/@profile.username" id="avatarpic" style="height:100px!important" style="width:100px!important">
+              <h1 align="center">@profile.username</h1>
 
-                  <div Style = "width:90%" Style="float:right">
-                    <input type="button" data-icon="plus" value="Favourite" id="addfavourite">
-                  </div>
-                </div>
+              <div class="ui-grid-a ui-responsive">
+              <div class="ui-block-a">
+              <div class="formMyprofile" Style="border:none">
                 
-                   
-                <div class="divLayoutcontact" Style = "width:80%">
-                           <div data-role="fieldcontain">
-                      <label for="username">Username:</label>
+                
+                  <img src="/profilepic/@profile.username" id="avatarpic"style="width:100px; height:100px; ">
+<br>
+                   <label for="username">Username:</label>
                       <input readonly type="text" name="username" id="username" maxlength="30" value="@profile.username" >  
-                      <label for="skypeID">Skype:</label>
+                      <label for="skypeID"><img src="@routes.Assets.at("images/skype.png")" style="width:30px; height:30px;"></label>
                       <input readonly type="text" name="skypeID" id="skypeID" maxlength="30" value="@profile.skypeID" placeholder="Skype">
-                      <label for="battlenetID">Battle.net:</label>
+                      <label for="battlenetID"><img src="@routes.Assets.at("images/battleNet.png")"style="width:30px; height:30px;"></label>
                       <input readonly type="text" name="battlenetID" id="battlenetID" maxlength="30" value="@profile.battlenetID" placeholder="Battle.net">
-                      <label for="steamID">Steam:</label>
+                      <label for="steamID"><img src="@routes.Assets.at("images/steam.png")"style="width:30px; height:30px;"></label>
                       <input readonly type="text" name="steamID" id="steamID" maxlength="30" value="@profile.steamID" placeholder="Steam">
-                      <label for="twitchID">Twitch:</label>
+                      <label for="twitchID"><img src="@routes.Assets.at("images/twitch.png")"style="width:30px; height:30px;"></label>
                       <input readonly type="text" name="twitchID" id="twitchID" maxlength="30" value="@profile.twitchID" placeholder="Twitch">
-                      <label for="uplayID">UPlay:</label>
+                      <label for="uplayID"><img src="@routes.Assets.at("images/play.png")"style="width:30px; height:30px;"></label>
                       <input readonly type="text" name="uplayID" id="uplayID" maxlength="30" value="@profile.uplayID" placeholder="UPlay">       
-                    </div>
-                  </div>
-                </div>
+               
                 
-                <div class="section">
-                  <div data-role="fieldcontain">
                      <label for="CS:GO Rank">CS:GO Rank:</label>
                       <input readonly type="text" name="CS:GO Rank" id="CS:GO Rank" maxlength="30" value="@profile.csgorank" placeholder="CS:GO Rank">  
                       <label for="WoW 2v2 Rating">WoW 2v2 Rating:</label>
@@ -66,37 +57,52 @@
                       <input readonly type="text" name="LoL Rank" id="LoL Rank" maxlength="30" value="@profile.lolrank" placeholder="LoL Rank">
                       <label for="DOTA 2">DOTA 2 MMR:</label>
                       <input readonly type="text" name="DOTA 2" id="DOTA 2" maxlength="30" value="@profile.dota2rank" placeholder="DOTA 2 MMR">
-                  </div>      
+                   
                   
                   <div data-role="fieldcontain">
                     <label for="otherranksshow">Other Ranks:</label>
                     <textarea readonly cols="40" rows="8" name="otherranksshow" id="otherranksshow" placeholder="Other Ranks">@profile.otherranks</textarea>
                 </div>
                   
-                </div>
-
-                <div class="section">
+                
+             
                   <div data-role="fieldcontain">
                     <label for="about">About:</label>
                     <textarea readonly cols="40" rows="8" name="about" id="about" placeholder="About">@profile.userbio</textarea>
                   </div> 
-                </div>
                 
-                  <div class="section">
+                
+     
+                           
+                 
+     
+             
+               
+                  </div>
+               </div>
+                <div class="ui-block-b">
+              <div class="formMyprofile2">
+
+
+                            <div class="section">
                     <label for="joinedT">Joined ETournaments:</label>
-                    <div class ="MEArenaContent" id="joinedT">
-                        <ul data-role="listview" data-inset="true" data-dividertheme="a" data-theme = "b"> 
+                    <div class ="tournamentMyProfile" id="joinedT">
+                        <ul data-role="listview" data-inset="true" data-dividertheme="a" data-theme = "c"> 
                         @for(tournament <- tournament) {
-                            <li  data-role = "list-divider" ></li>
+                         
                                 <li><a data-role = "button"  rel="external"  href="/showtournament/@tournament.tournamentID" class = "greyBtn"><img src="@routes.Assets.at("images/sun.jpg")" alt="Dreamhack" class = "fullscreen"  /><h2>@{tournament.tournamentname}</h2> <p>@{"Admin: " +  tournament.tournamentcreator }</p></a>
                             </li>
+                            <li  data-role = "list-divider" style="background:transparent;border:none" ></li>
+                         
                         } 
                         </ul>
                     </div> 
                   </div>
+      
+                </div> 
+              </div>
 
-
-            
+            </div>
             </div>
             @Templates.footer()
             @Templates.panelAndLogOut()
