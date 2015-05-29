@@ -12,7 +12,14 @@
 
       </head>
 
-    <body>         
+    <body> 
+        <style>
+        p.text{
+            padding: 0px 0px; 
+            margin: 0px;
+        }
+        
+        </style>        
         <div data-role="page" data-theme="c">   
             <div data-role="header">
                 @Templates.header()
@@ -24,12 +31,12 @@
                 <h2 align="center"><strong>Your own packlist!</strong></h2>
                 <p align="center" style="font-size:130%">Difficult to remember what things you <br> have packed for DreamHack and not? <br> Here is where a list comes in handy!</p>
 
-                <p class="linespacing" style="font-size:170%"><strong>Tick the things you have packed</strong></p>
-                <p>_____________________________________________________________________ </p>
+                <p class="text" style="font-size:170%"><strong>Tick the things you have packed</strong></p>
+                <p class="text">_______________________________________________________________________________________________________________________________________ </p>
                 
-
+                <div class="standardBox" style="text-align:left; float:left">
                 <form>
-                    <div data-role="fieldcontain">
+                    <div data-role="fieldcontain" data-mini="true">
                 <label><input type="checkbox" name="checkbox-0" id="pc" value="unchecked" @packlist.pc>Personal computer with all cables</label>
                 <label><input type="checkbox" name="checkbox-0" id="powerstrip" value="unchecked" @packlist.powerstrip>Powerstrip so you can connect all your stuff</label>
                 <label><input type="checkbox" name="checkbox-0" id="screenAndCables" value="unchecked" @packlist.screenAndCables >Screen and associated cables</label>
@@ -67,6 +74,7 @@
                 <div Style="float:right"><input type="button" value="Save" id="save"  data-mini="true"></div>
                 </div>
               </form>
+          </div>
      
     <script>
         $("#save").click(function() {

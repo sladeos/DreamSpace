@@ -173,10 +173,6 @@ border-color:transparent;
     margin: 0 auto;
 }
 
-.linespacing {
-    line-height: 1px
-}
-
 #pagination{
     visibility: hidden;
 }
