@@ -12,7 +12,10 @@
                 @Templates.header()
             </div>
             <div data-role="content">
-                    <h1 align="center">New Photo</h1>
+                     <div class="ui-grid-solo ui-responsive">
+              <img src="@routes.Assets.at("images/GALLERY.jpg")" alt="tPicture" class = "fullscreen" />
+            </div>
+            
                     <div class = "standardBox">
                     <form id ="newpicture" action="@routes.PictureDatabase.savePicture()" method ="post" data-ajax="false" enctype="multipart/form-data">
                     <input id="picfield" name="picture" type="file" accept="image/*;capture=camera">
