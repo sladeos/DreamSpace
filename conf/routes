@@ -47,6 +47,12 @@ GET /createtournament controllers.Application.tournament()
 #Post to save tournament created
 POST /savetournament controllers.TournamentDatabase.addTournament()
 
+#Post to leave tournament
+POST /leavetournament controllers.InviteDatabase.leaveTournament()
+
+#Post to kick user from tournament
+POST /kickUser controllers.InviteDatabase.kickUser()
+
 #Post to delete tournament
 POST /deletetournament controllers.TournamentDatabase.deleteTournament()
 
