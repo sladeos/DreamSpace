@@ -15,96 +15,134 @@
    <body>
    
 
-        <div data-role="page" data-theme="b" id = "main">
+        <div data-role="page" data-theme="c" id = "main">
               <div data-role="header">
 	       @Templates.header()
          <a id = "back" rel="external" href="/mainearena" data-role="button" role="button" data-icon="back" data-iconpos="notext">Back</a>
-            <script>
-              $("#back").css("background","  #FF9900");
-            </script>
 
 	       </div>
             <div data-role="content">
             <div class ="wrap">
-                <h1 align="center">EArena Ad</h1>
+               
+            <div class="ui-grid-solo ui-responsive">
+              <img src="@routes.Assets.at("images/EARENA.jpg")" alt="tPicture" class = "fullscreen" />
+            </div>
+                <br>
+            <div class="ui-grid-solo ui-responsive">
+              <div class="ui-block-a"><b><h1 style="margin:0;text-align:center">@eAd.arenaName</h1></b></div>
+            </div>
+
             <button id="share_button" class = "facebookColor facebookButton centerButton" data-mini="true">Facebook Share</button>
             
             <script type="text/javascript">
-            $(document).ready(function() {
-              $('#share_button').click(function(e) {
-                e.preventDefault();
-                FB.ui({
-                  method: 'feed',
-                  name: 'EArenaAd: @eAd.arenaName',
-                  link: document.URL,
-                  caption: "@eAd.admin" +" is looking for people to play @eAd.gameName" ,
-                  description: ""
+              $(document).ready(function() {
+                $('#share_button').click(function(e) {
+                  e.preventDefault();
+                  FB.ui({
+                    method: 'feed',
+                    name: 'EArenaAd: @eAd.arenaName',
+                    link: document.URL,
+                    caption: "@eAd.admin" +" is looking for people to play @eAd.gameName" ,
+                    description: ""
+                  });
                 });
               });
-            });
             </script>
-            <div data-role="popup" id="replyPopUp" class="ui-content" data-theme="b" data-position-to="origin" style="width:300px;">
-</div>
+            
+            <div data-role="popup" id="replyPopUp" class="ui-content" data-theme="c" data-position-to="origin" style="width:300px;"></div>
 
-<script type="text/javascript">
-          function getProfileRanks(user){
+            <script type="text/javascript">
+              function getProfileRanks(user){
                 $.ajax({
                     url: "/replyprofileranks/"+user,
                     type: 'GET',
                     contentType:'application/json',
                     dataType : 'json',
                     success: function(data ){
-                    	$('#replyPopUp').html("<a rel=external href=/profile/" +data['username'] + " data-iconpos=right data-transition=pop class=my-tooltip-btn ui-btn ui-alt-icon ui-nodisc-icon ui-btn-inline ui-icon-delete>  <p> User: " + data['username'] +"</a> "+ "</p> <p> CS:GO Rank: " + data['csgorank']  + "</p> <p> WoW 2v2 Rating: " +  data['wow2v2rating']  + "</p> <p> WoW 3v3 Rating: " +  data['wow3v3rating']  + "</p> <p> WoW 5v5 Rating: " +  data['wow5v5rating']  + "</p> <p> WoW RBG Rating: " + data['wowrbgrating']  + "</p> <p> LoL Rank: " +  data['lolrank']  + "</p> <p> DOTA 2: " +  data['dota2rank']  + "</p> <p> Other Ranks: " +  data['otherranks'])
-                    	$('#replyPopUp').append("<a href=# class=ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-b data-rel=back>Close</a>")
+                    	$('#replyPopUp').html("<a rel=external href=/profile/" +data['username'] + " data-iconpos=right data-transition=pop class=my-tooltip-btn ui-btn ui-alt-icon ui-nodisc-icon ui-btn-inline ui-icon-delete>  <p><h2><b>" + data['username'] +"</a> "+ "</b></h2></p> <p><b> CS:GO Rank:</b> " + data['csgorank']  + "</p> <p><b> WoW 2v2 Rating:</b> " +  data['wow2v2rating']  + "</p> <p><b> WoW 3v3 Rating:</b> " +  data['wow3v3rating']  + "</p> <p><b> WoW 5v5 Rating:</b> " +  data['wow5v5rating']  + "</p> <p><b> WoW RBG Rating:</b> " + data['wowrbgrating']  + "</p> <p><b> LoL Rank:</b> " +  data['lolrank']  + "</p> <p><b> DOTA 2:</b> " +  data['dota2rank']  + "</p> <p><b> Other Ranks:</b> " +  data['otherranks'])
+                    	$('#replyPopUp').append("<a href=# class=ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-b data-rel=back>CLOSE</a>")
                        	$("#replyPopUp" ).popup("open");
                         		}
                 });
-                }
-          </script>
+              }
+            </script>
+            <br>
+            <div class="ui-grid-a ui-responsive">
+              <div class="ui-block-a">
+                <div style = "padding-right:30px">               
+                  <article data-role="listview" data-inset="true" data-dividertheme="a"> 
+                    <li style="background:#DBDBDB"><h2>@eAd.arenaName</h2>
+                      <div style="float:right;"><img src="../assets/images/gamelogos/@eAd.logo"></div>
+                        <p>AdType: @eAd.adType</p>
+                        <p>Creator: @eAd.admin</p>
+                        <p>Game: @eAd.gameName</p>
+                        <p>Created: @eAd.createdDate</p>
+                        <p>Players: @eAd.playersRequired</p>
+                        <p>Information:</p> 
+                        <textarea readonly name="textarea" id="@eAd.arenaID" style = "overflow:auto;resize:none" >@eAd.information</textarea>
+                      </li>
+                                  
+                      <script>
+                        $('.ui-page-active .ui-listview').listview('refresh');
+                        $('.ui-page-active :jqmData(role=content)').trigger('create');
+                        if("@eAd.adType" === "Tournament Ad"){
+                          $("#@eAd.arenaID").css("background", "#FF8532");
+                          $("#@eAd.arenaID").css("font-weight", "bold");
+                        }else{
+                          $("#@eAd.arenaID").css("background", "#373945");
+                          $("#@eAd.arenaID").css("color", "#FFFFFF");
+                        }
+                      </script>
             
-            
-                    <div id = "adinfo">               
-                          <article data-role="listview" data-inset="true" data-dividertheme="a"> 
-                              <li><h2>@eAd.arenaName</h2>
-                              <div style="float:right;"><img src="../assets/images/gamelogos/@eAd.logo"></div>
-                                  <p>AdType: @eAd.adType</p>
-                                  <p>Creator: @eAd.admin</p>
-                                  <p>Game: @eAd.gameName</p>
-                                  <p>Created: @eAd.createdDate</p>
-                                  <p>Players: @eAd.playersRequired</p>
-                                  <p>Information:</p> 
-                                  <textarea readonly name="textarea" id="text">@eAd.information</textarea>
-                              </li>
-                          </article>
-                        <label for="reply">Reply:</label>
-                        <hr>
-                        <textarea placeholder="Post your reply here" name="reply" id="replyarea" rows="4" cols="50"></textarea>
-                        <div data-role="controlgroup" data-type="horizontal" style="text-align:center;">
-                        <button data-role = "button" type="submit" id="postreply"value="Submit Reply" class = "submitReplay" data-inline = "true">Submit Reply</button>
-                        </div>
-                        <p id="warning"></p>
-                    </div>
-                    <div id = "adreplies">  
-                      <article data-role="listview" data-inset="true" data-dividertheme="a">
-                        @for(eAdReplies <- eAdReplies) {
-                        <div id="@eAdReplies.arenaID">
-                          <li  data-role = "list-divider" ></li>
-                          <li><h2>@{eAdReplies.user + " - " + eAdReplies.createdDate}</h2>
-                           <p>Reply:</p>
-                           <textarea readonly name="textarea" id="text" style = "overflow:auto;resize:none">@{eAdReplies.content}
-                            </textarea>
-                            </li>
-                            </div>
-                            <script>
-                                $("#@eAdReplies.arenaID").click(function(event){
-                                	getProfileRanks("@eAdReplies.user");
-                                })
-
-                                </script>
-                        } 
-                      </article> 
-                    </div>
+                  </article>
+                            
+                  <label for="reply"><b><h3 style="margin:0">Submit a reply</b></h3></label>
+                  <hr>
+                  <textarea placeholder="Post your reply here" name="reply" id="replyarea" rows="4" cols="50" style="background-color:#53585F;color:white"></textarea>
+                  <div data-role="controlgroup" data-type="horizontal" style="text-align:center;">
+                    <button data-role = "button" type="submit" id="postreply"value="Submit Reply" class = "submitReplay" data-inline = "true"><b>SUBMIT</b></button>
                   </div>
+                  <p id="warning"></p>
+                </div>
+          </div>
+
+          <div class="ui-block-b">
+            <br>
+            <div style="border-left:dotted;padding-left:10px">
+              <div class="ui-grid-solo ui-responsive">
+                <div class="ui-block-a"><b><h3 style="margin:0">Replies</h3></b></div>
+              </div> 
+              <hr>
+              <article data-role="listview" data-inset="true" data-dividertheme="a" >
+                @for(eAdReplies <- eAdReplies) {
+                  <div id="@eAdReplies.arenaID" style="background:#DBDBDB;padding:.7em 1em;">
+                    <li>
+                      <div class="ui-grid-a ui-responsive">
+                        <div class="ui-block-a">
+                          <h2 style="margin:0">@{eAdReplies.user}</h2>
+                        </div>
+                        <div class="ui-block-b">
+                          <p style="margin:0">@{"[" + eAdReplies.createdDate + "]"}</p>
+                        </div>
+                      </div>
+                      
+                      <p>Reply:</p>
+                      <textarea readonly name="textarea" style = "overflow:auto;resize:none;background:#373945;color:#FFFFFF">@{eAdReplies.content}
+                      </textarea>
+                    </li>
+                  </div>
+                  <li  data-role = "list-divider"  style="background:transparent;border:none" ></li>
+                            
+                  <script>
+                    $("#@eAdReplies.arenaID").click(function(event){
+                      getProfileRanks("@eAdReplies.user");
+                    })
+                  </script>
+                } 
+              </article> 
+            </div>
+          </div>
+        </div>
                   
                 <script>
                     $("#postreply").click(function() {
