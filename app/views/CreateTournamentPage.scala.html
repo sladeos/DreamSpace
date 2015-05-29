@@ -99,8 +99,21 @@
             <script type="text/javascript">
    
             $(function() {
+<<<<<<< HEAD
 					$("#imgpick").imagepicker();
 					
+=======
+            	$("#imgpick").imagepicker();
+            	
+                generateBracket($('#amount').val());
+                
+                var data;
+                
+                function saveFn(data) {
+                    
+                }
+                
+>>>>>>> 81af8fe79b1d0c23ecdd9ebfdf1cac64c6d16814
                 function generateBracket(playerAmount) {
     
     var teamData = {
@@ -182,7 +195,6 @@
                 success: function(){
                     alert("Tournament created!");
                     window.location = "/myetournaments"; 
-
                 }
             });
         }else{
