@@ -99,10 +99,19 @@
             <script type="text/javascript">
    
             $(function() {
-            $("#imgpick").imagepicker();
+            	$("#imgpick").imagepicker();
+            	
+                generateBracket($('#amount').val());
+                
+                var data;
+                
+                function saveFn(data) {
+                    
+                }
+                
 
-     function generateBracket(playerAmount) {
-    	 
+    function generateBracket(playerAmount) {
+   
     var teamData = {
     teams : [] 
     };
