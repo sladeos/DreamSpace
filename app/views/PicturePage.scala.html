@@ -12,7 +12,9 @@
             @Templates.header()
          </div>
          <div data-role="content">
-            <h1 align="center">Photo Stream</h1>
+           <div class="ui-grid-solo ui-responsive">
+              <img src="@routes.Assets.at("images/GALLERY.jpg")" alt="tPicture" class = "fullscreen" />
+            </div>
             <div class = "standardBox">
                <a data-role = "button" id = "btn2"  rel="external" href="/newpicture" data-icon="arrow-r" data-iconpos="right">Take and Upload a Picture</a>
             </div>
