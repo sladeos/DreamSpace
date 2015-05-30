@@ -21,13 +21,13 @@
         
         <div data-role="content">    
           <div class="ui-grid-solo ui-responsive">
-            <img src="@routes.Assets.at("images/EDITTOURNAMENT.jpg")" alt="tPicture" class = "fullscreen"/>
+            <img src="@routes.Assets.at("images/EDITT.jpg")" alt="tPicture" class = "fullscreen"/>
           </div>
             
           <br>
             
           <div class="ui-grid-solo ui-responsive">
-            <div class="ui-block-a"><b><h1 style="margin:0;text-align:center"><img src="../assets/images/gamelogos/@tournament.logo" alt="Dreamhack" class = "fullscreen"/>@tournament.tournamentname</h1></b></div>
+            <div class="ui-block-a"><h1 style="text-align:center"><img src="../assets/images/gamelogos/@tournament.logo" alt="Dreamhack" class = "fullscreen"/><br>@tournament.tournamentname</h1></div>
           </div>
           
 
@@ -85,24 +85,22 @@
 					  <button data-role = "button" class="kickP" data-inline="true" style="float:right;" value="@participant.username">Kick</button>
 					  <h2 style="margin:0;text-align:center">@{participant.username}</h2></a>
                       </li>
-                    } 
-        
+                   
+        }
 
                   </ul>
-                  <hr> 
-                </div> 
-              
+                
+                </div>
+         
 
-
-
-
+  
               <div id='bracketForm' class = "standardBox">
 
 
                 <input type="text" name="fname" id="fname" style="color:white;background:#53585F">
                 <textarea placeholder="Enter some information about your Tournament here. This will only be visible to invited players" name="information" id="informationArea" rows="4" cols="50" >@tournament.information</textarea>
                 
-                <div data-role="collapsible" class="ui-icon-alt" id="1234" data-collapsed-icon="grid" data-expanded-icon="grid" data-iconpos="right"  >
+                <div data-role="collapsible" class="ui-icon-alt" id="1234" data-collapsed-icon="grid" data-expanded-icon="grid" data-iconpos="right" data-content-theme="b" >
                     <h3 class = "custom-centercollheader" >Choose a Game Icon</h3>
                         <select class="image-picker hide-html" id="imgpick" name="logo" >
                           <option data-img-src="@routes.Assets.at("images/gamelogos/game.png")" value="game.png"></option>
@@ -386,7 +384,7 @@ $('#imgpick-button').remove()
                                                    }
                                                         
                                                     $("#inviteDialog").click(function() {
-                                                        event.preventDefault();
+                                                        
                                                         dialog.dialog( "open" );
                                                         
                                                         
