@@ -1,4 +1,4 @@
-@(tournament: Tournament, participant: List[String])
+@(tournament: Tournament, participant: List[Participant], pending: List[Participant])
 <!DOCTYPE html>
 <html>
    <head>
@@ -17,10 +17,12 @@
           <a id = "back" rel="external" href="/myetournaments" data-role="button" role="button" data-icon="back" data-iconpos="notext">Back</a>
         </div>
         
-        <div data-role="content" style = "padding:0">    
+        <div data-role="content">    
             
           <div class="ui-grid-solo ui-responsive">
-            <img src="@routes.Assets.at("images/EDITTOURNAMENT.jpg")" alt="tPicture" class = "fullscreen" />
+          <div class="ui-block-a" >
+             <img src="@routes.Assets.at("images/EDITT.jpg")" alt="tPicture" class = "fullscreen" />
+            </div>
           </div>
             
           <br>
@@ -48,11 +50,12 @@
                                   </script>
             
           <div id = "bracketcontent" style="text-align:center">
-              
+              <button data-role="button" data-icon="arrow-u" data-iconpos="notext" id="increase"></button>
+                <button data-role="button" data-icon="arrow-d" data-iconpos="notext" id="decrease"></button>
             <a href="#popupCloseRight" data-rel="popup" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-icon-info ui-btn-icon-right ui-mini">Info</a>
             <div data-role="popup" id="popupCloseRight" class="ui-content" style="max-width:280px;background:#DBDBDB">
               <a href="#" id="close" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext  ui-btn-right">Close</a>
-              <p>You can change the name of the teams in your tournament by clicking the respective team label, you can also change the score by clicking the label after the team name. This updates the bracket.</p>
+              <p>You can change the name of the teams in your tournament by clicking the respective team label, you can also change the score by clicking the label after the team name. Click the arrows to change the size of the tournament, this may result in loss of data.</p>
             </div>
             
             <br>
@@ -65,7 +68,9 @@
                
                <br>
                <br>
+
                 
+				
               <div class="ui-grid-solo ui-responsive">
                 <div class="ui-block-a"><b><h3 style="margin:0;text-align:center">Participants:</h3></b></div>
               </div>
@@ -75,9 +80,35 @@
                   <hr>    
                   <ul data-role="listview" data-inset="true" data-dividertheme="a"> 
                     @for(participant <- participant) {
-                      <li><a data-role = "button"  rel="external"  href="/profile/@participant" style="background:#FFFFFF"><h2 style="margin:0;text-align:center">@{participant}</h2></a>
+
+                      <li><a data-role = "button"  rel="external"  href="/profile/@participant.username" style="background:#FFFFFF">
+					  <button data-role = "button" class="kickP" data-inline="true" style="float:right;" value="@participant.username">Kick</button>
+					  <h2 style="margin:0;text-align:center">@{participant.username}</h2></a>
                       </li>
                     } 
+        
+
+                  </ul>
+                  <hr> 
+                </div> 
+                
+                  <div class="ui-grid-solo ui-responsive">
+                <div class="ui-block-a"><b><h3 style="margin:0;text-align:center">Pending invites:</h3></b></div>
+              </div>
+                
+             
+                <div class ="flowBox" style="text-align:center">
+                  <hr>    
+                  <ul data-role="listview" data-inset="true" data-dividertheme="a"> 
+                    @for(pending <- pending) {
+
+                      <li><a data-role = "button"  rel="external"  href="/profile/@pending.username" style="background:#FFFFFF">
+					  <button data-role = "button" class="kickP" data-inline="true" style="float:right;" value="@pending.username">Revoke</button>
+					  <h2 style="margin:0;text-align:center">@{pending.username} - Invite pending</h2></a>
+                      </li>
+                    } 
+        
+
                   </ul>
                   <hr> 
                 </div> 
@@ -88,7 +119,9 @@
 
               <div id='bracketForm' class = "standardBox">
 
+
                 <input type="text" name="fname" id="fname" style="color:white;background:#53585F">
+
                 
                 <div id="dialog-form" title="Invite player">
                 	
@@ -110,174 +143,205 @@
 
               </div>
 
+
                                                         <script>
 
-                                                           var data;
-                                                           var a = @Html(tournament.tournamentdata);
-                                                           var tid = @tournament.tournamentID;
-                                                           var name = "@tournament.tournamentname";
-                                                           var tamount = @tournament.participant_count;
-                                                           var amount = tamount.toString(); 
-                                                           var container = $('#bracket');
-                                                           var prevAmt;
-                                                           
-                                                           
-                                                           $(document).on("pageload",function(){ 
-                                                        	  
-                                                           });
-                                                           
-                                                       
-                                                           $(document).ready(function() {
-                                                        	 
-                                                        	});
-                                                    	   
-                                                    	  
-                                                           
-                                                           $(document).on('click','.increment',function(){
-                                                        	  
-                                                               switch(amount) {
-                                                                   case "4":
-                                                                   amount = "8"; 
-                                                                       break;
-                                                                   case "8":
-                                                                   amount = "16";
-                                                                       break;
-                                                                   case "16":
-                                                                   amount = "32";
-                                                                   $('.increment').remove();
-                                                                       break;
-                                                                   case "32":
-                                                                       break;                       
-                                                               }
-                                                               
-                                                               $('.decrement').width('30');
-                                                         	   $('.decrement').height('30');
-                                                         	   $('.increment').width('30');
-                                                         	   $('.increment').height('30');
-                                                               
-                                                           });
-                                                           
-                                                           $(document).on('click','.decrement',function(){
-                                                               
-                                                               switch(amount) {
-                                                                   case "4":
-                                                                       break;
-                                                                   case "8":
-                                                                    $('.decrement').remove();
-                                                                   amount = "4";
-                                                                       break;
-                                                                   case "16":
-                                                                   amount = "8";
-                                                                       break;
-                                                                   case "32":
-                                                                   amount = "16";
-                                                                       break;
-                                                               }
-                                                               $('.decrement').width('30');
-                                                         	   $('.decrement').height('30');
-                                                         	   $('.increment').width('30');
-                                                         	   $('.increment').height('30');
-                                                           });
-                                                           
-                                                           $('#bracket').click(function() {
-                                                               
-                                                               $('.doubleElimination').remove();                  
-                                                           });
-                                                           
-                                                           $(function() {
-                                                        	 
-                                                               
-                                                               $("#fname").val(name);
-                                                               $("#amount").val(amount);
-                                                               $("#amount").selectmenu('refresh');
-                                                               prevAmt = $('#amount').val();
-                                                               
-                                                               container.bracket({
-                                                               init: a,
-                                                               save: saveFn
-                                                               
-                                                               });
-                                                               
-                                                               if (amount == "4"){
-                                                                   $('.decrement').remove();
-                                                               }
-                                                               
-                                                               $('.doubleElimination').remove();
-                                                               $('.decrement').width('30');
-                                                         	   $('.decrement').height('30');
-                                                         	   $('.increment').width('30');
-                                                         	   $('.increment').height('30');
-                                                            
-                                                           });
-                                                           
-                                                           function saveFn(data) {
-                                                           }
-                                                           
-                                                           $("#save").click(function(event) {
-                                                                event.preventDefault();
-                                                               name = $("#fname").val();
-                                                               if(name.length >3){
-                                                               amount;
-                                                               data = container.bracket('data');
-                                                               var teams = data.teams;
-                                                               var results = data.results;
-                                                               var id = tid.toString();
-                                                                
-                                                               
-                                                               $.ajax({
-                                                                       url: "/edittournament",
-                                                                       type: 'POST',
-                                                                       contentType:'application/json',
-                                                                       data: JSON.stringify({ id: id, name: name, amount: amount, teams: teams, results: results }),
-                                                                       dataType : 'html',
-                                                                       success: function(){
-                                                                            alert("Tournament edited!");
-                                                                            location.reload(); 
+               var data;
+               var a = @Html(tournament.tournamentdata);
+               var tid = @tournament.tournamentID;
+               var name = "@tournament.tournamentname";
+               var tamount = @tournament.participant_count;
+               var amount = tamount.toString(); 
+               var container = $('#bracket');
+               var prevAmt;
+           
+               
+               $(document).on('click','.increment',function(){
+            	  
+                   switch(amount) {
+                       case "4":
+                       amount = "8"; 
+                           break;
+                       case "8":
+                       amount = "16";
+                           break;
+                       case "16":
+                       amount = "32";
+                       $('.increment').remove();
+                           break;
+                       case "32":
+                           break;                       
+                   }
+                   
+                   $('.decrement').width('30');
+             	   $('.decrement').height('30');
+             	   $('.increment').width('30');
+             	   $('.increment').height('30');
+             	   $('.decrement').hide();
+             	   $('.increment').hide();
+                   
+               });
+               
+               $(document).on('click','.decrement',function(e){
+                
+                   
+                   switch(amount) {
+                       case "4":
+                           break;
+                       case "8":
+                        $('.decrement').remove();
+                       amount = "4";
+                           break;
+                       case "16":
+                       amount = "8";
+                           break;
+                       case "32":
+                       amount = "16";
+                           break;
+                   }
+                   $('.decrement').width('30');
+             	   $('.decrement').height('30');
+             	   $('.increment').width('30');
+             	   $('.increment').height('30');
+             	   $('.decrement').hide();
+             	   $('.increment').hide();
+                    
+                        
+                     
+                    
+                    
+               });
+               
+               $('#bracket').click(function() {
+                   
+                   $('.doubleElimination').remove();                  
+               });
+               
+                $(".kickP").click(function(e) {
+                   e.preventDefault();
+                   var is_sure = confirm("Are you sure you want to kick this user from the tournament?");
+                    if (is_sure == true) {
+                        var participant = $(this).val();
+                        var tournamentID = @tournament.tournamentID;
+                           $.ajax({
+                               url: "/kickUser",
+                               type: 'POST',
+                               contentType:'application/json',
+                               data: JSON.stringify({participant: participant, tournamentID: tournamentID}),
+                               dataType : 'html',
+                               success: function(){
+                                  location.reload();;
+                               }
+                            });
+                    }
+               });
+               
+               $(function() {
+            	 
+                   $(".kickP").css("background","  #FF9900");
+                   $(".revokeP").css("background","  #FF9900");
+                   $("#fname").val(name);
+                   $("#amount").val(amount);
+                   $("#amount").selectmenu('refresh');
+                   prevAmt = $('#amount').val();
+                   
+                   container.bracket({
+                   init: a,
+                   save: saveFn
+                   
+                   });
+                   
+                   if (amount == "4"){
+                       $('.decrement').remove();
+                   }
+                   
+                   $('.doubleElimination').remove();
+                   $('.decrement').toggle();
+             	   $('.increment').toggle();
+                
+               });
+               
+               function saveFn(data) {
+               }
+               
+               $("#save").click(function(event) {
+                    event.preventDefault();
+                   name = $("#fname").val();
+                   if(name.length >3){
+                   amount;
+                   data = container.bracket('data');
+                   var teams = data.teams;
+                   var results = data.results;
+                   var id = tid.toString();
+                    
+                   
+                   $.ajax({
+                           url: "/edittournament",
+                           type: 'POST',
+                           contentType:'application/json',
+                           data: JSON.stringify({ id: id, name: name, amount: amount, teams: teams, results: results }),
+                           dataType : 'html',
+                           success: function(){
+                                alert("Tournament edited!");
+                                location.reload(); 
 
-                                                                       }
-                                                               });
-                                                               } else {
-                                                                   
-                                                                    $("#warning").html("Tournament Name is too short! Please enter a minimum of 4 characters");
-                                                                    $("#warning").css('color', 'red');
-                                                                    $('#warning').prepend('<img id="redcross" src="@routes.Assets.at("images/redcross.png")" />')
-                                                                    $('#redcross').width(40);
-                                                                    $('#redcross').height(40);
-                                                               } 
-                                                               
-                                                           
-                                                           });
-                                                           /////////////////////////////////////////////////delete button /////////////////////          
-                                                         
-                                                           $("#delete").click(function() {
+                           }
+                   });
+                   } else {
+                       
+                        $("#warning").html("Tournament Name is too short! Please enter a minimum of 4 characters");
+                        $("#warning").css('color', 'red');
+                        $('#warning').prepend('<img id="redcross" src="@routes.Assets.at("images/redcross.png")" />')
+                        $('#redcross').width(40);
+                        $('#redcross').height(40);
+                   } 
+                   
+               
+               });
+               
+               $("#increase").click(function() {
+                   $('.increment').trigger( "click" );
+                  
+                   
+               });
+               
+               $("#decrease").click(function() {
+                   var is_sure = confirm("Are you sure you want to decrease the size of your tournament? Data may be lost");
+                    if (is_sure == true) {
+                   $('.decrement').trigger( "click" );
 
-                                                           var is_sure = confirm("Are you sure you want to delete?");
-                                                       if (is_sure == true) {
+                    }
+               });
+               /////////////////////////////////////////////////delete button /////////////////////          
+             
+               $("#delete").click(function() {
+					   var is_sure = confirm("Are you sure you want to delete?");
+				   if (is_sure == true) {
 
-                                                         var data = {
-                                                           "id": "@tournament.tournamentID"
-                                                         }
+					 var data = {
+					   "id": "@tournament.tournamentID"
+					 }
 
-                                                         $.ajax({
-                                                           url: "/deletetournament",
-                                                           type: 'POST',
-                                                           contentType: 'application/json',
-                                                           data: JSON.stringify(data),
-                                                           dataType: 'html',
-                                                           success: function() {
-                                                                alert("Tournament deleted!");
-                                                                window.location = "/myetournaments";    
+					 $.ajax({
+					   url: "/deletetournament",
+					   type: 'POST',
+					   contentType: 'application/json',
+					   data: JSON.stringify(data),
+					   dataType: 'html',
+					   success: function() {
+							alert("Tournament deleted!");
+							window.location = "/myetournaments";    
 
-                                                           }
+					   }
 
-                                                         });
+					 });
 
-                                                            }
+						}
 
-                                                       
+				   
 
 
-                                                     });
+				 });
                                                      
                                                      
                                                      var dialog = $( "#dialog-form" ).dialog({

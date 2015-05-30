@@ -9,13 +9,18 @@
         @Templates.facebookHeadScript()
     </head>
     <body>
-        <div data-role="page" data-theme="b">   
+        <div data-role="page" data-theme="c">   
             <div data-role="header">
                 @Templates.header()
             </div>
             <div data-role="content">
-                  
-                    <h1 align="center">Profiles</h1>
+
+                          <div class="ui-grid-solo ui-responsive" >
+            <div class="ui-block-a" >
+              <img src="@routes.Assets.at("images/PROFILES.jpg")" alt="tPicture" class = "fullscreen" />
+              </div>
+            </div>
+
                     <div class = "standardBox">
                     
                     <a data-role = "button" id = "btn1"  rel="external" href="/myprofile" data-icon="user" data-iconpos="right">My Profile</a>
@@ -25,19 +30,17 @@
                     <div class ="flowBox">
                             
                             <hr>
-                        <ul data-role="listview" data-inset="true" data-dividertheme="a" data-theme = "b"> 
+                        <ul data-role="listview" data-inset="true" data-dividertheme="a" data-theme = "c" style="border:none;"> 
                         @for(profile <- profile) {
-                            <li  data-role = "list-divider" ></li>
+                          
                                 <li><a data-role = "button"  rel="external"  href="/profile/@profile.username" class = "greyBtn"><img src="@routes.Assets.at("images/sun.jpg")" alt="Dreamhack" class = "fullscreen"  /><h2>@{profile.username}</h2><p>@{"User Bio: " + profile.userbio} </p></a>
                             </li>
+                            <li  data-role = "list-divider" style="background:transparent;border:none" ></li>
                         } 
                         </ul>
                     </div>    
                     
-                    <script>
-                        $("#btn1").css("background","  #FF9900");
-
-                    </script>
+                   
                 
             </div>
             @Templates.footer()
