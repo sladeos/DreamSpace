@@ -9,35 +9,59 @@
       <script type="text/javascript" src="@routes.Assets.at("javascripts/jquery-ias.min.js")"></script>
    </head>
    <body>
-      <div data-role="page" data-theme="b" id = "main">
+
+      <div data-role="page" data-theme="c" id = "main">
          <div data-role="header">
             @Templates.header()
             <a id = "back" rel="external" href="/mainearena" data-role="button" role="button" data-icon="back" data-iconpos="notext">Back</a>
-            <script>
-               $("#back").css("background","  #FF9900");
-            </script>
          </div>
          <div data-role="content">
-         <div class = "standardBox">
-            <h1 align="center">My EArena</h1>
-            <button data-role = "button" id = "creatad" class = "search" rel="external" href="/">Create a new ad</button>
-            </div>
-            <div id="adsFound" class = "standardBox">
-            </div>
-             <div class="eadColours" style="background-color:DarkBlue;"><h4> <br><br>Game Ads</h4></div>
-             <div class="eadColours" style="background-color:FireBrick;"><h4><br><br>Tournament Ads</h4></div>
+            
 
-            <script type="text/javascript">
-               $('#creatad').click(function() {
-                 window.location='/createarenaad'; });
-            </script>
+            <div class="ui-grid-solo ui-responsive">
+              <img src="@routes.Assets.at("images/MYADS.jpg")" alt="tPicture" class = "fullscreen" />
+            </div>
+            <div style="width:100% ; text-align:center">
+              <p>
+                <b>My ads</b><br>
+               Take a look at all the ads you have<br>
+               created and shared with other users<br>
+               here on the EArena.
+              </p> 
+            </div>
+
+
+         <div class = "standardBox">   
+            <button data-role = "button" id = "creatad" class = "search" rel="external" href="/">CREATE AN AD</button>
+         </div>
+            
+
+
+          <div class="ui-grid-solo ui-responsive">
+            <div class="ui-block-a"><b><h3 style="margin:0"> <div id="adsFound"></div></h3></b></div>
+         </div> 
+    
+
+                                    <script type="text/javascript">
+                                       $('#creatad').click(function() {
+                                         window.location='/createarenaad'; });
+                                    </script>
+
+
             <div id ="earenas">
             <div class ="flowBox">
+
+               <hr>
+         <div class="ui-grid-a ui-responsive">
+            <div class="ui-block-a" style="text-align:center;background-color:#373945"><b><h3 style="margin:0;color:#FFFFFF">Game Ads</h3></b></div>
+            <div class="ui-block-b" style="text-align:center;background-color:#FF8532"><b><h3 style="margin:0;color:#000000">Tournament Ads</h3></b></div>
+         </div>
+
                <article  data-role="listview" data-inset="true" data-dividertheme="a">
                   @for(eads <- eads) {
-                  <li  data-role = "list-divider" ></li>
+                  
                   <li>
-                     <a rel="external" id="@eads.arenaID" href="/earenaad/@eads.arenaID" style = "background: #373737" >
+                     <a rel="external" href="/earenaad/@eads.arenaID" style = "" >
                         <h2>@{" " + eads.arenaName}</h2>
                         <div style="float:right;"><img src="assets/images/gamelogos/@eads.logo"></div>
                         <p>@{" Host: " + eads.admin}</p>
@@ -45,68 +69,72 @@
                         <p>@{" Created: " + eads.createdDate }</p>
                         <p>@{" Players: " + eads.playersRequired}</p>
                         <p>Information:</p>
-                        <textarea readonly name="textarea" id="text" style = "overflow:auto;resize:none" >@{eads.information}</textarea>
+                        <textarea readonly name="textarea" id="@eads.arenaID" style = "overflow:auto;resize:none" >@{eads.information}</textarea>
                         <br>
                      </a>
                   </li>
+                  <li  data-role = "list-divider" style="background:transparent;border:none"></li>
+
                   <script>
                         $('.ui-page-active .ui-listview').listview('refresh');
                         $('.ui-page-active :jqmData(role=content)').trigger('create');
                         if("@eads.adType" === "Tournament Ad"){
-                        	$("#@eads.arenaID").css("background", "FireBrick");
+                        	$("#@eads.arenaID").css("background", "#FF8532");
+                           $("#@eads.arenaID").css("font-weight", "bold");
                         }else{
-                        	$("#@eads.arenaID").css("background", "DarkBlue");
+                        	$("#@eads.arenaID").css("background", "#373945");
+                           $("#@eads.arenaID").css("color", "#FFFFFF");
                         }
                      </script>
                   } 
                </article>
                </div>
                </div>
-               <script>
-               var rowcount = @rowcount;
-               var pageDecimal = rowcount / 10;
-               var pages = Math.ceil(pageDecimal);
+                                             <script>
+                                             var rowcount = @rowcount;
+                                             var pageDecimal = rowcount / 10;
+                                             var pages = Math.ceil(pageDecimal);
 
-               $(document).ready(function() {
-            	   if(rowcount < 1){
-            		$("#adsFound").html("<h3>It seems like you haven't created any ads, click <a href=/createarenaad rel=external>  here </a> , or on Create a new ad to create a new ad</h3>");
-            	   }else{
-            	   $("#adsFound").html("<h3>Ads found: " + rowcount + "</h3>");
-            	   }
-               var ias = jQuery.ias({
-               	  container:  '#earenas',
-               	  item:       '.flowBox',
-               	  pagination: '#pagination',
-               	  next:       '.Next'
-               	});
-               
-               var cPage;
-               ias.on('load', function(event) {
-            	   if(cPage > pages){
-               		jQuery.ias().unbind();
-               		$('.ias-spinner img:last-child').remove()
-               		$('.ias-spinner').append("No more results")
-               	}
-                var url = event.url;
-                url += cPage
-               	event.url = url
-               })
-               
-               jQuery.ias().extension(new IASPagingExtension());
-               jQuery.ias().on('pageChange', function(pageNum, scrollOffset, url) {
-               	cPage = pageNum;
-               	
-               });
-               
-               ias.extension(new IASSpinnerExtension({
-                   src: "@routes.Assets.at("images/loading.gif")",
-               }));
-               
-               });
-               </script>
-            <div id="pagination">
-               <a href="?page=" class="Next" id="Next1">next</a>
-            </div>
+                                             $(document).ready(function() {
+                                          	   if(rowcount < 1){
+                                          		$("#adsFound").html("<h3>It seems like you haven't created any ads, click <a href=/createarenaad rel=external>  here </a> , or on Create a new ad to create a new ad</h3>");
+                                          	   }else{
+                                          	   $("#adsFound").html("Ads found (" + rowcount + ")");
+                                          	   }
+                                             var ias = jQuery.ias({
+                                             	  container:  '#earenas',
+                                             	  item:       '.flowBox',
+                                             	  pagination: '#pagination',
+                                             	  next:       '.Next'
+                                             	});
+                                             
+                                             var cPage;
+                                             ias.on('load', function(event) {
+                                          	   if(cPage > pages){
+                                             		jQuery.ias().unbind();
+                                             		$('.ias-spinner img:last-child').remove()
+                                             		$('.ias-spinner').append("No more results")
+                                             	}
+                                              var url = event.url;
+                                              url += cPage
+                                             	event.url = url
+                                             })
+                                             
+                                             jQuery.ias().extension(new IASPagingExtension());
+                                             jQuery.ias().on('pageChange', function(pageNum, scrollOffset, url) {
+                                             	cPage = pageNum;
+                                             	
+                                             });
+                                             
+                                             ias.extension(new IASSpinnerExtension({
+                                                 src: "@routes.Assets.at("images/loading.gif")",
+                                             }));
+                                             
+                                             });
+                                             </script>
+                                          <div id="pagination">
+                                             <a href="?page=" class="Next" id="Next1">next</a>
+                                          </div>
          </div>
          @Templates.footer()
          @Templates.panelAndLogOut()

@@ -13,26 +13,48 @@
         <meta charset="UTF-8">
     </head>
     <body>
-    <div data-role="page" data-theme="b" id = "main">
+    <div data-role="page" data-theme="c" id = "main">
 	   <div data-role="header">
 	       @Templates.header()
                  <a id = "back" rel="external" href="/mainearena" data-role="button" role="button" data-icon="back" data-iconpos="notext">Back</a>
-            <script type="text/javascript">
-            $("#back").css("background","  #FF9900");
-            </script>
-	       </div>
-        <div data-role="content">  
-            <h1 align="center">Create an EArena Ad</h1>
+	   </div>
+       
+<div data-role="content">
+            <div class="ui-grid-solo ui-responsive">
+              <img src="@routes.Assets.at("images/CREATEANAD.jpg")" alt="tPicture" class = "fullscreen" />
+            </div>
 
-            <div class = "standardBox">
+            <div style="width:100% ; text-align:center">
+              <p>
+                <b>Create an ad</b><br>
+                Here you can upload an ad and find<br>
+                other players for you and your friends<br> 
+                in your upcoming games!
+              </p> 
+            </div>
+
+            <div class="ui-grid-solo ui-responsive">
+              <div class="ui-block-a"><b><h3 style="margin:0">Fill in the fields below to create your ad!</h3></b><hr></div>
+            </div>
+            <br>
+
+            <div class="ui-grid-a ui-responsive">
+              <div class="ui-block-a">
+            <img src="@routes.Assets.at("images/createad.PNG")" alt="tPicture" class = "fullscreen" />
+
+              </div>
+              <div class="ui-block-b">
+
+
+                <div class = "standardBox">
                 <form id ="EArenaForm"  method ="post" action="@routes.EArenaDatabase.addEArenaAd()" data-ajax="false">
                    
-                 <div class="ui-grid-a"> 
-                   <div class="ui-block-a" style="width:40%;"><label><input checked type="radio" name="adType" value="Game Ad" class="adType">GameAd</label></div>
-    				<div class="ui-block-b" style="width:60%;"><label><input type="radio" name="adType" value="Tournament Ad" class="adType">TournamentAd</label></div>
+                 <div class="ui-grid-a  ui-responsive"> 
+                   <div class="ui-block-a"><label><input checked type="radio" name="adType" data-mini="true" value="Game Ad" class="adType">GameAd</label></div>
+                    <div class="ui-block-b"><label><input type="radio" name="adType" data-mini="true" value="Tournament Ad" class="adType" >TournamentAd</label></div>
                     </div>
                     
-                    <div data-role="collapsible" class="ui-icon-alt" data-collapsed-icon="grid" data-expanded-icon="grid" data-iconpos="right"  >
+                    <div data-role="collapsible" class="ui-icon-alt" data-collapsed-icon="grid" data-expanded-icon="grid" data-iconpos="right" style="background-color:#DBDBDB" >
                     <h3 class = "custom-centercollheader" >Choose an icon</h3>
                     
                         <select class="image-picker hide-html" id="imgpick" name="logo" >
@@ -57,28 +79,37 @@
 
                     <div data-role="fieldcontain" class="ui-hide-label">
                         <label for="arenaName">Arena Ad Name:</label>
-                        <input type="text" name="arenaName" id="arenaName" value="" placeholder="Arena Ad Name"/>
+                        <input type="text" name="arenaName" id="arenaName" value="" style="background-color:#53585F;color:white" placeholder="Arena Ad Name"/>
                     </div>
                  
                     <div data-role="fieldcontain" class="ui-hide-label">
                         <label for="gameName" >Game:</label>
-                        <input type="text" name="gameName" id="game" value="" placeholder="Game "/>
+                        <input type="text" name="gameName" id="game" value="" style="background-color:#53585F;color:white" placeholder="Game "/>
                     </div>
                     <div data-role="fieldcontain" class="ui-hide-label">
                         <label for="playersRequired" >Players Required:</label>
-                        <input type="number" min="1" max="100" name="playersRequired" id="playersRequired" value="" placeholder="Players Required"/>
+                        <input type="number" min="1" max="100" name="playersRequired" id="playersRequired" value="" style="background-color:#53585F;color:white" placeholder="Players Required"/>
                     </div>
                     <div data-role="fieldcontain" class="ui-hide-label">
-                        <textarea placeholder="Enter some information about your ad here!" name="information" id="informationArea" rows="4" cols="50" ></textarea>
+                        <textarea style="background-color:#53585F;color:white" placeholder="Enter some information about your ad here!" name="information" id="informationArea" rows="4" cols="50" maxlength="500" ></textarea>
                     </div>
                     
-                    <div data-role="controlgroup" data-type="horizontal" style="text-align:center;">
-                        <button class = "my-btn"  type="submit" value="Create EArena Ad" data-inline = "true"onclick="return validate()">Create </button>
+                    <div data-type="horizontal" style="text-align:center;">
+                        <button type="submit" value="Create EArena Ad" data-inline = "true" onclick="return validate()"><b>UPLOAD</b></button><br>
+                        <a data-role = "button"  type="button" data-inline = "true" rel="external" href="/mainearena" style="background:#FF9900">CANCEL</a>
 
                     </div>
                     <p id="warning"></p>
                 </form>
             </div>
+
+
+
+              </div>
+            </div>
+
+
+            
             <script type="text/javascript">
 	           $(function() {
 		          var games = @Html(games.toString())
