@@ -68,6 +68,8 @@
 $(document).ready(function() {
 	if($('#participants > div.flowBox:contains("@currentuser")').length > 0) {
 		$('#privateInformation').append("@tournament.information")
+	}else{
+		$('#privateInformation').html("");
 	}
 });
 </script>
