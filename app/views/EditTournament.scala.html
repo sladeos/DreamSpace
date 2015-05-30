@@ -17,10 +17,12 @@
           <a id = "back" rel="external" href="/myetournaments" data-role="button" role="button" data-icon="back" data-iconpos="notext">Back</a>
         </div>
         
-        <div data-role="content" style = "padding:0">    
+        <div data-role="content">    
             
           <div class="ui-grid-solo ui-responsive">
-            <img src="@routes.Assets.at("images/EDITTOURNAMENT.jpg")" alt="tPicture" class = "fullscreen" />
+          <div class="ui-block-a" >
+             <img src="@routes.Assets.at("images/EDITT.jpg")" alt="tPicture" class = "fullscreen" />
+            </div>
           </div>
             
           <br>
@@ -29,7 +31,7 @@
             <div class="ui-block-a"><b><h1 style="margin:0;text-align:center">@tournament.tournamentname</h1></b></div>
           </div>
 
-          <button id="share_button" class = "facebookColor facebookButton centerButton" data-mini="true">Facebook Share</button>
+    <!--       <button id="share_button" class = "facebookColor facebookButton centerButton" data-mini="true">Facebook Share</button>
           <br>
             
                                   <script type="text/javascript">
@@ -45,7 +47,7 @@
                                       });
                                     });
                                   });
-                                  </script>
+                                  </script> -->
             
           <div id = "bracketcontent" style="text-align:center">
               <button data-role="button" data-icon="arrow-u" data-iconpos="notext" id="increase"></button>

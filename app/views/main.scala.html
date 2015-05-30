@@ -5,7 +5,8 @@
     <head>
         @Templates.head()
         @Templates.facebookHeadScript()
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+     
+
         <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/mainpage.css")">
     </head>
     <body>  
@@ -22,7 +23,7 @@
          
           
                         <div class="ui-grid-solo">
-                            <div class="ui-block-a" style="width:100%; text-align:center; position:relative; ">
+                            <div class="ui-block-a" style="width:100%; text-align:center;">
                                
                                     @for(pictures <- pictures) {
                                         <a href="/pictures" rel="external" class="ui-btn ui-btn-b ui-corner-all ui-shadow imgCut imgFloat" ><img  src="/pic/@pictures.pictureID" style="width:100%" /></a>
