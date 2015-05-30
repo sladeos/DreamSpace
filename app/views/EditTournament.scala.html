@@ -7,6 +7,8 @@
 		<link rel="stylesheet"  href="@routes.Assets.at("stylesheets/jquery.bracket.min.css")">
 		<script type="text/javascript" src="@routes.Assets.at("stylesheets/jquery-ui/jquery-ui.js")" ></script>
         <link rel="stylesheet" href="@routes.Assets.at("stylesheets/jquery-ui/jquery-ui.css")">
+        <script type="text/javascript" src="@routes.Assets.at("javascripts/image-picker/image-picker.min.js")" ></script>
+        <link rel="stylesheet" href="@routes.Assets.at("javascripts/image-picker/image-picker.css")">
 
        @Templates.facebookHeadScript()
     </head>
@@ -17,7 +19,7 @@
           <a id = "back" rel="external" href="/myetournaments" data-role="button" role="button" data-icon="back" data-iconpos="notext">Back</a>
         </div>
         
-        <div data-role="content" style = "padding:0">    
+        <div data-role="content">    
           <div class="ui-grid-solo ui-responsive">
             <img src="@routes.Assets.at("images/EDITTOURNAMENT.jpg")" alt="tPicture" class = "fullscreen"/>
           </div>
@@ -25,8 +27,9 @@
           <br>
             
           <div class="ui-grid-solo ui-responsive">
-            <div class="ui-block-a"><b><h1 style="margin:0;text-align:center">@tournament.tournamentname</h1></b></div>
+            <div class="ui-block-a"><b><h1 style="margin:0;text-align:center"><img src="../assets/images/gamelogos/@tournament.logo" alt="Dreamhack" class = "fullscreen"/>@tournament.tournamentname</h1></b></div>
           </div>
+          
 
           <button id="share_button" class = "facebookColor facebookButton centerButton" data-mini="true">Facebook Share</button>
           <br>
@@ -47,8 +50,8 @@
                                   </script>
             
           <div id = "bracketcontent" style="text-align:center">
-              <button data-role="button" data-icon="arrow-u" data-iconpos="notext" id="increase"></button>
-                <button data-role="button" data-icon="arrow-d" data-iconpos="notext" id="decrease"></button>
+              <button data-role="button" data-icon="plus" data-iconpos="notext" id="increase"></button>
+                <button data-role="button" data-icon="minus" data-iconpos="notext" id="decrease"></button>
             <a href="#popupCloseRight" data-rel="popup" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-icon-info ui-btn-icon-right ui-mini">Info</a>
             <div data-role="popup" id="popupCloseRight" class="ui-content" style="max-width:280px;background:#DBDBDB">
               <a href="#" id="close" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext  ui-btn-right">Close</a>
@@ -79,7 +82,7 @@
                     @for(participant <- participant) {
 
                       <li><a data-role = "button"  rel="external"  href="/profile/@participant" style="background:#FFFFFF">
-					  <button data-role = "button" class="kickP" data-inline="true" style="float:right;" value="@participant">Kick</button>
+					  <button data-role = "button" class="kickP" data-inline="true" style="float:right;" value="@participant.username">Kick</button>
 					  <h2 style="margin:0;text-align:center">@{participant.username}</h2></a>
                       </li>
                     } 
@@ -97,7 +100,26 @@
 
 
                 <input type="text" name="fname" id="fname" style="color:white;background:#53585F">
-
+                <textarea placeholder="Enter some information about your Tournament here. This will only be visible to invited players" name="information" id="informationArea" rows="4" cols="50" >@tournament.information</textarea>
+                
+                <div data-role="collapsible" class="ui-icon-alt" data-collapsed-icon="grid" data-expanded-icon="grid" data-iconpos="right"  >
+                    <h3 class = "custom-centercollheader" >Choose a Game Icon</h3>
+                        <select class="image-picker hide-html" id="imgpick" name="logo" >
+                          <option data-img-src="@routes.Assets.at("images/gamelogos/game.png")" value="game.png"></option>
+                          <option data-img-src="@routes.Assets.at("images/gamelogos/brack.png")" value="brack.png"></option>
+                          <option data-img-src="@routes.Assets.at("images/gamelogos/csgo.png")" value="csgo.png"></option>
+                          <option data-img-src="@routes.Assets.at("images/gamelogos/wow.png")" value="wow.png"></option>
+                          <option data-img-src="@routes.Assets.at("images/gamelogos/mc.png")" value="mc.png"></option>
+                          <option data-img-src="@routes.Assets.at("images/gamelogos/hs.png")" value="hs.png"></option>
+                          <option data-img-src="@routes.Assets.at("images/gamelogos/lol.png")" value="lol.png"></option>
+                          <option data-img-src="@routes.Assets.at("images/gamelogos/rust.png")" value="rust.png"></option>
+                          <option data-img-src="@routes.Assets.at("images/gamelogos/bf4.png")" value="bf4.png"></option>
+                          <option data-img-src="@routes.Assets.at("images/gamelogos/sc.png")" value="sc.png"></option>
+                          <option data-img-src="@routes.Assets.at("images/gamelogos/gtav.png")" value="gtav.png"></option>
+                          <option data-img-src="@routes.Assets.at("images/gamelogos/dota.png")" value="dota.png"></option>
+                          <option data-img-src="@routes.Assets.at("images/gamelogos/d3.png")" value="d3.png"></option>
+                        </select>
+                    </div>    
                 
                 <div id="dialog-form" title="Invite player">
                 	
@@ -118,7 +140,12 @@
                 <p id="warning"></p>
 
               </div>
-
+<script>
+$(function() {
+$("#imgpick").imagepicker();
+$("#imgpick").val('@tournament.logo');
+});
+</script>
 
                                                         <script>
 
@@ -181,11 +208,6 @@
              	   $('.increment').height('30');
              	   $('.decrement').hide();
              	   $('.increment').hide();
-                    
-                        
-                     
-                    
-                    
                });
                
                $('#bracket').click(function() {
@@ -254,10 +276,9 @@
                            url: "/edittournament",
                            type: 'POST',
                            contentType:'application/json',
-                           data: JSON.stringify({ id: id, name: name, amount: amount, teams: teams, results: results }),
+                           data: JSON.stringify({ id: id, name: name, amount: amount, teams: teams, results: results, information: $('#informationArea').val(), logo: $('#imgpick').val()}),
                            dataType : 'html',
                            success: function(){
-                                alert("Tournament edited!");
                                 location.reload(); 
 
                            }

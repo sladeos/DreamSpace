@@ -187,7 +187,6 @@
                 data: JSON.stringify({name :  $('#fname').val(), amount: $('#amount').val(), teams: teams, results: results, info: $('#informationArea').val(), logo : $('#imgpick').val()}),
                 dataType : 'html',
                 success: function(){
-                    alert("Tournament created!");
                     window.location = "/myetournaments"; 
                 }
             });

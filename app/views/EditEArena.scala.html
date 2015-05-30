@@ -84,6 +84,10 @@
             <script type="text/javascript">
             $(document).ready(function() {
                 $("#imgpick").imagepicker();
+                
+                $("#imgpick").val('@eAd.logo').selectmenu("refresh");
+                $('#imgpick').selectmenu('refresh');
+                $('select').selectmenu("refresh", true);
 
             	if('@eAd.adType' == "Tournament Ad"){
            			 $('#tournamentAd').prop('checked', true);

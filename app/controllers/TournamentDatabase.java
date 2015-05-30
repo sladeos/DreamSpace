@@ -76,8 +76,8 @@ public class TournamentDatabase extends Controller {
 				t.participant_count = rs.getInt("teamAmount");
 				t.tournamentcreator = rs.getString("admin");
 				t.tournamentdata = rs.getString("tournamentData");
-				t.information =rs.getString("information");
-				t.logo =rs.getString("logo");
+				t.information = rs.getString("information");
+				t.logo = rs.getString("logo");
 			}
 
 			if (t.tournamentdata == null) {
@@ -362,6 +362,8 @@ public class TournamentDatabase extends Controller {
 					t.tournamentcreator = rs.getString("admin");
 					t.tournamentdata = rs.getString("tournamentData");
 					t.tournamentID = rs.getInt("tournamentID");
+					t.information =rs.getString("information");
+					t.logo =rs.getString("logo");
 					tList.add(t);
 				}
 				rs.close();
@@ -417,6 +419,8 @@ public class TournamentDatabase extends Controller {
 				t.tournamentcreator = rs.getString("admin");
 				t.tournamentdata = rs.getString("tournamentData");
 				t.tournamentID = rs.getInt("tournamentID");
+				t.information =rs.getString("information");
+				t.logo =rs.getString("logo");
 				tList.add(t);
 			}
 			
@@ -470,6 +474,8 @@ public class TournamentDatabase extends Controller {
 				t.tournamentcreator = rs.getString("admin");
 				t.tournamentdata = rs.getString("tournamentData");
 				t.tournamentID = rs.getInt("tournamentID");
+				t.information =rs.getString("information");
+				t.logo =rs.getString("logo");
 				tList.add(t);
 			}
 
@@ -522,10 +528,6 @@ public class TournamentDatabase extends Controller {
 	            
 		 		pList.add(p);
 		 	}
-			
-
-
-
 		 	rs.close();
 			return pList;
 			

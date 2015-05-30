@@ -94,11 +94,9 @@ public class Application extends Controller {
 		String user = session("connected");
 		if (user != null) {
 			if (user.equals(TournamentDatabase.getTournamentAdmin(id).tournamentcreator)) {
-				return ok(EditTournament.render(TournamentDatabase
-						.getTournament(id), TournamentDatabase.getParticipants(id)));
+				return ok(EditTournament.render(TournamentDatabase.getTournament(id), TournamentDatabase.getParticipants(id)));
 			} else {
-				return ok(ShowTournament.render(TournamentDatabase
-						.getTournament(id), TournamentDatabase.getParticipants(id)));
+				return ok(ShowTournament.render(TournamentDatabase.getTournament(id), TournamentDatabase.getParticipants(id), user));
 			}
 		} else {
 			return unauthorized(LoginUserPage
