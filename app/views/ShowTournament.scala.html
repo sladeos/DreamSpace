@@ -1,4 +1,4 @@
-@(tournament: Tournament, participant: List[Participant])
+@(tournament: Tournament, participant: List[Participant], currentuser: String)
 <!DOCTYPE html>
 <html>
    <head>
@@ -20,11 +20,10 @@
                 </div>
                 <br>
                 <div class="ui-grid-solo ui-responsive">
-                  <div class="ui-block-a"><b><h1 style="margin:0;text-align:center">@tournament.tournamentname</h1></b></div>
+                  <div class="ui-block-a"><h1 style="text-align:center"><img src="../assets/images/gamelogos/@tournament.logo" alt="Dreamhack" class = "fullscreen"  /><br>@tournament.tournamentname</h1></div>
                 </div>
                 <button id="share_button" class = "facebookColor facebookButton centerButton" data-mini="true">Facebook Share</button>
                 <br>
-                
                 <div id = "bracketcontent" >
 
                     <div id="bracket"></div>
@@ -61,19 +60,27 @@
                         </ul> 
                     </div> 
                 </div>
-
+                
+                <div id ="privateInformation"  class ="flowBox">
+                <h3 style="margin:0;text-align:center">Tournament Information</h3>
+                </div>
+<script>
+$(document).ready(function() {
+	if($('#participants > div.flowBox:contains("@currentuser")').length > 0) {
+		$('#privateInformation').append("@tournament.information")
+	}else{
+		$('#privateInformation').html("");
+	}
+});
+</script>
 
                     <script type="text/javascript">  
                         var a = @Html(tournament.tournamentdata);
                         $(function() {
-                  
                               var container = $('#bracket')
                               container.bracket({
                                 init: a
-                               
-                   
                             })
-                    
                             $('.tools').remove();
                         });
                   

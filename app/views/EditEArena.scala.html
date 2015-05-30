@@ -92,10 +92,13 @@
           </div>
                     
 
-                                      <script type="text/javascript">
-                                        $(document).ready(function() {
-                                          $("#imgpick").imagepicker();
 
+            <script type="text/javascript">
+            $(document).ready(function() {
+                $("#imgpick").imagepicker();
+                $("#imgpick").val('@eAd.logo');
+                $("#imgpick").imagepicker();
+                $('#imgpick-button').remove()
                                       	if('@eAd.adType' == "Tournament Ad"){
                                      			$('#tournamentAd').prop('checked', true);
                                      			$("#tournamentAd").checkboxradio("refresh");
