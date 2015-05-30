@@ -589,4 +589,63 @@ public class TournamentDatabase extends Controller {
 				} // end finally try
 			} // end try
 		}
+		
+		public static List<Participant> getPending(int tID) {	
+		
+		Connection conn = null;
+		PreparedStatement preparedStatement = null;
+		List<Participant> pList = new ArrayList<Participant>();
+		int acceptedCheck = 0;
+
+		 try {
+		 	conn = DB.getConnection();
+		 	String insertIntoDatabase = "SELECT username FROM TournamentInvite JOIN UserProfile ON TournamentInvite.participant = UserProfile.username WHERE TournamentInvite.tournamentID=? AND TournamentInvite.accepted=?";
+
+		 	preparedStatement = conn.prepareStatement(insertIntoDatabase);
+		 	preparedStatement.setInt(1, tID);
+		 	preparedStatement.setInt(2, acceptedCheck);
+		 	ResultSet rs = preparedStatement.executeQuery();
+
+
+		 	while (rs.next()) {
+		 	    Participant p = new Participant();
+		 	    
+		 	    p.username = rs.getString("username");
+	            p.tournamentID = tID;
+	            
+		 		pList.add(p);
+		 	}
+			
+
+
+
+		 	rs.close();
+			return pList;
+			
+			}catch (com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException ice) {
+					return null;
+			} catch (NumberFormatException nfe) {
+		            return null;
+			} catch (SQLException se) {
+    		        return null;
+			} catch (NullPointerException npe) {
+	    	        return null;
+			} catch (Exception e) {
+				return null;
+			}
+			finally {
+				// finally block used to close resources
+				// try {
+				// if (preparedStatement != null)
+				// conn.close();
+				// } catch (SQLException se) {
+				// } //do nothing
+				try {
+					if (conn != null)
+						conn.close();
+				} catch (SQLException se) {
+					return null;
+				} // end finally try
+			} // end try
+		}
 }
