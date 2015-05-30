@@ -25,9 +25,9 @@
             <div class ="wrap">
                
             <div class="ui-grid-solo ui-responsive">
-              <img src="@routes.Assets.at("images/EARENA.jpg")" alt="tPicture" class = "fullscreen" />
+              <img src="@routes.Assets.at("images/SHOWADPIC.jpg")" alt="tPicture" class = "fullscreen" />
             </div>
-                <br>
+            <br>
             <div class="ui-grid-solo ui-responsive">
               <div class="ui-block-a"><b><h1 style="margin:0;text-align:center">@eAd.arenaName</h1></b></div>
             </div>
@@ -98,7 +98,7 @@
                             
                   <label for="reply"><b><h3 style="margin:0">Submit a reply</b></h3></label>
                   <hr>
-                  <textarea placeholder="Post your reply here" name="reply" id="replyarea" rows="4" cols="50" style="background-color:#53585F;color:white"></textarea>
+                  <textarea placeholder="Post your reply here" name="reply" id="replyarea" rows="4" cols="50" maxlength="500" style="background-color:#53585F;color:white"></textarea>
                   <div data-role="controlgroup" data-type="horizontal" style="text-align:center;">
                     <button data-role = "button" type="submit" id="postreply"value="Submit Reply" class = "submitReplay" data-inline = "true"><b>SUBMIT</b></button>
                   </div>
@@ -126,7 +126,7 @@
                         </div>
                       </div>
                       
-                      <p>Reply:</p>
+                      <p>Comment:</p>
                       <textarea readonly name="textarea" style = "overflow:auto;resize:none;background:#373945;color:#FFFFFF">@{eAdReplies.content}
                       </textarea>
                     </li>

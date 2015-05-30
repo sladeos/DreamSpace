@@ -19,7 +19,7 @@
                  <a id = "back" rel="external" href="/mainearena" data-role="button" role="button" data-icon="back" data-iconpos="notext">Back</a>
 	   </div>
        
-<div data-role="content" Style = "padding:0">
+<div data-role="content">
             <div class="ui-grid-solo ui-responsive">
               <img src="@routes.Assets.at("images/CREATEANAD.jpg")" alt="tPicture" class = "fullscreen" />
             </div>
@@ -50,8 +50,8 @@
                 <form id ="EArenaForm"  method ="post" action="@routes.EArenaDatabase.addEArenaAd()" data-ajax="false">
                    
                  <div class="ui-grid-a  ui-responsive"> 
-                   <div class="ui-block-a" style="width:40%;"><label><input checked type="radio" name="adType" value="Game Ad" class="adType">GameAd</label></div>
-                    <div class="ui-block-b" style="width:60%;"><label><input type="radio" name="adType" value="Tournament Ad" class="adType">TournamentAd</label></div>
+                   <div class="ui-block-a"><label><input checked type="radio" name="adType" data-mini="true" value="Game Ad" class="adType">GameAd</label></div>
+                    <div class="ui-block-b"><label><input type="radio" name="adType" data-mini="true" value="Tournament Ad" class="adType" >TournamentAd</label></div>
                     </div>
                     
                     <div data-role="collapsible" class="ui-icon-alt" data-collapsed-icon="grid" data-expanded-icon="grid" data-iconpos="right" style="background-color:#DBDBDB" >
@@ -91,7 +91,7 @@
                         <input type="number" min="1" max="100" name="playersRequired" id="playersRequired" value="" style="background-color:#53585F;color:white" placeholder="Players Required"/>
                     </div>
                     <div data-role="fieldcontain" class="ui-hide-label">
-                        <textarea style="background-color:#53585F;color:white" placeholder="Enter some information about your ad here!" name="information" id="informationArea" rows="4" cols="50" ></textarea>
+                        <textarea style="background-color:#53585F;color:white" placeholder="Enter some information about your ad here!" name="information" id="informationArea" rows="4" cols="50" maxlength="500" ></textarea>
                     </div>
                     
                     <div data-type="horizontal" style="text-align:center;">
