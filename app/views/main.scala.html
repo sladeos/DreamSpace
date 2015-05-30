@@ -5,7 +5,8 @@
     <head>
         @Templates.head()
         @Templates.facebookHeadScript()
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+     
+
         <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/mainpage.css")">
     </head>
     <body>  
@@ -22,7 +23,7 @@
          
           
                         <div class="ui-grid-solo">
-                            <div class="ui-block-a" style="width:100%; text-align:center; position:relative; ">
+                            <div class="ui-block-a" style="width:100%; text-align:center;">
                                
                                     @for(pictures <- pictures) {
                                         <a href="/pictures" rel="external" class="ui-btn ui-btn-b ui-corner-all ui-shadow imgCut imgFloat" ><img  src="/pic/@pictures.pictureID" style="width:100%" /></a>
@@ -80,47 +81,60 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div id="pages" class ="ui-responsive" style="overflow: hidden">                          
-      
-                                    <div id = "1" class ="mainFlowBox ui-responsive">
-                                        <article  data-role="listview" data-inset="true" data-dividertheme="a"> 
-                                            @for(eads <- eads) {
-                                  
-                                                <li>
-                                                    <a rel="external"  href="/earenaad/@eads.arenaID" style = "background: #FFFFFF">
-                                                        <h2>@{" " + eads.arenaName}</h2>
-                                                        <div style="float:right;"><img src="../assets/images/gamelogos/@eads.logo"></div>
-                                                        <p>@{" Host: " + eads.admin}</p>
-                                                        <p>@{" Game: " + eads.gameName }</p>
-                                                        <p>@{" Created: " + eads.createdDate }</p>
-                                                        <p>@{" Players required: " + eads.playersRequired}</p>
-                                                        <p>Information:</p>
-                                                        <textarea readonly name="textarea" id="text" style = "overflow:auto ; resize:none ; background: #53585F ; color: white" >@{eads.information}</textarea>
-                                                        <br>
-                                                    </a>
-                                                </li>
-                                                <li  data-role = "list-divider" Style = "background-color : transparent ; border: none"></li>
-                                                
-                                            } 
-                                        </article>
+                                <div id="pages" class ="ui-responsive" style="overflow: hidden">        
+                                                  
+                                  <div id = "1" class ="mainFlowBox ui-responsive">
+                                    <div class="ui-grid-a ui-responsive" style="display:inline !important;">
+                                      <div class="ui-block-a" style="text-align:center;background-color:#373945;display:inline !important;"><b><h3 style="margin:0;color:#FFFFFF">Game Ads</h3></b></div>
+                                      <div class="ui-block-b" style="text-align:center;background-color:#FF8532;display:inline !important;"><b><h3 style="margin:0;color:#000000">Tournament Ads</h3></b></div>
                                     </div>
-         
-                                    <div id = "2" class ="mainFlowBox ui-responsive" style="display:none">
-                                        <ul data-role="listview" data-inset="true" data-dividertheme="a" data-theme = "b"> 
-                                            @for(tournament <- tournament) {
-                                      
-                                              <li>
-                                                    <a rel="external"  href="/showtournament/@tournament.tournamentID" style = "border: none ; background: #FFFFFF"><img src="../assets/images/gamelogos/@tournament.logo" alt="Dreamhack" class = "fullscreen"  />
-                                                    <h2>@{"Name: " + tournament.tournamentname}</h2> 
-                                                    <p>@{" Size: " +  tournament.participant_count }</p>
-                                                    <p>@{" Creator: " +  tournament.tournamentcreator }</p>
-                                                    </a>
-                                              </li>
-                                              <li  data-role = "list-divider" Style = "background-color : transparent ; border: none"></li>
-
-                                            } 
-                                        </ul>
-                                    </div>             
+                                        
+                                    <article  data-role="listview" data-inset="true" data-dividertheme="a" data-theme = "c"> 
+                                      @for(eads <- eads) {
+                                  
+                                        <li>
+                                          <a rel="external"  href="/earenaad/@eads.arenaID">
+                                            <h2>@{" " + eads.arenaName}</h2>
+                                            <div style="float:right; display:inline !important;" ><img src="../assets/images/gamelogos/@eads.logo"></div>
+                                            <p>@{" Host: " + eads.admin}</p>
+                                            <p>@{" Game: " + eads.gameName }</p>
+                                            <p>@{" Created: " + eads.createdDate }</p>
+                                            <p>@{" Players required: " + eads.playersRequired}</p>
+                                            <p>Information:</p>
+                                            <textarea readonly name="textarea" id="@eads.arenaID" style="overflow:auto;resize:none" >@{eads.information}</textarea>
+                                            <br>
+                                          </a>
+                                        </li>
+                                        <li  data-role = "list-divider" Style = "background-color : transparent ; border: none"></li>
+                                        
+                                        <script>
+                                          $('.ui-page-active .ui-listview').listview('refresh');
+                                          $('.ui-page-active :jqmData(role=content)').trigger('create');
+                                            if("@eads.adType" === "Tournament Ad"){
+                                              $("#@eads.arenaID").css("background", "#FF8532");
+                                              $("#@eads.arenaID").css("font-weight", "bold");
+                                            }else{
+                                              $("#@eads.arenaID").css("background", "#373945");
+                                              $("#@eads.arenaID").css("color", "#FFFFFF");
+                                            }
+                                        </script>
+                                      } 
+                                    </article>
+                                  </div>
+                                  <div id = "2" class ="mainFlowBox ui-responsive" style="display:none">
+                                    <ul data-role="listview" data-inset="true" data-dividertheme="a" data-theme = "c"> 
+                                      @for(tournament <- tournament) {
+                                        <li>
+                                          <a rel="external"  href="/showtournament/@tournament.tournamentID" style = "border: none"><img src="../assets/images/gamelogos/@tournament.logo" alt="Dreamhack" class = "fullscreen"  />
+                                            <h2>@{tournament.tournamentname}</h2> 
+                                            <p>@{" Size: " +  tournament.participant_count }</p>
+                                            <p>@{" Creator: " +  tournament.tournamentcreator }</p>
+                                          </a>
+                                        </li>
+                                        <li  data-role = "list-divider" Style = "background-color : transparent ; border: none"></li>
+                                      } 
+                                    </ul>
+                                  </div>             
                                 </div>
                             
                         </div>

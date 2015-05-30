@@ -24,7 +24,24 @@
                 the odds be ever in your favor!
               </p> 
             </div>
+                <div style="text-align:center">
+               <a href="#" id="share_button" class = "ui-btn-inline"> <img src="@routes.Assets.at("images/facebookIcon.png")" alt="tPicture" style="width:35px; height:35px;"  /></a>
+               </div>
             
+               <script type="text/javascript">
+               $(document).ready(function() {
+                 $('#share_button').click(function(e) {
+                   e.preventDefault();
+                   FB.ui({
+                     method: 'feed',
+                     name: 'DreamSpace mainTournament',
+                     link: document.URL,
+                     caption: "mainTournament" ,
+                     description: ""
+                   });
+                 });
+               });
+            </script>
 
             <div class="ui-grid-a ui-responsive">
               <div class="ui-block-a"><a data-role="button" id = "btn1"  rel="external" href="/myetournaments"   data-iconpos="right">MY TOURNAMENTS</a></div>
@@ -34,7 +51,7 @@
             <br> 
 
             <div class="ui-grid-solo ui-responsive">
-              <div class="ui-block-a"><b><h3 style="margin:0" ><div id="pagebuttons" align="center"></div></h3></b></div>
+              <div class="ui-block-a"><b><h3 style="margin:0" ><div id="pagebuttons"></div></h3></b></div>
             </div>            
               
             
