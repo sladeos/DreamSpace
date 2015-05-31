@@ -9,47 +9,85 @@
       
     </head>
     <body>
-        <div data-role="page" data-theme="b">   
+        <div data-role="page" data-theme="c">   
             <div data-role="header">
                 @Templates.header()
             </div>
             <div data-role="content">
+            <div class="ui-grid-solo ui-responsive" >
+            <div class="ui-block-a">
+                <div style = "text-align:center">
+              <img src="@routes.Assets.at("images/inbox.png")" alt="inbox" class = "notificationPic" />
+                </div>
+              </div>
+            </div>
                     <h1 align="center">My Notifications</h1>
                     
-            
-                    <h2 align="center">Invites</h1>
+
+<div class="ui-grid-a ui-responsive">
+    <div class="ui-block-a">
+
+                    <h1 align="center">Invites</h1>
                    @for(invitenotifications <- invitenotifications) {
+                   <div class = "formMyprofile">
                            
-                            <p>Tournament: @invitenotifications.tournamentID</p> 
+                       <!--      <p>Tournament: @invitenotifications.tournamentID</p> 
                             <p>Admin:   @invitenotifications.admin </p>
                             <p>Accepted: @invitenotifications.accepted </p>
-                            <p>Viewed:  @invitenotifications.viewed </p>
+                            <p>Viewed:  @invitenotifications.viewed </p> -->
+
+                            <ul data-role="listview" data-inset="true"  data-theme="c" data-divider-theme="b" data-count-theme="b">
+    <li data-role="list-divider">Tournament: @invitenotifications.tournamentID <span class="ui-li-count">@invitenotifications.viewed</span></li>
+    <h2>Admin: @invitenotifications.admin </h2>
+    <p>Accepted: @invitenotifications.accepted </p>
+   
+     
+  
                             
-					        <div class="ui-grid-a">
-                                <div class="ui-block-a"><button data-role = "button" value="@invitenotifications.tournamentID" class = "accept">Accept Invitation</button></div>
-                                <div class="ui-block-b"><button data-role = "button" value="@invitenotifications.tournamentID" class = "delete">Delete Invitation</button></div>
+					        <div class="ui-grid-solo">
+                                <div class="ui-block-a"><button data-role = "button" value="@invitenotifications.tournamentID" data-mini="true" data-inline="true" class = "accept">Accept Invitation</button>
+                               <button data-role = "button" value="@invitenotifications.tournamentID" data-mini="true" data-inline="true" class = "delete">Delete Invitation</button>
+                               </div>
+                            </div>
                             </div>
                       }
                       
-                      <h2 align="center">Replies</h2>
+                    </div>
+                        <div class="ui-block-b">
+                      <h1 align="center">Replies</h1>
                       
                       @for(replynotifications <- replynotifications) {
                       
                          
                            <div id="@replynotifications.replyID">
-                            <p>ReplyID: @replynotifications.replyID</p> 
+                          <!--   <p>ReplyID: @replynotifications.replyID</p> 
                             <p>ArenaID:  @replynotifications.arenaID </p>
                             <p>User: @replynotifications.username </p>
                             <p>Date: @replynotifications.created_date </p>
-                            <p>Viewed:  @replynotifications.viewed </p>
-                            
-					        <div class="ui-grid-a">
-                                <div class="ui-block-a"> <a href="/earenaad/@replynotifications.arenaID" rel="external"  data-role="button" class="view">View reply</a></div>
-                                <div class="ui-block-b"><button data-role = "button" value="@replynotifications.replyID" class = "hide">Hide</button></div>
+                            <p>Viewed:  @replynotifications.viewed </p> -->
+                          
+
+
+  
+<ul data-role="listview" data-inset="true" data-theme="c" data-divider-theme="b" data-count-theme="b">
+    <li data-role="list-divider">Date: @replynotifications.created_date  <span class="ui-li-count">@replynotifications.viewed</span></li>
+    <h2>User: @replynotifications.username</h2>
+    <!-- <p><strong></strong></p> -->
+    <p>ReplyID: @replynotifications.replyID</p>
+    <p>ArenaID:  @replynotifications.arenaID </p>
+       <!--  <p class="ui-li-aside"><strong>6:24</strong>PM</p> -->
+    </li>
+                       
+					        <div class="ui-grid-solo">
+                                <div class="ui-block-a"> <a href="/earenaad/@replynotifications.arenaID" rel="external"  data-role="button" data-mini="true" data-inline="true" class="view">View reply</a>
+                                <button data-role = "button" value="@replynotifications.replyID" data-mini="true" data-inline="true"  class = "hide">Hide</button>
                             </div>
                            
                      </div>
+                        </div>  
                       }
+                      </div>
+                        </div> 
                       
                     
                        <script>
@@ -120,7 +158,7 @@
                                     type: 'POST',
                                 });
                                   
-                                $(".view").css("background","  #FF9900");
+                                // $(".view").css("background","  #FF9900");
                             });
                            
                         
@@ -133,11 +171,6 @@
                 </div>
             @Templates.footer()
             @Templates.panelAndLogOut()
-            <script>
-                $('#mail').removeClass('ui-alt-icon');
-                $('#h').addClass('ui-alt-icon');
-                $('#user').addClass('ui-alt-icon');
-          </script>
             </div>
 
 @Templates.jsDisabled()

@@ -30,6 +30,25 @@
               </p> 
             </div>
 
+                <div style="text-align:center">
+               <a href="#" id="share_button" class = "ui-btn-inline"> <img src="@routes.Assets.at("images/facebookIcon.png")" alt="tPicture" style="width:35px; height:35px;"  /></a>
+               </div>
+            
+               <script type="text/javascript">
+               $(document).ready(function() {
+                 $('#share_button').click(function(e) {
+                   e.preventDefault();
+                   FB.ui({
+                     method: 'feed',
+                     name: 'DreamSpace myEarena',
+                     link: document.URL,
+                     caption: "myEarena" ,
+                     description: ""
+                   });
+                 });
+               });
+            </script>
+
 
          <div class = "standardBox">   
             <button data-role = "button" id = "creatad" class = "search" rel="external" href="/">CREATE AN AD</button>

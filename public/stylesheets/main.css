@@ -189,8 +189,13 @@ border-color:transparent;
     padding-right:15px;
         
 }
-
-
+.notificationPic{
+    max-width: 100%;
+    height:250px;
+}
+.paddingInvites{
+    padding-right:10px;
+}
 
 #pagination{
     visibility: hidden;
@@ -316,6 +321,10 @@ border-color:transparent;
 
 
     }
+    .notificationPic{
+    max-width: 100%;
+    height:150px;
+}
 
      
 }
@@ -484,6 +493,11 @@ border-color:transparent;
         margin:0 auto;
         width: 500px;
     
+}
+
+.notificationPic{
+    max-width: 100%;
+    height:250px;
 }
 
     #adinfo{
