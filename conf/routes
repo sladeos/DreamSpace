@@ -134,7 +134,7 @@ POST /edituserprofile controllers.UserProfileDatabase.editUserProfile()
 GET  /profile/:user controllers.Application.showProfile(user: String)
 
 #Get all profiles
-GET /profiles controllers.UserProfileDatabase.getProfiles()
+GET /profiles controllers.UserProfileDatabase.getProfiles(page:Integer ?=1)
 
 #Get current user's profile
 GET /myprofile controllers.Application.getMyProfile()

@@ -3,22 +3,27 @@ package controllers;
 import models.*;
 
 import java.sql.*;
+
 import com.drew.imaging.ImageMetadataReader;
 import com.drew.imaging.ImageProcessingException;
 import com.drew.metadata.*;
 import com.drew.metadata.exif.ExifIFD0Directory;
 import com.drew.metadata.jpeg.JpegDirectory;
 import com.fasterxml.jackson.databind.JsonNode;
+
 import javax.imageio.ImageIO;
+
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
+
 import play.mvc.Http.MultipartFormData;
 import play.mvc.Http.MultipartFormData.FilePart;
 import views.html.*;
 import play.db.DB;
 import play.mvc.*;
+
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -186,7 +191,7 @@ public class UserProfileDatabase extends Controller {
 		} // end try
 	}
 
-	public static Result getProfiles() {
+	public static Result getProfiles(int page) {
 		String currentUser = session("connected");
 		if (currentUser == null) {
 			return unauthorized(LoginUserPage
@@ -196,12 +201,12 @@ public class UserProfileDatabase extends Controller {
 			PreparedStatement preparedStatement = null;
 			List<Profile> proList = new ArrayList<Profile>();
 			try {
-
+				page = (page - 1) * 10;
 				conn = DB.getConnection();
 
-				String selectProfiles = "SELECT * FROM UserProfile";
+				String selectProfiles = "SELECT * FROM UserProfile ORDER BY userID DESC LIMIT 10 OFFSET ? ";
 				preparedStatement = conn.prepareStatement(selectProfiles);
-
+				preparedStatement.setInt(1, page);
 				ResultSet rs = preparedStatement.executeQuery();
 
 				while (rs.next()) {
@@ -211,9 +216,15 @@ public class UserProfileDatabase extends Controller {
 					p.userbio = rs.getString("userbio");
 					proList.add(p);
 				}
-
 				rs.close();
-				return ok(MainProfilePage.render(proList));
+				String rowCountStatement = "SELECT COUNT(*) FROM UserProfile";
+				preparedStatement = conn.prepareStatement(rowCountStatement);
+
+				ResultSet rc = preparedStatement.executeQuery();
+				rc.next();
+				int rowcount = rc.getInt(1);
+				rc.close();
+				return ok(MainProfilePage.render(proList, rowcount));
 			} catch (com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException ice) {
 				return badRequest(ice.toString());
 			} catch (NumberFormatException nfe) {
