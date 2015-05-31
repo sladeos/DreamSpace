@@ -22,7 +22,7 @@
                 <div class="ui-grid-solo ui-responsive">
                   <div class="ui-block-a"><h1 style="text-align:center"><img src="../assets/images/gamelogos/@tournament.logo" alt="Dreamhack" class = "fullscreen"  /><br>@tournament.tournamentname</h1></div>
                 </div>
-                <button id="share_button" class = "facebookColor facebookButton centerButton" data-mini="true">Facebook Share</button>
+           
                 <br>
                 <div id = "bracketcontent" >
 
@@ -50,23 +50,23 @@
                 </div>
                 
                 <div id="participants">
-                    <div class ="flowBox">
+                    <div class ="standardBox">
                       <hr>    
-                        <ul data-role="listview" data-inset="true" data-dividertheme="a"> 
+                        <ul data-role="listview" data-inset="true" data-dividertheme="c"> 
                         @for(participant <- participant) {
-                                <li><a data-role = "button"  rel="external"  href="/profile/@participant" style="background:#FFFFFF"><h2 style="margin:0;text-align:center">@{participant.username}</h2></a>
+                                <li><a data-role = "button"  rel="external"  href="/profile/@participant.username"><h2 style="margin:0;text-align:center">@{participant.username}</h2></a>
                             </li>
                         } 
                         </ul> 
                     </div> 
                 </div>
                 
-                <div id ="privateInformation"  class ="flowBox">
-                <h3 style="margin:0;text-align:center">Tournament Information</h3>
+                <div id ="privateInformation"  class ="standardBox">
+                <h3 style="text-align:center">Tournament Information</h3>
                 </div>
 <script>
 $(document).ready(function() {
-	if($('#participants > div.flowBox:contains("@currentuser")').length > 0) {
+	if($('#participants > div.standardBox:contains("@currentuser")').length > 0) {
 		$('#privateInformation').append("@tournament.information")
 	}else{
 		$('#privateInformation').html("");

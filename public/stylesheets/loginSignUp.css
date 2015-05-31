@@ -13,10 +13,10 @@
 
     .ui-content{
             padding: 5% 5%;
-            width:500px;
+            width:400px;
             background: transparent;
             margin: 0 auto;
-            margin-top: 200px;
+            margin-top: 1%;
             border-radius: 25px;
             border:2px solid #DADADA;
     }
@@ -102,10 +102,10 @@
         }
         .ui-content{
          
-            width:500px;
+            width:400px;
             background: transparent;
             margin: 0 auto;
-            margin-top: 200px;
+            margin-top: 2%;
             border-radius: 25px;
             border:2px solid #DADADA;
         }

@@ -33,23 +33,7 @@
           </div>
           
 
-          <button id="share_button" class = "facebookColor facebookButton centerButton" data-mini="true">Facebook Share</button>
-          <br>
-            
-                                  <script type="text/javascript">
-                                  $(document).ready(function() {
-                                    $('#share_button').click(function(e) {
-                                      e.preventDefault();
-                                      FB.ui({
-                                        method: 'feed',
-                                        name: 'Tournament: @tournament.tournamentname',
-                                        link: document.URL,
-                                        caption: "@tournament.tournamentcreator" + "'s " + "tournament",
-                                        description: "Size of Tournament: @tournament.participant_count"
-                                      });
-                                    });
-                                  });
-                                  </script>
+         
             
           <div id = "bracketcontent" style="text-align:center">
               <button data-role="button" data-icon="plus" data-iconpos="notext" id="increase"></button>
@@ -78,21 +62,21 @@
               </div>
                 
              
-                <div class ="flowBox" style="text-align:center">
-                  <hr>    
-                  <ul data-role="listview" data-inset="true" data-dividertheme="a"> 
+                <div class ="standardBox" style="text-align:center">
+                     
+                  <ul data-role="listview" data-inset="true" data-dividertheme="c"> 
                     @for(participant <- participant) {
-                      <li><a data-role = "button"  rel="external"  href="/profile/@participant.username" style="background:#FFFFFF">
+                      <li><a data-role = "button"  rel="external"  href="/profile/@participant.username">
 
-					  <button data-role = "button" class="kickP" data-inline="true" style="float:right;" value="@participant.username">Kick</button>
-					  <h2 style="margin:0;text-align:center">@{participant.username}</h2></a>
+					  <button data-role = "button" class="kickP" data-inline="true" data-mini="true" style="float:right;" value="@participant.username">Kick</button>
+					  <h2>@{participant.username}</h2></a>
                       </li>
                    
         }
 
                   </ul>
 
-                  <hr> 
+                  
                 </div> 
                 
                   <div class="ui-grid-solo ui-responsive">
@@ -100,18 +84,18 @@
               </div>
                 
              
-                <div class ="flowBox" style="text-align:center">
-                  <hr>    
-                  <ul data-role="listview" data-inset="true" data-dividertheme="a"> 
+                <div class ="standardBox" style="text-align:center">
+                    
+                  <ul data-role="listview" data-inset="true" data-dividertheme="c"> 
                     @for(pending <- pending) {
 
-                      <li><a data-role = "button"  rel="external"  href="/profile/@pending.username" style="background:#FFFFFF">
-					  <button data-role = "button" class="kickP" data-inline="true" style="float:right;" value="@pending.username">Revoke</button>
-					  <h2 style="margin:0;text-align:center">@{pending.username} - Invite pending</h2></a>
+                      <li><a data-role = "button"  rel="external"  href="/profile/@pending.username">
+					  <button data-role = "button" class="kickP" data-inline="true" data-mini="true" style="float:right;" value="@pending.username">Revoke</button>
+					  <h2 >@{pending.username} - Invite pending</h2></a>
                       </li>
                     } 
                   </ul>
-                  <hr> 
+                
                 </div> 
   
               <div id='bracketForm' class = "standardBox">
