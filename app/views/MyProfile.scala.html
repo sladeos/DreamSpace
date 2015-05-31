@@ -61,6 +61,10 @@
 		$("#imageshow").css('color', 'red');
 		$('#imageshow').html("That file format is not supported")
 		$("#buttonSubmit").attr("disabled", true);
+	}else if (this.files[0].size>4000000){
+	   	$("#imageshow").css('color', 'red');
+		$('#imageshow').html("That picture has a size exceeding 4 megabytes, please upload a smaller picture")
+		$(":submit").attr("disabled", true);
     }else{
 		$('#imageshow').html("")
 		$("#buttonSubmit").removeAttr("disabled")
