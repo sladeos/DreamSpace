@@ -33,13 +33,14 @@
                                       <div style="text-align:center">  <img src="/profilepic/@profile.username" id="avatarpic" style="height:100px; width:100px;">
                                          </div> 
                                          <div style="text-align:center"> 
-                                            <a href="#both"id="upload" data-rel="popup" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-icon-camera ui-btn-icon-left">Upload</a>
+                                            <a href="#both" id="upload" data-rel="popup" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-icon-camera ui-btn-icon-left">Upload</a>
                                             <button data-role = "button" id="delete" data-inline="true"  data-icon="delete">Delete pic</button>
                                         </div>
                                         <div id="both" data-role="popup" style="background:grey;" >
                                             <form id= "picupload" action="@routes.UserProfileDatabase.savePicture()" method ="post" data-ajax="false" enctype="multipart/form-data" >
                                                 <input id="picfield" name="picture" type="file" accept="image/*;capture=camera" Style="margin-top:20%">
                                         <div id="imageshow" align="center"></div>
+                                        <div align="center">Max Size: 4MB</div>
                                                 <button type="submit" id="buttonSubmit"  class="ui-btn ui-corner-all ui-shadow ui-btn-c ui-btn-icon-left ui-icon-check">Upload</button>
                                                 
                                             </form>
@@ -49,6 +50,8 @@
     <script type="text/javascript">
     $(function() {
     	$("#buttonSubmit").attr("disabled", true);
+    	$("#imageshow").css('max-height', '200px');
+    	$("#imageshow").css('max-width', '200px');
     });
     $('#picfield').change(function(e){
   	var fullPath = document.getElementById('picfield').value;
@@ -83,10 +86,10 @@
 		                document.getElementById("imageshow").appendChild(img);
 		    
 		            }, {
-		              maxWidth: 300,
-		              maxHeight: 300,
+		              maxWidth: 100,
+		              maxHeight: 100,
 		              minWidth: 100,
-		              minHeight: 50,
+		              minHeight: 100,
 		              orientation: orientationt,
 		            }
 		    
