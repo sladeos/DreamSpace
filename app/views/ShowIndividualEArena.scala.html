@@ -18,18 +18,19 @@
         <div data-role="page" data-theme="c" id = "main">
               <div data-role="header">
 	       @Templates.header()
-         <a id = "back" rel="external" href="/mainearena" data-role="button" role="button" data-icon="back" data-iconpos="notext">Back</a>
+         
 
 	       </div>
             <div data-role="content">
-            <div class ="wrap">
+           
                
             <div class="ui-grid-solo ui-responsive">
-              <img src="@routes.Assets.at("images/SHOWADPIC.jpg")" alt="tPicture" class = "fullscreen" />
+              <img src="@routes.Assets.at("images/earenaAD.jpg")" alt="tPicture" class = "fullscreen" />
             </div>
+             <div class ="wrap">
             <br>
             <div class="ui-grid-solo ui-responsive">
-              <div class="ui-block-a"><b><h1 style="margin:0;text-align:center">@eAd.arenaName</h1></b></div>
+              <div class="ui-block-a"><b><h1 style="text-align:center">@eAd.arenaName</h1></b></div>
             </div>
 
             <button id="share_button" class = "facebookColor facebookButton centerButton" data-mini="true">Facebook Share</button>
@@ -167,6 +168,7 @@
                         }
                     });
                 </script>
+                </div>
                 </div>
             @Templates.footer()
             @Templates.panelAndLogOut()
