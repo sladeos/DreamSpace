@@ -1,3 +1,4 @@
+
 img {
   width: auto;
   height : auto;
@@ -199,6 +200,34 @@ border-color:transparent;
     padding-right:10px;
 }
 
+.ui-icon-myicon:after {
+    background-image: url("../images/menyIconer/Arena.png");
+    /* Make your icon fit */
+    background-size: 18px 18px;
+}
+
+.ui-icon-myicon1:after {
+    background-image: url("../images/menyIconer/bbracketIcon.png");
+    /* Make your icon fit */
+    background-size: 18px 18px;
+}
+
+
+.ui-icon-myicon2:after {
+    background-image: url("../images/menyIconer/backpack.png");
+    /* Make your icon fit */
+    background-size: 18px 18px;
+}
+.ui-icon-myicon3:after {
+    background-image: url("../images/menyIconer/camera.png");
+    /* Make your icon fit */
+    background-size: 18px 18px;
+}
+.ui-icon-myicon4:after {
+    background-image: url("../images/menyIconer/profile.png");
+    /* Make your icon fit */
+    background-size: 18px 18px;
+}
 #pagination{
     visibility: hidden;
 }
