@@ -180,9 +180,11 @@ border-color:transparent;
        border:none;
 
 }
+
 .mainFlowBox{
     margin: 0 auto;
 }
+
 
 .formMyprofile{
    
@@ -234,6 +236,8 @@ border-color:transparent;
 #replyfielddiv{
     width: 100%;
 }
+
+
 
 @media all and (max-width: 36em){
     .ui-page{
