@@ -8,10 +8,10 @@
        
     </head>
     <body>
-        <div data-role="page" id = "signup" data-theme="b">
+        <div data-role="page" id = "signup" data-theme="c">
             <div data-role = "content">
                 <div class = "loginBox">
-                    <h1 class = "headerPic"><img src="@routes.Assets.at("images/e3.png")" class = "fullscreen"></h1> 
+                    <h1 class = "headerPic"><img src="@routes.Assets.at("images/real.png")" class = "headerImg "></h1> 
                     <h1 class =  "headerPic">Create new user</h1>
                     <form id ="signupform" action="@routes.UserDatabase.addUser()" method ="post" data-ajax="false">
                 
@@ -36,21 +36,23 @@
                         </div>
                            <p id="warning">@message</p>
                        <div style="text-align: center">
-                         <button id = "creatButton"class=" ui-btn ui-corner-all ui-btn-inline"  type="submit" value="Create account" onclick="return validate()" >Create account </button>
+                         <button id = "creatButton"class=" ui-btn ui-corner-all ui-btn-inline" style="border:none"  type="submit" value="Create account" onclick="return validate()" >Create account </button>
                          </div>
                     </form>
                     <div style="text-align: center">
-                        <button data-role = "button" onclick="window.location.href='/login'" class=" ui-btn ui-icon-delete ui-btn-icon-right ui-btn  ui-corner-all ui-btn-inline  goBackButton ui-mini">Cancel</button>
+                        <button id="cancel" data-role = "button" onclick="window.location.href='/login'" class=" ui-btn ui-icon-delete ui-btn-icon-right ui-btn  ui-corner-all ui-btn-inline  goBackButton ui-mini" style="border:none">Cancel</button>
                     </div>
             </div> 
                 <script type="text/javascript">
-                $("#creatButton ").css("background","  #FF9900");
+                $("#creatButton ").css("background","#FF9900");
+                $("#creatButton,#cancel").css('color','black');
                 </script>
                 <script>
                     $('#username').textinput({ theme: "a" });
                     $('#email').textinput({ theme: "a" });
                     $('#password').textinput({ theme: "a" });
                     $('#confirmPass').textinput({ theme: "a" });
+
                 </script>
 
               <script type="text/javascript">

@@ -1,43 +1,90 @@
-@(profile: List[Profile])
+@(profile: List[Profile], rowcount: Integer)
 
 <!DOCTYPE html>
 
 <html>
     <head>
         @Templates.head()
-        
+        <script type="text/javascript" src="@routes.Assets.at("javascripts/jquery-ias.min.js")"></script>
         @Templates.facebookHeadScript()
     </head>
     <body>
-        <div data-role="page" data-theme="b">   
+        <div data-role="page" data-theme="c">   
             <div data-role="header">
                 @Templates.header()
             </div>
             <div data-role="content">
-                  
-                    <h1 align="center">Profiles</h1>
-                    <div class = "standardBox">
+
+                          <div class="ui-grid-solo ui-responsive" >
+            <div class="ui-block-a" >
+              <img src="@routes.Assets.at("images/PROFILES.jpg")" alt="tPicture" class = "fullscreen" />
+              </div>
+            </div>
+
+                    <div id="userProfiles"class = "standardBox">
                     
                     <a data-role = "button" id = "btn1"  rel="external" href="/myprofile" data-icon="user" data-iconpos="right">My Profile</a>
-                    
-                    <h3>User Profiles</h3>
                     </div>
+                    <div id="profiles">
                     <div class ="flowBox">
-                            
                             <hr>
-                        <ul data-role="listview" data-inset="true" data-dividertheme="a" data-theme = "b"> 
+                        <ul data-role="listview" data-inset="true" data-dividertheme="a" data-theme = "c" style="border:none;"> 
                         @for(profile <- profile) {
-                            <li  data-role = "list-divider" ></li>
-                                <li><a data-role = "button"  rel="external"  href="/profile/@profile.username" class = "greyBtn"><img src="@routes.Assets.at("images/sun.jpg")" alt="Dreamhack" class = "fullscreen"  /><h2>@{profile.username}</h2><p>@{"User Bio: " + profile.userbio} </p></a>
+                          
+                                <li><a data-role = "button"  rel="external"  href="/profile/@profile.username" class = "greyBtn"><img src="/profilepic/@profile.username" alt="Dreamhack" class = "fullscreen"  /><h2>@{profile.username}</h2><p>@{"About: " + profile.userbio} </p></a>
                             </li>
+                            <li  data-role = "list-divider" style="background:transparent;border:none" ></li>
+                            <script>
+                        $('.ui-page-active .ui-listview').listview('refresh');
+                        $('.ui-page-active :jqmData(role=content)').trigger('create');
+                     </script>
                         } 
                         </ul>
                     </div>    
-                    
+                    </div>
                     <script>
-                        $("#btn1").css("background","  #FF9900");
+                                             var rowcount = @rowcount;
+                                             var pageDecimal = rowcount / 10;
+                                             var pages = Math.ceil(pageDecimal);
 
-                    </script>
+                                             $(document).ready(function() {
+                                          	   $("#userProfiles").append("<h3>User Profiles (" + rowcount + ")</h3>");
+                                          	  
+                                             var ias = jQuery.ias({
+                                             	  container:  '#profiles',
+                                             	  item:       '.flowBox',
+                                             	  pagination: '#pagination',
+                                             	  next:       '.Next'
+                                             	});
+                                             
+                                             var cPage;
+                                             ias.on('load', function(event) {
+                                          	   if(cPage > pages){
+                                             		jQuery.ias().unbind();
+                                             		$('.ias-spinner img:last-child').remove()
+                                             		$('.ias-spinner').append("No more results")
+                                             	}
+                                              var url = event.url;
+                                              url += cPage
+                                             	event.url = url
+                                             })
+                                             
+                                             jQuery.ias().extension(new IASPagingExtension());
+                                             jQuery.ias().on('pageChange', function(pageNum, scrollOffset, url) {
+                                             	cPage = pageNum;
+                                             	
+                                             });
+                                             
+                                             ias.extension(new IASSpinnerExtension({
+                                                 src: "@routes.Assets.at("images/loading.gif")",
+                                             }));
+                                             
+                                             });
+                                             </script>
+                                          <div id="pagination">
+                                             <a href="?page=" class="Next" id="Next1">next</a>
+                                          </div>
+                   
                 
             </div>
             @Templates.footer()

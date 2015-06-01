@@ -1,3 +1,9 @@
+img {
+  width: auto;
+  height : auto;
+  max-height: 100%;
+  max-width: 100%
+}
 .eadColours{
 	  width: 60px;
     height: 60px;
@@ -65,7 +71,7 @@ border-color:transparent;
     
 }
 
-.facebook2{
+.facebookButton2{
     width: 65px;
     max-width: 65px;
 }
@@ -135,11 +141,17 @@ border-color:transparent;
     }
 
 .imgCut{
-    max-Width: 150px;
-    max-Height: 150px;
-    min-Width: 100px;
-    min-Height: 50px;
+    max-width: 150px;
+    max-height: 150px;
+    min-width: 150px;
+    min-height: 150px;
 }
+
+   .imgCutGallery{
+        max-height:400px; 
+        max-width: 400px; 
+    }
+
 
 .imgFloat{
     display: inline-block;
@@ -171,6 +183,20 @@ border-color:transparent;
 
 .mainFlowBox{
     margin: 0 auto;
+}
+
+
+.formMyprofile{
+   
+    padding-right:15px;
+        
+}
+.notificationPic{
+    max-width: 100%;
+    height:250px;
+}
+.paddingInvites{
+    padding-right:10px;
 }
 
 #pagination{
@@ -241,16 +267,22 @@ border-color:transparent;
         max-width: 65px;
     }
 
-
     .imgCut{
-        max-Width: 75px;
-        max-Height: 75px;
-        min-Width: 75px;
-        min-Height: 75px;
+         max-width: 75px;
+        max-height: 75px;
+        min-width: 75px;
+        min-height: 75px
     }
+     .imgCutGallery{
+        max-height:380px; 
+        max-width: 300px; 
+    }
+
+
     .imgFloat{
         display: inline-block;
         padding:2px;
+ 
         
     }
 
@@ -293,13 +325,22 @@ border-color:transparent;
 
 
     }
+    .notificationPic{
+    max-width: 100%;
+    height:150px;
+}
+
      
 }
 
 @media all and (min-width: 60em){
 
     .ui-page{
-        background: white;
+        background: black url("../images/LOGIN.jpg")no-repeat scroll center top;;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-size: 100% 100%
+
     }
     
     .ui-content{
@@ -311,6 +352,7 @@ border-color:transparent;
     
     .ui-page .ui-header{
         margin:0 auto;
+        width: 1230px;
         
     }
 
@@ -360,17 +402,26 @@ border-color:transparent;
 
     .imgCut{
 
-        max-Width: 350px;
-        max-Height: 350px;
-        min-Width: 350px;
-        min-Height: 350px;
+        max-width: 350px;
+        max-height: 350px;
+        min-width: 350px;
+        min-height: 350px;
+
         
    
     }
+    .imgCutGallery{
+        max-height:512px; 
+        max-width:512px; 
+
+    }
+
+
    .imgFloat{
         display: inline-block;
         padding:2px;
     }
+
     .blockPadding{
         padding:20px;
     }
@@ -404,11 +455,11 @@ border-color:transparent;
     }
 
     .headerImg{
-        margin-bottom: -30px; 
+        margin-bottom: -60px; 
         padding-right: 70px; 
         padding-left: 50px;
-        width: 300px;
-        height:100px;
+        width: 350px;
+        height:150px;
     }
     .block{
       
@@ -416,7 +467,7 @@ border-color:transparent;
     }
   
       .headern{
-        text-align: left;
+        text-align: center;
     }
 
     .ui-page .ui-btn.flipButton{
@@ -426,6 +477,32 @@ border-color:transparent;
         font-weight: bold;
         border:none;
     }
+    .myProfileImg{
+        width: 200px;
+        height:200px;
+    }
+    .formMyprofile{
+           width: 500px;
+          float:left;
+           padding-left:15px;
+        
+    }
+     .formMyprofile2{
+           width: 500px;
+          float:left;
+           padding-right:15px;
+        
+    }
+    .tournamentMyProfile{
+        margin:0 auto;
+        width: 500px;
+    
+}
+
+.notificationPic{
+    max-width: 100%;
+    height:250px;
+}
 
     #adinfo{
         position: relative;
@@ -449,4 +526,5 @@ border-color:transparent;
     }
 
 }
+
 

@@ -10,26 +10,52 @@
       <script type="text/javascript" src="@routes.Assets.at("javascripts/jquery-ias.min.js")"></script>
    </head>
    <body>
-      <div data-role="page" data-theme="b" id = "main" >
+
+<div data-role="page" data-theme="c" id = "main" >
          <div data-role="header">
             @Templates.header()
          </div>
          <div data-role="content">
-            <h1 align="center">EArena</h1>
-            <button id="share_button" class = "facebookColor facebookButton centerButton" data-mini="true">Facebook Share</button>
-            <div class ="standardBox">
-               <button data-role = "button" id = "MYEArena"  rel="external" href="/" data-icon="user" data-iconpos="right" >My Ads</button>
-               <p>
-                  <button data-role = "button" id = "creatAd"  rel="external" href="/" data-icon="arrow-r" data-iconpos="right" >Create ad</button>
+            
+
+            <div class="ui-grid-solo ui-responsive">
+              <img src="@routes.Assets.at("images/EARENA.jpg")" alt="tPicture" class = "fullscreen" />
             </div>
-            <script type="text/javascript">
-               $('#creatAd').click(function() {
-               window.location='/createarenaad'; });
-               
-               $('#MYEArena').click(function() {
-               window.location='/myearena'; });
-               
+            <div style="width:100% ; text-align:center">
+              <p>
+                <b>Welcome to the EArena!</b><br>
+               Here is where you can create and<br>
+               search game ads from different users.
+              </p> 
+            </div>
+
+
+                <div style="text-align:center">
+               <a href="#" id="share_button" class = "ui-btn-inline"> <img src="@routes.Assets.at("images/facebookIcon.png")" alt="tPicture" style="width:35px; height:35px;"  /></a>
+               </div>
+            
+               <script type="text/javascript">
+               $(document).ready(function() {
+                 $('#share_button').click(function(e) {
+                   e.preventDefault();
+                   FB.ui({
+                     method: 'feed',
+                     name: 'DreamSpace mainEarena',
+                     link: document.URL,
+                     caption: "mainEarena" ,
+                     description: ""
+                   });
+                 });
+               });
             </script>
+
+            <div class="ui-grid-a ui-responsive">
+              <div class="ui-block-a"><a data-role = "button" id = "MYEArena"  rel="external" href="/myearena" data-iconpos="right" >MY ADS</a></div>
+              <div class="ui-block-b"><a data-role = "button" id = "creatAd"  rel="external" href="/createarenaad" data-iconpos="right" >CREATE AN AD</a></div>
+            </div>
+
+
+
             <script type="text/javascript">
                $(document).ready(function() {
                  $('#share_button').click(function(e) {
@@ -44,38 +70,50 @@
                  });
                });
             </script>
+
+
+
             <div class ="standardBox">
-               <div data-role="collapsible" class="ui-icon-alt" data-collapsed-icon="arrow-r" data-expanded-icon="arrow-d" data-iconpos="right"  >
-                  <h3 class = "custom-centercollheader" >Search ad</h3>
+               <div data-role="collapsible" class="ui-icon-alt" data-collapsed-icon="arrow-r" data-expanded-icon="arrow-d" data-iconpos="right">
+                  <h3 class = "custom-centercollheader" >SEARCH ADS</h3>
                   <form data-ajax="false">
-                     <input type="search" name="search" id="search-basic" value="" />
+                     <input type="search" name="search" id="search-basic" value="" placeholder="Search ad" />
                      <p>Advanced search</p>
                      <hr>
                      <div data-role="fieldcontain"class="ui-hide-label" >
                         <input type="text" name="game" placeholder="Game" id="game">
                         <input type="text" name="username" placeholder="Username" id="username">
-                        <input type="number" name="players" placeholder="Players" id="players">
-                        <input type="number" name="minutes" placeholder="Search X minutes ago" id="minutes">
+                        <input type="number" name="players" placeholder="Number of players" id="players">
+                        <input type="number" name="minutes" placeholder="Uploaded X minutes ago" id="minutes">
                      </div>
                      <div data-role="controlgroup" data-type="horizontal" style="text-align:center;">
-                        <button data-inline="true" type="submit"  data-icon="search" data-mini="true">GO!</button>
+                        <button data-inline="true" type="submit"><b>GO!</b></button>
                      </div>
                   </form>
                </div>
             </div>
-            <div id="adsFound" class = "standardBox">
-            </div>
-            
-              <div class="eadColours" style="background-color:DarkBlue;"><h4> <br><br>Game Ads</h4></div>
-             <div class="eadColours" style="background-color:FireBrick;"><h4><br><br>Tournament Ads</h4></div>
-             <div id ="earenas">
+          
+
+
+          <div class="ui-grid-solo ui-responsive">
+            <div class="ui-block-a"><b><h3 style="margin:0"> <div id="adsFound"></div></h3></b></div>
+         </div>  
+
+
+
+            <div id ="earenas">
             <div class ="flowBox">
+
                <hr>
+         <div class="ui-grid-a ui-responsive">
+            <div class="ui-block-a" style="text-align:center;background-color:#373945"><b><h3 style="margin:0;color:#FFFFFF">Game Ads</h3></b></div>
+            <div class="ui-block-b" style="text-align:center;background-color:#FF8532"><b><h3 style="margin:0;color:#000000">Tournament Ads</h3></b></div>
+         </div>
                <article  data-role="listview" data-inset="true" data-dividertheme="a">
                   @for(eads <- eads) {
-                  <li  data-role = "list-divider" ></li>
+                  
                   <li >
-                     <a rel="external" id="@eads.arenaID" href="/earenaad/@eads.arenaID" style = "background: #373737" >
+                     <a rel="external"  href="/earenaad/@eads.arenaID" style = "" >
                         <h2>@{" " + eads.arenaName}</h2>
                         <div style="float:right;"><img src="assets/images/gamelogos/@eads.logo"></div>
                         <p>@{" Host: " + eads.admin}</p>
@@ -83,18 +121,21 @@
                         <p>@{" Created: " + eads.createdDate }</p>
                         <p>@{" Players: " + eads.playersRequired}</p>
                         <p>Information:</p>
-                        <textarea readonly name="textarea" id="text" style = "overflow:auto;resize:none" >@{eads.information}</textarea>
+                        <textarea readonly name="textarea" id="@eads.arenaID" style = "overflow:auto;resize:none" >@{eads.information}</textarea>
                         <br>
                      </a>
                   </li>
+                  <li  data-role = "list-divider"  style="background:transparent;border:none" ></li>
                   
                   <script>
                         $('.ui-page-active .ui-listview').listview('refresh');
                         $('.ui-page-active :jqmData(role=content)').trigger('create');
                         if("@eads.adType" === "Tournament Ad"){
-                        	$("#@eads.arenaID").css("background", "FireBrick");
+                        	$("#@eads.arenaID").css("background", "#FF8532");
+                           $("#@eads.arenaID").css("font-weight", "bold");
                         }else{
-                        	$("#@eads.arenaID").css("background", "DarkBlue");
+                        	$("#@eads.arenaID").css("background", "#373945");
+                           $("#@eads.arenaID").css("color", "#FFFFFF");
                         }
                      </script>
                   } 
@@ -128,7 +169,7 @@
                
             
             $(document).ready(function() {
-                  $("#adsFound").html("<h3>Ads found: " + rowcount + "</h3>");
+                  $("#adsFound").html("Current ads (" + rowcount + ")");
   
             var ias = jQuery.ias({
             	  container:  '#earenas',

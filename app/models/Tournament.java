@@ -23,4 +23,8 @@ public String tournamentdata;
 public String tournamentcreator;
 
 public int tournamentID;
+
+public String information;
+
+public String logo;
 }

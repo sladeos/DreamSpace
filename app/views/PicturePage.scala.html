@@ -7,27 +7,34 @@
       <script type="text/javascript" src="@routes.Assets.at("javascripts/jquery-ias.min.js")"></script>
    </head>
    <body>
-      <div data-role="page" data-theme="b">
+      <div data-role="page" data-theme="c">
          <div data-role="header">
             @Templates.header()
          </div>
          <div data-role="content">
-            <h1 align="center">Photo Stream</h1>
-            <div class = "standardBox">
+            <div class="ui-grid-solo ui-responsive" >
+            <div class="ui-block-a" >
+              <img src="@routes.Assets.at("images/GALLERY.jpg")" alt="tPicture" class = "fullscreen" />
+              </div>
+            </div>
+
+            <div class = "standardBox" style="padding-bottom:20px;">
+
                <a data-role = "button" id = "btn2"  rel="external" href="/newpicture" data-icon="arrow-r" data-iconpos="right">Take and Upload a Picture</a>
             </div>
             <div id="outerpictures" class = "centerDiv">
                <div class="innerpictures">
                   @for(pictures <- pictures) {
-                  <div class="ui-bar ui-bar-b" style="width:70%; margin:0 auto; padding-top:10px; padding-bottom:10px;"><h3 style="float:left">
+                                <div class="ui-grid-solo">
+                        <div class="ui-block-a">
+                           <a href="#@pictures.pictureID" data-rel="popup" data-position-to="window" class="ui-btn ui-btn-b ui-corner-all ui-shadow imgCutGallery " data-transition="fade" style="background:white; margin: 0 auto; border:none;"><img  class ="popphoto"src="/pic/@pictures.pictureID" style="width:100%" /></a>
+                        </div>
+                               <div class="ui-bar ui-bar-d ui-corner-all imgCutGallery" style=" margin:0 auto; padding-top:10px; padding-bottom:10px; background:#DBDBDB; border:none;"><h3 style="float:left">
                      Creator:@pictures.creator  
-                      <button id="share_button@pictures.pictureID" class = "facebookColor facebookButton2 standardBox ui-btn-right ui-btn-inline" data-mini="true"> Share</button>
+                      <a href="#" id="share_button@pictures.pictureID" class = " ui-btn-right ui-btn-inline"> <img src="@routes.Assets.at("images/facebookIcon.png")" alt="tPicture" style="width:35px; height:35px;" /></a>
                      </h3>
                   </div>
-                     <div class="ui-grid-solo">
-                        <div class="ui-block-a">
-                           <a href="#@pictures.pictureID" data-rel="popup" data-position-to="window" class="ui-btn ui-btn-b ui-corner-all ui-shadow " data-transition="fade" style="max-height:512px; width:70%; margin: 0 auto; background:#151515" ><img src="/pic/@pictures.pictureID" style="width: 100%" /></a>
-                        </div>
+
 
                       
 
@@ -105,9 +112,7 @@
             <div id="pagination">
                <a href="?page=" class="Next" id="Next1">next</a>
             </div>
-            <script>
-               $("#btn2").css("background","  #FF9900");
-            </script>
+           
          </div>
          @Templates.footer()
          @Templates.panelAndLogOut()

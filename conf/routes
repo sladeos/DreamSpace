@@ -47,6 +47,12 @@ GET /createtournament controllers.Application.tournament()
 #Post to save tournament created
 POST /savetournament controllers.TournamentDatabase.addTournament()
 
+#Post to leave tournament
+POST /leavetournament controllers.InviteDatabase.leaveTournament()
+
+#Post to kick user from tournament
+POST /kickUser controllers.InviteDatabase.kickUser()
+
 #Post to delete tournament
 POST /deletetournament controllers.TournamentDatabase.deleteTournament()
 
@@ -128,7 +134,7 @@ POST /edituserprofile controllers.UserProfileDatabase.editUserProfile()
 GET  /profile/:user controllers.Application.showProfile(user: String)
 
 #Get all profiles
-GET /profiles controllers.UserProfileDatabase.getProfiles()
+GET /profiles controllers.UserProfileDatabase.getProfiles(page:Integer ?=1)
 
 #Get current user's profile
 GET /myprofile controllers.Application.getMyProfile()

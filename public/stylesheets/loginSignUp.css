@@ -1,15 +1,30 @@
 
+      .headerImg{
+        width: 350px;
+        height:150px;
+    }
     .ui-page{
-            background: url("../images/main.jpg");
+            
+        background: url("../images/LOGIN.jpg");
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-size: 100% 100%
     }
 
     .ui-content{
-            background: #151515;
+            padding: 5% 5%;
+            width:400px;
+            background: transparent;
+            margin: 0 auto;
+            margin-top: 1%;
+            border-radius: 25px;
+            border:2px solid #DADADA;
     }
 
     .ui-page .ui-btn  {
         color      : white;
-        background : #FF9900;
+        background : #DADADA;
+        
     }   ​
 
     .ui-page .ui-btn.goBackButton  {
@@ -18,6 +33,7 @@
 
 
     }​
+  
 
     .fullscreen{
         max-height: 100%;
@@ -45,34 +61,61 @@
     .center-button{
             margin: 0 auto;
     }
-
+.ui-collapsible-inset .ui-collapsible-heading .ui-btn {
+    border:none;
+    color:black;
+}
     @media all and (max-width: 36em){
-        .ui-content{
-            background: #151515;
+        .ui-page{
+            background:white;
+             width: 100%;
         }
-
-        .loginBox{
+        .ui-content{
+            padding: 5% 5%;
+            width:auto;
+            background: transparent;
             margin: 0 auto;
-            width: 100%;
-        } 
+            margin-top: 0px;
+            border-radius: 0px;
+            
+                     }
+
+      .loginBox{
+        margin: 0 auto;
+        width:auto;
+    } 
+          .headerImg{
+        width: 250px;
+        height:100px;
+    }
+
     }
 
     @media all and (min-width: 60em){
          
         .ui-page{
-            background: url("../images/main.jpg");
+        background: black url("../images/LOGIN.jpg")no-repeat scroll center top;;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-size: 100% 100%
+
         }
         .ui-content{
-            padding: 15px 15px;
-            width:500px;
-            background: #151515;
+         
+            width:400px;
+            background: transparent;
             margin: 0 auto;
-            margin-top: 200px;
+            margin-top: 2%;
             border-radius: 25px;
+            border:2px solid #DADADA;
         }
         .myClass.ui-btn-inner{
             padding: 0px;
         }
+         .headerImg{
+        width: 350px;
+        height:150px;
+    }
    
         .loginBox{
             margin: 0 auto;

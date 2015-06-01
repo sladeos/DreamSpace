@@ -7,33 +7,49 @@
         @Templates.facebookHeadScript()
     </head>
     <body>
-        <div data-role="page" data-theme="b">   
+        <div data-role="page" data-theme="c">   
             <div data-role="header">
                 @Templates.header()
             </div>
             <div data-role="content">
+                  <div class="ui-grid-solo ui-responsive" >
+            <div class="ui-block-a" >
+              <img src="@routes.Assets.at("images/GALLERY.jpg")" alt="tPicture" class = "fullscreen" />
+              </div>
+            </div>
                     <h1 align="center">New Photo</h1>
-                    <div class = "standardBox">
+                    <div class = "standardBox" style="border:none;">
+
                     <form id ="newpicture" action="@routes.PictureDatabase.savePicture()" method ="post" data-ajax="false" enctype="multipart/form-data">
                     <input id="picfield" name="picture" type="file" accept="image/*;capture=camera">
-   							
-                    <button type="submit" value="Save Picture" >Save Picture </button>
+   					<div align="center">Max Size: 4MB</div>		
+                    <button type="submit" value="Save Picture" id="buttonSubmit">Save Picture </button>
     </form>
 
     <div id="imageshow" align="center"></div>
 
     <script type="text/javascript">
+    $(function() {
+    	$(":submit").attr("disabled", true);
+    });
     $('#picfield').change(function(e){
   	var fullPath = document.getElementById('picfield').value;
 	var fileType = fullPath.substring(fullPath.indexOf(".")+1).toLowerCase();
 	var acceptedTypes = ["jpeg", "jpg", "jfif", "jpeg 2000", "tiff", "riff", "png", "gif","bmp", "png", "jpeg xr", "img", "bpg", "webp"];
 	if(fullPath == ""){
 		$('#imageshow').html("")
+		$(":submit").attr("disabled", true);;
 	}else if (acceptedTypes.indexOf(fileType) == -1){
 		$("#imageshow").css('color', 'red');
 		$('#imageshow').html("That file format is not supported")
+		$(":submit").attr("disabled", true);
+	}else if (this.files[0].size>4000000){
+	   	$("#imageshow").css('color', 'red');
+		$('#imageshow').html("That picture has a size exceeding 4 megabytes, please upload a smaller picture")
+		$(":submit").attr("disabled", true);
     }else{
 		$('#imageshow').html("")
+		 $(":submit").removeAttr("disabled")
 		    var orientationt = null;
 		  
 		    var file = e.target.files[0];
@@ -59,19 +75,10 @@
 		          );
 		    });
 		          
-		      if(orientationt != null){
-		          
-		        
-		      }
-		         
-		    
+		      if(orientationt != null){ 
+		      } 
 	}
     })
-    
-    
-    
-    
-        
 </script>
 </div>
                 </div>

@@ -9,109 +9,123 @@
       <link rel="stylesheet" href="@routes.Assets.at("javascripts/image-picker/image-picker.css")">
       @Templates.facebookHeadScript()
       <meta charset="UTF-8">
-              <script> 
-            $(document).ready(function() {
-                $("#replyarea").val('');
-            });
-        </script>
-        <script type="text/javascript" src="@routes.Assets.at("stylesheets/jquery-ui/jquery-ui.js")" ></script>
-        <link rel="stylesheet" href="@routes.Assets.at("stylesheets/jquery-ui/jquery-ui.css")">
+      <script> 
+        $(document).ready(function() {
+          $("#replyarea").val('');
+        });
+      </script>
+      <script type="text/javascript" src="@routes.Assets.at("stylesheets/jquery-ui/jquery-ui.js")" ></script>
+      <link rel="stylesheet" href="@routes.Assets.at("stylesheets/jquery-ui/jquery-ui.css")">
    </head>
+   
+
    <body>
+      <div data-role="page" data-theme="c" id = "main" >
+        <div data-role="header">
+	        @Templates.header()
+            <a id = "back" rel="external" href="/mainearena"  data-role="button" role="button" data-icon="back" data-iconpos="notext">Back</a>
+        </div>
+          
+        <div data-role="content">
 
-        <div data-role="page" data-theme="b" id = "main" >
-             <div data-role="header">
-	       @Templates.header()
-             <a id = "back" rel="external" href="/mainearena"  data-role="button" role="button" data-icon="back" data-iconpos="notext">Back</a>
-            <script type="text/javascript">
-               $("#back").css("background","  #FF9900");
-            </script>
-	       </div>
-            <div data-role="content">
+          <div class="ui-grid-solo ui-responsive">
+            <img src="@routes.Assets.at("images/EDITAD.jpg")" alt="tPicture" class = "fullscreen" />
+          </div>
+          
+          <br>
+          
+          <div class="ui-grid-solo ui-responsive">
+            <div class="ui-block-a"><b><h1 style="margin:0;text-align:center">@eAd.arenaName</h1></b></div>
+          </div>
 
-                 <h1 align="center">Your EArena Ad</h1>
+          <button id="share_button" class = "facebookColor facebookButton centerButton" data-mini="true">Facebook Share</button>
 
-                <div class = "standardBox">
-                    <button id="share_button" class = "facebookColor facebookButton centerButton" data-mini="true">Facebook Share</button>
-                    <div data-role="collapsible" class="ui-icon-alt" data-collapsed-icon="arrow-r" data-inline="true" data-expanded-icon="arrow-d" data-iconpos="right"  >
+          <div class = "standardBox">
+                    
+            <div data-role="collapsible" class="ui-icon-alt" data-collapsed-icon="arrow-r" data-inline="true" data-expanded-icon="arrow-d" data-iconpos="right"  >
 
-                     <h3 class = "custom-centercollheader" >Edit ad</h3>
-  						 <form id="adTypes">
-                     		<div class="ui-grid-a">   
-                  			<div class="ui-block-a" style="width:40%;"><label ><input type="radio" id="gameAd" name="adType" value="Game Ad" class="adType">GameAd</label></div>
-    						<div class="ui-block-b" style="width:60%;"><label ><input type="radio"  id="tournamentAd" name="adType" value="Tournament Ad" class="adType">TournamentAd</label></div>
-                    		</div>
-                     	</form>
+              <h3 class = "custom-centercollheader" >Edit ad</h3>
+  						<form id="adTypes">
+                <div class="ui-grid-a ui-responsive">   
+                  <div class="ui-block-a"><label><input type="radio" id="gameAd" name="adType" data-mini="true" value="Game Ad" class="adType">GameAd</label></div>
+    						  <div class="ui-block-b"><label ><input type="radio"  id="tournamentAd" name="adType" data-mini="true" value="Tournament Ad" class="adType">TournamentAd</label></div>
+                </div>
+              </form>
                      	
-                     	<div data-role="collapsible" class="ui-icon-alt" data-collapsed-icon="grid" data-expanded-icon="grid" data-iconpos="right" >
-                            <h3 class = "custom-centercollheader" >Choose an icon</h3>
+              <div data-role="collapsible" class="ui-icon-alt" data-collapsed-icon="grid" data-expanded-icon="grid" data-iconpos="right"  style="background-color:#DBDBDB">
+                <h3 class = "custom-centercollheader" >Choose an icon</h3>
                         
-                            <select class="image-picker hide-html" id="imgpick" name="logo" >
-                              <option data-img-src="@routes.Assets.at("images/gamelogos/game.png")" value="game.png"></option>
-                              <option data-img-src="@routes.Assets.at("images/gamelogos/brack.png")" value="brack.png"></option>
-                              <option data-img-src="@routes.Assets.at("images/gamelogos/csgo.png")" value="csgo.png"></option>
-                              <option data-img-src="@routes.Assets.at("images/gamelogos/wow.png")" value="wow.png"></option>
-                              <option data-img-src="@routes.Assets.at("images/gamelogos/mc.png")" value="mc.png"></option>
-                              <option data-img-src="@routes.Assets.at("images/gamelogos/hs.png")" value="hs.png"></option>
-                              <option data-img-src="@routes.Assets.at("images/gamelogos/lol.png")" value="lol.png"></option>
-                              <option data-img-src="@routes.Assets.at("images/gamelogos/rust.png")" value="rust.png"></option>
-                              <option data-img-src="@routes.Assets.at("images/gamelogos/bf4.png")" value="bf4.png"></option>
-                              <option data-img-src="@routes.Assets.at("images/gamelogos/sc.png")" value="sc.png"></option>
-                              <option data-img-src="@routes.Assets.at("images/gamelogos/gtav.png")" value="gtav.png"></option>
-                              <option data-img-src="@routes.Assets.at("images/gamelogos/dota.png")" value="dota.png"></option>
-                            </select>
-                          
-                        </div>
+                <select class="image-picker hide-html" id="imgpick" name="logo" >
+                  <option data-img-src="@routes.Assets.at("images/gamelogos/game.png")" value="game.png"></option>
+                  <option data-img-src="@routes.Assets.at("images/gamelogos/brack.png")" value="brack.png"></option>
+                  <option data-img-src="@routes.Assets.at("images/gamelogos/csgo.png")" value="csgo.png"></option>
+                  <option data-img-src="@routes.Assets.at("images/gamelogos/wow.png")" value="wow.png"></option>
+                  <option data-img-src="@routes.Assets.at("images/gamelogos/mc.png")" value="mc.png"></option>
+                  <option data-img-src="@routes.Assets.at("images/gamelogos/hs.png")" value="hs.png"></option>
+                  <option data-img-src="@routes.Assets.at("images/gamelogos/lol.png")" value="lol.png"></option>
+                  <option data-img-src="@routes.Assets.at("images/gamelogos/rust.png")" value="rust.png"></option>
+                  <option data-img-src="@routes.Assets.at("images/gamelogos/bf4.png")" value="bf4.png"></option>
+                  <option data-img-src="@routes.Assets.at("images/gamelogos/sc.png")" value="sc.png"></option>
+                  <option data-img-src="@routes.Assets.at("images/gamelogos/gtav.png")" value="gtav.png"></option>
+                  <option data-img-src="@routes.Assets.at("images/gamelogos/dota.png")" value="dota.png"></option>
+                </select>       
+              </div>
                      	
-                            <input type="text" name="arenaName" id="arenaName" value="@eAd.arenaName" placeholder="Arena Ad Name"/>
+              <input type="text" name="arenaName" id="arenaName" value="@eAd.arenaName" style="background-color:#53585F;color:white" placeholder="Arena Ad Name"/>
                     
-                            <input type="text" name="gameName" id="game" value="@eAd.gameName" placeholder="Game "/>
+              <input type="text" name="gameName" id="game" value="@eAd.gameName" style="background-color:#53585F;color:white" placeholder="Game"/>
              
-                            <input type="number" min="1" max="100" name="playersRequired" id="playersRequired" value="@eAd.playersRequired" placeholder="Players Required"/>
+              <input type="number" min="1" max="100" name="playersRequired" id="playersRequired" value="@eAd.playersRequired" style="background-color:#53585F;color:white" placeholder="Players Required"/>
                    
-                            <textarea placeholder="Enter some information about your ad here!" name="information" id="informationArea" rows="4" cols="50"  >@eAd.information</textarea>
+              <textarea style="background-color:#53585F;color:white" placeholder="Enter some information about your ad here!" name="information" id="informationArea" rows="4" maxlength="500" cols="50"  >@eAd.information</textarea>
                     
-                        <div style="display: none;">
-                            <input type="text" name="id" id="id" value="@eAd.arenaID"/>
-                        </div>
-                        <button  class = "my-btn"  id="updateearena"  value="Update EArena Ad" onclick="validate()">Update EArena Ad </button>
-                        <button data-role = "button" value="Delete EArena" id="deletearena" class = "submitReplay goBackButton" data-icon="delete" data-iconpos="right">Delete EArena</button>
-                            <p id="warning"></p>
-                        </div>
-                    </div>
+              <div style="display: none;">
+                <input type="text" name="id" id="id" value="@eAd.arenaID"/>
+              </div>       
+              <br>
+              <button  class = "my-btn"  id="updateearena"  value="Update EArena Ad" onclick="validate()">SAVE CHANGES</button>
+              <br>
+              <br>
+              <button data-role = "button" value="Delete EArena" id="deletearena" class = "submitReplay goBackButton" data-icon="delete" data-iconpos="right" style="background:#FF9900">DELETE AD</button>
+              <p id="warning"></p>
+            </div>
+          </div>
                     
+
 
             <script type="text/javascript">
             $(document).ready(function() {
                 $("#imgpick").imagepicker();
+                $("#imgpick").val('@eAd.logo');
+                $("#imgpick").imagepicker();
+                $('#imgpick-button').remove()
+                                      	if('@eAd.adType' == "Tournament Ad"){
+                                     			$('#tournamentAd').prop('checked', true);
+                                     			$("#tournamentAd").checkboxradio("refresh");
+                              
+                                      	}else{
+                                      		$('#gameAd').prop('checked', true);
+                                      		$("#gameAd").checkboxradio("refresh");
+                                      	}         		
+                            
+                                          $('#share_button').click(function(e) {
+                                            e.preventDefault();
+                                            FB.ui({
+                                              method: 'feed',
+                                              name: 'EArenaAd: @eAd.arenaName',
+                                              link: document.URL,
+                                              caption: "@eAd.admin" +" is looking for people to play @eAd.gameName" ,
+                                              description: ""
+                                            });
+                                          });
+                                        });
+                                      </script>
 
-            	if('@eAd.adType' == "Tournament Ad"){
-           			 $('#tournamentAd').prop('checked', true);
-           			$("#tournamentAd").checkboxradio("refresh");
+          <div data-role="popup" id="replyPopUp" class="ui-content" data-theme="c" data-position-to="origin" style="width:300px;"></div>
+
     
-            	}  else{
-            		 $('#gameAd').prop('checked', true);
-            		 $("#gameAd").checkboxradio("refresh");
-            	}         		
-            	
-            
-              $('#share_button').click(function(e) {
-                e.preventDefault();
-                FB.ui({
-                  method: 'feed',
-                  name: 'EArenaAd: @eAd.arenaName',
-                  link: document.URL,
-                  caption: "@eAd.admin" +" is looking for people to play @eAd.gameName" ,
-                  description: ""
-                });
-              });
-            });
-</script>
-
-<div data-role="popup" id="replyPopUp" class="ui-content" data-theme="b" data-position-to="origin" style="width:300px;">
-</div>
-
-<script type="text/javascript">
+        <script type="text/javascript">
+        ////////////////////////////////////SCRIPT////
           function getProfileRanks(user){
                 $.ajax({
                     url: "/replyprofileranks/"+user,
@@ -119,15 +133,13 @@
                     contentType:'application/json',
                     dataType : 'json',
                     success: function(data ){
-                    	$('#replyPopUp').html("<a rel=external href=/profile/" +data['username'] + " data-iconpos=right data-transition=pop class=my-tooltip-btn ui-btn ui-alt-icon ui-nodisc-icon ui-btn-inline ui-icon-delete>  <p> User: " + data['username'] +"</a> "+ "</p> <p> CS:GO Rank: " + data['csgorank']  + "</p> <p> WoW 2v2 Rating: " +  data['wow2v2rating']  + "</p> <p> WoW 3v3 Rating: " +  data['wow3v3rating']  + "</p> <p> WoW 5v5 Rating: " +  data['wow5v5rating']  + "</p> <p> WoW RBG Rating: " + data['wowrbgrating']  + "</p> <p> LoL Rank: " +  data['lolrank']  + "</p> <p> DOTA 2: " +  data['dota2rank']  + "</p> <p> Other Ranks: " +  data['otherranks'])
-                    	$('#replyPopUp').append("<a href=# class=ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-b data-rel=back>Close</a>")
-                       	$("#replyPopUp" ).popup("open");
+                      $('#replyPopUp').html("<a rel=external href=/profile/" +data['username'] + " data-iconpos=right data-transition=pop class=my-tooltip-btn ui-btn ui-alt-icon ui-nodisc-icon ui-btn-inline ui-icon-delete>  <p><h2><b>" + data['username'] +"</a> "+ "</b></h2></p> <p><b> CS:GO Rank:</b> " + data['csgorank']  + "</p> <p><b> WoW 2v2 Rating:</b> " +  data['wow2v2rating']  + "</p> <p><b> WoW 3v3 Rating:</b> " +  data['wow3v3rating']  + "</p> <p><b> WoW 5v5 Rating:</b> " +  data['wow5v5rating']  + "</p> <p><b> WoW RBG Rating:</b> " + data['wowrbgrating']  + "</p> <p><b> LoL Rank:</b> " +  data['lolrank']  + "</p> <p><b> DOTA 2:</b> " +  data['dota2rank']  + "</p> <p><b> Other Ranks:</b> " +  data['otherranks'])
+                      $('#replyPopUp').append("<a href=# class=ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-b data-rel=back>CLOSE</a>")
+                        $("#replyPopUp" ).popup("open");
                         		}
                 });
-                }
-              
-
-            </script>
+          }
+        </script>
             
             <script type="text/javascript">
 
@@ -205,7 +217,7 @@
                       });
                   }
                
-               
+               ////////////////////////////////////SCRIPT////
                
                ////////////////////////////////////Delete button////
                
@@ -240,60 +252,95 @@
                   });
                            
                });
+               ////////////////////////////////////HTML////
             </script>
-                
-                <div class = "wrap">
-                    <div id="adinfo">
-                        <article data-role="listview" data-inset="true" data-dividertheme="a"> 
-                            <li><h2>@eAd.arenaName</h2>
-                            <div style="float:right;"><img src="../assets/images/gamelogos/@eAd.logo"></div>
-                                <p>AdType: @eAd.adType</p>
-                                <p>Creator: @eAd.admin</p>
-                                <p>Game: @eAd.gameName</p>
-                                <p>Created: @eAd.createdDate</p>
-                                <p>Players: @eAd.playersRequired</p>
-                                <p>Information:</p> 
-                                
-                                <textarea readonly name="textarea" id="text" style = "overflow:auto;resize:none">@eAd.information</textarea>
-                            </li>
-                        </article>
-                        <label for="reply">Reply:</label>
-                        <hr>
-                        <textarea placeholder="Post your reply here" name="reply" id="replyarea" rows="4" cols="50"></textarea>
-                        <div data-role="controlgroup" data-type="horizontal" style="text-align:center;">
-                          <button type="submit" id="postreply" data-inline = "true" value="Submit Reply" class = "submitReplay" >Submit Reply </button>
-                        </div>
-                        <p id="warningreply"></p>
-                    </div>
-                    <div id="adreplies">
-                         <article data-role="listview" data-inset="true" data-dividertheme="a">
-                            @for(eAdReplies <- eAdReplies) {
-                            <div id="reply@eAdReplies.arenaID">
-                              <li  data-role = "list-divider" ></li>
-                              <li><h2>@{eAdReplies.user + " - " + eAdReplies.createdDate} <a onclick="openReplyDelete(@eAdReplies.arenaID)" id="replyDelete" data-rel="popup" data-transition="pop" data-iconpos="right" data-position-to="window" data-iconshadow="false" class="my-tooltip-btn ui-btn ui-alt-icon ui-nodisc-icon ui-btn-inline ui-icon-delete ui-btn-icon-notext ui-btn-b"></a> </h2>  
-                               <p>Reply:</p>
-                               <textarea readonly name="textarea" id="text" style = "overflow:auto;resize:none">@{eAdReplies.content}
-                                </textarea>
-                                </li>
-                                
-                                </div>
-                                <script>
-                                $("#reply@eAdReplies.arenaID").click(function(event){
-                                	getProfileRanks("@eAdReplies.user");
-                                })
 
-                                </script>
-                            } 
-                          </article>
-                    </div>
-                    
-                    <div data-role="popup" id="popupInfo" class="ui-content" data-theme="b" style="max-width:200px;">
-  						<p>Are you sure you wish to <strong>Delete</strong> this Reply? </p>
-  						<a href="#" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-b" data-rel="back">Cancel</a>
-       				    <a onclick="deleteReply()" href="#" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-b">Delete</a>
-					</div>
-					
+          <div class="ui-grid-a ui-responsive">
+            
+            <div class="ui-block-a">
+              <div style = "padding-right:30px">               
+                <article data-role="listview" data-inset="true" data-dividertheme="a"> 
+                  <li style="background:#DBDBDB"><h2>@eAd.arenaName</h2>
+                    <div style="float:right;"><img src="../assets/images/gamelogos/@eAd.logo"></div>
+                    <p>AdType: @eAd.adType</p>
+                    <p>Creator: @eAd.admin</p>
+                    <p>Game: @eAd.gameName</p>
+                    <p>Created: @eAd.createdDate</p>
+                    <p>Players: @eAd.playersRequired</p>
+                    <p>Information:</p> 
+                    <textarea readonly name="textarea" id="@eAd.arenaID" style = "overflow:auto;resize:none" >@eAd.information</textarea>
+                  </li>
+                                  
+                      <script>
+                        $('.ui-page-active .ui-listview').listview('refresh');
+                        $('.ui-page-active :jqmData(role=content)').trigger('create');
+                          if("@eAd.adType" === "Tournament Ad"){
+                            $("#@eAd.arenaID").css("background", "#FF8532");
+                            $("#@eAd.arenaID").css("font-weight", "bold");
+                          }else{
+                            $("#@eAd.arenaID").css("background", "#373945");
+                            $("#@eAd.arenaID").css("color", "#FFFFFF");
+                          }
+                      </script>
+            
+                  </article>
+                            
+                  <label for="reply"><h3 style="margin:0"><b>Submit a reply</b></h3></label>
+                  <hr>
+                  <textarea placeholder="Post your reply here" name="reply" id="replyarea" rows="4" cols="50" maxlength="500" style="background-color:#53585F;color:white"></textarea>
+                  <div data-role="controlgroup" data-type="horizontal" style="text-align:center;">
+                    <button data-role = "button" type="submit" id="postreply"value="Submit Reply" class = "submitReplay" data-inline = "true"><b>SUBMIT</b></button>
+                  </div>
+                  <p id="warning"></p>
                 </div>
+          </div>
+
+
+
+          <div class="ui-block-b">
+            <br>
+            <div style="border-left:dotted;padding-left:10px">
+              <div class="ui-grid-solo ui-responsive">
+                <div class="ui-block-a"><h3 style="margin:0"><b>Replies</b></h3></div>
+              </div> 
+              <hr>
+              <article data-role="listview" data-inset="true" data-dividertheme="a" >
+                @for(eAdReplies <- eAdReplies) {
+                  <div id="@eAdReplies.arenaID" style="background:#DBDBDB;padding:.7em 1em;">
+                    <li>
+                      <div class="ui-grid-a ui-responsive">
+                        <div class="ui-block-a">
+                          <h2 style="margin:0">@{eAdReplies.user}</h2>
+                        </div>
+                        <div class="ui-block-b">
+                          <p style="margin:0">@{"[" + eAdReplies.createdDate + "]"}</p>
+                        </div>
+                      </div>
+                      <p>Comment:</p>
+                      <textarea readonly name="textarea" style = "overflow:auto;resize:none;background:#373945;color:#FFFFFF">@{eAdReplies.content}
+                      </textarea>
+                    </li>
+                  </div>
+                  <li  data-role = "list-divider"  style="background:transparent;border:none" ></li>
+                            
+                                            <script>
+                                              $("#@eAdReplies.arenaID").click(function(event){
+                                                getProfileRanks("@eAdReplies.user");
+                                              })
+                                            </script>
+                } 
+              </article> 
+            </div>
+          </div>
+        </div>
+
+  
+        <div data-role="popup" id="popupInfo" class="ui-content" data-theme="b" style="max-width:200px;">
+  			  <p>Are you sure you wish to <strong>Delete</strong> this Reply? </p>
+  				<a href="#" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-b" data-rel="back">Cancel</a>
+       		<a onclick="deleteReply()" href="#" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-b">Delete</a>
+				</div>
+
                 
                 <script>
                 var replyToDelete;

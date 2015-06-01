@@ -1,4 +1,4 @@
-@(tournament: Tournament, participant: List[String])
+@(tournament: Tournament, participant: List[Participant], currentuser: String)
 <!DOCTYPE html>
 <html>
    <head>
@@ -14,17 +14,16 @@
                 <a id = "back" rel="external" href="/mainetournament" data-role="button" role="button" data-icon="back" data-iconpos="notext">Back</a>
 
             </div>
-            <div data-role="content" style = "padding:0">
+            <div data-role="content">
                 <div class="ui-grid-solo ui-responsive">
                   <img src="@routes.Assets.at("images/ETOURNAMENT.jpg")" alt="tPicture" class = "fullscreen" />
                 </div>
                 <br>
                 <div class="ui-grid-solo ui-responsive">
-                  <div class="ui-block-a"><b><h1 style="margin:0;text-align:center">@tournament.tournamentname</h1></b></div>
+                  <div class="ui-block-a"><h1 style="text-align:center"><img src="../assets/images/gamelogos/@tournament.logo" alt="Dreamhack" class = "fullscreen"  /><br>@tournament.tournamentname</h1></div>
                 </div>
-                <button id="share_button" class = "facebookColor facebookButton centerButton" data-mini="true">Facebook Share</button>
+           
                 <br>
-                
                 <div id = "bracketcontent" >
 
                     <div id="bracket"></div>
@@ -51,29 +50,37 @@
                 </div>
                 
                 <div id="participants">
-                    <div class ="flowBox">
+                    <div class ="standardBox">
                       <hr>    
-                        <ul data-role="listview" data-inset="true" data-dividertheme="a"> 
+                        <ul data-role="listview" data-inset="true" data-dividertheme="c"> 
                         @for(participant <- participant) {
-                                <li><a data-role = "button"  rel="external"  href="/profile/@participant" style="background:#FFFFFF"><h2 style="margin:0;text-align:center">@{participant}</h2></a>
+                                <li><a data-role = "button"  rel="external"  href="/profile/@participant.username"><h2 style="margin:0;text-align:center">@{participant.username}</h2></a>
                             </li>
                         } 
                         </ul> 
                     </div> 
                 </div>
-
+                
+                <div id ="privateInformation"  class ="standardBox">
+                <h3 style="text-align:center">Tournament Information</h3>
+                </div>
+<script>
+$(document).ready(function() {
+	if($('#participants > div.standardBox:contains("@currentuser")').length > 0) {
+		$('#privateInformation').append("@tournament.information")
+	}else{
+		$('#privateInformation').html("");
+	}
+});
+</script>
 
                     <script type="text/javascript">  
                         var a = @Html(tournament.tournamentdata);
                         $(function() {
-                  
                               var container = $('#bracket')
                               container.bracket({
                                 init: a
-                               
-                   
                             })
-                    
                             $('.tools').remove();
                         });
                   
