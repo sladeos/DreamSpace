@@ -168,6 +168,7 @@ $('#imgpick-button').remove()
                    switch(amount) {
                        case "4":
                        amount = "8"; 
+                       $('#decrease').show();
                            break;
                        case "8":
                        amount = "16";
@@ -175,6 +176,7 @@ $('#imgpick-button').remove()
                        case "16":
                        amount = "32";
                        $('.increment').remove();
+                       $('#increase').hide();
                            break;
                        case "32":
                            break;                       
@@ -197,6 +199,7 @@ $('#imgpick-button').remove()
                            break;
                        case "8":
                         $('.decrement').remove();
+                        $('#decrease').hide();
                        amount = "4";
                            break;
                        case "16":
@@ -204,6 +207,7 @@ $('#imgpick-button').remove()
                            break;
                        case "32":
                        amount = "16";
+                       $('#increase').show();
                            break;
                    }
                    $('.decrement').width('30');
@@ -255,6 +259,12 @@ $('#imgpick-button').remove()
                    
                    if (amount == "4"){
                        $('.decrement').remove();
+                       $('#decrease').hide();
+                   }
+                   
+                   if (amount == "32"){
+                       $('.increment').remove();
+                       $('#increase').hide();
                    }
                    
                    $('.doubleElimination').remove();
