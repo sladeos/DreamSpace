@@ -9,8 +9,7 @@
         <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/userprofile.css")">
 
        @Templates.facebookHeadScript()
-
-      </head>
+    </head>
 
     <body> 
         <style>
@@ -24,6 +23,11 @@
             width: 100%;
         }
 
+
+        .ui-btn-icon-left:after, .ui-btn-icon-right:after, .ui-btn-icon-top:after, .ui-btn-icon-bottom:after, .ui-btn-icon-notext:after {
+            background-color: #FF9200;
+        }
+
         </style>        
         <div data-role="page" data-theme="c">   
             <div data-role="header">
@@ -31,56 +35,82 @@
             </div>
             
             <div data-role="content">
-            
-                <img src="@routes.Assets.at("images/PacklistBild.jpg") " Style="width:100%" > 
-                <h2 align="center"><strong>Your own packlist!</strong></h2>
-                <p align="center" style="font-size:130%">Difficult to remember what things you <br> have packed for DreamHack and not? <br> Here is where a list comes in handy!</p>
-
-                <p class="text" style="font-size:170%"><strong>Tick the things you have packed</strong></p>
-                <p class="text">_______________________________________________________________________________________________________________________________________ </p>
-                
-                <div class="standardBox" style="text-align:left; float:left">
-                <form>
-                    <div data-role="fieldcontain" data-mini="true">
-                <label><input type="checkbox" name="checkbox-0" id="pc" value="unchecked" @packlist.pc>Personal computer with all cables</label>
-                <label><input type="checkbox" name="checkbox-0" id="powerstrip" value="unchecked" @packlist.powerstrip>Powerstrip so you can connect all your stuff</label>
-                <label><input type="checkbox" name="checkbox-0" id="screenAndCables" value="unchecked" @packlist.screenAndCables >Screen and associated cables</label>
-                <label><input type="checkbox" name="checkbox-0" id="keyboard" value="unchecked" @packlist.keyboard>Keyboard and mouse</label>
-                <label><input type="checkbox" name="checkbox-0" id="headset" value="unchecked" @packlist.headset>Headset or headphones</label>
-                <label><input type="checkbox" name="checkbox-0" id="networkCable" value="unchecked" @packlist.networkCable>Network cable, about 10-15 meters</label>
-                <label><input type="checkbox" name="checkbox-0" id="screwdriver" value="unchecked" @packlist.screwdriver>Screwdriver, for quick fixes and upgrades</label>
-                <label><input type="checkbox" name="checkbox-0" id="cableTies" value="unchecked" @packlist.cableTies>Cable ties</label>
-                <label><input type="checkbox" name="checkbox-0" id="ductTape" value="unchecked" @packlist.ductTape>Duct Tape</label>
-                <label><input type="checkbox" name="checkbox-0" id="gameConsole" value="unchecked" @packlist.gameConsole>Game console and controller</label>
-                <label><input type="checkbox" name="checkbox-0" id="mobilePhone" value="unchecked" @packlist.mobilePhone>Mobile phone and charger</label>
-                <label><input type="checkbox" name="checkbox-0" id="camera" value="unchecked" @packlist.camera>Digital Camera and camcorder</label>
-                <label><input type="checkbox" name="checkbox-0" id="flashlight" value="unchecked" @packlist.flashlight>Flashlight</label>
-                <label><input type="checkbox" name="checkbox-0" id="chair" value="unchecked" @packlist.chair>Your own office chair</label>
-                <label><input type="checkbox" name="checkbox-0" id="safe" value="unchecked" @packlist.safe>Computer security lock</label>
-                <label><input type="checkbox" name="checkbox-0" id="installationMedia" value="unchecked" @packlist.installationMedia>Installation CD/DVD/HD/USB for your operating system</label>
-                <label><input type="checkbox" name="checkbox-0" id="drivers" value="unchecked" @packlist.drivers>Drivers on a USB/DVD/CD</label>
-                <label><input type="checkbox" name="checkbox-0" id="games" value="unchecked" @packlist.games>Games and software</label>
-                <label><input type="checkbox" name="checkbox-0" id="antiVirus" value="unchecked" @packlist.antiVirus>Anti-virus software</label>
-                <label><input type="checkbox" name="checkbox-0" id="toothbrush" value="unchecked" @packlist.toothbrush>Toothbrush and toothpaste</label>
-                <label><input type="checkbox" name="checkbox-0" id="soap" value="unchecked" @packlist.soap>Shower Soap</label>
-                <label><input type="checkbox" name="checkbox-0" id="handCream" value="unchecked" @packlist.handCream>Hand Cream</label>
-                <label><input type="checkbox" name="checkbox-0" id="shampoo" value="unchecked" @packlist.shampoo>Shampoo</label>
-                <label><input type="checkbox" name="checkbox-0" id="deo" value="unchecked" @packlist.deo>Deodorant</label>
-                <label><input type="checkbox" name="checkbox-0" id="aspirin" value="unchecked" @packlist.aspirin>Headache tablets</label>
-                <label><input type="checkbox" name="checkbox-0" id="earplugs" value="unchecked" @packlist.earplugs>Earplugs</label>
-                <label><input type="checkbox" name="checkbox-0" id="medication" value="unchecked" @packlist.medication>Medications</label>
-                <label><input type="checkbox" name="checkbox-0" id="clothes" value="unchecked" @packlist.clothes>Comfortable clothes</label>
-                <label><input type="checkbox" name="checkbox-0" id="swimwear" value="unchecked" @packlist.swimwear>Swimwear, visit the nearby waterpark!</label>
-                <label><input type="checkbox" name="checkbox-0" id="sheets" value="unchecked" @packlist.sheets>Bed sheets and towels</label>
-                <label><input type="checkbox" name="checkbox-0" id="sleepingBag" value="unchecked" @packlist.sleepingBag>Sleeping bag or blanket</label>
-                <label><input type="checkbox" name="checkbox-0" id="pillow" value="unchecked" @packlist.pillow>Pillows</label>
-                <label><input type="checkbox" name="checkbox-0" id="mattress" value="unchecked" @packlist.mattress>Sleeping pad or air mattress</label>
-                
-                <div Style="float:right"><input type="button" value="Save" id="save"  data-mini="true"></div>
+                <div class="ui-grid-solo ui-responsive">
+                    <img src="@routes.Assets.at("images/PacklistBild.jpg") " alt="tPicture" class = "fullscreen" /> 
                 </div>
-              </form>
-          </div>
+
+                <div style="width:100% ; text-align:center">
+                    <p>
+                        <b>Your own packlist!</b><br>
+                        Difficult to remember what things you<br> 
+                        have packed for DreamHack and not?<br>
+                        Here is where a list comes in handy!
+                    </p>
+                </div>
+
+                <div class="ui-grid-solo ui-responsive">
+                    <div class="ui-block-a"><b><h3 style="margin:0">Tick the things you have packed</h3></b></div>
+                </div>
+                <hr>
+                
+                <div class="ui-grid-a ui-responsive">
+                    <div class="ui-block-a">
+                        <img src="@routes.Assets.at("images/packlistPicture.PNG")" alt="tPicture" class = "fullscreen" />
+                    </div>
+                    
+                    <div class="ui-block-b">
+                        <div class="standardBox" style="text-align:left; float:left">
+                            <form>
+                                <div data-role="fieldcontain" data-mini="true">
+                                    <label><input type="checkbox" name="checkbox-0" id="pc" value="unchecked" @packlist.pc>Personal computer with all cables</label>
+                                    <label><input type="checkbox" name="checkbox-0" id="powerstrip" value="unchecked" @packlist.powerstrip>Powerstrip so you can connect all your stuff</label>
+                                    <label><input type="checkbox" name="checkbox-0" id="screenAndCables" value="unchecked" @packlist.screenAndCables >Screen and associated cables</label>
+                                    <label><input type="checkbox" name="checkbox-0" id="keyboard" value="unchecked" @packlist.keyboard>Keyboard and mouse</label>
+                                    <label><input type="checkbox" name="checkbox-0" id="headset" value="unchecked" @packlist.headset>Headset or headphones</label>
+                                    <label><input type="checkbox" name="checkbox-0" id="networkCable" value="unchecked" @packlist.networkCable>Network cable, about 10-15 meters</label>
+                                    <label><input type="checkbox" name="checkbox-0" id="screwdriver" value="unchecked" @packlist.screwdriver>Screwdriver, for quick fixes and upgrades</label>
+                                    <label><input type="checkbox" name="checkbox-0" id="cableTies" value="unchecked" @packlist.cableTies>Cable ties</label>
+                                    <label><input type="checkbox" name="checkbox-0" id="ductTape" value="unchecked" @packlist.ductTape>Duct Tape</label>
+                                    <label><input type="checkbox" name="checkbox-0" id="gameConsole" value="unchecked" @packlist.gameConsole>Game console and controller</label>
+                                    <label><input type="checkbox" name="checkbox-0" id="mobilePhone" value="unchecked" @packlist.mobilePhone>Mobile phone and charger</label>
+                                    <label><input type="checkbox" name="checkbox-0" id="camera" value="unchecked" @packlist.camera>Digital Camera and camcorder</label>
+                                    <label><input type="checkbox" name="checkbox-0" id="flashlight" value="unchecked" @packlist.flashlight>Flashlight</label>
+                                    <label><input type="checkbox" name="checkbox-0" id="chair" value="unchecked" @packlist.chair>Your own office chair</label>
+                                    <label><input type="checkbox" name="checkbox-0" id="safe" value="unchecked" @packlist.safe>Computer security lock</label>
+                                    <label><input type="checkbox" name="checkbox-0" id="installationMedia" value="unchecked" @packlist.installationMedia>Installation CD/DVD/HD/USB for your operating system</label>
+                                    <label><input type="checkbox" name="checkbox-0" id="drivers" value="unchecked" @packlist.drivers>Drivers on a USB/DVD/CD</label>
+                                    <label><input type="checkbox" name="checkbox-0" id="games" value="unchecked" @packlist.games>Games and software</label>
+                                    <label><input type="checkbox" name="checkbox-0" id="antiVirus" value="unchecked" @packlist.antiVirus>Anti-virus software</label>
+                                    <label><input type="checkbox" name="checkbox-0" id="toothbrush" value="unchecked" @packlist.toothbrush>Toothbrush and toothpaste</label>
+                                    <label><input type="checkbox" name="checkbox-0" id="soap" value="unchecked" @packlist.soap>Shower Soap</label>
+                                    <label><input type="checkbox" name="checkbox-0" id="handCream" value="unchecked" @packlist.handCream>Hand Cream</label>
+                                    <label><input type="checkbox" name="checkbox-0" id="shampoo" value="unchecked" @packlist.shampoo>Shampoo</label>
+                                    <label><input type="checkbox" name="checkbox-0" id="deo" value="unchecked" @packlist.deo>Deodorant</label>
+                                    <label><input type="checkbox" name="checkbox-0" id="aspirin" value="unchecked" @packlist.aspirin>Headache tablets</label>
+                                    <label><input type="checkbox" name="checkbox-0" id="earplugs" value="unchecked" @packlist.earplugs>Earplugs</label>
+                                    <label><input type="checkbox" name="checkbox-0" id="medication" value="unchecked" @packlist.medication>Medications</label>
+                                    <label><input type="checkbox" name="checkbox-0" id="clothes" value="unchecked" @packlist.clothes>Comfortable clothes</label>
+                                    <label><input type="checkbox" name="checkbox-0" id="swimwear" value="unchecked" @packlist.swimwear>Swimwear, visit the nearby waterpark!</label>
+                                    <label><input type="checkbox" name="checkbox-0" id="sheets" value="unchecked" @packlist.sheets>Bed sheets and towels</label>
+                                    <label><input type="checkbox" name="checkbox-0" id="sleepingBag" value="unchecked" @packlist.sleepingBag>Sleeping bag or blanket</label>
+                                    <label><input type="checkbox" name="checkbox-0" id="pillow" value="unchecked" @packlist.pillow>Pillows</label>
+                                    <label><input type="checkbox" name="checkbox-0" id="mattress" value="unchecked" @packlist.mattress>Sleeping pad or air mattress</label>
+                    
+                                    <div Style="float:right"><input type="button" value="Save" id="save"  data-mini="true"></div>
+                                </div>
+                            </form>
+                        </div>
      
+                    </div>
+                </div>
+                
+            
+
+
+
+
+
+
     <script>
         $("#save").click(function() {
           
