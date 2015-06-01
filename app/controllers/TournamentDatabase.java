@@ -183,7 +183,7 @@ public class TournamentDatabase extends Controller {
 
 		String tournamentName = json.findPath("name").textValue();
 		String tournamentAmount = json.findPath("amount").textValue();
-		String information = json.findPath("information").textValue();
+		String information = json.findPath("info").textValue();
 		String logo = json.findPath("logo").textValue();
 		JsonNode tournamentTeams = json.findPath("teams");
 		JsonNode tournamentResults = json.findPath("results");
