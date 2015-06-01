@@ -19,15 +19,15 @@
          
   
             <div data-role="content" >
-               <div class="ui-grid-solo ui-responsive" >
-            <div class="ui-block-a" >
-              <img src="@routes.Assets.at("images/MyProfile.jpg")" alt="tPicture" class = "fullscreen" />
+              <div class="ui-grid-solo ui-responsive" >
+                <div class="ui-block-a" >
+                  <img src="@routes.Assets.at("images/MyProfile.jpg")" alt="tPicture" class = "fullscreen" />
+                </div>
               </div>
-            </div>
 
-                <div class="ui-grid-a ui-responsive">
-                        <div class="ui-block-a">
-       
+
+              <div style="text-align:center;">
+                
                             <div data-role="collapsible" class="ui-icon-alt" data-collapsed-icon="arrow-r" data-inline="true" data-expanded-icon="arrow-d" data-iconpos="right"  >
                                 <h3 id="displayedit" class = "custom-centercollheader" >Edit Profile</h3>
                                       <div style="text-align:center">  <img src="/profilepic/@profile.username" id="avatarpic" style="height:100px; width:100px;">
@@ -49,61 +49,61 @@
 
     <script type="text/javascript">
     $(function() {
-    	$("#buttonSubmit").attr("disabled", true);
-    	$("#imageshow").css('max-height', '200px');
-    	$("#imageshow").css('max-width', '200px');
+      $("#buttonSubmit").attr("disabled", true);
+      $("#imageshow").css('max-height', '200px');
+      $("#imageshow").css('max-width', '200px');
     });
     $('#picfield').change(function(e){
-  	var fullPath = document.getElementById('picfield').value;
-	var fileType = fullPath.substring(fullPath.indexOf(".")+1).toLowerCase();
-	var acceptedTypes = ["jpeg", "jpg", "jfif", "jpeg 2000", "tiff", "riff", "png", "gif","bmp", "png", "jpeg xr", "img", "bpg", "webp"];
-	if(fullPath == ""){
-		$('#imageshow').html("")
-		$("#buttonSubmit").attr("disabled", true);;
-	}else if (acceptedTypes.indexOf(fileType) == -1){
-		$("#imageshow").css('color', 'red');
-		$('#imageshow').html("That file format is not supported")
-		$("#buttonSubmit").attr("disabled", true);
-	}else if (this.files[0].size>4000000){
-	   	$("#imageshow").css('color', 'red');
-		$('#imageshow').html("That picture has a size exceeding 4 megabytes, please upload a smaller picture")
-		$(":submit").attr("disabled", true);
+    var fullPath = document.getElementById('picfield').value;
+  var fileType = fullPath.substring(fullPath.indexOf(".")+1).toLowerCase();
+  var acceptedTypes = ["jpeg", "jpg", "jfif", "jpeg 2000", "tiff", "riff", "png", "gif","bmp", "png", "jpeg xr", "img", "bpg", "webp"];
+  if(fullPath == ""){
+    $('#imageshow').html("")
+    $("#buttonSubmit").attr("disabled", true);;
+  }else if (acceptedTypes.indexOf(fileType) == -1){
+    $("#imageshow").css('color', 'red');
+    $('#imageshow').html("That file format is not supported")
+    $("#buttonSubmit").attr("disabled", true);
+  }else if (this.files[0].size>4000000){
+      $("#imageshow").css('color', 'red');
+    $('#imageshow').html("That picture has a size exceeding 4 megabytes, please upload a smaller picture")
+    $(":submit").attr("disabled", true);
     }else{
-		$('#imageshow').html("")
-		$("#buttonSubmit").removeAttr("disabled")
-		    var orientationt = null;
-		  
-		    var file = e.target.files[0];
-		    loadImage.parseMetaData(file, function(data) {
-		        if (data.exif) {
-		            orientationt = data.exif.get('Orientation');
-		          
-		        }
-		          var loadingImage = loadImage(
-		            e.target.files[0],
-		           
-		            function(img) {
-		                document.getElementById("imageshow").appendChild(img);
-		    
-		            }, {
-		              maxWidth: 100,
-		              maxHeight: 100,
-		              minWidth: 100,
-		              minHeight: 100,
-		              orientation: orientationt,
-		            }
-		    
-		          );
-		    });
-		          
-		      if(orientationt != null){ 
-		      } 
-	}
+    $('#imageshow').html("")
+    $("#buttonSubmit").removeAttr("disabled")
+        var orientationt = null;
+      
+        var file = e.target.files[0];
+        loadImage.parseMetaData(file, function(data) {
+            if (data.exif) {
+                orientationt = data.exif.get('Orientation');
+              
+            }
+              var loadingImage = loadImage(
+                e.target.files[0],
+               
+                function(img) {
+                    document.getElementById("imageshow").appendChild(img);
+        
+                }, {
+                  maxWidth: 100,
+                  maxHeight: 100,
+                  minWidth: 100,
+                  minHeight: 100,
+                  orientation: orientationt,
+                }
+        
+              );
+        });
+              
+          if(orientationt != null){ 
+          } 
+  }
     })
 </script>
                                         
-                                    <form name="contactInfoGenerate" >
-                                        <div data-role="fieldcontain">
+                                    <form name="contactInfoGenerate"  style="text-align:left">
+                                        <div data-role="fieldcontain"  style="text-align:left">
                                             <label for="username">Username:</label>
                                             <input disabled type="text" name="username" id="username" maxlength="30" value="@profile.username" >  
 
@@ -124,9 +124,8 @@
                                         </div>
                                    </form>
                                 
-                                <h3>Game Ranks</h3>
                        
-                                <div data-role="fieldcontain" >
+                                <div data-role="fieldcontain" style="text-align:left">
                                     <label for="CS:GO" class="select">CS:GO Rank</label>
                                     <select name="CS:GO" id="csgorank" data-role = "button" data-inline = "true" data-mini = "true">
                                         <option value="None">None</option>
@@ -150,7 +149,7 @@
                                         <option value="The Global Elite">The Global Elite</option>
                                     </select>
                                 </div>
-                                <div data-role="fieldcontain">
+                                <div data-role="fieldcontain"  style="text-align:left">
                                     <label for="wow2v2" class="select">WoW 2v2 Rating</label>
                                     <select name="wow2v2" id="wow2v2" data-role = "button" data-inline = "true" data-mini = "true">
                                        <option value="None">None</option>
@@ -171,7 +170,7 @@
                                        <option value="2601+">2601+</option>
                                     </select>
                                 </div>
-                                <div data-role="fieldcontain">
+                                <div data-role="fieldcontain"  style="text-align:left">
                                     <label for="wow3v3" class="select">WoW 3v3 Rating</label>
                                     <select name="wow3v3" id="wow3v3" data-role = "button" data-inline = "true" data-mini = "true">
                                        <option value="None">None</option>
@@ -192,7 +191,7 @@
                                        <option value="2601+">2601+</option>
                                     </select>
                                 </div>
-                                <div data-role="fieldcontain">
+                                <div data-role="fieldcontain"  style="text-align:left">
                                     <label for="wow5v5" class="select">WoW 5v5 Rating</label>
                                     <select name="wow5v5" id="wow5v5" data-role = "button" data-inline = "true" data-mini = "true">
                                        <option value="None">None</option>
@@ -213,7 +212,7 @@
                                        <option value="2601+">2601+</option>
                                     </select>
                                 </div>
-                                <div data-role="fieldcontain">
+                                <div data-role="fieldcontain"  style="text-align:left">
                                     <label for="wowrbg" class="select">WoW RBG Rating</label>
                                     <select name="wowrbg" id="wowrbg" data-role = "button" data-inline = "true" data-mini = "true">
                                        <option value="None">None</option>
@@ -234,7 +233,7 @@
                                        <option value="2601+">2601+</option>
                                     </select>
                                 </div>
-                                <div data-role="fieldcontain">
+                                <div data-role="fieldcontain"  style="text-align:left">
                                     <label for="lolrank" class="select">LoL Rank</label>
                                     <select name="lolrank" id="lolrank" data-role = "button" data-inline = "true" data-mini = "true">
                                        <option value="None">None</option>
@@ -246,7 +245,7 @@
                                        <option value="Challenger">Challenger</option>
                                     </select>
                                 </div>
-                                <div data-role="fieldcontain">
+                                <div data-role="fieldcontain"  style="text-align:left">
                                     <label for="dota2" class="select">DOTA 2 MMR</label>
                                     <select name="dota2" id="dota2mmr" data-role = "button" data-inline = "true" data-mini = "true">
                                        <option value="None">None</option>
@@ -265,7 +264,8 @@
                                        <option value="7000">7000+</option>
                                     </select>
                                 </div>
-                                <label for="otherranks">Other Game Ranks:</label>
+                                <br>
+                                <label for="otherranks"  style="text-align:left">Other Game Ranks:</label>
                                 <textarea cols="40" rows="8" name="otherranks" id="otherranks" placeholder="Type your rank in other games here">@profile.otherranks</textarea>
                        
                        
@@ -275,77 +275,89 @@
                                         <div Style="float:right"><input type="button" value="Save" id="save"  data-mini="true"></div>
                                     </div>
                             </div>
-                               
-                                <label for="joinedT">Joined ETournaments:</label>
-                                <div class="tournamentMyProfile" id="joinedT">
-                                    <ul data-role="listview" data-inset="true" data-dividertheme="a" data-theme = "c">
-                                        @for(tournament <- tournament) {
-                                        <li>
-                                            <a data-role = "button"  rel="external"  href="/showtournament/@tournament.tournamentID" class = "greyBtn">
-                                                <img src="../assets/images/gamelogos/@tournament.logo" alt="Dreamhack" class = "fullscreen"  />
-                                                <button data-role = "button" class="leaveT" data-inline="true" style="float:right;" value="@tournament.tournamentID">Leave</button>
-                                                <h2>@{tournament.tournamentname}</h2>
-                                                <p>@{"Admin: " +  tournament.tournamentcreator }</p>
-                                           </a>
-                                        </li>
-                                        <li  data-role = "list-divider" style="background:transparent;border:none" ></li>
-                                        } 
-                                    </ul>
-                                </div>
-                        </div>
-                    <div class="ui-block-b">
-                        <div class="formMyprofile" Style="border:none">
-                            <div style="text-align:center;">
-                                <img src="/profilepic/@profile.username" id="avatarpic" style="height:100px; width:100px">
-                            </div>
-                                                
-                            <label for="username">Username:</label>
-                            <input readonly type="text" name="username" id="username" maxlength="30" value="@profile.username" >  
-                            <label for="skypeID">   <img src="@routes.Assets.at("images/skype.png")" style="width:30px; height:30px;" ></label>
-                            <input readonly type="text" name="skypeID" id="skypeID" maxlength="30" value="@profile.skypeID" placeholder="Skype">
-                            <label for="battlenetID"><img src="@routes.Assets.at("images/battleNet.png")" style="width:30px; height:30px;" </label>
-                            <input readonly type="text" name="battlenetID" id="battlenetID" maxlength="30" value="@profile.battlenetID" placeholder="Battle.net">
-                            <label for="steamID"><img src="@routes.Assets.at("images/steam.png")" style="width:30px; height:30px;" ></label>
-                            <input readonly type="text" name="steamID" id="steamID" maxlength="30" value="@profile.steamID" placeholder="Steam">
-                            <label for="twitchID"><img src="@routes.Assets.at("images/twitch.png")" style="width:30px; height:30px;" ></label>
-                            <input readonly type="text" name="twitchID" id="twitchID" maxlength="30" value="@profile.twitchID" placeholder="Twitch">
-                            <label for="uplayID"><img src="@routes.Assets.at("images/play.png")" style="width:30px; height:30px;" ></label>
-                            <input readonly type="text" name="uplayID" id="uplayID" maxlength="30" value="@profile.uplayID" placeholder="UPlay">       
-                           
-                       
-                     
-                  
-            
-                            <label for="CS:GO Rank">CS:GO Rank:</label>
-                            <input readonly type="text" name="CS:GO Rank" id="CS:GO Rank" maxlength="30" value="@profile.csgorank" placeholder="CS:GO Rank">  
-                            <label for="WoW 2v2 Rating">WoW 2v2 Rating:</label>
-                            <input readonly type="text" name="WoW 2v2 Rating" id="WoW 2v2 Rating" maxlength="30" value="@profile.wow2v2rating" placeholder="WoW 2v2 Rating">
-                            <label for="WoW 3v3 Rating">WoW 3v3 Rating:</label>
-                            <input readonly type="text" name="WoW 3v3 Rating" id="WoW 3v3 Rating" maxlength="30" value="@profile.wow3v3rating" placeholder="WoW 3v3 Rating">
-                            <label for="WoW 5v5 Rating">WoW 5v5 Rating:</label>
-                            <input readonly type="text" name="WoW 5v5 Rating" id="WoW 5v5 Rating" maxlength="30" value="@profile.wow5v5rating" placeholder="WoW 5v5 Rating">
-                            <label for="WoW RBG Rating">WoW RBG Rating:</label>
-                            <input readonly type="text" name="WoW RBG Rating" id="WoW RBG Rating" maxlength="30" value="@profile.wowrbgrating" placeholder="WoW RBG Rating">
-                            <label for="LoL Rank">LoL Rank:</label>
-                            <input readonly type="text" name="LoL Rank" id="LoL Rank" maxlength="30" value="@profile.lolrank" placeholder="LoL Rank">
-                            <label for="DOTA 2">DOTA 2 MMR:</label>
-                            <input readonly type="text" name="DOTA 2" id="DOTA 2" maxlength="30" value="@profile.dota2rank" placeholder="DOTA 2 MMR">
-                                 
-                            <div data-role="fieldcontain">
-                                <label for="otherranksshow">Other Ranks:</label>
-                                <textarea readonly cols="40" rows="8" name="otherranksshow" id="otherranksshow" placeholder="Other Ranks">@profile.otherranks</textarea>
-                            </div>
-               
-                            <div class="section">
-                                <div data-role="fieldcontain">
-                                    <label for="about">About:</label>
-                                    <textarea readonly cols="40" rows="8" name="about" id="about" placeholder="About">@profile.userbio</textarea>
-                                </div>
-                            </div>
 
-                        </div>
+
+
+
+
+                <img src="/profilepic/@profile.username" id="avatarpic"style="width:100px; height:100px; ">
+                <p><h2><b>@profile.username </b></h2></p>
+              </div>
+
+
+
+
+                <div class="ui-grid-a ui-responsive">
+                  <div class="ui-block-a">
+
+                    <div class="formMyprofile" style="border:none;float:right">
+               
+                      <p><img src="@routes.Assets.at("images/skype.png")" style="width:30px; height:30px;margin-right:10px" >@profile.skypeID</p>
+
+                      <p><img src="@routes.Assets.at("images/battleNet.png")" style="width:30px; height:30px;margin-right:10px" >@profile.battlenetID</p>
+
+                      <p><img src="@routes.Assets.at("images/steam.png")" style="width:30px; height:30px;margin-right:10px" >@profile.steamID</p>
+
+                      <p><img src="@routes.Assets.at("images/twitch.png")" style="width:30px; height:30px;margin-right:10px" >@profile.twitchID</p>
+                        
+                      <p><img src="@routes.Assets.at("images/play.png")" style="width:30px; height:30px;margin-right:10px" >@profile.uplayID</p>
+       
+
+                    <div class="section">
+                      <b><h3 style="margin:0" >About:</h3></b>
+                      <textarea readonly cols="40" rows="8" name="about" id="about" placeholder="About">@profile.userbio</textarea>
+                    </div>
+
+                    </div>
+                  </div>
+                  
+                  <div class="ui-block-b">
+                    <div class="formMyprofile" Style="float:right">
+                      <p><b>CS:GO Rank:</b>      @profile.csgorank</p>  
+                      <p><b>WoW 2v2 Rating:</b>      @profile.wow2v2rating</p>
+                      <p><b>WoW 3v3 Rating:</b>      @profile.wow3v3rating</p>
+                      <p><b>WoW 5v5 Rating:</b>      @profile.wow5v5rating</p>
+                      <p><b>WoW RBG Rating:</b>      @profile.wowrbgrating</p>
+                      <p><b>LoL Rank:</b>      @profile.lolrank</p>
+                      <p><b>DOTA 2 MMR:</b>      @profile.dota2rank</p>
+                      <p><b>Other Ranks:</b>      @profile.otherranks</p>
+                      <br>
+                      <br>
+                      <br>
+                    </div>
+                  </div>
+                </div> 
+
+
+
+              <div class="ui-grid-solo ui-responsive" >
+                <div class="ui-block-a" >
+
+                  <div class="tournamentMyProfile" id="joinedT" style="border-color:#000000">
+                    <div class="ui-grid-solo ui-responsive">
+                      <div class="ui-block-a"><b><h3 style="margin:0" >Joined Tournaments:</h3></b></div>
+                    </div>            
+                    <hr>
+                    
+                    <ul data-role="listview" data-inset="true" data-dividertheme="a" data-theme = "c">
+                      @for(tournament <- tournament) {
+                          <li>
+                            <a data-role = "button"  rel="external"  href="/showtournament/@tournament.tournamentID" class = "greyBtn">
+                              <img src="../assets/images/gamelogos/@tournament.logo" alt="Dreamhack" class = "fullscreen"  />
+                              <button data-role = "button" class="leaveT" data-inline="true" style="float:right;" value="@tournament.tournamentID">Leave</button>
+                              <h2>@{tournament.tournamentname}</h2>
+                              <p>@{"Admin: " +  tournament.tournamentcreator }</p>
+                            </a>
+                          </li>
+                          <li  data-role = "list-divider" style="background:transparent;border:none" ></li>
+                      } 
+                    </ul>
+                  </div>
                 </div>
-            </div> 
+              </div>
+
+
+
                 <script>
                     $(function(){
                      $("#csgorank").val('@profile.csgorank');
