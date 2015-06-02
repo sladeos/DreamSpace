@@ -25,7 +25,7 @@
               </p> 
             </div>
                 <div style="text-align:center">
-               <a href="#" id="share_button" class = "ui-btn-inline"> <img src="@routes.Assets.at("images/facebookIcon.png")" alt="tPicture" style="width:35px; height:35px;"  /></a>
+               <a href="#" id="share_button" class = "ui-btn-inline"> <img src="@routes.Assets.at("images/facebooksharebutton.png")" alt="tPicture" style="max-width:100%; height:35px;"  /></a>
                </div>
             
                <script type="text/javascript">
@@ -49,14 +49,15 @@
             </div>
             <br>
             <br> 
-
-            <div class="ui-grid-solo ui-responsive">
-              <div class="ui-block-a"><b><h3 style="margin:0" ><div id="pagebuttons"></div></h3></b></div>
-            </div>            
+        
               
             
             <div id="tournaments">
                <div   class ="flowBox">
+               
+            <div class="ui-grid-solo ui-responsive">
+              <div class="ui-block-a"><b><h3 style="margin:0" ><div id="pagebuttons"></div></h3></b></div>
+            </div>    
                   <hr>
                   <ul data-role="listview" data-inset="true" data-dividertheme="a" data-theme = "c">
                      @for(tournament <- tournament) {

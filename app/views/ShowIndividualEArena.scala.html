@@ -33,7 +33,9 @@
               <div class="ui-block-a"><b><h1 style="text-align:center">@eAd.arenaName</h1></b></div>
             </div>
 
-            <button id="share_button" class = "facebookColor facebookButton centerButton" data-mini="true">Facebook Share</button>
+             <div style="text-align:center">
+               <a href="#" id="share_button" class = "ui-btn-inline"> <img src="@routes.Assets.at("images/facebooksharebutton.png")" alt="tPicture" style="max-width:100%; height:35px;"  /></a>
+               </div>
             
             <script type="text/javascript">
               $(document).ready(function() {
@@ -70,7 +72,7 @@
             <br>
             <div class="ui-grid-a ui-responsive">
               <div class="ui-block-a">
-                <div style = "padding-right:30px">               
+                <div class = "dialog">               
                   <article data-role="listview" data-inset="true" data-dividertheme="a"> 
                     <li style="background:#DBDBDB"><h2>@eAd.arenaName</h2>
                       <div style="float:right;"><img src="../assets/images/gamelogos/@eAd.logo"></div>
@@ -109,7 +111,7 @@
 
           <div class="ui-block-b">
             <br>
-            <div style="border-left:dotted;padding-left:10px">
+            <div class = "dottedMobile">
               <div class="ui-grid-solo ui-responsive">
                 <div class="ui-block-a"><b><h3 style="margin:0">Replies</h3></b></div>
               </div> 
