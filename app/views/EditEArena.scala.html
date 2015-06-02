@@ -46,7 +46,7 @@
                     
             <div data-role="collapsible" class="ui-icon-alt" data-collapsed-icon="arrow-r" data-inline="true" data-expanded-icon="arrow-d" data-iconpos="right"  >
 
-              <h3 class = "custom-centercollheader" >Edit ad</h3>
+              <h3 class = "custom-centercollheader" >Edit Ad</h3>
   						<form id="adTypes">
                 <div class="ui-grid-a ui-responsive">   
                   <div class="ui-block-a"><label><input type="radio" id="gameAd" name="adType" data-mini="true" value="Game Ad" class="adType">GameAd</label></div>
@@ -72,24 +72,25 @@
                   <option data-img-src="@routes.Assets.at("images/gamelogos/dota.png")" value="dota.png"></option>
                 </select>       
               </div>
-                     	
-              <input type="text" name="arenaName" id="arenaName" value="@eAd.arenaName" style="background-color:#53585F;color:white" placeholder="Arena Ad Name"/>
-                    
-              <input type="text" name="gameName" id="game" value="@eAd.gameName" style="background-color:#53585F;color:white" placeholder="Game"/>
-             
+              <p>Name of your ad:</p>       	
+              <input type="text" name="arenaName" id="arenaName" value="@eAd.arenaName" style="background-color:#53585F;color:white" placeholder=""/>
+              <p>Game:</p>      
+              <input type="text" name="gameName" id="game" value="@eAd.gameName" style="background-color:#53585F;color:white" placeholder=""/>
+              <p>Players required:</p>
               <input type="number" min="1" max="100" name="playersRequired" id="playersRequired" value="@eAd.playersRequired" style="background-color:#53585F;color:white" placeholder="Players Required"/>
-                   
+              <p> Information*:    
               <textarea style="background-color:#53585F;color:white" placeholder="Enter some information about your ad here!" name="information" id="informationArea" rows="4" maxlength="500" cols="50"  >@eAd.information</textarea>
-                    
+                  
               <div style="display: none;">
                 <input type="text" name="id" id="id" value="@eAd.arenaID"/>
               </div>       
               <br>
-              <button  class = "my-btn"  id="updateearena"  value="Update EArena Ad" onclick="validate()">SAVE CHANGES</button>
+              <button  class = "my-btn"  id="updateearena"  value="Update EArena Ad" onclick="validate()">Save changes</button>
               <br>
               <br>
-              <button data-role = "button" value="Delete EArena" id="deletearena" class = "submitReplay goBackButton" data-icon="delete" data-iconpos="right" style="background:#FF9900">DELETE AD</button>
+              <button data-role = "button" value="Delete EArena" id="deletearena" class = "submitReplay goBackButton" data-icon="delete" data-iconpos="right" style="background:#FF9900">Delete ad</button>
               <p id="warning"></p>
+              <p><i>*If you're creating a TournamentAd we recommend that you type in the name of the tournament in this field.</i></p>
             </div>
           </div>
                     
@@ -303,7 +304,7 @@
             <br>
             <div class="dottedMobile">
               <div class="ui-grid-solo ui-responsive">
-                <div class="ui-block-a"><h3 style="margin:0"><b>Replies</b></h3></div>
+                <div class="ui-block-a"><h3 style="margin:0"><b>Replies*</b></h3></div>
               </div> 
               <hr>
               <article data-role="listview" data-inset="true" data-dividertheme="a" >
@@ -315,7 +316,7 @@
                           <h2 style="margin:0">@{eAdReplies.user}</h2>
                         </div>
                         <div class="ui-block-b">
-                          <p style="margin:0">@{"[" + eAdReplies.createdDate + "]"}<a onclick="openReplyDelete(@eAdReplies.arenaID)" style="float:right;" id="replyDelete" data-rel="popup" data-transition="pop" data-iconpos="right" data-position-to="window" data-iconshadow="false" class="my-tooltip-btn ui-btn ui-alt-icon ui-nodisc-icon ui-btn-inline ui-icon-delete ui-btn-icon-notext ui-btn-b"></a> </p>
+                          <p style="margin:0">@{"[" + eAdReplies.createdDate + "]"}<a onclick="openReplyDelete(@eAdReplies.arenaID)" style="float:right;background-color:#8d343b" id="replyDelete" data-rel="popup" data-transition="pop" data-iconpos="right" data-position-to="window" data-iconshadow="false" class="my-tooltip-btn ui-btn ui-alt-icon ui-nodisc-icon ui-btn-inline ui-icon-delete ui-btn-icon-notext ui-btn-b"></a> </p>
                         </div>
                       </div>
                       <p>Comment:</p>
@@ -331,13 +332,14 @@
                                               })
                                             </script>
                 } 
+                <p><i>*Just click on the reply if you want to see what game ranks the responding user has.</i></p>
               </article> 
             </div>
           </div>
         </div>
 
   
-        <div data-role="popup" id="popupInfo" class="ui-content" data-theme="b" style="max-width:200px;">
+        <div data-role="popup" id="popupInfo" class="ui-content" data-theme="c" style="max-width:200px;">
   			  <p>Are you sure you wish to <strong>Delete</strong> this Reply? </p>
   				<a href="#" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-b" data-rel="back">Cancel</a>
        		<a onclick="deleteReply()" href="#" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-b">Delete</a>
