@@ -3,10 +3,11 @@ package controllers;
 import models.*;
 import play.*;
 import play.mvc.*;
+import play.mvc.Http.Request;
+import play.mvc.Http.RequestHeader;
 
 import java.io.ByteArrayInputStream;
 import java.io.UnsupportedEncodingException;
-
 import java.sql.*;
 
 import views.html.*;
@@ -21,6 +22,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.io.IOException;
 import java.security.SecureRandom;
+import java.util.Arrays;
 
 import javax.persistence.Entity;
 
@@ -29,10 +31,16 @@ import play.libs.Json;
 public class Application extends Controller {
 
 	public static Result mainMethod() {
+		String[] acceptedIps = new String[] {"facebookexternalhit/1.1 (http://www.facebook.com/externalhit_uatext.php)","facebookexternalhit/1.1", "Facebot"};
+		String userAgent = request().getHeader("User-Agent");
 		String user = session("connected");
 		if (user != null) {
 			return ok(main.render( user, PictureDatabase.getPicturesMainPage(), EArenaDatabase.getEArenaAdsMainPage(), TournamentDatabase.getTournamentsMainPage()));
-		} else {
+		}else if(Arrays.asList(acceptedIps).contains(userAgent)){
+			session("connected", "facebookCrawler");
+			return ok(main.render( "facebookCrawler", PictureDatabase.getPicturesMainPage(), EArenaDatabase.getEArenaAdsMainPage(), TournamentDatabase.getTournamentsMainPage()));
+		}
+		else {
 			return unauthorized(LoginUserPage
 					.render("Welcome, login to explore the website"));
 		}
@@ -54,6 +62,7 @@ public class Application extends Controller {
 	}
 
 	public static Result chooseUsername() {
+		
 		String currentUser = session("connected");
 		if (currentUser != null) {
 			return ok(main.render("You are already logged in as " + currentUser
@@ -64,13 +73,17 @@ public class Application extends Controller {
 	}
 
 	public static Result loginUserPage() {
-
+		String[] acceptedIps = new String[] {"facebookexternalhit/1.1 (http://www.facebook.com/externalhit_uatext.php)","facebookexternalhit/1.1", "Facebot"};
+		String userAgent = request().getHeader("User-Agent");
+		
 		String currentUser = session("connected");
 		if (currentUser != null) {
 			return ok(main
 					.render("You are already logged in as " + currentUser, PictureDatabase.getPicturesMainPage(), EArenaDatabase.getEArenaAdsMainPage(), TournamentDatabase.getTournamentsMainPage()));
+		}else if(Arrays.asList(acceptedIps).contains(userAgent)){
+			session("connected", "facebookCrawler");
+			return ok(main.render( "facebookCrawler", PictureDatabase.getPicturesMainPage(), EArenaDatabase.getEArenaAdsMainPage(), TournamentDatabase.getTournamentsMainPage()));
 		}
-
 		return ok(LoginUserPage.render(""));
 	}
 

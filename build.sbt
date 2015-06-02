@@ -1,6 +1,6 @@
 import NativePackagerKeys._
 
-herokuAppName in Compile := "floating-dusk-5648"
+herokuAppName in Compile := "young-beach-4936"
 
 name := """DreamSpace"""
 
@@ -21,3 +21,6 @@ libraryDependencies ++= Seq(
   javaWs
 )
 
+
+
+fork in run := true
