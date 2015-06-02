@@ -1,5 +1,13 @@
                 
-
+<div  style="float:right; padding-right:30px;">
+     <a id="logged" data-role="button" rel = "external" href='#' data-theme="a" data-icon="user" data-inline = "true" data-shadow="false" style= "background:#FF6E00;  background:white; border:none;"> </a>
+      <script>
+     $(document).ready(function() {
+  	   var currentuser = $.cookie("connected");
+  	   $('#logged').append(currentuser);
+     });
+     </script>
+     </div>
          
           <div  class="ui-bar ui-bar-b headern" style = "background:white; border:none;"> 
               <img  id ="bild" src="@routes.Assets.at("images/real.png")" class = "fullscreen headerImg" >

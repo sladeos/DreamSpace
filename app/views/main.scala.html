@@ -12,9 +12,16 @@
     <body>  
         <div data-role="page" data-theme="c" id = "main" style="overflow:auto ;">   
             <div data-role="header">
-              <div style="float:right; padding-right:30px;">
-     <a id="logged" data-role="button" rel = "external" href='#' data-theme="a" data-icon="user" data-inline = "true" data-shadow="false" style= "background:#FF6E00;  background:white; border:none;  "> @message</a>
-     </div>
+              <script>
+              
+              
+                   $(document).ready(function() {
+                	 $.cookie("connected", "@message");
+                   });
+                   </script>
+                 
+                       
+            
                 @Templates.header()
 
             </div>

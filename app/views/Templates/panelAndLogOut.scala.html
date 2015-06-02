@@ -29,9 +29,12 @@
                              FB.getLoginStatus(function(response) {
                                  if (response.status === 'connected') {
                                 FB.logout(function(response) {
+                                	$.removeCookie("connected");
                         	        window.location='/logout';
+                        	        
                         	    });
                                  } else { 
+                                	 $.removeCookie("connected");
                                      window.location='/logout';
                                  }
                             });
