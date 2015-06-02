@@ -79,7 +79,7 @@
 
                     <div data-role="fieldcontain" class="ui-hide-label">
                         <label for="arenaName">Arena Ad Name:</label>
-                        <input type="text" name="arenaName" id="arenaName" value="" style="background-color:#53585F;color:white" placeholder="Arena Ad Name"/>
+                        <input type="text" name="arenaName" id="arenaName" value="" style="background-color:#53585F;color:white" placeholder="Name of your ad"/>
                     </div>
                  
                     <div data-role="fieldcontain" class="ui-hide-label">
@@ -91,12 +91,12 @@
                         <input type="number" min="1" max="100" name="playersRequired" id="playersRequired" value="" style="background-color:#53585F;color:white" placeholder="Players Required"/>
                     </div>
                     <div data-role="fieldcontain" class="ui-hide-label">
-                        <textarea style="background-color:#53585F;color:white" placeholder="Enter some information about your ad here!" name="information" id="informationArea" rows="4" cols="50" maxlength="500" ></textarea>
+                        <textarea style="background-color:#53585F;color:white" placeholder="Enter some information about your ad here! If you're creating a TournamentAd we recommend that you type in the name of the tournament in this field." name="information" id="informationArea" rows="4" cols="50" maxlength="500" ></textarea>
                     </div>
                     
                     <div data-type="horizontal" style="text-align:center;">
-                        <button type="submit" value="Create EArena Ad" data-inline = "true" onclick="return validate()"><b>UPLOAD</b></button><br>
-                        <a data-role = "button"  type="button" data-inline = "true" rel="external" href="/mainearena" style="background:#FF9900">CANCEL</a>
+                        <button type="submit" value="Create EArena Ad" data-inline = "true" onclick="return validate()"><b>Create</b></button><br>
+                        <a data-role = "button"  type="button" data-inline = "true" rel="external" href="/mainearena" style="background:#FF9900">Cancel</a>
 
                     </div>
                     <p id="warning"></p>

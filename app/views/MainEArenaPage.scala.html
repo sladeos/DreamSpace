@@ -50,13 +50,13 @@
             </script>
 
             <div class="ui-grid-a ui-responsive">
-              <div class="ui-block-a"><a data-role = "button" id = "MYEArena"  rel="external" href="/myearena" data-iconpos="right" >MY ADS</a></div>
-              <div class="ui-block-b"><a data-role = "button" id = "creatAd"  rel="external" href="/createarenaad" data-iconpos="right" >CREATE AN AD</a></div>
+              <div class="ui-block-a"><a data-role = "button" id = "MYEArena"  rel="external" href="/myearena" data-iconpos="right" >My Ads</a></div>
+              <div class="ui-block-b"><a data-role = "button" id = "creatAd"  rel="external" href="/createarenaad" data-iconpos="right" >Create an Ad</a></div>
             </div>
 
             <div class ="standardBox">
                <div data-role="collapsible" class="ui-icon-alt" data-collapsed-icon="arrow-r" data-expanded-icon="arrow-d" data-iconpos="right">
-                  <h3 class = "custom-centercollheader" >SEARCH ADS</h3>
+                  <h3 class = "custom-centercollheader" >Search Ads</h3>
                   <form data-ajax="false">
                      <input type="search" name="search" id="search-basic" value="" placeholder="Search ad" />
                      <p>Advanced search</p>
@@ -88,8 +88,8 @@
 
                <hr>
          <div class="ui-grid-a ui-responsive">
-            <div class="ui-block-a" style="text-align:center;background-color:#373945"><b><h3 style="margin:0;color:#FFFFFF">Game Ads</h3></b></div>
-            <div class="ui-block-b" style="text-align:center;background-color:#FF8532"><b><h3 style="margin:0;color:#000000">Tournament Ads</h3></b></div>
+            <div class="ui-block-a" style="text-align:center;background-color:#373945"><b><h3 style="margin:0;color:#FFFFFF">Game ads</h3></b></div>
+            <div class="ui-block-b" style="text-align:center;background-color:#FF8532"><b><h3 style="margin:0;color:#000000">Tournament ads</h3></b></div>
          </div>
                <article  data-role="listview" data-inset="true" data-dividertheme="a">
                   @for(eads <- eads) {
@@ -151,7 +151,7 @@
                
             
             $(document).ready(function() {
-                  $("#adsFound").html("Current ads (" + rowcount + ")");
+                  $("#adsFound").html("Current Ads (" + rowcount + ")");
   
             var ias = jQuery.ias({
             	  container:  '#earenas',
