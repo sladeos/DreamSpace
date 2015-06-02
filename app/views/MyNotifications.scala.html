@@ -16,12 +16,10 @@
             <div data-role="content">
             <div class="ui-grid-solo ui-responsive" >
             <div class="ui-block-a">
-                <div style = "text-align:center">
-              <img src="@routes.Assets.at("images/inbox.png")" alt="inbox" class = "notificationPic" />
-                </div>
+              <img src="@routes.Assets.at("images/NOTIFICATIONS.jpg")" alt="inbox" class = "fullscreen" />
               </div>
             </div>
-                    <h1 align="center">My Notifications</h1>
+                   
                     
 
 <div class="ui-grid-a ui-responsive">
@@ -60,11 +58,7 @@
                       
                          
                            <div id="@replynotifications.replyID">
-                          <!--   <p>ReplyID: @replynotifications.replyID</p> 
-                            <p>ArenaID:  @replynotifications.arenaID </p>
-                            <p>User: @replynotifications.username </p>
-                            <p>Date: @replynotifications.created_date </p>
-                            <p>Viewed:  @replynotifications.viewed </p> -->
+
                           
 
 
@@ -73,14 +67,12 @@
     <li data-role="list-divider">Date: @replynotifications.created_date  <span class="ui-li-count">@replynotifications.viewed</span></li>
     <h2>User: @replynotifications.username</h2>
     <!-- <p><strong></strong></p> -->
+    <p>Ad:  @replynotifications.adName </p>
     <p>ReplyID: @replynotifications.replyID</p>
-    <p>ArenaID:  @replynotifications.arenaID </p>
-       <!--  <p class="ui-li-aside"><strong>6:24</strong>PM</p> -->
-    </li>
-                       
+    </li>                   
 					        <div class="ui-grid-solo">
                                 <div class="ui-block-a"> <a href="/earenaad/@replynotifications.arenaID" rel="external"  data-role="button" data-mini="true" data-inline="true" class="view">View reply</a>
-                                <button data-role = "button" value="@replynotifications.replyID" data-mini="true" data-inline="true"  class = "hide">Hide</button>
+                                <button data-role = "button" value="@replynotifications.replyID" data-mini="true" data-inline="true"  class = "hide">Delete Notification</button>
                             </div>
                            
                      </div>
@@ -158,7 +150,8 @@
                                     type: 'POST',
                                 });
                                   
-                                // $(".view").css("background","  #FF9900");
+                                $(".view, .hide, .accept, .delete").css("background","  #FF9900");
+
                             });
                            
                         

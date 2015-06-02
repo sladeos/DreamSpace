@@ -31,7 +31,7 @@
 
 
                 <div style="text-align:center">
-               <a href="#" id="share_button" class = "ui-btn-inline"> <img src="@routes.Assets.at("images/facebookIcon.png")" alt="tPicture" style="width:35px; height:35px;"  /></a>
+               <a href="#" id="share_button" class = "ui-btn-inline"> <img src="@routes.Assets.at("images/facebooksharebutton.png")" alt="tPicture" style="max-width:100%; height:35px;"  /></a>
                </div>
             
                <script type="text/javascript">
@@ -54,25 +54,6 @@
               <div class="ui-block-b"><a data-role = "button" id = "creatAd"  rel="external" href="/createarenaad" data-iconpos="right" >CREATE AN AD</a></div>
             </div>
 
-
-
-            <script type="text/javascript">
-               $(document).ready(function() {
-                 $('#share_button').click(function(e) {
-                   e.preventDefault();
-                   FB.ui({
-                     method: 'feed',
-                     name: 'DreamSpace EArenaAds',
-                     link: document.URL,
-                     caption: "EArenaAds" ,
-                     description: ""
-                   });
-                 });
-               });
-            </script>
-
-
-
             <div class ="standardBox">
                <div data-role="collapsible" class="ui-icon-alt" data-collapsed-icon="arrow-r" data-expanded-icon="arrow-d" data-iconpos="right">
                   <h3 class = "custom-centercollheader" >SEARCH ADS</h3>
@@ -83,8 +64,8 @@
                      <div data-role="fieldcontain"class="ui-hide-label" >
                         <input type="text" name="game" placeholder="Game" id="game">
                         <input type="text" name="username" placeholder="Username" id="username">
-                        <input type="number" name="players" placeholder="Number of players" id="players">
-                        <input type="number" name="minutes" placeholder="Uploaded X minutes ago" id="minutes">
+                        <input type="number" name="players" min="0" max="99" placeholder="Number of players" id="players">
+                        <input type="number" name="minutes" min="0" placeholder="Uploaded X minutes ago" id="minutes">
                      </div>
                      <div data-role="controlgroup" data-type="horizontal" style="text-align:center;">
                         <button data-inline="true" type="submit"><b>GO!</b></button>
@@ -95,14 +76,15 @@
           
 
 
-          <div class="ui-grid-solo ui-responsive">
-            <div class="ui-block-a"><b><h3 style="margin:0"> <div id="adsFound"></div></h3></b></div>
-         </div>  
-
+       
 
 
             <div id ="earenas">
             <div class ="flowBox">
+            <br>
+   <div class="ui-grid-solo ui-responsive">
+            <div class="ui-block-a"><b><h3 style="margin:0"> <div id="adsFound"></div></h3></b></div>
+         </div>  
 
                <hr>
          <div class="ui-grid-a ui-responsive">

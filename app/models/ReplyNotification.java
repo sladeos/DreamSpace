@@ -28,4 +28,6 @@ public String created_date;
 
 @Constraints.Required 
 public int viewed;
+
+public String adName;
 }

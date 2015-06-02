@@ -1,5 +1,13 @@
 @(tournament: Tournament, participant: List[Participant], pending: List[Participant])
 <!DOCTYPE html>
+<!-- /**
+ * jQuery Bracket
+ *
+ * Copyright (c) 2011-2013, Teijo Laine,
+ * http://aropupu.fi/bracket/
+ *
+ * Licenced under the MIT licence
+ */ -->
 <html>
    <head>
       @Templates.head()
@@ -16,7 +24,7 @@
       <div data-role="page" data-theme="c">
         <div data-role="header">
           @Templates.header()
-          <a id = "back" rel="external" href="/myetournaments" data-role="button" role="button" data-icon="back" data-iconpos="notext">Back</a>
+         
         </div>
         
         <div data-role="content">    
@@ -383,7 +391,7 @@ $('#imgpick-button').remove()
                                                            dataType: 'html',
                                                            success: function(data) {
                                                                 if (data == "success") {
-                                                                alert("Player added");
+                                                                alert("Invitation Sent!");
                                                                 location.reload();
                                                                 } else if(data == "non-existent") {
                                                                 $('#dialogWarning').html("User doesnt exist");

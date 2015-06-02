@@ -23,7 +23,7 @@
       <div data-role="page" data-theme="c" id = "main" >
         <div data-role="header">
 	        @Templates.header()
-            <a id = "back" rel="external" href="/mainearena"  data-role="button" role="button" data-icon="back" data-iconpos="notext">Back</a>
+            
         </div>
           
         <div data-role="content">
@@ -38,7 +38,9 @@
             <div class="ui-block-a"><b><h1 style="margin:0;text-align:center">@eAd.arenaName</h1></b></div>
           </div>
 
-          <button id="share_button" class = "facebookColor facebookButton centerButton" data-mini="true">Facebook Share</button>
+           <div style="text-align:center">
+               <a href="#" id="share_button" class = "ui-btn-inline"> <img src="@routes.Assets.at("images/facebooksharebutton.png")" alt="tPicture" style="max-width:100%; height:35px;"  /></a>
+               </div>
 
           <div class = "standardBox">
                     
@@ -258,7 +260,7 @@
           <div class="ui-grid-a ui-responsive">
             
             <div class="ui-block-a">
-              <div style = "padding-right:30px">               
+              <div class="dialog">               
                 <article data-role="listview" data-inset="true" data-dividertheme="a"> 
                   <li style="background:#DBDBDB"><h2>@eAd.arenaName</h2>
                     <div style="float:right;"><img src="../assets/images/gamelogos/@eAd.logo"></div>
@@ -299,21 +301,21 @@
 
           <div class="ui-block-b">
             <br>
-            <div style="border-left:dotted;padding-left:10px">
+            <div class="dottedMobile">
               <div class="ui-grid-solo ui-responsive">
                 <div class="ui-block-a"><h3 style="margin:0"><b>Replies</b></h3></div>
               </div> 
               <hr>
               <article data-role="listview" data-inset="true" data-dividertheme="a" >
                 @for(eAdReplies <- eAdReplies) {
-                  <div id="@eAdReplies.arenaID" style="background:#DBDBDB;padding:.7em 1em;">
+                  <div id="reply@eAdReplies.arenaID" style="background:#DBDBDB;padding:.7em 1em;">
                     <li>
                       <div class="ui-grid-a ui-responsive">
                         <div class="ui-block-a">
                           <h2 style="margin:0">@{eAdReplies.user}</h2>
                         </div>
                         <div class="ui-block-b">
-                          <p style="margin:0">@{"[" + eAdReplies.createdDate + "]"}</p>
+                          <p style="margin:0">@{"[" + eAdReplies.createdDate + "]"}<a onclick="openReplyDelete(@eAdReplies.arenaID)" style="float:right;" id="replyDelete" data-rel="popup" data-transition="pop" data-iconpos="right" data-position-to="window" data-iconshadow="false" class="my-tooltip-btn ui-btn ui-alt-icon ui-nodisc-icon ui-btn-inline ui-icon-delete ui-btn-icon-notext ui-btn-b"></a> </p>
                         </div>
                       </div>
                       <p>Comment:</p>
@@ -324,7 +326,7 @@
                   <li  data-role = "list-divider"  style="background:transparent;border:none" ></li>
                             
                                             <script>
-                                              $("#@eAdReplies.arenaID").click(function(event){
+                                              $("#reply@eAdReplies.arenaID").click(function(event){
                                                 getProfileRanks("@eAdReplies.user");
                                               })
                                             </script>
@@ -367,7 +369,7 @@
                 }
                     $("#postreply").click(function() {
                         if($('#replyarea').val().length >2){
-                            var data = {"contents":$("#replyarea").val(), "adID": "@eAd.arenaID", "adAdmin": "@eAd.admin"};
+                            var data = {"contents":$("#replyarea").val(), "adID": "@eAd.arenaID", "adAdmin": "@eAd.admin",adName: "@eAd.arenaName"};
                             $.ajax({
                                 url: "/postreply",
                                 type: 'POST',
