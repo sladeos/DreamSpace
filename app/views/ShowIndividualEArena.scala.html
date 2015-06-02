@@ -30,7 +30,11 @@
              <div class ="wrap">
             <br>
             <div class="ui-grid-solo ui-responsive">
-              <div class="ui-block-a"><b><h1 style="text-align:center">@eAd.arenaName</h1></b></div>
+
+              <div class="ui-block-a">
+                <b><h1 style="margin:0;text-align:center">@eAd.arenaName</h1></b>
+              </div>
+
             </div>
 
              <div style="text-align:center">
@@ -51,6 +55,15 @@
                 });
               });
             </script>
+
+
+
+
+
+
+
+
+
             
             <div data-role="popup" id="replyPopUp" class="ui-content" data-theme="c" data-position-to="origin" style="width:300px;"></div>
 
@@ -77,7 +90,7 @@
                     <li style="background:#DBDBDB"><h2>@eAd.arenaName</h2>
                       <div style="float:right;"><img src="../assets/images/gamelogos/@eAd.logo"></div>
                         <p>AdType: @eAd.adType</p>
-                        <p>Creator: @eAd.admin</p>
+                        <p>Creator: <a rel="external"  href="/profile/@eAd.admin">@eAd.admin</a></p>
                         <p>Game: @eAd.gameName</p>
                         <p>Created: @eAd.createdDate</p>
                         <p>Players: @eAd.playersRequired</p>
@@ -103,7 +116,7 @@
                   <hr>
                   <textarea placeholder="Post your reply here" name="reply" id="replyarea" rows="4" cols="50" maxlength="500" style="background-color:#53585F;color:white"></textarea>
                   <div data-role="controlgroup" data-type="horizontal" style="text-align:center;">
-                    <button data-role = "button" type="submit" id="postreply"value="Submit Reply" class = "submitReplay" data-inline = "true"><b>SUBMIT</b></button>
+                    <button data-role = "button" type="submit" id="postreply"value="Submit Reply" class = "submitReplay" data-inline = "true" style="background-color:#FF9900"><b>SUBMIT</b></button>
                   </div>
                   <p id="warning"></p>
                 </div>
@@ -122,7 +135,7 @@
                     <li>
                       <div class="ui-grid-a ui-responsive">
                         <div class="ui-block-a">
-                          <h2 style="margin:0">@{eAdReplies.user}</h2>
+                          <h3 style="margin:0">@{eAdReplies.user}</h3>
                         </div>
                         <div class="ui-block-b">
                           <p style="margin:0">@{"[" + eAdReplies.createdDate + "]"}</p>
@@ -150,7 +163,7 @@
                 <script>
                     $("#postreply").click(function() {
                         if($('#replyarea').val().length >2){
-                            var data = {"contents":$("#replyarea").val(), "adID": "@eAd.arenaID", "adAdmin": "@eAd.admin"};
+                            var data = {"contents":$("#replyarea").val(), "adID": "@eAd.arenaID", "adAdmin": "@eAd.admin",adName: "@eAd.arenaName"};
                             $.ajax({
                                 url: "/postreply",
                                 type: 'POST',

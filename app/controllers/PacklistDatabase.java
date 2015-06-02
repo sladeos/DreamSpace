@@ -133,13 +133,13 @@ public class PacklistDatabase extends Controller {
 public static Result addPacklist() {
 		Connection conn = null;
 		PreparedStatement preparedStatement = null;
-		
         String username = session("connected");
+        System.out.println(username);
 		try {
 
 			conn = DB.getConnection();
 
-			String insertIntoDatabase = "INSERT INTO Packlist username VALUES(?)";
+			String insertIntoDatabase = "INSERT INTO Packlist (USERNAME) VALUES(?)";
 							
 			preparedStatement = conn.prepareStatement(insertIntoDatabase);
 

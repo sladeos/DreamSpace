@@ -47,26 +47,17 @@
                             <div class ="textBox" Style = "background: #FFFFFF; border-style: solid; border-color: #767575; height:100%;">
                                 <H1 Style ="text-align: center">WELCOME</H1>
                                 <hr>
-                                <p class="welcomeTexta"style="text-align:center;">
-                                  blafoajfo pojfpo
-                                  fjojjodjsojdljsdlkjsdkjdojsdösdjklsnklsnv
-                                  lksdnvlksdnkd idiohfosdihi
-                                  soidhfoishdihi i i i i ishdoifs dis
-                                  ofihdihdoihfiso.    blafoajfo pojfpo
-                                  fjojjodjsojdljsdlkjsdkjdojsdösdjklsnklsnv
-                                  lksdnvlksdnkd idiohfosdihi
-                                  soidhfoishdihi i i i i ishdoifs dis
-                                  ofihdihdoihfiso.    blafoajfo pojfpo
-                                  fjojjodjsojdljsdlkjsdkjdojsdösdjklsnklsnv
-                                  lksdnvlksdnkd idiohfosdihi
-                                  soidhfoishdihi i i i i ishdoifs dis
-                                  ofihdihdoihfiso.    blafoajfo pojfpo
-                                  fjojjodjsojdljsdlkjsdkjdojsdösdjklsnklsnv
-                                  lksdnvlksdnkd idiohfosdihi
-                                  soidhfoishdihi i i i i ishdoifs dis
-                                  ofihdihdoihfiso.
+                                <p class="welcomeTexta">
+What you're looking at now is the homepage of the platform called DreamSpace. As a DreamHack corporate group,
+our goal is to optimize your experience at the DreamHack LAN event by letting you use our functions. For instance we offer you the
+possibility to upload game ads in the EArena to aid you and your friends in your search in finding new gaming buddies.
+And when you're already on it - go ahead and check out our other main function, the ETournament! Here you can create your own tournaments for you and your friends - all to increase the excitement of gaming.<br> 
+And the game? That’s totally up to you. So here is our word for you:<br> 
+Enjoy! And do not forget - Life is short, play more.
                                 </p>
                             </div>
+                            <br>
+                            <br>
                         </div>
                   
                         <div class="ui-block-b">
@@ -74,20 +65,16 @@
                                 <div id="buttons">
                                     <div class="ui-grid-a">
                                         <div class="ui-block-a" >
-                                            <a href="#" id="1" class="ui-btn ui-btn-b ui-shadow  flipButton">EARENA</a>
+                                            <a href="#" id="1" class="ui-btn ui-btn-b ui-shadow  flipButton" style="background-color:#FF9200">EARENA</a>
                                         </div>
                                         <div class="ui-block-b">
-                                            <a href="#" id="2" class="ui-btn ui-shadow ui-btn-b flipButton">ETOURNAMENT</a>
+                                            <a href="#" id="2" class="ui-btn ui-shadow ui-btn-b flipButton" style="background-color:#373737">ETOURNAMENT</a>
                                         </div>
                                     </div>
                                 </div>
                                 <div id="pages" class ="ui-responsive" style="overflow: hidden">        
                                                   
                                   <div id = "1" class ="mainFlowBox ui-responsive">
-                                    <div class="ui-grid-a ui-responsive" style="display:inline !important;">
-                                      <div class="ui-block-a" style="text-align:center;background-color:#373945;display:inline !important;"><b><h3 style="margin:0;color:#FFFFFF">Game Ads</h3></b></div>
-                                      <div class="ui-block-b" style="text-align:center;background-color:#FF8532;display:inline !important;"><b><h3 style="margin:0;color:#000000">Tournament Ads</h3></b></div>
-                                    </div>
                                         
                                     <article  data-role="listview" data-inset="true" data-dividertheme="a" data-theme = "c"> 
                                       @for(eads <- eads) {
@@ -101,23 +88,12 @@
                                             <p>@{" Created: " + eads.createdDate }</p>
                                             <p>@{" Players required: " + eads.playersRequired}</p>
                                             <p>Information:</p>
-                                            <textarea readonly name="textarea" id="@eads.arenaID" style="overflow:auto;resize:none" >@{eads.information}</textarea>
+                                            <textarea readonly name="textarea" id="@eads.arenaID" style="overflow:auto;resize:none;background-color:#373945;color:#FFFFFF" >@{eads.information}</textarea>
                                             <br>
                                           </a>
                                         </li>
                                         <li  data-role = "list-divider" Style = "background-color : transparent ; border: none"></li>
                                         
-                                        <script>
-                                          $('.ui-page-active .ui-listview').listview('refresh');
-                                          $('.ui-page-active :jqmData(role=content)').trigger('create');
-                                            if("@eads.adType" === "Tournament Ad"){
-                                              $("#@eads.arenaID").css("background", "#FF8532");
-                                              $("#@eads.arenaID").css("font-weight", "bold");
-                                            }else{
-                                              $("#@eads.arenaID").css("background", "#373945");
-                                              $("#@eads.arenaID").css("color", "#FFFFFF");
-                                            }
-                                        </script>
                                       } 
                                     </article>
                                   </div>
@@ -146,9 +122,10 @@
                     <script>
                           $("#buttons a").click(function() {
                             var id = $(this).attr("id");
-                          $("#pages div").css("display", "none");
-                          $("#pages div#" + id + "").css("display", "block");
-                         
+                            $("#pages div").css("display", "none");
+                            $("#pages div#" + id + "").css("display", "block");
+                            $("#buttons a").css("background-color", "#373737");
+                            $(this).css("background-color", "#FF9200");
                         });
                     </script>
         </div>

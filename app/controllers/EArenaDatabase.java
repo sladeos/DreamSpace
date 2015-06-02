@@ -432,18 +432,22 @@ public class EArenaDatabase extends Controller {
 		String adID = json.findPath("adID").textValue();
 		String contents = json.findPath("contents").textValue();
 		String adAdmin = json.findPath("adAdmin").textValue();
-		
+		String adName = json.findPath("adName").textValue();
+				
+				
+				
 		String currentUser = session("connected");
 		try {
 			int adIDint = Integer.parseInt(adID);
 			conn = DB.getConnection();
-			String insertIntoDatabase = "INSERT INTO EArenaReply (arenaID, arenaadmin, username,replycontent) VALUES(?,?,?,?)";
+			String insertIntoDatabase = "INSERT INTO EArenaReply (arenaID, arenaadmin, username, replycontent, adname) VALUES(?,?,?,?,?)";
 			preparedStatement = conn.prepareStatement(insertIntoDatabase);
 
 			preparedStatement.setInt(1, adIDint);
 			preparedStatement.setString(2, adAdmin);
 			preparedStatement.setString(3, currentUser);
 			preparedStatement.setString(4, contents);
+			preparedStatement.setString(5, adName);
 
 			preparedStatement.executeUpdate();
 			return ok("Succesful Reply!");
@@ -765,21 +769,48 @@ public static Result getReplyProfile(String user){
 		
 		preparedStatement = conn.prepareStatement(getProfiles);
 		preparedStatement.setString(1, user);
-
+		String ifNull = "";
 
 		ResultSet rs = preparedStatement.executeQuery();
 		if (rs.isBeforeFirst()) {
 			rs.next();
+
 			result.put("username", user);
-			result.put("csgorank", rs.getString("csgorank"));
-			result.put("wow2v2rating", rs.getString("wow2v2"));
-			result.put("wow3v3rating", rs.getString("wow3v3"));
-			result.put("wow5v5rating", rs.getString("wow5v5"));
-			result.put("wowrbgrating", rs.getString("wowrbg"));
-			result.put("lolrank", rs.getString("lolrank"));
-			result.put("dota2rank", rs.getString("dota2mmr"));
-			result.put("otherranks", rs.getString("otherranks"));
+			
+			if (rs.getString("csgorank")!=null){
+				result.put("csgorank", rs.getString("csgorank"));
+			} else result.put("csgorank", ifNull);
+
+			if (rs.getString("wow2v2")!=null){
+				result.put("wow2v2rating", rs.getString("wow2v2"));
+			} else result.put("wow2v2rating", ifNull);
+
+			if (rs.getString("wow3v3")!=null){
+				result.put("wow3v3rating", rs.getString("wow3v3"));
+			} else result.put("wow3v3rating", ifNull);
+			
+			if (rs.getString("wow5v5")!=null){
+				result.put("wow5v5rating", rs.getString("wow5v5"));
+			} else result.put("wow5v5rating", ifNull);
+
+			if (rs.getString("wowrbg")!=null){
+				result.put("wowrbgrating", rs.getString("wowrbg"));
+			} else result.put("wowrbgrating", ifNull);
+
+			if (rs.getString("lolrank")!=null){
+				result.put("lolrank", rs.getString("lolrank"));
+			} else result.put("lolrank", ifNull);
+
+			if (rs.getString("dota2mmr")!=null){
+				result.put("dota2rank", rs.getString("dota2mmr"));
+			} else result.put("dota2rank", ifNull);
+
+			if (rs.getString("otherranks")!=null){
+				result.put("otherranks", rs.getString("otherranks"));
+			} else result.put("otherranks", ifNull);
+			
 		}
+
 		return ok(result);
 	} catch (SQLException se) {
 		return ok("SQL " + se.toString());
