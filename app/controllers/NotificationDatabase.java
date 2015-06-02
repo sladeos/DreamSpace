@@ -27,6 +27,7 @@ public class NotificationDatabase extends Controller {
 
 		String participant = json.findPath("participant").textValue();
         int intTournamentID = json.findPath("tournamentID").asInt();
+        String tname = json.findPath("tname").textValue();
         
 		try {
             String currentUser = session("connected");
@@ -50,11 +51,12 @@ public class NotificationDatabase extends Controller {
 			}
 
 			
-			String insertIntoDatabase = "INSERT INTO TournamentInvite (tournamentID, admin, participant) VALUES(?,?,?)";
+			String insertIntoDatabase = "INSERT INTO TournamentInvite (tournamentID, admin, participant, tournamentname) VALUES(?,?,?, ?)";
 			preparedStatement = conn.prepareStatement(insertIntoDatabase);
 			preparedStatement.setInt(1, intTournamentID);
 			preparedStatement.setString(2, currentUser);
 			preparedStatement.setString(3, participant);
+			preparedStatement.setString(4, tname);
 			preparedStatement.executeUpdate();
 
 			return ok("success");
@@ -263,6 +265,7 @@ public class NotificationDatabase extends Controller {
     			    n.participant = rsI.getString("participant");
     			    n.accepted = rsI.getInt("accepted");
     			    n.viewed = rsI.getInt("viewed");
+    			    n.tournamentName = rsI.getString("tournamentName");
     			    
     				notiList.add(n);
     			}

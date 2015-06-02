@@ -387,7 +387,7 @@ $('#imgpick-button').remove()
                                                            url: "/invitePlayer",
                                                            type: 'POST',
                                                            contentType: 'application/json',
-                                                           data: JSON.stringify({tournamentID: tournamentID, participant: participantUsername}),
+                                                           data: JSON.stringify({tournamentID: tournamentID, participant: participantUsername, tname: "@tournament.tournamentname"}),
                                                            dataType: 'html',
                                                            success: function(data) {
                                                                 if (data == "success") {

@@ -25,4 +25,6 @@ public int accepted;
 
 @Constraints.Required 
 public int viewed;
+
+public String tournamentName;
 }
