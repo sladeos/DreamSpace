@@ -228,6 +228,14 @@ border-color:transparent;
     /* Make your icon fit */
     background-size: 18px 18px;
 }
+.dottedMobile{
+    border-left:dotted;
+    padding-left:10px;
+}
+.dialog{
+padding-right:30px;
+
+}
 #pagination{
     visibility: hidden;
 }
@@ -358,6 +366,14 @@ border-color:transparent;
     max-width: 100%;
     height:150px;
 }
+.dottedMobile{
+    border-left:none;
+    padding-left:0px;
+}
+.dialog{
+padding-right:0px;
+
+}
 
      
 }
@@ -392,12 +408,12 @@ border-color:transparent;
     .flowBox{
         width: 500px;
         margin: 0 auto;
-         box-shadow: 10px 10px 5px #888888;
+         
     }
      .mainFlowBox{
         width: 500px;
         margin: 0 auto;
-         box-shadow: 10px 10px 5px #888888;
+   
     }
 
     .standardBox{
