@@ -477,7 +477,7 @@ public class EArenaDatabase extends Controller {
 		try {
 
 			conn = DB.getConnection();
-			String insertIntoDatabase = "SELECT * FROM EArenaReply WHERE arenaID=? ORDER BY created_date DESC";
+			String insertIntoDatabase = "SELECT * FROM EArenaReply WHERE arenaID=?";
 			preparedStatement = conn.prepareStatement(insertIntoDatabase);
 			preparedStatement.setInt(1, id);
 
