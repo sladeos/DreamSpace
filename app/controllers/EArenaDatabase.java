@@ -432,18 +432,22 @@ public class EArenaDatabase extends Controller {
 		String adID = json.findPath("adID").textValue();
 		String contents = json.findPath("contents").textValue();
 		String adAdmin = json.findPath("adAdmin").textValue();
-		
+		String adName = json.findPath("adName").textValue();
+				
+				
+				
 		String currentUser = session("connected");
 		try {
 			int adIDint = Integer.parseInt(adID);
 			conn = DB.getConnection();
-			String insertIntoDatabase = "INSERT INTO EArenaReply (arenaID, arenaadmin, username,replycontent) VALUES(?,?,?,?)";
+			String insertIntoDatabase = "INSERT INTO EArenaReply (arenaID, arenaadmin, username, replycontent, adname) VALUES(?,?,?,?,?)";
 			preparedStatement = conn.prepareStatement(insertIntoDatabase);
 
 			preparedStatement.setInt(1, adIDint);
 			preparedStatement.setString(2, adAdmin);
 			preparedStatement.setString(3, currentUser);
 			preparedStatement.setString(4, contents);
+			preparedStatement.setString(5, adName);
 
 			preparedStatement.executeUpdate();
 			return ok("Succesful Reply!");
@@ -477,7 +481,7 @@ public class EArenaDatabase extends Controller {
 		try {
 
 			conn = DB.getConnection();
-			String insertIntoDatabase = "SELECT * FROM EArenaReply WHERE arenaID=? ORDER BY created_date DESC";
+			String insertIntoDatabase = "SELECT * FROM EArenaReply WHERE arenaID=?";
 			preparedStatement = conn.prepareStatement(insertIntoDatabase);
 			preparedStatement.setInt(1, id);
 

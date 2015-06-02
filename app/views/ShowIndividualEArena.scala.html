@@ -150,7 +150,7 @@
                 <script>
                     $("#postreply").click(function() {
                         if($('#replyarea').val().length >2){
-                            var data = {"contents":$("#replyarea").val(), "adID": "@eAd.arenaID", "adAdmin": "@eAd.admin"};
+                            var data = {"contents":$("#replyarea").val(), "adID": "@eAd.arenaID", "adAdmin": "@eAd.admin",adName: "@eAd.arenaName"};
                             $.ajax({
                                 url: "/postreply",
                                 type: 'POST',

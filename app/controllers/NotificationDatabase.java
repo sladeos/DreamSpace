@@ -269,7 +269,7 @@ public class NotificationDatabase extends Controller {
     			rsI.close();
     			
     			
-    		    String selectRNotifications = "SELECT * FROM EArenaReply WHERE arenaadmin=? AND hidden=0";
+    		    String selectRNotifications = "SELECT * FROM EArenaReply WHERE arenaadmin=? AND hidden=0 ORDER BY created_date DESC";
     			preparedRStatement = conn.prepareStatement(selectRNotifications);
     			preparedRStatement.setString(1, currentUser);
     			ResultSet rsR = preparedRStatement.executeQuery();
@@ -283,7 +283,7 @@ public class NotificationDatabase extends Controller {
     			    r.created_date = rsR.getString("created_date");
     			    r.created_date = r.created_date.substring(0, r.created_date.lastIndexOf("."));
     			    r.viewed = rsR.getInt("viewed");
-    			    
+    			    r.adName = rsR.getString("adname");
     				notrList.add(r);
     			}
     

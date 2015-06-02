@@ -64,8 +64,8 @@
                      <div data-role="fieldcontain"class="ui-hide-label" >
                         <input type="text" name="game" placeholder="Game" id="game">
                         <input type="text" name="username" placeholder="Username" id="username">
-                        <input type="number" name="players" placeholder="Number of players" id="players">
-                        <input type="number" name="minutes" placeholder="Uploaded X minutes ago" id="minutes">
+                        <input type="number" name="players" min="0" max="99" placeholder="Number of players" id="players">
+                        <input type="number" name="minutes" min="0" placeholder="Uploaded X minutes ago" id="minutes">
                      </div>
                      <div data-role="controlgroup" data-type="horizontal" style="text-align:center;">
                         <button data-inline="true" type="submit"><b>GO!</b></button>

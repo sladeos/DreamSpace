@@ -480,7 +480,7 @@ public class UserProfileDatabase extends Controller {
 				String getDefaultPicDatabase = "SELECT image, mimetype FROM UserProfile WHERE username=?";
 				preparedStatementD = conn
 						.prepareStatement(getDefaultPicDatabase);
-				preparedStatementD.setString(1, "defaultpic");
+				preparedStatementD.setString(1, "default");
 				ResultSet rsD = preparedStatementD.executeQuery();
 
 				while (rsD.next()) {
